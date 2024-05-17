@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace TCC_SIA.Controller
 {
-    internal class ClasseSeiLa
+    internal class conexãoBD
     {
+
     }
 }

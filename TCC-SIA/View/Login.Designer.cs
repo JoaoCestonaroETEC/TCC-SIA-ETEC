@@ -28,12 +28,76 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Login";
+            label1 = new Label();
+            label2 = new Label();
+            maskedTextBox1 = new MaskedTextBox();
+            maskedTextBox2 = new MaskedTextBox();
+            button1 = new Button();
+            SuspendLayout();
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(31, 31);
+            label1.Name = "label1";
+            label1.Size = new Size(121, 20);
+            label1.TabIndex = 0;
+            label1.Text = "Nome ou E-mail:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(100, 69);
+            label2.Name = "label2";
+            label2.Size = new Size(52, 20);
+            label2.TabIndex = 1;
+            label2.Text = "Senha:";
+            // 
+            // maskedTextBox1
+            // 
+            maskedTextBox1.Location = new Point(158, 28);
+            maskedTextBox1.Name = "maskedTextBox1";
+            maskedTextBox1.Size = new Size(264, 27);
+            maskedTextBox1.TabIndex = 2;
+            // 
+            // maskedTextBox2
+            // 
+            maskedTextBox2.Location = new Point(158, 66);
+            maskedTextBox2.Name = "maskedTextBox2";
+            maskedTextBox2.Size = new Size(264, 27);
+            maskedTextBox2.TabIndex = 3;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(328, 121);
+            button1.Name = "button1";
+            button1.Size = new Size(94, 29);
+            button1.TabIndex = 4;
+            button1.Text = "Login";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // Login
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(button1);
+            Controls.Add(maskedTextBox2);
+            Controls.Add(maskedTextBox1);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Name = "Login";
+            Text = "Login";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private Label label1;
+        private Label label2;
+        private MaskedTextBox maskedTextBox1;
+        private MaskedTextBox maskedTextBox2;
+        private Button button1;
     }
 }
