@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Npgsql;
 
 namespace TCC_SIA.Controller
 {
@@ -12,7 +13,7 @@ namespace TCC_SIA.Controller
         static string porta = "5433";
         static string user = "postgres";
         static string password = "2204";
-        static string dataBase = "Produto";
+        static string dataBase = "projetoagendamento";
 
         //objetos necessários para comunicação
         NpgsqlConnection conn = null;
