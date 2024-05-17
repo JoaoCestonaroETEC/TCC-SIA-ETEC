@@ -10,7 +10,7 @@ namespace TCC_SIA.Controller
 {
     internal class controleCadastro
     {
-        string sql = "insert into Produto(nome_produto, preco_custo, preco_venda, quantidade, unidade, validade, cod_tipo, cod_marca, descricao) " + "values(@nome_produto, @preco_custo, @preco_venda, @quantidade, @unidade, @validade, @cod_tipo, @cod_marca, @descricao);";
+        string sql = "insert into Cliente(NOMECLIENTE, SENHACLIENTE, EMAILCLIENTE) " + "values(@nomeCliente, senhaCliente, emailCliente);";
 
 
         conectaPG con = new conectaPG();
