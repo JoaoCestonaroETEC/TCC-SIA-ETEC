@@ -15,15 +15,40 @@ namespace TCC_SIA.Model
         private string senhaCliente;
 
         // Propriedade automática para idCliente
-        public int IdCliente { get; set; }
+        public string getNomeCliente()
+        {
+            return this.nomeCliente;
+        }
 
-        public string NomeCliente { get; set; }
+        // Método para definir o nome do cliente
+        public void setNomeCliente(string nomeCliente)
+        {
+            this.nomeCliente = nomeCliente;
+        }
 
-        // Propriedade automática para emailCliente
-        public string EmailCliente { get; set; }
+        // Método para obter o email do cliente
+        public string getEmailCliente()
+        {
+            return this.emailCliente;
+        }
 
-        // Propriedade automática para senha
-        public string Senha { get; set; }
+        // Método para definir o email do cliente
+        public void setEmailCliente(string emailCliente)
+        {
+            this.emailCliente = emailCliente;
+        }
+
+        // Método para obter a senha do cliente
+        public string getSenhaCliente()
+        {
+            return this.senhaCliente;
+        }
+
+        // Método para definir a senha do cliente
+        public void setSenhaCliente(string senhaCliente)
+        {
+            this.senhaCliente = senhaCliente;
+        }
     }
 
     

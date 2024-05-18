@@ -10,10 +10,10 @@ namespace TCC_SIA.Controller
     internal class conexãoBD
     {
         static string server = "127.0.0.1";
-        static string porta = "5433";
+        static string porta = "5432";
         static string user = "postgres";
-        static string password = "2204";
-        static string dataBase = "projetoagendamento";
+        static string password = "123456";
+        static string dataBase = "TCC-SIA";
 
 
         //objetos necessários para comunicação
