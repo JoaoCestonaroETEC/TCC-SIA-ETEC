@@ -51,7 +51,7 @@
             Margin = new Padding(3, 2, 3, 2);
             Name = "TelaInicial";
             Text = "Tela Inicial";
-            WindowState = FormWindowState.Maximized;
+            WindowState = FormWindowState.Minimized;
             ResumeLayout(false);
         }
 
