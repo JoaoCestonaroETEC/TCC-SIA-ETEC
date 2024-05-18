@@ -33,7 +33,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(360, 156);
+            button1.Location = new Point(199, 166);
             button1.Name = "button1";
             button1.Size = new Size(215, 139);
             button1.TabIndex = 0;
@@ -46,7 +46,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
-            ClientSize = new Size(1104, 505);
+            ClientSize = new Size(622, 505);
             Controls.Add(button1);
             Margin = new Padding(3, 2, 3, 2);
             Name = "TelaInicial";
