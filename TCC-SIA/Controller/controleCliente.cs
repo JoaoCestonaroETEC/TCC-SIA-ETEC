@@ -11,14 +11,12 @@ using TCC_SIA.Controller;
 
 namespace TCC_SIA.Controller
 {
-    class ControleCadastro
+    class controleCliente
     {
 
-
-
-        public string cadastroProduto(Cliente mCliente)
+        public string cadastroCliente(Cliente mCliente)
         {
-            string sql = "insert into CLIENTE(NOMECLIENTE, EMAILCLIENTE, EMAILCLIENTE) " + "values(@nomeCliente, emailCliente, senhaCliente;";
+            string sql = "insert into CLIENTE(NOMECLIENTE, EMAIL, SENHA) " + "values(@nomeCliente, @emailCliente, @senhaCliente);";
             conexãoBD con = new conexãoBD();
             NpgsqlConnection conn = con.conectar();
             NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
@@ -26,11 +24,11 @@ namespace TCC_SIA.Controller
             try
             {
                 comm.Parameters.AddWithValue("@nomeCliente", mCliente.getNomeCliente());
-                comm.Parameters.AddWithValue("@emailCLiente", mCliente.getEmailCliente());
+                comm.Parameters.AddWithValue("@emailCliente", mCliente.getEmailCliente());
                 comm.Parameters.AddWithValue("@senhaCliente", mCliente.getSenhaCliente());
 
                 comm.ExecuteNonQuery();
-                return "Produto cadastrado com sucesso!";
+                return "Cliente cadastrado com sucesso!";
             }
             catch (NpgsqlException ex)
             {

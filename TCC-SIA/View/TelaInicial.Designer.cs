@@ -28,14 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
+            button1 = new Button();
             SuspendLayout();
+            // 
+            // button1
+            // 
+            button1.Location = new Point(360, 156);
+            button1.Name = "button1";
+            button1.Size = new Size(215, 139);
+            button1.TabIndex = 0;
+            button1.Text = "Cadastrar Cliente";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // TelaInicial
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
-            ClientSize = new Size(1262, 673);
+            ClientSize = new Size(1104, 505);
+            Controls.Add(button1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "TelaInicial";
             Text = "Tela Inicial";
             WindowState = FormWindowState.Maximized;
@@ -43,5 +56,7 @@
         }
 
         #endregion
+
+        private Button button1;
     }
 }

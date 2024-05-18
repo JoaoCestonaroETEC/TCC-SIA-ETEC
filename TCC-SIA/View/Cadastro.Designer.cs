@@ -39,66 +39,71 @@
             // 
             // button1
             // 
-            button1.Location = new Point(257, 148);
+            button1.Location = new Point(225, 111);
+            button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
-            button1.Size = new Size(94, 29);
+            button1.Size = new Size(82, 22);
             button1.TabIndex = 9;
             button1.Text = "Cadastrar";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // maskedTextBox2
             // 
-            maskedTextBox2.Location = new Point(87, 68);
+            maskedTextBox2.Location = new Point(76, 51);
+            maskedTextBox2.Margin = new Padding(3, 2, 3, 2);
             maskedTextBox2.Name = "maskedTextBox2";
-            maskedTextBox2.Size = new Size(264, 27);
+            maskedTextBox2.Size = new Size(232, 23);
             maskedTextBox2.TabIndex = 8;
             // 
             // maskedTextBox1
             // 
-            maskedTextBox1.Location = new Point(87, 30);
+            maskedTextBox1.Location = new Point(76, 22);
+            maskedTextBox1.Margin = new Padding(3, 2, 3, 2);
             maskedTextBox1.Name = "maskedTextBox1";
-            maskedTextBox1.Size = new Size(264, 27);
+            maskedTextBox1.Size = new Size(232, 23);
             maskedTextBox1.TabIndex = 7;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(29, 71);
+            label2.Location = new Point(25, 53);
             label2.Name = "label2";
-            label2.Size = new Size(55, 20);
+            label2.Size = new Size(44, 15);
             label2.TabIndex = 6;
             label2.Text = "E-mail:";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(28, 33);
+            label1.Location = new Point(24, 25);
             label1.Name = "label1";
-            label1.Size = new Size(53, 20);
+            label1.Size = new Size(43, 15);
             label1.TabIndex = 5;
             label1.Text = "Nome:";
             // 
             // maskedTextBox3
             // 
-            maskedTextBox3.Location = new Point(87, 101);
+            maskedTextBox3.Location = new Point(76, 76);
+            maskedTextBox3.Margin = new Padding(3, 2, 3, 2);
             maskedTextBox3.Name = "maskedTextBox3";
-            maskedTextBox3.Size = new Size(264, 27);
+            maskedTextBox3.Size = new Size(232, 23);
             maskedTextBox3.TabIndex = 11;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(28, 104);
+            label3.Location = new Point(24, 78);
             label3.Name = "label3";
-            label3.Size = new Size(52, 20);
+            label3.Size = new Size(42, 15);
             label3.TabIndex = 10;
             label3.Text = "Senha:";
             // 
             // Cadastro
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(700, 338);
             Controls.Add(maskedTextBox3);
             Controls.Add(label3);
             Controls.Add(button1);
@@ -106,6 +111,7 @@
             Controls.Add(maskedTextBox1);
             Controls.Add(label2);
             Controls.Add(label1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Cadastro";
             Text = "Cadastro";
             ResumeLayout(false);
