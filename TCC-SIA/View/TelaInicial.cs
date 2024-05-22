@@ -23,5 +23,11 @@ namespace TCC_SIA.View
             Cadastro formCadastro = new Cadastro();
             formCadastro.Show();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Login formLogin = new Login();
+            formLogin.Show();
+        }
     }
 }

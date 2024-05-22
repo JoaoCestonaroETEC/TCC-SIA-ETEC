@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             button1 = new Button();
+            button2 = new Button();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new Point(199, 166);
+            button1.Location = new Point(12, 12);
             button1.Name = "button1";
             button1.Size = new Size(215, 139);
             button1.TabIndex = 0;
@@ -41,12 +42,23 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // button2
+            // 
+            button2.Location = new Point(395, 12);
+            button2.Name = "button2";
+            button2.Size = new Size(215, 139);
+            button2.TabIndex = 1;
+            button2.Text = "Logar ";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
             // TelaInicial
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             ClientSize = new Size(622, 505);
+            Controls.Add(button2);
             Controls.Add(button1);
             Margin = new Padding(3, 2, 3, 2);
             Name = "TelaInicial";
@@ -58,5 +70,6 @@
         #endregion
 
         private Button button1;
+        private Button button2;
     }
 }

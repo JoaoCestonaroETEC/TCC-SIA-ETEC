@@ -35,5 +35,26 @@ namespace TCC_SIA.Controller
                 return ex.ToString();
             }
         }
+
+        public string loginCadastro(IdLogin mIdLogin)
+        {
+            string sql = "SELECT COUNT(1) FROM CLIENTE WHERE NOMECLIENTE=@usuario AND SENHA=@senha;";
+            conexãoBD con = new conexãoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            comm.Parameters.AddWithValue("@usuario", mIdLogin.getUsuario());
+            comm.Parameters.AddWithValue("@senha", mIdLogin.getSenha());
+
+            try
+            {
+                comm.ExecuteNonQuery();
+                return "Sei la";
+            }
+            catch (NpgsqlException ex)
+            {
+                return ex.ToString();
+            }
+        }
     }
 }
