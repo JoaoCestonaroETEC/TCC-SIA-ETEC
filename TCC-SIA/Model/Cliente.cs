@@ -4,16 +4,28 @@ using System.DirectoryServices;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BCrypt;
 
 namespace TCC_SIA.Model
 {
     internal class Cliente
     {
-        private int idCliente;
+        private string cpfCliente;
         private string nomeCliente;
         private string emailCliente;
         private string senhaCliente;
 
+        //Método para definir o cpf do cliente
+        public string getCpfCliente()
+        {
+            return this.cpfCliente;
+        }
+
+        // Método para definir o nome do cliente
+        public void setCpfCliente(string cpfCliente)
+        {
+            this.cpfCliente = cpfCliente;
+        }
         // Propriedade automática para idCliente
         public string getNomeCliente()
         {

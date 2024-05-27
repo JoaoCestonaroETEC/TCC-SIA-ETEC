@@ -28,91 +28,107 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
-            maskedTextBox2 = new MaskedTextBox();
-            maskedTextBox1 = new MaskedTextBox();
+            buttonCadastrar = new Button();
+            maskedTextBoxEmail = new MaskedTextBox();
+            maskedTextBoxNome = new MaskedTextBox();
             label2 = new Label();
             label1 = new Label();
-            maskedTextBox3 = new MaskedTextBox();
+            maskedTextBoxSenha = new MaskedTextBox();
             label3 = new Label();
+            maskedTextBoxCpf = new MaskedTextBox();
+            label4 = new Label();
             SuspendLayout();
             // 
-            // button1
+            // buttonCadastrar
             // 
-            button1.Location = new Point(225, 111);
-            button1.Margin = new Padding(3, 2, 3, 2);
-            button1.Name = "button1";
-            button1.Size = new Size(82, 22);
-            button1.TabIndex = 9;
-            button1.Text = "Cadastrar";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            buttonCadastrar.Location = new Point(265, 164);
+            buttonCadastrar.Name = "buttonCadastrar";
+            buttonCadastrar.Size = new Size(94, 29);
+            buttonCadastrar.TabIndex = 9;
+            buttonCadastrar.Text = "Cadastrar";
+            buttonCadastrar.UseVisualStyleBackColor = true;
+            buttonCadastrar.Click += Cadastar_Cliente;
             // 
-            // maskedTextBox2
+            // maskedTextBoxEmail
             // 
-            maskedTextBox2.Location = new Point(76, 51);
-            maskedTextBox2.Margin = new Padding(3, 2, 3, 2);
-            maskedTextBox2.Name = "maskedTextBox2";
-            maskedTextBox2.Size = new Size(232, 23);
-            maskedTextBox2.TabIndex = 8;
+            maskedTextBoxEmail.Location = new Point(95, 84);
+            maskedTextBoxEmail.Name = "maskedTextBoxEmail";
+            maskedTextBoxEmail.Size = new Size(265, 27);
+            maskedTextBoxEmail.TabIndex = 8;
             // 
-            // maskedTextBox1
+            // maskedTextBoxNome
             // 
-            maskedTextBox1.Location = new Point(76, 22);
-            maskedTextBox1.Margin = new Padding(3, 2, 3, 2);
-            maskedTextBox1.Name = "maskedTextBox1";
-            maskedTextBox1.Size = new Size(232, 23);
-            maskedTextBox1.TabIndex = 7;
+            maskedTextBoxNome.Location = new Point(95, 45);
+            maskedTextBoxNome.Name = "maskedTextBoxNome";
+            maskedTextBoxNome.Size = new Size(265, 27);
+            maskedTextBoxNome.TabIndex = 7;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(25, 53);
+            label2.Location = new Point(37, 87);
             label2.Name = "label2";
-            label2.Size = new Size(44, 15);
+            label2.Size = new Size(55, 20);
             label2.TabIndex = 6;
             label2.Text = "E-mail:";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(24, 25);
+            label1.Location = new Point(35, 49);
             label1.Name = "label1";
-            label1.Size = new Size(43, 15);
+            label1.Size = new Size(53, 20);
             label1.TabIndex = 5;
             label1.Text = "Nome:";
             // 
-            // maskedTextBox3
+            // maskedTextBoxSenha
             // 
-            maskedTextBox3.Location = new Point(76, 76);
-            maskedTextBox3.Margin = new Padding(3, 2, 3, 2);
-            maskedTextBox3.Name = "maskedTextBox3";
-            maskedTextBox3.Size = new Size(232, 23);
-            maskedTextBox3.TabIndex = 11;
+            maskedTextBoxSenha.Location = new Point(95, 117);
+            maskedTextBoxSenha.Name = "maskedTextBoxSenha";
+            maskedTextBoxSenha.Size = new Size(265, 27);
+            maskedTextBoxSenha.TabIndex = 11;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(24, 78);
+            label3.Location = new Point(35, 120);
             label3.Name = "label3";
-            label3.Size = new Size(42, 15);
+            label3.Size = new Size(52, 20);
             label3.TabIndex = 10;
             label3.Text = "Senha:";
             // 
+            // maskedTextBoxCpf
+            // 
+            maskedTextBoxCpf.Location = new Point(95, 12);
+            maskedTextBoxCpf.Mask = "000.000.000-00";
+            maskedTextBoxCpf.Name = "maskedTextBoxCpf";
+            maskedTextBoxCpf.Size = new Size(265, 27);
+            maskedTextBoxCpf.TabIndex = 13;
+            maskedTextBoxCpf.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(52, 15);
+            label4.Name = "label4";
+            label4.Size = new Size(35, 20);
+            label4.TabIndex = 12;
+            label4.Text = "Cpf:";
+            // 
             // Cadastro
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(700, 338);
-            ClientSize = new Size(343, 151);
-            Controls.Add(maskedTextBox3);
+            ClientSize = new Size(392, 201);
+            Controls.Add(maskedTextBoxCpf);
+            Controls.Add(label4);
+            Controls.Add(maskedTextBoxSenha);
             Controls.Add(label3);
-            Controls.Add(button1);
-            Controls.Add(maskedTextBox2);
-            Controls.Add(maskedTextBox1);
+            Controls.Add(buttonCadastrar);
+            Controls.Add(maskedTextBoxEmail);
+            Controls.Add(maskedTextBoxNome);
             Controls.Add(label2);
             Controls.Add(label1);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "Cadastro";
             Text = "Cadastro";
             ResumeLayout(false);
@@ -121,12 +137,14 @@
 
         #endregion
 
-        private Button button1;
-        private MaskedTextBox maskedTextBox2;
-        private MaskedTextBox maskedTextBox1;
+        private Button buttonCadastrar;
+        private MaskedTextBox maskedTextBoxEmail;
+        private MaskedTextBox maskedTextBoxNome;
         private Label label2;
         private Label label1;
-        private MaskedTextBox maskedTextBox3;
+        private MaskedTextBox maskedTextBoxSenha;
         private Label label3;
+        private MaskedTextBox maskedTextBoxCpf;
+        private Label label4;
     }
 }

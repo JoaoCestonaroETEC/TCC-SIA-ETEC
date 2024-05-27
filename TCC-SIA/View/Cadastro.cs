@@ -19,14 +19,15 @@ namespace TCC_SIA.View
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Cadastar_Cliente(object sender, EventArgs e)
         {
             Cliente mCliente = new Cliente();
             controleCliente cCliente = new controleCliente();
 
-            mCliente.setNomeCliente(maskedTextBox1.Text);
-            mCliente.setEmailCliente(maskedTextBox2.Text);
-            mCliente.setSenhaCliente(maskedTextBox3.Text);
+            mCliente.setCpfCliente(maskedTextBoxCpf.Text);
+            mCliente.setNomeCliente(maskedTextBoxNome.Text);
+            mCliente.setEmailCliente(maskedTextBoxEmail.Text);
+            mCliente.setSenhaCliente(maskedTextBoxSenha.Text);
 
             string res = cCliente.cadastroCliente(mCliente);
             MessageBox.Show(res);
