@@ -14,6 +14,8 @@ namespace TCC_SIA.Model
         private string nomeCliente;
         private string emailCliente;
         private string senhaCliente;
+        private string telefoneCliente;
+        private string datanascCliente;
 
         //Método para definir o cpf do cliente
         public string getCpfCliente()

@@ -10,10 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="BCrypt.Net" Version="0.1.0" />
     <PackageReference Include="Npgsql" Version="8.0.3" />
   </ItemGroup>

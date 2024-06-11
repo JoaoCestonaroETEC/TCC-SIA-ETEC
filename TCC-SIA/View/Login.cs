@@ -27,7 +27,7 @@ namespace TCC_SIA.View
             mIdLogin.setUsuario(maskedTextBox1.Text);
             mIdLogin.setSenha(maskedTextBox2.Text);
 
-            string res = cCliente.loginCadastro(mIdLogin);
+            string res = cCliente.compararSenha(mIdLogin);
             MessageBox.Show(res);
         }
     }
