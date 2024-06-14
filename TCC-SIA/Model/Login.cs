@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TCC_SIA.Model
 {
-    internal class Login
+    internal class LoginEmpresa
     {
         private int cnpjLogin;
         private string senhaLogin;

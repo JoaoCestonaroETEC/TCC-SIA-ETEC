@@ -7,6 +7,7 @@ using Npgsql;
 using TCC_SIA.Model;
 using TCC_SIA.Controller;
 using BCrypt;
+using TCC_SIA.View;
 
 
 
@@ -15,9 +16,9 @@ namespace TCC_SIA.Controller
     class controleCliente
     {
 
-        public string cadastroCliente(Login mLogin)
+        public string cadastroCliente(LoginEmpresa mLogin)
         {
-            string sql = "insert into Login(cnpjlogin, nomelogin, senhalogin) " + "values(@cnpjlogin, @nomelogin, @senhalogin);";
+            string sql = "insert into Login(cnpjlogin, senhalogin, nomelogin) " + "values(@cnpjlogin, @senhalogin, @nomelogin);";
             conexãoBD con = new conexãoBD();
             NpgsqlConnection conn = con.conectar();
             NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
@@ -28,14 +29,12 @@ namespace TCC_SIA.Controller
             string hashSenha = BCrypt.Net.BCrypt.HashPassword(senhaTexto);
 
             // Converta o hash para um array de bytes
-            byte[] hashBytes = System.Text.Encoding.UTF8.GetBytes(hashSenha);
 
             try
             {
                 comm.Parameters.AddWithValue("@cnpjlogin", mLogin.getCnpj());
                 comm.Parameters.AddWithValue("@nomelogin", mLogin.getNome());
-                comm.Parameters.AddWithValue("@emaiLogin", mLogin.getSenha());
-                comm.Parameters.AddWithValue("@senhaCliente", hashBytes);
+                comm.Parameters.AddWithValue("@senhalogin", hashSenha);
 
                 comm.ExecuteNonQuery();
                 return "Cliente cadastrado com sucesso!";
@@ -46,39 +45,34 @@ namespace TCC_SIA.Controller
             }
         }
 
-      
-
-        public string ConverterByteParaSenha(byte[] hashBytes)
+        public string loginLogin(IdLogin mIdLogin)
         {
-            return Convert.ToBase64String(hashBytes);
-        }
+            string sql = "SELECT senhalogin from Login where nomelogin = @usuario;";
+            string hasharmazenado = "senhalogin";
+            string senhaTexto = mIdLogin.getSenha();
 
-        public string compararSenha(IdLogin mIdLogin)
-        {
-            string sql = "SELECT senhaLogin from Login where cpfLogin = @usuario;";
+
             conexãoBD con = new conexãoBD();
             NpgsqlConnection conn = con.conectar();
             NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
-            byte[] storedHash = (byte[])comm.ExecuteScalar();
 
             // Hash a senha
+            string hashSenha = BCrypt.Net.BCrypt.HashPassword(senhaTexto);
 
-            // Converta o hash para um array de byte
+            // Converta o hash para um array de bytes
 
             comm.Parameters.AddWithValue("@usuario", mIdLogin.getUsuario());
 
             try
             {
-                string originalHash = ConverterByteParaSenha(storedHash);
-                int linhasAfetadas = comm.ExecuteNonQuery();
-
-                if (linhasAfetadas > 0)
+                bool SenhaCorreta = BCrypt.Net.BCrypt.Verify(senhaTexto, hasharmazenado);
+                if (SenhaCorreta)
                 {
-                    return ("Cliente cadastrado com sucesso!");
+                    return "Deu certo!";
                 }
                 else
                 {
-                    return ("Falha ao cadastrar o cliente.");
+                    return "Deu Errado!";
                 }
             }
             catch (NpgsqlException ex)
