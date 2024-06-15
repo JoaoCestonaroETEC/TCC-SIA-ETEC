@@ -8,6 +8,7 @@ namespace TCC_SIA.Model
 {
     internal class IdLogin
     {
+        private long cnpj;
         private string usuario;
         private string senha;
 
@@ -33,6 +34,16 @@ namespace TCC_SIA.Model
         public void setSenha(string Senha)
         {
             this.senha = Senha;
+        }
+
+        public long getCnpj()
+        {
+            return this.cnpj;
+        }
+
+        public void setCnpj(long Cnpj)
+        {
+            this.cnpj = Cnpj;
         }
     }
 }

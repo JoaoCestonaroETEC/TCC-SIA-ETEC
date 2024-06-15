@@ -24,7 +24,7 @@ namespace TCC_SIA.View
             LoginEmpresa MLogin = new LoginEmpresa();
             controleCliente cCliente = new controleCliente();
 
-            MLogin.setCnpj(Convert.ToInt32(maskedTextBoxCnpj.Text));
+            MLogin.setCnpj(Convert.ToInt64(maskedTextBoxCnpj.Text));
             MLogin.setNome(maskedTextBoxNome.Text);
             MLogin.setSenha(maskedTextBoxSenha.Text);
 

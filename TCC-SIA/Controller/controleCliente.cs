@@ -19,16 +19,15 @@ namespace TCC_SIA.Controller
         public string cadastroCliente(LoginEmpresa mLogin)
         {
             string sql = "insert into Login(cnpjlogin, senhalogin, nomelogin) " + "values(@cnpjlogin, @senhalogin, @nomelogin);";
+            
             conexãoBD con = new conexãoBD();
             NpgsqlConnection conn = con.conectar();
             NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
 
+            //transforma a senha definida do cadastro em uma variável
             string senhaTexto = mLogin.getSenha();
-
             // Hash a senha
             string hashSenha = BCrypt.Net.BCrypt.HashPassword(senhaTexto);
-
-            // Converta o hash para um array de bytes
 
             try
             {
@@ -45,34 +44,44 @@ namespace TCC_SIA.Controller
             }
         }
 
-        public string loginLogin(IdLogin mIdLogin)
+        public string loginCadastro(IdLogin mLogin)
         {
-            string sql = "SELECT senhalogin from Login where nomelogin = @usuario;";
-            string hasharmazenado = "senhalogin";
-            string senhaTexto = mIdLogin.getSenha();
-
-
+            string sql = "SELECT senhalogin FROM Login WHERE cnpjlogin = @cnpjlogin";
             conexãoBD con = new conexãoBD();
             NpgsqlConnection conn = con.conectar();
             NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
 
-            // Hash a senha
-            string hashSenha = BCrypt.Net.BCrypt.HashPassword(senhaTexto);
-
-            // Converta o hash para um array de bytes
-
-            comm.Parameters.AddWithValue("@usuario", mIdLogin.getUsuario());
-
             try
             {
-                bool SenhaCorreta = BCrypt.Net.BCrypt.Verify(senhaTexto, hasharmazenado);
-                if (SenhaCorreta)
+                comm.Parameters.AddWithValue("@cnpjlogin", mLogin.getCnpj());
+
+                string hashArmazenado = null;
+
+                using (NpgsqlDataReader reader = comm.ExecuteReader())
                 {
-                    return "Deu certo!";
+                    if (reader.Read())
+                    {
+                        hashArmazenado = reader["senhalogin"].ToString();
+                    }
+                }
+
+                if (hashArmazenado != null)
+                {
+                    string senhaInserida = mLogin.getSenha();
+                    bool senhaCorreta = BCrypt.Net.BCrypt.Verify(senhaInserida, hashArmazenado);
+
+                    if (senhaCorreta)
+                    {
+                        return "Login efetuado!";
+                    }
+                    else
+                    {
+                        return "Senha incorreta!";
+                    }
                 }
                 else
                 {
-                    return "Deu Errado!";
+                    return "Usuário não encontrado.";
                 }
             }
             catch (NpgsqlException ex)

@@ -39,9 +39,10 @@
             // 
             // buttonCadastrar
             // 
-            buttonCadastrar.Location = new Point(265, 164);
+            buttonCadastrar.Location = new Point(232, 123);
+            buttonCadastrar.Margin = new Padding(3, 2, 3, 2);
             buttonCadastrar.Name = "buttonCadastrar";
-            buttonCadastrar.Size = new Size(94, 29);
+            buttonCadastrar.Size = new Size(82, 22);
             buttonCadastrar.TabIndex = 9;
             buttonCadastrar.Text = "Cadastrar";
             buttonCadastrar.UseVisualStyleBackColor = true;
@@ -49,59 +50,63 @@
             // 
             // maskedTextBoxNome
             // 
-            maskedTextBoxNome.Location = new Point(95, 45);
+            maskedTextBoxNome.Location = new Point(83, 34);
+            maskedTextBoxNome.Margin = new Padding(3, 2, 3, 2);
             maskedTextBoxNome.Name = "maskedTextBoxNome";
-            maskedTextBoxNome.Size = new Size(265, 27);
+            maskedTextBoxNome.Size = new Size(232, 23);
             maskedTextBoxNome.TabIndex = 7;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(35, 49);
+            label1.Location = new Point(31, 37);
             label1.Name = "label1";
-            label1.Size = new Size(53, 20);
+            label1.Size = new Size(43, 15);
             label1.TabIndex = 5;
             label1.Text = "Nome:";
             // 
             // maskedTextBoxSenha
             // 
-            maskedTextBoxSenha.Location = new Point(95, 78);
+            maskedTextBoxSenha.Location = new Point(83, 58);
+            maskedTextBoxSenha.Margin = new Padding(3, 2, 3, 2);
             maskedTextBoxSenha.Name = "maskedTextBoxSenha";
-            maskedTextBoxSenha.Size = new Size(265, 27);
+            maskedTextBoxSenha.PasswordChar = '*';
+            maskedTextBoxSenha.Size = new Size(232, 23);
             maskedTextBoxSenha.TabIndex = 11;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(35, 81);
+            label3.Location = new Point(31, 61);
             label3.Name = "label3";
-            label3.Size = new Size(52, 20);
+            label3.Size = new Size(42, 15);
             label3.TabIndex = 10;
             label3.Text = "Senha:";
             // 
             // maskedTextBoxCnpj
             // 
-            maskedTextBoxCnpj.Location = new Point(95, 12);
-            maskedTextBoxCnpj.Mask = "0000000";
+            maskedTextBoxCnpj.Location = new Point(83, 9);
+            maskedTextBoxCnpj.Margin = new Padding(3, 2, 3, 2);
+            maskedTextBoxCnpj.Mask = "00000000000000";
             maskedTextBoxCnpj.Name = "maskedTextBoxCnpj";
-            maskedTextBoxCnpj.Size = new Size(265, 27);
+            maskedTextBoxCnpj.Size = new Size(232, 23);
             maskedTextBoxCnpj.TabIndex = 13;
             maskedTextBoxCnpj.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(52, 15);
+            label4.Location = new Point(38, 12);
             label4.Name = "label4";
-            label4.Size = new Size(35, 20);
+            label4.Size = new Size(35, 15);
             label4.TabIndex = 12;
-            label4.Text = "Cpf:";
+            label4.Text = "Cnpj:";
             // 
             // Cadastro
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(392, 201);
+            ClientSize = new Size(343, 151);
             Controls.Add(maskedTextBoxCnpj);
             Controls.Add(label4);
             Controls.Add(maskedTextBoxSenha);
@@ -109,6 +114,7 @@
             Controls.Add(buttonCadastrar);
             Controls.Add(maskedTextBoxNome);
             Controls.Add(label1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Cadastro";
             Text = "Cadastro";
             ResumeLayout(false);

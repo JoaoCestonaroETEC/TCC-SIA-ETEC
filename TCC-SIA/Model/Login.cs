@@ -8,17 +8,17 @@ namespace TCC_SIA.Model
 {
     internal class LoginEmpresa
     {
-        private int cnpjLogin;
+        private long cnpjLogin;
         private string senhaLogin;
         private string nomeLogin;
 
-        public int getCnpj()
+        public long getCnpj()
         {
             return this.cnpjLogin;
         }
 
         // Método para definir o nome do cliente
-        public void setCnpj(int Cnpj)
+        public void setCnpj(long Cnpj)
         {
             this.cnpjLogin = Cnpj;
         }

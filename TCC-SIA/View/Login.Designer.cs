@@ -57,6 +57,7 @@
             // 
             maskedTextBox1.Location = new Point(138, 21);
             maskedTextBox1.Margin = new Padding(3, 2, 3, 2);
+            maskedTextBox1.Mask = "00000000000000";
             maskedTextBox1.Name = "maskedTextBox1";
             maskedTextBox1.Size = new Size(232, 23);
             maskedTextBox1.TabIndex = 2;
@@ -66,6 +67,7 @@
             maskedTextBox2.Location = new Point(138, 50);
             maskedTextBox2.Margin = new Padding(3, 2, 3, 2);
             maskedTextBox2.Name = "maskedTextBox2";
+            maskedTextBox2.PasswordChar = '*';
             maskedTextBox2.Size = new Size(232, 23);
             maskedTextBox2.TabIndex = 3;
             // 
