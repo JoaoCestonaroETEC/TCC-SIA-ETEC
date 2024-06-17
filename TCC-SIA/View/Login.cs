@@ -23,8 +23,7 @@ namespace TCC_SIA.View
         {
             IdLogin mIdLogin = new IdLogin();
             controleCliente cCliente = new controleCliente();
-
-            mIdLogin.setCnpj(Convert.ToInt64(maskedTextBox1.Text));
+            mIdLogin.setNomeCnpj(maskedTextBox1.Text);
             mIdLogin.setSenha(maskedTextBox2.Text);
 
             string res = cCliente.loginCadastro(mIdLogin);

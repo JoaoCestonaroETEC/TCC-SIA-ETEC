@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace TCC_SIA.Model
 {
-    internal class LoginEmpresa
+    internal class CadastroLogin
     {
-        private long cnpjLogin;
+        private string cnpjLogin;
         private string senhaLogin;
         private string nomeLogin;
 
-        public long getCnpj()
+        public string getCnpj()
         {
             return this.cnpjLogin;
         }
 
         // Método para definir o nome do cliente
-        public void setCnpj(long Cnpj)
+        public void setCnpj(string Cnpj)
         {
             this.cnpjLogin = Cnpj;
         }

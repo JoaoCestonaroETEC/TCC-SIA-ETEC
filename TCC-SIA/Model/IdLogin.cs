@@ -8,20 +8,19 @@ namespace TCC_SIA.Model
 {
     internal class IdLogin
     {
-        private long cnpj;
-        private string usuario;
+        private string nome_cnpj;
         private string senha;
 
         // Propriedade automática para idCliente
-        public string getUsuario()
+        public string getNomeCnpj()
         {
-            return this.usuario;
+            return this.nome_cnpj;
         }
 
         // Método para definir o nome do cliente
-        public void setUsuario(string Usuario)
+        public void setNomeCnpj(string NomeCnpj)
         {
-            this.usuario = Usuario;
+            this.nome_cnpj = NomeCnpj;
         }
 
         // Método para obter o email do cliente
@@ -34,16 +33,6 @@ namespace TCC_SIA.Model
         public void setSenha(string Senha)
         {
             this.senha = Senha;
-        }
-
-        public long getCnpj()
-        {
-            return this.cnpj;
-        }
-
-        public void setCnpj(long Cnpj)
-        {
-            this.cnpj = Cnpj;
         }
     }
 }

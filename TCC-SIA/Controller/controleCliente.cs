@@ -16,9 +16,9 @@ namespace TCC_SIA.Controller
     class controleCliente
     {
 
-        public string cadastroCliente(LoginEmpresa mLogin)
+        public string cadastroLogin(CadastroLogin mLogin)
         {
-            string sql = "insert into Login(cnpjlogin, senhalogin, nomelogin) " + "values(@cnpjlogin, @senhalogin, @nomelogin);";
+            string sql = "insert into Login(cnpjlogin, senhalogin, nomelogin) " + "values(@cnpjlogincadastro, @senhalogincadastro, @nomelogincadastro);";
             
             conexãoBD con = new conexãoBD();
             NpgsqlConnection conn = con.conectar();
@@ -31,9 +31,9 @@ namespace TCC_SIA.Controller
 
             try
             {
-                comm.Parameters.AddWithValue("@cnpjlogin", mLogin.getCnpj());
-                comm.Parameters.AddWithValue("@nomelogin", mLogin.getNome());
-                comm.Parameters.AddWithValue("@senhalogin", hashSenha);
+                comm.Parameters.AddWithValue("@cnpjlogincadastro", mLogin.getCnpj());
+                comm.Parameters.AddWithValue("@nomelogincadastro", mLogin.getNome());
+                comm.Parameters.AddWithValue("@senhalogincadastro", hashSenha);
 
                 comm.ExecuteNonQuery();
                 return "Cliente cadastrado com sucesso!";
@@ -46,14 +46,15 @@ namespace TCC_SIA.Controller
 
         public string loginCadastro(IdLogin mLogin)
         {
-            string sql = "SELECT senhalogin FROM Login WHERE cnpjlogin = @cnpjlogin";
+            string sql = "SELECT senhalogin FROM Login WHERE cnpjlogin = @cnpjlogin OR nomelogin = @nomelogin";
             conexãoBD con = new conexãoBD();
             NpgsqlConnection conn = con.conectar();
             NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
 
             try
             {
-                comm.Parameters.AddWithValue("@cnpjlogin", mLogin.getCnpj());
+                comm.Parameters.AddWithValue("@cnpjlogin", mLogin.getNomeCnpj());
+                comm.Parameters.AddWithValue("@nomelogin", mLogin.getNomeCnpj());
 
                 string hashArmazenado = null;
 

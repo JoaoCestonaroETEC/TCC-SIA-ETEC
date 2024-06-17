@@ -21,14 +21,14 @@ namespace TCC_SIA.View
 
         private void Cadastar_Cliente(object sender, EventArgs e)
         {
-            LoginEmpresa MLogin = new LoginEmpresa();
+            CadastroLogin MLogin = new CadastroLogin();
             controleCliente cCliente = new controleCliente();
 
-            MLogin.setCnpj(Convert.ToInt64(maskedTextBoxCnpj.Text));
+            MLogin.setCnpj(maskedTextBoxCnpj.Text);
             MLogin.setNome(maskedTextBoxNome.Text);
             MLogin.setSenha(maskedTextBoxSenha.Text);
 
-            string res = cCliente.cadastroCliente(MLogin);
+            string res = cCliente.cadastroLogin(MLogin);
             MessageBox.Show(res);
         }
     }
