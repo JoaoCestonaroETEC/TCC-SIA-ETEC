@@ -22,10 +22,13 @@ namespace TCC_SIA.View
 
         private void cadastrarServico(object sender, EventArgs e)
         {
-            modeloServ mServico = new modeloServ();
+            modeloServ mServico = new modeloServ(); // criei variavel para receber as informações da classe "modeloServ"
 
+            //Abaixo estou pegando info dos campos e setando nas variaveis do modeloServ
             mServico.setNomeServ(txbNomeServ.Text);
             mServico.setValorServ(Convert.ToDecimal(maskValor.Text));
+
+            MessageBox.Show'Aparentemente tudo certo'; //poha o texto
 
         }
     }

@@ -35,7 +35,7 @@ namespace TCC_SIA.Model
         {
             return this.valorServ;
         }
-        public void setValorServ (int valorServ)
+        public void setValorServ (decimal valorServ)
         {
             this.valorServ = valorServ;
         }
