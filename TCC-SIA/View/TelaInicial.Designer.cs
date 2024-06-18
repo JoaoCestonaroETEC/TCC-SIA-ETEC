@@ -30,37 +30,51 @@
         {
             button1 = new Button();
             button2 = new Button();
+            button3 = new Button();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new Point(12, 12);
+            button1.Location = new Point(14, 16);
+            button1.Margin = new Padding(3, 4, 3, 4);
             button1.Name = "button1";
-            button1.Size = new Size(215, 139);
+            button1.Size = new Size(246, 185);
             button1.TabIndex = 0;
-            button1.Text = "Cadastrar Cliente";
+            button1.Text = "Cadastrar";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
             // button2
             // 
-            button2.Location = new Point(395, 12);
+            button2.Location = new Point(276, 16);
+            button2.Margin = new Padding(3, 4, 3, 4);
             button2.Name = "button2";
-            button2.Size = new Size(215, 139);
+            button2.Size = new Size(246, 185);
             button2.TabIndex = 1;
             button2.Text = "Logar ";
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
+            // button3
+            // 
+            button3.Location = new Point(14, 223);
+            button3.Margin = new Padding(3, 4, 3, 4);
+            button3.Name = "button3";
+            button3.Size = new Size(246, 185);
+            button3.TabIndex = 2;
+            button3.Text = "Cadastro de Veiculo";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
             // TelaInicial
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
-            ClientSize = new Size(622, 505);
+            ClientSize = new Size(711, 673);
+            Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "TelaInicial";
             Text = "Tela Inicial";
             WindowState = FormWindowState.Minimized;
@@ -71,5 +85,6 @@
 
         private Button button1;
         private Button button2;
+        private Button button3;
     }
 }

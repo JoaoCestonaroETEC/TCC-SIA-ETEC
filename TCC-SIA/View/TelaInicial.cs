@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TCC_SIA.Model;
 using static System.Windows.Forms.DataFormats;
 
 namespace TCC_SIA.View
@@ -28,6 +29,12 @@ namespace TCC_SIA.View
         {
             Login formLogin = new Login();
             formLogin.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            CadastroVeículo formVeiculo = new CadastroVeículo();
+            formVeiculo.Show();
         }
     }
 }

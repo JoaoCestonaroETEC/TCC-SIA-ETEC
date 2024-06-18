@@ -35,12 +35,12 @@
             labelTipo = new Label();
             labelPlaca = new Label();
             labelModelo = new Label();
-            textBoxCpf = new TextBox();
             textBoxCor = new TextBox();
             textBoxMarca = new TextBox();
             textBoxTipo = new TextBox();
             textBoxModelo = new TextBox();
             textBoxPlaca = new TextBox();
+            maskedTextBoxCpf = new MaskedTextBox();
             SuspendLayout();
             // 
             // labelCpf
@@ -107,13 +107,6 @@
             labelModelo.TabIndex = 21;
             labelModelo.Text = "Modelo:";
             // 
-            // textBoxCpf
-            // 
-            textBoxCpf.Location = new Point(140, 28);
-            textBoxCpf.Name = "textBoxCpf";
-            textBoxCpf.Size = new Size(245, 27);
-            textBoxCpf.TabIndex = 26;
-            // 
             // textBoxCor
             // 
             textBoxCor.Location = new Point(140, 61);
@@ -149,17 +142,24 @@
             textBoxPlaca.Size = new Size(245, 27);
             textBoxPlaca.TabIndex = 31;
             // 
+            // maskedTextBoxCpf
+            // 
+            maskedTextBoxCpf.Location = new Point(140, 25);
+            maskedTextBoxCpf.Name = "maskedTextBoxCpf";
+            maskedTextBoxCpf.Size = new Size(245, 27);
+            maskedTextBoxCpf.TabIndex = 32;
+            // 
             // CadastroVeículo
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(447, 410);
+            Controls.Add(maskedTextBoxCpf);
             Controls.Add(textBoxPlaca);
             Controls.Add(textBoxModelo);
             Controls.Add(textBoxTipo);
             Controls.Add(textBoxMarca);
             Controls.Add(textBoxCor);
-            Controls.Add(textBoxCpf);
             Controls.Add(labelTipo);
             Controls.Add(labelPlaca);
             Controls.Add(labelModelo);
@@ -181,11 +181,11 @@
         private Label labelTipo;
         private Label labelPlaca;
         private Label labelModelo;
-        private TextBox textBoxCpf;
         private TextBox textBoxCor;
         private TextBox textBoxMarca;
         private TextBox textBoxTipo;
         private TextBox textBoxModelo;
         private TextBox textBoxPlaca;
+        private MaskedTextBox maskedTextBoxCpf;
     }
 }

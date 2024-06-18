@@ -24,7 +24,7 @@ namespace TCC_SIA.View
             Veiculo mVeiculo = new Veiculo();
             controleVeiculo cVeiculo = new controleVeiculo();
 
-            mVeiculo.setCpfCliente(Convert.ToInt32(textBoxCpf.Text));
+            mVeiculo.setCpfCliente(Convert.ToInt32(maskedTextBoxCpf.Text));
             mVeiculo.setCor(textBoxCor.Text);
             mVeiculo.setMarca(textBoxMarca.Text);
             mVeiculo.setTipo(textBoxTipo.Text);
