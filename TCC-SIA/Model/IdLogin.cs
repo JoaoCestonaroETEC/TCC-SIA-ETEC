@@ -20,9 +20,9 @@ namespace TCC_SIA.Model
         }
 
         // Método para definir o nome do cliente
-        public void setUsuario(string Usuario)
+        public void setUsuario(string usuario)
         {
-            this.usuario = Usuario;
+            this.usuario = usuario;
         }
 
         public string getEmail()
@@ -31,9 +31,9 @@ namespace TCC_SIA.Model
         }
 
         // Método para definir o nome do cliente
-        public void setEmail(string Email)
+        public void setEmail(string email)
         {
-            this.email = Email;
+            this.email = email;
         }
 
         // Método para obter o email do cliente
@@ -43,9 +43,9 @@ namespace TCC_SIA.Model
         }
 
         // Método para definir o email do cliente
-        public void setSenha(string Senha)
+        public void setSenha(string senha)
         {
-            this.senha = Senha;
+            this.senha = senha;
         }
 
         public string getCnpj()
@@ -53,9 +53,9 @@ namespace TCC_SIA.Model
             return this.cnpj;
         }
 
-        public void setCnpj(string Cnpj)
+        public void setCnpj(string cnpj)
         {
-            this.cnpj = Cnpj;
+            this.cnpj = cnpj;
         }
     }
 }
