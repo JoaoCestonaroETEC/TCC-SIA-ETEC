@@ -80,12 +80,12 @@ namespace TCC_SIA.Controller
                     }
                     else
                     {
-                        return "Senha incorreta!";
+                        return "Usuário ou senha incorreta!";
                     }
                 }
                 else
                 {
-                    return "Usuário não encontrado.";
+                    return "Usuário ou senha incorreta!";
                 }
             }
             catch (NpgsqlException ex)
