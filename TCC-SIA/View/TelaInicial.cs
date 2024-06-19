@@ -19,28 +19,21 @@ namespace TCC_SIA.View
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void sERVIÇOToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Cadastro formCadastro = new Cadastro();
-            formCadastro.Show();
+
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Login formLogin = new Login();
-            formLogin.Show();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            CadastroVeículo formVeiculo = new CadastroVeículo();
-            formVeiculo.Show();
-        }
-
-        private void button4_Click(object sender, EventArgs e)
+        private void pEÇAToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CadastroPeça formPeça = new CadastroPeça();
             formPeça.Show();
+        }
+
+        private void vEÍCULOToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CadastroVeículo formVeiculo = new CadastroVeículo();
+            formVeiculo.Show();
         }
     }
 }
