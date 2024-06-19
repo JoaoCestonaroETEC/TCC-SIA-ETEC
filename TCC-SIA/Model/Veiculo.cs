@@ -8,19 +8,19 @@ namespace TCC_SIA.Model
 {
     internal class Veiculo
     {
-        private int cpfcliente;
+        private long cpfcliente;
         private string cor;
         private string marca;
         private string tipo;
         private string modelo;
         private string placa;
 
-        public int getCpfCliente()
+        public long getCpfCliente()
         {
             return this.cpfcliente;
         }
 
-        public void setCpfCliente(int CpfCliente)
+        public void setCpfCliente(long CpfCliente)
         {
             this.cpfcliente = CpfCliente;
         }

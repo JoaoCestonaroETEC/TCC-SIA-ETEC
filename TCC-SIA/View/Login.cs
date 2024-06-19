@@ -22,9 +22,10 @@ namespace TCC_SIA.View
         private void button1_Click(object sender, EventArgs e)
         {
             IdLogin mIdLogin = new IdLogin();
-            controleCliente cCliente = new controleCliente();
+            controleLogin cCliente = new controleLogin();
 
-            mIdLogin.setCnpj(Convert.ToInt64(maskedTextBox1.Text));
+            mIdLogin.setUsuario(maskedTextBox1.Text);
+            mIdLogin.setEmail(maskedTextBox1.Text);
             mIdLogin.setSenha(maskedTextBox2.Text);
 
             string res = cCliente.loginCadastro(mIdLogin);

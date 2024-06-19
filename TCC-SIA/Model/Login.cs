@@ -9,8 +9,10 @@ namespace TCC_SIA.Model
     internal class LoginEmpresa
     {
         private long cnpjLogin;
+        private string emailogin;
         private string senhaLogin;
         private string nomeLogin;
+        private long telefoneLogin;
 
         public long getCnpj()
         {
@@ -34,6 +36,18 @@ namespace TCC_SIA.Model
             this.nomeLogin = Nome;
         }
 
+        public string getEmail()
+        {
+            return this.emailogin;
+        }
+
+        // Método para definir o nome do cliente
+        public void setEmail(string Email)
+        {
+            this.emailogin = Email;
+        }
+
+
         public string getSenha()
         {
             return this.senhaLogin;
@@ -43,6 +57,17 @@ namespace TCC_SIA.Model
         public void setSenha(string Senha)
         {
             this.senhaLogin = Senha;
+        }
+
+        public long getTelefone()
+        {
+            return this.telefoneLogin;
+        }
+
+        // Método para definir o nome do cliente
+        public void setTelefone(long Telefone)
+        {
+            this.telefoneLogin = Telefone;
         }
     }
 }
