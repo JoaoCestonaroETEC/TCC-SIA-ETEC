@@ -31,5 +31,10 @@ namespace TCC_SIA.View
             string res = cCliente.loginCadastro(mIdLogin);
             MessageBox.Show(res);
         }
+
+        private void peca_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

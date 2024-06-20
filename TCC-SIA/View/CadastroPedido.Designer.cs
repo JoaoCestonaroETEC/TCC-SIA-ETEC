@@ -1,6 +1,6 @@
 ﻿namespace TCC_SIA.View
 {
-    partial class CadastroServico
+    partial class CadastroPedido
     {
         /// <summary>
         /// Required designer variable.
@@ -30,8 +30,6 @@
         {
             AbaServico = new TabControl();
             tabPageServico = new TabPage();
-            tabPagePecas = new TabPage();
-            button1 = new Button();
             dateTimePicker1 = new DateTimePicker();
             comboBox2 = new ComboBox();
             maskedTextBox2 = new MaskedTextBox();
@@ -44,8 +42,9 @@
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
+            tabPagePecas = new TabPage();
             dataGridView1 = new DataGridView();
-            button2 = new Button();
+            button1 = new Button();
             AbaServico.SuspendLayout();
             tabPageServico.SuspendLayout();
             tabPagePecas.SuspendLayout();
@@ -59,12 +58,11 @@
             AbaServico.Location = new Point(12, 12);
             AbaServico.Name = "AbaServico";
             AbaServico.SelectedIndex = 0;
-            AbaServico.Size = new Size(972, 518);
+            AbaServico.Size = new Size(972, 341);
             AbaServico.TabIndex = 0;
             // 
             // tabPageServico
             // 
-            tabPageServico.Controls.Add(button1);
             tabPageServico.Controls.Add(dateTimePicker1);
             tabPageServico.Controls.Add(comboBox2);
             tabPageServico.Controls.Add(maskedTextBox2);
@@ -80,31 +78,10 @@
             tabPageServico.Location = new Point(4, 29);
             tabPageServico.Name = "tabPageServico";
             tabPageServico.Padding = new Padding(3);
-            tabPageServico.Size = new Size(964, 485);
+            tabPageServico.Size = new Size(964, 308);
             tabPageServico.TabIndex = 0;
-            tabPageServico.Text = "Serviço";
+            tabPageServico.Text = "Pedido";
             tabPageServico.UseVisualStyleBackColor = true;
-            // 
-            // tabPagePecas
-            // 
-            tabPagePecas.Controls.Add(button2);
-            tabPagePecas.Controls.Add(dataGridView1);
-            tabPagePecas.Location = new Point(4, 29);
-            tabPagePecas.Name = "tabPagePecas";
-            tabPagePecas.Padding = new Padding(3);
-            tabPagePecas.Size = new Size(964, 485);
-            tabPagePecas.TabIndex = 1;
-            tabPagePecas.Text = "Peças usadas";
-            tabPagePecas.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(34, 231);
-            button1.Name = "button1";
-            button1.Size = new Size(186, 149);
-            button1.TabIndex = 27;
-            button1.Text = "Cadastrar";
-            button1.UseVisualStyleBackColor = true;
             // 
             // dateTimePicker1
             // 
@@ -205,32 +182,45 @@
             label1.TabIndex = 15;
             label1.Text = "Nome:";
             // 
+            // tabPagePecas
+            // 
+            tabPagePecas.Controls.Add(dataGridView1);
+            tabPagePecas.Location = new Point(4, 29);
+            tabPagePecas.Name = "tabPagePecas";
+            tabPagePecas.Padding = new Padding(3);
+            tabPagePecas.Size = new Size(964, 308);
+            tabPagePecas.TabIndex = 1;
+            tabPagePecas.Text = "Peças usadas";
+            tabPagePecas.UseVisualStyleBackColor = true;
+            // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(-4, 3);
+            dataGridView1.Location = new Point(6, 6);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(952, 303);
             dataGridView1.TabIndex = 0;
             // 
-            // button2
+            // button1
             // 
-            button2.Location = new Point(6, 329);
-            button2.Name = "button2";
-            button2.Size = new Size(202, 150);
-            button2.TabIndex = 1;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
+            button1.Location = new Point(16, 355);
+            button1.Name = "button1";
+            button1.Size = new Size(232, 106);
+            button1.TabIndex = 1;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
             // 
-            // CadastroServico
+            // CadastroPedido
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(996, 542);
+            Controls.Add(button1);
             Controls.Add(AbaServico);
-            Name = "CadastroServico";
+            Name = "CadastroPedido";
             Text = "CadastroServiço";
+            Load += Cadastrar_Load;
             AbaServico.ResumeLayout(false);
             tabPageServico.ResumeLayout(false);
             tabPageServico.PerformLayout();
@@ -243,7 +233,6 @@
 
         private TabControl AbaServico;
         private TabPage tabPageServico;
-        private Button button1;
         private DateTimePicker dateTimePicker1;
         private ComboBox comboBox2;
         private MaskedTextBox maskedTextBox2;
@@ -258,6 +247,6 @@
         private Label label1;
         private TabPage tabPagePecas;
         private DataGridView dataGridView1;
-        private Button button2;
+        private Button button1;
     }
 }
