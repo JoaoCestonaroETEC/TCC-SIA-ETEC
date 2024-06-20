@@ -47,5 +47,10 @@ namespace TCC_SIA.View
             string res = cVeiculo.cadastroVeiculo(mVeiculo);
             MessageBox.Show(res);
         }
+
+        private void CadastroVeículo_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

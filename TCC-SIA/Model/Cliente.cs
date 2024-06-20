@@ -10,21 +10,21 @@ namespace TCC_SIA.Model
 {
     internal class Cliente
     {
-        private string cpfCliente;
+        private long cpfCliente;
         private string nomeCliente;
         private string emailCliente;
         private string senhaCliente;
         private string telefoneCliente;
-        private string datanascCliente;
+        private DateTime datanascCliente;
 
         //Método para definir o cpf do cliente
-        public string getCpfCliente()
+        public long getCpfCliente()
         {
             return this.cpfCliente;
         }
 
         // Método para definir o nome do cliente
-        public void setCpfCliente(string cpfCliente)
+        public void setCpfCliente(long cpfCliente)
         {
             this.cpfCliente = cpfCliente;
         }
@@ -62,6 +62,30 @@ namespace TCC_SIA.Model
         public void setSenhaCliente(string senhaCliente)
         {
             this.senhaCliente = senhaCliente;
+        }
+
+        // Método para obter o telefone do cliente
+        public string getTelefoneCliente()
+        {
+            return this.telefoneCliente;
+        }
+
+        // Método para definir o telefone do cliente
+        public void getTelefoneCliente(string telefoneCliente)
+        {
+            this.telefoneCliente = telefoneCliente;
+        }
+
+        // Método para obter a data de nascimento do cliente
+        public DateTime getDataNascCliente()
+        {
+            return this.datanascCliente;
+        }
+
+        // Método para definir a data de nascimento do cliente
+        public void setDataNascCliente(DateTime datanascCliente)
+        {
+            this.datanascCliente = datanascCliente;
         }
     }
 
