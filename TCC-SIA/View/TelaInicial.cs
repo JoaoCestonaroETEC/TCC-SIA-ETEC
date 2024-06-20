@@ -21,7 +21,8 @@ namespace TCC_SIA.View
 
         private void sERVIÇOToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            CadastroServico formServico = new CadastroServico();
+            formServico.Show();
         }
 
         private void pEÇAToolStripMenuItem_Click(object sender, EventArgs e)

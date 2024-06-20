@@ -12,18 +12,18 @@ namespace TCC_SIA.Model
         private string nomeServico;
         private string descServico;
         private string tipoServico;
-        private long valorServico;
+        private decimal valorServico;
 
         public string NomeServico
         {
             get { return nomeServico; }
-            set { NomeServico = value; }
+            set { nomeServico = value; }
         }
 
         public string DescServico
         {
             get { return descServico; }
-            set { DescServico = value; }
+            set { descServico = value; }
         }
 
         public string TipoServico
@@ -32,10 +32,10 @@ namespace TCC_SIA.Model
             set { tipoServico = value; }
         }
 
-        public long ValorServico
+        public decimal ValorServico
         {
             get { return valorServico; }
-            set { ValorServico = value; }
+            set { valorServico = value; }
         }
     }
 }

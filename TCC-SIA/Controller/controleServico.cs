@@ -20,19 +20,21 @@ namespace TCC_SIA.Controller
 
             try
             {
-                comm.Parameters.AddWithValue("@NOMEPECA", mPeca.getNomePeca());
-                comm.Parameters.AddWithValue("@TIPOPECA", mPeca.getTipoPeca());
-                comm.Parameters.AddWithValue("@DESCPECA", mPeca.getDescPeca());
-                comm.Parameters.AddWithValue("@VALORPECA", mPeca.getValorPeca());
-                comm.Parameters.AddWithValue("@QUANTPECA", mPeca.getQuantPeca());
-                comm.Parameters.AddWithValue("@MARCAPECA", mPeca.getMarcaPeca());
+                comm.Parameters.AddWithValue("@NOMESERVICO", mServico.NomeServico);
+                comm.Parameters.AddWithValue("@TIPOSERVICO", mServico.TipoServico);
+                comm.Parameters.AddWithValue("@DESCSERVICO", mServico.DescServico);
+                comm.Parameters.AddWithValue("@VALORSERVICO", mServico.ValorServico);
 
                 comm.ExecuteNonQuery();
-                return "Veículo cadastrado com sucesso!";
+                return "Serviço cadastrado com sucesso!";
             }
             catch (NpgsqlException ex)
             {
                 return ex.ToString();
+            }
+            finally
+            {
+                con.desconectar();
             }
         }
     }
