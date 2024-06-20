@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace TCC_SIA.View
 {
-    public partial class CadastroServiço : Form
+    public partial class CadastroServico : Form
     {
-        public CadastroServiço()
+        public CadastroServico()
         {
             InitializeComponent();
         }
