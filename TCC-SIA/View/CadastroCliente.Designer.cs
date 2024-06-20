@@ -51,6 +51,8 @@
             textBoxCidade = new TextBox();
             textBoxUF = new TextBox();
             maskedTextBoxCep = new MaskedTextBox();
+            label12 = new Label();
+            textBoxSexo = new TextBox();
             SuspendLayout();
             // 
             // buttonCadastrar
@@ -121,7 +123,6 @@
             textBoxEmail.Name = "textBoxEmail";
             textBoxEmail.Size = new Size(351, 27);
             textBoxEmail.TabIndex = 8;
-            textBoxEmail.Text = "exemplo@gmail.com";
             // 
             // dateTimePickerNasc
             // 
@@ -152,7 +153,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(672, 67);
+            label6.Location = new Point(669, 110);
             label6.Name = "label6";
             label6.Size = new Size(120, 20);
             label6.TabIndex = 12;
@@ -161,7 +162,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(672, 110);
+            label7.Location = new Point(669, 153);
             label7.Name = "label7";
             label7.Size = new Size(37, 20);
             label7.TabIndex = 13;
@@ -170,7 +171,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(672, 159);
+            label8.Location = new Point(669, 202);
             label8.Name = "label8";
             label8.Size = new Size(52, 20);
             label8.TabIndex = 14;
@@ -179,7 +180,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(672, 203);
+            label9.Location = new Point(669, 246);
             label9.Name = "label9";
             label9.Size = new Size(59, 20);
             label9.TabIndex = 15;
@@ -188,7 +189,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(672, 244);
+            label10.Location = new Point(1138, 67);
             label10.Name = "label10";
             label10.Size = new Size(38, 20);
             label10.TabIndex = 16;
@@ -197,7 +198,7 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(1147, 67);
+            label11.Location = new Point(1140, 110);
             label11.Name = "label11";
             label11.RightToLeft = RightToLeft.No;
             label11.Size = new Size(57, 20);
@@ -206,53 +207,71 @@
             // 
             // textBoxNumero
             // 
-            textBoxNumero.Location = new Point(798, 64);
+            textBoxNumero.Location = new Point(795, 107);
             textBoxNumero.Name = "textBoxNumero";
             textBoxNumero.Size = new Size(257, 27);
             textBoxNumero.TabIndex = 18;
             // 
             // textBoxRua
             // 
-            textBoxRua.Location = new Point(716, 107);
+            textBoxRua.Location = new Point(713, 150);
             textBoxRua.Name = "textBoxRua";
             textBoxRua.Size = new Size(339, 27);
             textBoxRua.TabIndex = 19;
             // 
             // textBoxBairro
             // 
-            textBoxBairro.Location = new Point(730, 156);
+            textBoxBairro.Location = new Point(727, 199);
             textBoxBairro.Name = "textBoxBairro";
             textBoxBairro.Size = new Size(325, 27);
             textBoxBairro.TabIndex = 20;
             // 
             // textBoxCidade
             // 
-            textBoxCidade.Location = new Point(737, 200);
+            textBoxCidade.Location = new Point(734, 243);
             textBoxCidade.Name = "textBoxCidade";
             textBoxCidade.Size = new Size(318, 27);
             textBoxCidade.TabIndex = 21;
             // 
             // textBoxUF
             // 
-            textBoxUF.Location = new Point(1210, 64);
+            textBoxUF.Location = new Point(1203, 107);
             textBoxUF.Name = "textBoxUF";
             textBoxUF.Size = new Size(247, 27);
             textBoxUF.TabIndex = 22;
             // 
             // maskedTextBoxCep
             // 
-            maskedTextBoxCep.Location = new Point(716, 241);
+            maskedTextBoxCep.Location = new Point(1182, 64);
             maskedTextBoxCep.Mask = "00000-000";
             maskedTextBoxCep.Name = "maskedTextBoxCep";
-            maskedTextBoxCep.Size = new Size(339, 27);
+            maskedTextBoxCep.Size = new Size(268, 27);
             maskedTextBoxCep.TabIndex = 23;
             maskedTextBoxCep.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(669, 67);
+            label12.Name = "label12";
+            label12.Size = new Size(44, 20);
+            label12.TabIndex = 24;
+            label12.Text = "Sexo:";
+            // 
+            // textBoxSexo
+            // 
+            textBoxSexo.Location = new Point(719, 64);
+            textBoxSexo.Name = "textBoxSexo";
+            textBoxSexo.Size = new Size(333, 27);
+            textBoxSexo.TabIndex = 25;
             // 
             // CadastroCliente
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1503, 509);
+            Controls.Add(textBoxSexo);
+            Controls.Add(label12);
             Controls.Add(maskedTextBoxCep);
             Controls.Add(textBoxUF);
             Controls.Add(textBoxCidade);
@@ -307,5 +326,7 @@
         private TextBox textBoxCidade;
         private TextBox textBoxUF;
         private MaskedTextBox maskedTextBoxCep;
+        private Label label12;
+        private TextBox textBoxSexo;
     }
 }

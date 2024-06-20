@@ -22,6 +22,7 @@ namespace TCC_SIA.Model
         private string cidade;
         private int cep;
         private string uf;
+        private string sexo;
 
         //Método para definir o cpf do cliente
         public long getCpfCliente()
@@ -163,10 +164,22 @@ namespace TCC_SIA.Model
             return this.uf;
         }
 
-        // Método para definir uf(Estado) do cliente
+        // Método para definir o uf(Estado) do cliente
         public void setUf(string uf)
         {
             this.uf = uf;
+        }
+
+        // Método para obter o sexo do cliente
+        public string getSexo()
+        {
+            return this.sexo;
+        }
+
+        // Método para definir o sexo do cliente
+        public void setSexo(string sexo)
+        {
+            this.sexo = sexo;
         }
     }
 

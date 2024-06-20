@@ -15,8 +15,10 @@ namespace TCC_SIA.Controller
         {
             string sql = "INSERT INTO CLIENTE(CPFCLIENTE, NOMECLIENTE, EMAILCLIENTE, DATANASC_CLIENTE) " + "values(@CPFCLIENTE, @NOMECLIENTE, @EMAILCLIENTE, @DATANASC_CLIENTE);" +
                 "INSERT INTO CLIENTE_TELEFONE(CPFCLIENTE, TELEFONECLIENTE) " + "values(@CPFCLIENTE, @TELEFONECLIENTE);" +
-                "INSERT INTO CLIENTE_ENDERECO(CPFCLIENTE, NUMERO, RUA, BAIRRO, CIDADE, CEP, UF) " + "values(@CPFCLIENTE, @NUMERO, @RUA, @BAIRRO, @CIDADE, @CEP, @UF);";
-                
+                "INSERT INTO CLIENTE_ENDERECO(CPFCLIENTE, NUMERO, RUA, BAIRRO, CIDADE, CEP, UF) " + "values(@CPFCLIENTE, @NUMERO, @RUA, @BAIRRO, @CIDADE, @CEP, @UF);" +
+                "INSERT INTO SEXO_CLIENTE(CPFCLIENTE, SEXOCLIENTE) " + "values(@CPFCLIENTE, @SEXOCLIENTE);";
+
+
 
             conexãoBD con = new conexãoBD();
             NpgsqlConnection conn = con.conectar();
@@ -35,6 +37,7 @@ namespace TCC_SIA.Controller
                 comm.Parameters.AddWithValue("@CIDADE", mCliente.getCidade());
                 comm.Parameters.AddWithValue("@CEP", mCliente.getCep());
                 comm.Parameters.AddWithValue("@UF", mCliente.getUf());
+                comm.Parameters.AddWithValue("@SEXOCLIENTE", mCliente.getSexo());
 
                 comm.ExecuteNonQuery();
                 return "Cliente cadastrado com sucesso!";

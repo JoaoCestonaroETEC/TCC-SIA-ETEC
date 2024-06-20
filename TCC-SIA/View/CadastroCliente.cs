@@ -36,6 +36,7 @@ namespace TCC_SIA.View
             mCliente.setCidade(textBoxCidade.Text);
             mCliente.setCep(Convert.ToInt32(maskedTextBoxCep.Text));
             mCliente.setUf(textBoxUF.Text);
+            mCliente.setSexo(textBoxSexo.Text);
 
             string res = cCliente.cadastroCliente(mCliente);
             MessageBox.Show(res);
