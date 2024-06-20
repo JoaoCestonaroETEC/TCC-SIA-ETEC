@@ -16,6 +16,12 @@ namespace TCC_SIA.Model
         private string senhaCliente;
         private string telefoneCliente;
         private DateTime datanascCliente;
+        private int numero;
+        private string rua;
+        private string bairro;
+        private string cidade;
+        private int cep;
+        private string uf;
 
         //Método para definir o cpf do cliente
         public long getCpfCliente()
@@ -71,7 +77,7 @@ namespace TCC_SIA.Model
         }
 
         // Método para definir o telefone do cliente
-        public void getTelefoneCliente(string telefoneCliente)
+        public void setTelefoneCliente(string telefoneCliente)
         {
             this.telefoneCliente = telefoneCliente;
         }
@@ -87,7 +93,81 @@ namespace TCC_SIA.Model
         {
             this.datanascCliente = datanascCliente;
         }
+
+
+
+        // Método para obter o número da casa do cliente
+        public int getNumero()
+        {
+            return this.numero;
+        }
+
+        // Método para definir o número da casa do cliente
+        public void setNumero(int numero)
+        {
+            this.numero = numero;
+        }
+
+        // Método para obter rua do cliente
+        public string getRua()
+        {
+            return this.rua;
+        }
+
+        // Método para definir a rua do cliente
+        public void setRua(string rua)
+        {
+            this.rua = rua;
+        }
+
+        // Método para obter o bairro do cliente
+        public string getBairro()
+        {
+            return this.bairro;
+        }
+
+        // Método para definir o bairro do cliente
+        public void setBairro(string bairro)
+        {
+            this.bairro = bairro;
+        }
+
+        // Método para obter a cidade do cliente
+        public string getCidade()
+        {
+            return this.cidade;
+        }
+
+        // Método para definir a cidade do cliente
+        public void setCidade(string cidade)
+        {
+            this.cidade = cidade;
+        }
+
+        // Método para obter o cep do cliente
+        public int getCep()
+        {
+            return this.cep;
+        }
+
+        // Método para definir o cep do cliente
+        public void setCep(int cep)
+        {
+            this.cep = cep;
+
+        }
+
+        // Método para obter a uf(Estado) do cliente
+        public string getUf()
+        {
+            return this.uf;
+        }
+
+        // Método para definir uf(Estado) do cliente
+        public void setUf(string uf)
+        {
+            this.uf = uf;
+        }
     }
 
-    
 }

@@ -13,7 +13,10 @@ namespace TCC_SIA.Controller
     {
         public string cadastroCliente(Cliente mCliente)
         {
-            string sql = "INSERT INTO CLIENTE(CPFCLIENTE, NOMECLIENTE, EMAILCLIENTE, DATANASC_CLIENTE) " + "values(@CPFCLIENTE, @NOMECLIENTE, @EMAILCLIENTE, @DATANASC_CLIENTE);";
+            string sql = "INSERT INTO CLIENTE(CPFCLIENTE, NOMECLIENTE, EMAILCLIENTE, DATANASC_CLIENTE) " + "values(@CPFCLIENTE, @NOMECLIENTE, @EMAILCLIENTE, @DATANASC_CLIENTE);" +
+                "INSERT INTO CLIENTE_TELEFONE(CPFCLIENTE, TELEFONECLIENTE) " + "values(@CPFCLIENTE, @TELEFONECLIENTE);" +
+                "INSERT INTO CLIENTE_ENDERECO(CPFCLIENTE, NUMERO, RUA, BAIRRO, CIDADE, CEP, UF) " + "values(@CPFCLIENTE, @NUMERO, @RUA, @BAIRRO, @CIDADE, @CEP, @UF);";
+                
 
             conexãoBD con = new conexãoBD();
             NpgsqlConnection conn = con.conectar();
@@ -25,6 +28,13 @@ namespace TCC_SIA.Controller
                 comm.Parameters.AddWithValue("@NOMECLIENTE", mCliente.getNomeCliente());
                 comm.Parameters.AddWithValue("@EMAILCLIENTE", mCliente.getEmailCliente());
                 comm.Parameters.AddWithValue("@DATANASC_CLIENTE", mCliente.getDataNascCliente());
+                comm.Parameters.AddWithValue("@TELEFONECLIENTE", mCliente.getTelefoneCliente());
+                comm.Parameters.AddWithValue("@NUMERO", mCliente.getNumero());
+                comm.Parameters.AddWithValue("RUA", mCliente.getRua());
+                comm.Parameters.AddWithValue("@BAIRRO", mCliente.getBairro());
+                comm.Parameters.AddWithValue("@CIDADE", mCliente.getCidade());
+                comm.Parameters.AddWithValue("@CEP", mCliente.getCep());
+                comm.Parameters.AddWithValue("@UF", mCliente.getUf());
 
                 comm.ExecuteNonQuery();
                 return "Cliente cadastrado com sucesso!";

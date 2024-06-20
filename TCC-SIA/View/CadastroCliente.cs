@@ -28,8 +28,14 @@ namespace TCC_SIA.View
             mCliente.setCpfCliente(long.Parse(maskedTextBoxCPF.Text));
             mCliente.setNomeCliente(textBoxNome.Text);
             mCliente.setEmailCliente(textBoxEmail.Text);
-            mCliente.setDataNascCliente(Convert.ToDateTime(maskedTextBoxDate.Text));
-
+            mCliente.setDataNascCliente(Convert.ToDateTime(dateTimePickerNasc.Text));
+            mCliente.setTelefoneCliente(Convert.ToString(maskedTextBoxTelefone.Text));
+            mCliente.setNumero(Convert.ToInt32(textBoxNumero.Text));
+            mCliente.setRua(textBoxRua.Text);
+            mCliente.setBairro(textBoxBairro.Text);
+            mCliente.setCidade(textBoxCidade.Text);
+            mCliente.setCep(Convert.ToInt32(maskedTextBoxCep.Text));
+            mCliente.setUf(textBoxUF.Text);
 
             string res = cCliente.cadastroCliente(mCliente);
             MessageBox.Show(res);
