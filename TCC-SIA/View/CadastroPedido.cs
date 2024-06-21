@@ -51,7 +51,7 @@ namespace TCC_SIA.View
                 MessageBox.Show(res);
             }catch
             {
-                MessageBox.Show("Pô Eduardo, preenche tudo certo men!!!");
+                MessageBox.Show("Preencha corretamente os campos!");
             }
         }
     }

@@ -30,6 +30,8 @@
         {
             AbaServico = new TabControl();
             tabPageServico = new TabPage();
+            cbbVeiculo = new ComboBox();
+            cbbCliente = new ComboBox();
             dataTimeFim = new DateTimePicker();
             label10 = new Label();
             maskPlaca = new MaskedTextBox();
@@ -53,8 +55,6 @@
             tabPagePecas = new TabPage();
             dataGridView1 = new DataGridView();
             button1 = new Button();
-            comboBox1 = new ComboBox();
-            comboBox2 = new ComboBox();
             AbaServico.SuspendLayout();
             tabPageServico.SuspendLayout();
             tabPagePecas.SuspendLayout();
@@ -73,8 +73,8 @@
             // 
             // tabPageServico
             // 
-            tabPageServico.Controls.Add(comboBox2);
-            tabPageServico.Controls.Add(comboBox1);
+            tabPageServico.Controls.Add(cbbVeiculo);
+            tabPageServico.Controls.Add(cbbCliente);
             tabPageServico.Controls.Add(dataTimeFim);
             tabPageServico.Controls.Add(label10);
             tabPageServico.Controls.Add(maskPlaca);
@@ -102,6 +102,22 @@
             tabPageServico.TabIndex = 0;
             tabPageServico.Text = "Geral";
             tabPageServico.UseVisualStyleBackColor = true;
+            // 
+            // cbbVeiculo
+            // 
+            cbbVeiculo.FormattingEnabled = true;
+            cbbVeiculo.Location = new Point(1150, 64);
+            cbbVeiculo.Name = "cbbVeiculo";
+            cbbVeiculo.Size = new Size(151, 28);
+            cbbVeiculo.TabIndex = 38;
+            // 
+            // cbbCliente
+            // 
+            cbbCliente.FormattingEnabled = true;
+            cbbCliente.Location = new Point(1150, 25);
+            cbbCliente.Name = "cbbCliente";
+            cbbCliente.Size = new Size(151, 28);
+            cbbCliente.TabIndex = 37;
             // 
             // dataTimeFim
             // 
@@ -244,11 +260,11 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(478, 26);
+            label4.Location = new Point(462, 28);
             label4.Name = "label4";
-            label4.Size = new Size(77, 20);
+            label4.Size = new Size(90, 20);
             label4.TabIndex = 18;
-            label4.Text = "Descrição:";
+            label4.Text = "Observação:";
             // 
             // label3
             // 
@@ -283,7 +299,7 @@
             tabPagePecas.Location = new Point(4, 29);
             tabPagePecas.Name = "tabPagePecas";
             tabPagePecas.Padding = new Padding(3);
-            tabPagePecas.Size = new Size(964, 363);
+            tabPagePecas.Size = new Size(1319, 363);
             tabPagePecas.TabIndex = 1;
             tabPagePecas.Text = "Peças usadas";
             tabPagePecas.UseVisualStyleBackColor = true;
@@ -306,22 +322,6 @@
             button1.Text = "button1";
             button1.UseVisualStyleBackColor = true;
             button1.Click += Cadastrar_Pedidos;
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(1150, 25);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(151, 28);
-            comboBox1.TabIndex = 37;
-            // 
-            // comboBox2
-            // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(1150, 64);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(151, 28);
-            comboBox2.TabIndex = 38;
             // 
             // CadastroPedido
             // 
@@ -368,7 +368,7 @@
         private MaskedTextBox maskPlaca;
         private DateTimePicker dataTimeFim;
         private Label label10;
-        private ComboBox comboBox2;
-        private ComboBox comboBox1;
+        private ComboBox cbbVeiculo;
+        private ComboBox cbbCliente;
     }
 }

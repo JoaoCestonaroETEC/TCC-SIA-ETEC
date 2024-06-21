@@ -23,7 +23,7 @@ namespace TCC_SIA.Model
         private string corVeiculo;
         private DateTime dataInicio;
         private DateTime dataFim;
-        private int idCliente;
+        private int fk_cpfCliente;
 
         #region Encapsulamento
 
