@@ -70,11 +70,13 @@ namespace TCC_SIA.Controller
 
                 // Converter o resultado para Int64 (long) e incrementar
                 var maiorId = Convert.ToInt64(result);
-                var proximoIdPedido = maiorId + 1;
-                if (proximoIdPedido < 0)
+                  
+                if (maiorId < 0)
                 {
-                    proximoIdPedido = 0;
+                    maiorId = 0;
                 }
+
+                var proximoIdPedido = maiorId + 1;
                 var resultadoFinal = Convert.ToInt32(result);
 
                 return resultadoFinal;
