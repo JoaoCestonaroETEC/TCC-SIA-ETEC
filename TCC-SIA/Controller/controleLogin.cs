@@ -21,7 +21,7 @@ namespace TCC_SIA.Controller
             string sql = "insert into Login(cnpjlogin, nomelogin, emaillogin, senhalogin) " + "values(@cnpjlogin, @nomelogin, @emaillogin, @senhalogin);" +
                 "insert into login_telefone(cnpjlogin, telefonelogin) " + "values(@cnpjlogin, @telefonelogin)";
             
-            conexãoBD con = new conexãoBD();
+            conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();
             NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
 
@@ -50,7 +50,7 @@ namespace TCC_SIA.Controller
         public string loginCadastro(IdLogin mLogin)
         {
             string sql = "SELECT senhalogin FROM Login WHERE nomelogin = @nomelogin or emaillogin = @emaillogin";
-            conexãoBD con = new conexãoBD();
+            conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();
             NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
 

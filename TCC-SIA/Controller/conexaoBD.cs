@@ -7,7 +7,7 @@ using Npgsql;
 
 namespace TCC_SIA.Controller
 {
-    internal class conexãoBD
+    internal class conexaoBD
     {
         static string server = "127.0.0.1";
         static string porta = "5432";

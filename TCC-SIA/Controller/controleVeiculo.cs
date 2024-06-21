@@ -16,7 +16,7 @@ namespace TCC_SIA.Controller
         {
             string sql = "insert into Veiculo(cpfcliente, corveiculo, marcaveiculo, tipoveiculo, placaveiculo, modeloveiculo) " + "values(@cpfcliente, @corveiculo, @marcaveiculo, @tipoveiculo, @placaveiculo, @modeloveiculo);";
 
-            conexãoBD con = new conexãoBD();
+            conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();
             NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
 

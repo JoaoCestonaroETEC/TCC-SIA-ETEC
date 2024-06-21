@@ -14,7 +14,7 @@ namespace TCC_SIA.Controller
         {
             string sql = "INSERT INTO PECA(NOMEPECA, TIPOPECA, DESCPECA, VALORPECA, QUANTPECA, MARCAPECA) " + "values(@NOMEPECA, @TIPOPECA, @DESCPECA, @VALORPECA, @QUANTPECA, @MARCAPECA);";
 
-            conexãoBD con = new conexãoBD();
+            conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();
             NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
 
