@@ -14,7 +14,7 @@ namespace TCC_SIA.Controller
     {
         public string cadastroPedido(Pedido mPedido)
         {
-            string sql = "INSERT INTO PEDIDO(CPFCLIENTE, IDVEICULO, VALORTOTALPEDIDO, VALORTOTALPECA, VALORTOTALSERVICO, OBSERVACAO, DATAINICIO, DATAFIM) " + "values(@CPFCLIENTE, @IDVEICULO, @VALORTOTALPEDIDO, @VALORTOTALEPCA, @VALORTOTALSERVICO, @OBSERVACAO, @DATAINICIO, @DATAFIM);";
+            string sql = "INSERT INTO PEDIDO(IDVEICULO, CPFCLIENTE, VALORTOTALPEDIDO, VALORTOTALPECA, VALORTOTALSERVICO, OBSERVACAO, DATAINICIO, DATAFIM) " + "values(@IDVEICULO, @CPFCLIENTE, @VALORTOTALPEDIDO, @VALORTOTALPECA, @VALORTOTALSERVICO, @OBSERVACAO, @DATAINICIO, @DATAFIM);";
 
             conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();
@@ -24,7 +24,7 @@ namespace TCC_SIA.Controller
             {
                 comm.Parameters.AddWithValue("@CPFCLIENTE", mPedido.getCpfCliente());
                 comm.Parameters.AddWithValue("@IDVEICULO", mPedido.getIdVeiculo());
-                comm.Parameters.AddWithValue("@VALORPEDIDOTOTAL", mPedido.getValorTotalServico());
+                comm.Parameters.AddWithValue("@VALORTOTALPEDIDO", mPedido.getValorTotalPedido());
                 comm.Parameters.AddWithValue("@VALORTOTALPECA", mPedido.getValorTotalPeca());
                 comm.Parameters.AddWithValue("@VALORTOTALSERVICO", mPedido.getValorTotalServico());
                 comm.Parameters.AddWithValue("@OBSERVACAO", mPedido.getObservacao());

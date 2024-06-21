@@ -35,5 +35,25 @@ namespace TCC_SIA.Controller
                 return ex.ToString();
             }
         }
+        public NpgsqlDataReader pesquisaPeca(string nomepeca)
+        {
+            string sql = "select idpeca, idmarca, " +
+                "idtipo, nomepeca, descpeca, " +
+                "valorpeca, quantpeca from peca" +
+                "where nomepeca like '" + nomepeca + "%';";
+
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            try
+            {
+                return comm.ExecuteReader();
+            }
+            catch (NpgsqlException ex)
+            {
+                return null;
+            }
+        }
     }
 }

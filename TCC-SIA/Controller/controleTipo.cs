@@ -12,7 +12,7 @@ namespace TCC_SIA.Controller
     {
         public string cadastroTipo(Tipo mTipo)
         {
-            string sql = "INSERT INTO TIPO(NOMETIPO) " + "values(@NOMETIPO);";
+            string sql = "INSERT INTO TIPO_VEICULO(NOMETIPO) " + "values(@NOMETIPO);";
 
             conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();

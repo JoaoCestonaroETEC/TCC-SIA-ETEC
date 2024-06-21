@@ -9,8 +9,9 @@ namespace TCC_SIA.Model
     internal class Veiculo
     {
         private long cpfcliente;
+        private long idMarca;
+        private long idTipo;
         private string cor;
-        private string marca;
         private string tipo;
         private string modelo;
         private string placa;
@@ -25,6 +26,26 @@ namespace TCC_SIA.Model
             this.cpfcliente = CpfCliente;
         }
 
+        public long getIdMarca()
+        {
+            return this.idMarca;
+        }
+
+        public void setIdMarca(long idMarca)
+        {
+            this.idMarca = idMarca;
+        }
+
+        public long getIdTipo()
+        {
+            return this.idTipo;
+        }
+
+        public void setIdTipo(long idTipo)
+        {
+            this.idTipo = idTipo;
+        }
+
         public string getCor()
         {
             return this.cor;
@@ -33,16 +54,6 @@ namespace TCC_SIA.Model
         public void setCor(string Cor)
         {
             this.cor = Cor;
-        }
-
-        public string getMarca()
-        {
-            return this.marca;
-        }
-
-        public void setMarca(string Marca)
-        {
-            this.marca = Marca;
         }
 
         public string getTipo()

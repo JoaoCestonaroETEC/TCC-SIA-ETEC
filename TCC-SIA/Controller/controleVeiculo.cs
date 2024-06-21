@@ -14,7 +14,7 @@ namespace TCC_SIA.Controller
     {
         public string cadastroVeiculo(Veiculo mVeiculo)
         {
-            string sql = "insert into Veiculo(cpfcliente, corveiculo, marcaveiculo, tipoveiculo, placaveiculo, modeloveiculo) " + "values(@cpfcliente, @corveiculo, @marcaveiculo, @tipoveiculo, @placaveiculo, @modeloveiculo);";
+            string sql = "insert into Veiculo(cpfcliente, idmarca, idtipo, corveiculo, placaveiculo, modeloveiculo) " + "values(@cpfcliente, @idmarca, @idtipo, @corveiculo, @placaveiculo, @modeloveiculo);";
 
             conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();
@@ -23,8 +23,9 @@ namespace TCC_SIA.Controller
             try
             {
                 comm.Parameters.AddWithValue("@cpfcliente", mVeiculo.getCpfCliente());
+                comm.Parameters.AddWithValue("@idmarca", mVeiculo.getIdMarca());
+                comm.Parameters.AddWithValue("@idtipo", mVeiculo.getIdTipo());
                 comm.Parameters.AddWithValue("@corveiculo", mVeiculo.getCor());
-                comm.Parameters.AddWithValue("@marcaveiculo", mVeiculo.getMarca());
                 comm.Parameters.AddWithValue("@tipoveiculo", mVeiculo.getTipo());
                 comm.Parameters.AddWithValue("@modeloveiculo", mVeiculo.getModelo());
                 comm.Parameters.AddWithValue("@placaveiculo", mVeiculo.getPlaca());

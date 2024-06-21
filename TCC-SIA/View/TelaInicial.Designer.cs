@@ -34,8 +34,9 @@
             pEÇAToolStripMenuItem = new ToolStripMenuItem();
             cLIENTEToolStripMenuItem = new ToolStripMenuItem();
             vEÍCULOToolStripMenuItem = new ToolStripMenuItem();
-            tIPOToolStripMenuItem3 = new ToolStripMenuItem();
+            pEDIDOToolStripMenuItem = new ToolStripMenuItem();
             mARCAToolStripMenuItem = new ToolStripMenuItem();
+            tIPOToolStripMenuItem = new ToolStripMenuItem();
             pESQUISARToolStripMenuItem = new ToolStripMenuItem();
             sERVIÇOToolStripMenuItem1 = new ToolStripMenuItem();
             pEÇAToolStripMenuItem1 = new ToolStripMenuItem();
@@ -47,7 +48,6 @@
             cLIENTEToolStripMenuItem2 = new ToolStripMenuItem();
             vEÍCULOToolStripMenuItem2 = new ToolStripMenuItem();
             label1 = new Label();
-            pEDIDOToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -65,7 +65,7 @@
             // 
             // cADASTRARToolStripMenuItem
             // 
-            cADASTRARToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { sERVIÇOToolStripMenuItem, pEÇAToolStripMenuItem, cLIENTEToolStripMenuItem, vEÍCULOToolStripMenuItem });
+            cADASTRARToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { sERVIÇOToolStripMenuItem, pEÇAToolStripMenuItem, cLIENTEToolStripMenuItem, vEÍCULOToolStripMenuItem, pEDIDOToolStripMenuItem, mARCAToolStripMenuItem, tIPOToolStripMenuItem });
             cADASTRARToolStripMenuItem.Name = "cADASTRARToolStripMenuItem";
             cADASTRARToolStripMenuItem.Size = new Size(177, 41);
             cADASTRARToolStripMenuItem.Text = "CADASTRAR";
@@ -98,12 +98,12 @@
             vEÍCULOToolStripMenuItem.Text = "VEÍCULO";
             vEÍCULOToolStripMenuItem.Click += vEÍCULOToolStripMenuItem_Click;
             // 
-            // tIPOToolStripMenuItem3
+            // pEDIDOToolStripMenuItem
             // 
-            tIPOToolStripMenuItem3.Name = "tIPOToolStripMenuItem3";
-            tIPOToolStripMenuItem3.Size = new Size(224, 42);
-            tIPOToolStripMenuItem3.Text = "PEÇA";
-            tIPOToolStripMenuItem3.Click += tIPOToolStripMenuItem3_Click;
+            pEDIDOToolStripMenuItem.Name = "pEDIDOToolStripMenuItem";
+            pEDIDOToolStripMenuItem.Size = new Size(224, 42);
+            pEDIDOToolStripMenuItem.Text = "PEDIDO";
+            pEDIDOToolStripMenuItem.Click += pEDIDOToolStripMenuItem_Click;
             // 
             // mARCAToolStripMenuItem
             // 
@@ -111,6 +111,13 @@
             mARCAToolStripMenuItem.Size = new Size(224, 42);
             mARCAToolStripMenuItem.Text = "MARCA";
             mARCAToolStripMenuItem.Click += mARCAToolStripMenuItem_Click;
+            // 
+            // tIPOToolStripMenuItem
+            // 
+            tIPOToolStripMenuItem.Name = "tIPOToolStripMenuItem";
+            tIPOToolStripMenuItem.Size = new Size(224, 42);
+            tIPOToolStripMenuItem.Text = "TIPO";
+            tIPOToolStripMenuItem.Click += tIPOToolStripMenuItem_Click;
             // 
             // pESQUISARToolStripMenuItem
             // 
@@ -184,13 +191,6 @@
             label1.TabIndex = 1;
             label1.Text = "FAÇAM SUAS PARTE SEUS PREGUIÇOSOS!";
             // 
-            // pEDIDOToolStripMenuItem
-            // 
-            pEDIDOToolStripMenuItem.Name = "pEDIDOToolStripMenuItem";
-            pEDIDOToolStripMenuItem.Size = new Size(224, 42);
-            pEDIDOToolStripMenuItem.Text = "PEDIDO";
-            pEDIDOToolStripMenuItem.Click += pEDIDOToolStripMenuItem_Click;
-            // 
             // TelaInicial
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -228,5 +228,8 @@
         private ToolStripMenuItem cLIENTEToolStripMenuItem2;
         private ToolStripMenuItem vEÍCULOToolStripMenuItem2;
         private Label label1;
+        private ToolStripMenuItem pEDIDOToolStripMenuItem;
+        private ToolStripMenuItem mARCAToolStripMenuItem;
+        private ToolStripMenuItem tIPOToolStripMenuItem;
     }
 }
