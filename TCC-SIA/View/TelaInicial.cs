@@ -36,5 +36,11 @@ namespace TCC_SIA.View
             CadastroVeículo formVeiculo = new CadastroVeículo();
             formVeiculo.Show();
         }
+
+        private void cLIENTEToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CadastroCliente cadastroCliente = new CadastroCliente();
+            cadastroCliente.Show();
+        }
     }
 }
