@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TCC_SIA.Controller;
 
 namespace TCC_SIA.Model
 {
     internal class Pedido
     {
+        controlePedido cPedido = new controlePedido();
+
+        private long idpedido;
         private string servicos;
         private string pecas;
 
@@ -21,6 +25,16 @@ namespace TCC_SIA.Model
         private DateTime dataFim;
 
         #region Encapsulamento
+
+        public long getIdPedido()
+        {
+            return idpedido;
+        }
+
+        public void setIdPedido(long idPedido)
+        {
+            this.idpedido = idPedido;
+        }
 
         public string getServico()
         {

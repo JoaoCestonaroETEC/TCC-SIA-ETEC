@@ -47,17 +47,22 @@
             label4 = new Label();
             label3 = new Label();
             tabPagePecas = new TabPage();
-            dataGridView1 = new DataGridView();
+            dataGridViewPecas = new DataGridView();
             tabPageServicos = new TabPage();
             buttonCadastrar = new Button();
             label1 = new Label();
             label2 = new Label();
             maskedTextBoxValorTotalPeca = new MaskedTextBox();
             maskedTextBoxValorTotalServico = new MaskedTextBox();
+            textBoxPesquisaPeca = new TextBox();
+            textBoxPesquisaServico = new TextBox();
+            dataGridViewServicos = new DataGridView();
             AbaServico.SuspendLayout();
             tabPageServico.SuspendLayout();
             tabPagePecas.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewPecas).BeginInit();
+            tabPageServicos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewServicos).BeginInit();
             SuspendLayout();
             // 
             // AbaServico
@@ -238,7 +243,8 @@
             // 
             // tabPagePecas
             // 
-            tabPagePecas.Controls.Add(dataGridView1);
+            tabPagePecas.Controls.Add(textBoxPesquisaPeca);
+            tabPagePecas.Controls.Add(dataGridViewPecas);
             tabPagePecas.Location = new Point(4, 29);
             tabPagePecas.Name = "tabPagePecas";
             tabPagePecas.Padding = new Padding(3);
@@ -247,17 +253,19 @@
             tabPagePecas.Text = "Peças usadas";
             tabPagePecas.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dataGridViewPecas
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(6, 6);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(1009, 351);
-            dataGridView1.TabIndex = 0;
+            dataGridViewPecas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewPecas.Location = new Point(9, 39);
+            dataGridViewPecas.Name = "dataGridViewPecas";
+            dataGridViewPecas.RowHeadersWidth = 51;
+            dataGridViewPecas.Size = new Size(1009, 306);
+            dataGridViewPecas.TabIndex = 0;
             // 
             // tabPageServicos
             // 
+            tabPageServicos.Controls.Add(textBoxPesquisaServico);
+            tabPageServicos.Controls.Add(dataGridViewServicos);
             tabPageServicos.Location = new Point(4, 29);
             tabPageServicos.Name = "tabPageServicos";
             tabPageServicos.Padding = new Padding(3);
@@ -308,6 +316,29 @@
             maskedTextBoxValorTotalServico.Size = new Size(125, 27);
             maskedTextBoxValorTotalServico.TabIndex = 34;
             // 
+            // textBoxPesquisaPeca
+            // 
+            textBoxPesquisaPeca.Location = new Point(9, 6);
+            textBoxPesquisaPeca.Name = "textBoxPesquisaPeca";
+            textBoxPesquisaPeca.Size = new Size(1006, 27);
+            textBoxPesquisaPeca.TabIndex = 1;
+            // 
+            // textBoxPesquisaServico
+            // 
+            textBoxPesquisaServico.Location = new Point(6, 12);
+            textBoxPesquisaServico.Name = "textBoxPesquisaServico";
+            textBoxPesquisaServico.Size = new Size(1007, 27);
+            textBoxPesquisaServico.TabIndex = 3;
+            // 
+            // dataGridViewServicos
+            // 
+            dataGridViewServicos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewServicos.Location = new Point(7, 45);
+            dataGridViewServicos.Name = "dataGridViewServicos";
+            dataGridViewServicos.RowHeadersWidth = 51;
+            dataGridViewServicos.Size = new Size(1009, 306);
+            dataGridViewServicos.TabIndex = 2;
+            // 
             // CadastroPedido
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -321,11 +352,16 @@
             Controls.Add(AbaServico);
             Name = "CadastroPedido";
             Text = "CadastroPedido";
+            Load += CadastroPedido_Load;
             AbaServico.ResumeLayout(false);
             tabPageServico.ResumeLayout(false);
             tabPageServico.PerformLayout();
             tabPagePecas.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            tabPagePecas.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewPecas).EndInit();
+            tabPageServicos.ResumeLayout(false);
+            tabPageServicos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewServicos).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -340,7 +376,7 @@
         private Label label4;
         private Label label3;
         private TabPage tabPagePecas;
-        private DataGridView dataGridView1;
+        private DataGridView dataGridViewPecas;
         private Button buttonCadastrar;
         private ComboBox comboBoxPagamento;
         private Label label9;
@@ -358,5 +394,8 @@
         private TabPage tabPageServicos;
         private MaskedTextBox maskedTextBoxValorTotalPeca;
         private MaskedTextBox maskedTextBoxValorTotalServico;
+        private TextBox textBoxPesquisaPeca;
+        private TextBox textBoxPesquisaServico;
+        private DataGridView dataGridViewServicos;
     }
 }

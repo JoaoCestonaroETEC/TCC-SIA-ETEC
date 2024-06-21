@@ -41,5 +41,14 @@ namespace TCC_SIA.View
             MessageBox.Show(res);
 
         }
+
+        private void CadastroPedido_Load(object sender, EventArgs e)
+        {
+            Pedido mPedido = new Pedido();
+            controlePedido cPedido = new controlePedido();
+            int res = cPedido.ProximoIdPedido(mPedido);
+            MessageBox.Show(Convert.ToString(res));
+            mPedido.setIdVeiculo(Convert.ToInt64(res));
+        }
     }
 }

@@ -1,6 +1,9 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +17,9 @@ namespace TCC_SIA.Controller
     {
         public string cadastroPedido(Pedido mPedido)
         {
-            string sql = "INSERT INTO PEDIDO(IDVEICULO, CPFCLIENTE, VALORTOTALPEDIDO, VALORTOTALPECA, VALORTOTALSERVICO, OBSERVACAO, DATAINICIO, DATAFIM) " + "values(@IDVEICULO, @CPFCLIENTE, @VALORTOTALPEDIDO, @VALORTOTALPECA, @VALORTOTALSERVICO, @OBSERVACAO, @DATAINICIO, @DATAFIM);";
+            string sql = "INSERT INTO PEDIDO(IDPEDIDO, IDVEICULO, CPFCLIENTE, VALORTOTALPEDIDO, VALORTOTALPECA, VALORTOTALSERVICO, OBSERVACAO, DATAINICIO, DATAFIM) " + "values(@IDPEDIDO, @IDVEICULO, @CPFCLIENTE, @VALORTOTALPEDIDO, @VALORTOTALPECA, @VALORTOTALSERVICO, @OBSERVACAO, @DATAINICIO, @DATAFIM);" +
+                "INSERT INTO PEDIDO_PECA(IDPEDIDO, IDPECA)" + "VALUES(@IDPEDIDO, @IDPECA);" +
+                "INSERT INTO PEDIDO_SERVICO(IDPEDIDO, IDSERVICO" + "VALUES(@IDPEDIDO, @IDSERVICO)";
 
             conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();
@@ -30,6 +35,11 @@ namespace TCC_SIA.Controller
                 comm.Parameters.AddWithValue("@OBSERVACAO", mPedido.getObservacao());
                 comm.Parameters.AddWithValue("@DATAINICIO", mPedido.getDataInicio());
                 comm.Parameters.AddWithValue("@DATAFIM", mPedido.getDataFim());
+                comm.Parameters.AddWithValue("@IDPEDIDO", mPedido.getIdPedido());
+                comm.Parameters.AddWithValue("@IDSERVICO", mPedido.getServico());
+                comm.Parameters.AddWithValue("@IDPECA", mPedido.getPecas());
+
+
 
                 comm.ExecuteNonQuery();
                 return "Pedido cadastrado com sucesso!";
@@ -37,6 +47,43 @@ namespace TCC_SIA.Controller
             catch (NpgsqlException ex)
             {
                 return ex.ToString();
+            }
+        }
+
+        public int ProximoIdPedido(Pedido mPedido)
+        {
+            string sql = "SELECT MAX(idpedido) AS max_idpedido FROM pedido;";
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            // Consulta SQL para obter o maior valor de idpedido no banco de dados
+
+            // Executar a consulta usando o contexto do Entity Framework
+
+            // Incrementa o maior valor encontrado
+
+            try
+            {
+                // Executar a consulta e obter o resultado
+                var result = comm.ExecuteNonQuery();
+
+                // Converter o resultado para Int64 (long) e incrementar
+                var maiorId = Convert.ToInt64(result);
+                var proximoIdPedido = maiorId + 1;
+                if (proximoIdPedido < 0)
+                {
+                    proximoIdPedido = 0;
+                }
+                var resultadoFinal = Convert.ToInt32(result);
+
+                return resultadoFinal;
+
+            }
+            catch (NpgsqlException ex)
+            {
+                Console.WriteLine($"Erro ao obter próximo idpedido: {ex.Message}");
+                throw; // Você pode lançar a exceção novamente ou tratar de outra forma
             }
         }
     }
