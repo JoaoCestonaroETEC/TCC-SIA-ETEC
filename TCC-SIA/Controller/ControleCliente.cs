@@ -14,12 +14,12 @@ namespace TCC_SIA.Controller
         public string cadastroCliente(Cliente mCliente)
         {
             string sql = "INSERT INTO CLIENTE(CPFCLIENTE, NOMECLIENTE, EMAILCLIENTE, DATANASC_CLIENTE, SEXO) " + "values(@CPFCLIENTE, @NOMECLIENTE, @EMAILCLIENTE, @DATANASC_CLIENTE, @SEXO);" +
-                "INSERT INTO CLIENTE_TELEFONE(CPFCLIENTE, TELEFONECLIENTE) " + "values(@CPFCLIENTE, @TELEFONECLIENTE);" +
+                "INSERT INTO CLIENTE_TELEFONE(CPFCLIENTE, TELEFONE) " + "values(@CPFCLIENTE, @TELEFONECLIENTE);" +
                 "INSERT INTO CLIENTE_ENDERECO(CPFCLIENTE, NUMERO, RUA, BAIRRO, CIDADE, CEP, ESTADO) " + "values(@CPFCLIENTE, @NUMERO, @RUA, @BAIRRO, @CIDADE, @CEP, @ESTADO);";
 
 
 
-            conexãoBD con = new conexãoBD();
+            conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();
             NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
 

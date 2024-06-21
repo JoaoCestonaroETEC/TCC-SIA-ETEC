@@ -16,11 +16,11 @@ namespace TCC_SIA.Model
         private string senhaCliente;
         private string telefoneCliente;
         private DateTime datanascCliente;
-        private int numero;
+        private long numero;
         private string rua;
         private string bairro;
         private string cidade;
-        private int cep;
+        private long cep;
         private string uf;
         private string sexo;
 
@@ -98,13 +98,13 @@ namespace TCC_SIA.Model
 
 
         // Método para obter o número da casa do cliente
-        public int getNumero()
+        public long getNumero()
         {
             return this.numero;
         }
 
         // Método para definir o número da casa do cliente
-        public void setNumero(int numero)
+        public void setNumero(long numero)
         {
             this.numero = numero;
         }
@@ -146,13 +146,13 @@ namespace TCC_SIA.Model
         }
 
         // Método para obter o cep do cliente
-        public int getCep()
+        public long getCep()
         {
             return this.cep;
         }
 
         // Método para definir o cep do cliente
-        public void setCep(int cep)
+        public void setCep(long cep)
         {
             this.cep = cep;
 
