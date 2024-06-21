@@ -34,6 +34,8 @@
             pEÇAToolStripMenuItem = new ToolStripMenuItem();
             cLIENTEToolStripMenuItem = new ToolStripMenuItem();
             vEÍCULOToolStripMenuItem = new ToolStripMenuItem();
+            tIPOToolStripMenuItem3 = new ToolStripMenuItem();
+            mARCAToolStripMenuItem = new ToolStripMenuItem();
             pESQUISARToolStripMenuItem = new ToolStripMenuItem();
             sERVIÇOToolStripMenuItem1 = new ToolStripMenuItem();
             pEÇAToolStripMenuItem1 = new ToolStripMenuItem();
@@ -62,7 +64,7 @@
             // 
             // cADASTRARToolStripMenuItem
             // 
-            cADASTRARToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { sERVIÇOToolStripMenuItem, pEÇAToolStripMenuItem, cLIENTEToolStripMenuItem, vEÍCULOToolStripMenuItem });
+            cADASTRARToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { sERVIÇOToolStripMenuItem, pEÇAToolStripMenuItem, cLIENTEToolStripMenuItem, vEÍCULOToolStripMenuItem, tIPOToolStripMenuItem3, mARCAToolStripMenuItem });
             cADASTRARToolStripMenuItem.Name = "cADASTRARToolStripMenuItem";
             cADASTRARToolStripMenuItem.Size = new Size(177, 41);
             cADASTRARToolStripMenuItem.Text = "CADASTRAR";
@@ -94,6 +96,20 @@
             vEÍCULOToolStripMenuItem.Size = new Size(224, 42);
             vEÍCULOToolStripMenuItem.Text = "VEÍCULO";
             vEÍCULOToolStripMenuItem.Click += vEÍCULOToolStripMenuItem_Click;
+            // 
+            // tIPOToolStripMenuItem3
+            // 
+            tIPOToolStripMenuItem3.Name = "tIPOToolStripMenuItem3";
+            tIPOToolStripMenuItem3.Size = new Size(224, 42);
+            tIPOToolStripMenuItem3.Text = "PEÇA";
+            tIPOToolStripMenuItem3.Click += tIPOToolStripMenuItem3_Click;
+            // 
+            // mARCAToolStripMenuItem
+            // 
+            mARCAToolStripMenuItem.Name = "mARCAToolStripMenuItem";
+            mARCAToolStripMenuItem.Size = new Size(224, 42);
+            mARCAToolStripMenuItem.Text = "MARCA";
+            mARCAToolStripMenuItem.Click += mARCAToolStripMenuItem_Click;
             // 
             // pESQUISARToolStripMenuItem
             // 
@@ -204,5 +220,7 @@
         private ToolStripMenuItem cLIENTEToolStripMenuItem2;
         private ToolStripMenuItem vEÍCULOToolStripMenuItem2;
         private Label label1;
+        private ToolStripMenuItem tIPOToolStripMenuItem3;
+        private ToolStripMenuItem mARCAToolStripMenuItem;
     }
 }

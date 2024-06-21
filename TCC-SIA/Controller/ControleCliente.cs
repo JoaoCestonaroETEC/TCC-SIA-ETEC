@@ -39,7 +39,7 @@ namespace TCC_SIA.Controller
                 comm.Parameters.AddWithValue("@SEXO", mCliente.getSexo());
 
                 comm.ExecuteNonQuery();
-                return "Cliente cadastrado com sucesso!";
+                return "Login cadastrado com sucesso!";
             }
             catch (NpgsqlException ex)
             {

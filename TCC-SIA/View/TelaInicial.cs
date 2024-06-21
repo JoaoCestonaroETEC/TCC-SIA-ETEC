@@ -39,8 +39,20 @@ namespace TCC_SIA.View
 
         private void cLIENTEToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CadastroCliente cadastroCliente = new CadastroCliente();
-            cadastroCliente.Show();
+            CadastroCliente formCliente = new CadastroCliente();
+            formCliente.Show();
+        }
+
+        private void mARCAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CadastroMarca formMarca = new CadastroMarca();
+            formMarca.Show();
+        }
+
+        private void tIPOToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            CadastroTipo formTipo = new CadastroTipo();
+            formTipo.Show();
         }
     }
 }

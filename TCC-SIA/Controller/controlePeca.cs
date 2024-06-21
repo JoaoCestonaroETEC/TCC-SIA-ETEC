@@ -28,7 +28,7 @@ namespace TCC_SIA.Controller
                 comm.Parameters.AddWithValue("@GARANTIAPECA", mPeca.getGarantiaPeca());
 
                 comm.ExecuteNonQuery();
-                return "Veículo cadastrado com sucesso!";
+                return "Peça cadastrado com sucesso!";
             }
             catch (NpgsqlException ex)
             {
