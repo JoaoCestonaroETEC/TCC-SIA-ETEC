@@ -8,17 +8,22 @@ namespace TCC_SIA.Model
 {
     internal class Pedido
     {
-        int idPedido;
-        string placa;
-        string modelo;
-        string veiculo;
-        string servico;
-        string pecas;
-        long valorTotal;
-        string formaPagamento;
-        string observacao;
-        long valorTotalPeca;
-        long valorTotalServico;
+        private int idPedido;
+        private string placaVeiculo;
+        private string modeloVeiculo;
+        private string marcaVeiculo;
+        private string tipoVeiculo;
+        private string servico;
+        private string pecas;
+        private decimal valorTotal;
+        private string formaPagamento;
+        private string observacao;
+        private decimal valorTotalPeca;
+        private decimal valorTotalServico;
+        private string corVeiculo;
+        private DateTime dataInicio;
+        private DateTime dataFim;
+        private int idCliente;
 
         #region Encapsulamento
 
@@ -31,30 +36,30 @@ namespace TCC_SIA.Model
             this.idPedido = idPedido;
         }
 
-        public string getPlaca()
+        public string getPlacaVeiculo()
         {
-            return placa;
+            return placaVeiculo;
         }
-        public void setPlaca(string placa)
+        public void setPlacaVeiculo(string placaVeiculo)
         {
-            this.placa = placa;
+            this.placaVeiculo = placaVeiculo;
         }
-        public string getModelo()
+        public string getModeloVeiculo()
         {
-            return modelo;
+            return modeloVeiculo;
         }
-        public void setModelo(string placa)
+        public void setModeloVeiculo(string modeloVeiculo)
         {
-            this.modelo = modelo;
+            this.modeloVeiculo = modeloVeiculo;
         }
-        public string getVeiculo()
+        public string getTipoVeiculo()
         {
-            return veiculo;
+            return tipoVeiculo;
         }
 
-        public void setVeiculo(string veiculo)
+        public void setTipoVeiculo(string tipoVeiculo)
         {
-            this.veiculo = veiculo;
+            this.tipoVeiculo = tipoVeiculo;
         }
 
         public string getServico()
@@ -77,32 +82,32 @@ namespace TCC_SIA.Model
             this.pecas = pecas;
         }
 
-        public long getValorTotal()
+        public decimal getValorTotal()
         {
             return valorTotal;
         }
 
-        public void setTotalValor(long valorTotal)
+        public void setValorTotal(decimal valorTotal)
         {
             this.valorTotal = valorTotal;
         }
 
-        public long getValorTotalPeca()
+        public decimal getValorTotalPeca()
         {
             return valorTotalPeca;
         }
 
-        public void setValorTotalPeca(long valorTotalPeca)
+        public void setValorTotalPeca(decimal valorTotalPeca)
         {
             this.valorTotalPeca = valorTotalPeca;
         }
 
-        public long getValorTotalServico()
+        public decimal getValorTotalServico()
         {
             return valorTotalServico;
         }
 
-        public void setValorTotalServico(long valorTotalServico)
+        public void setValorTotalServico(decimal valorTotalServico)
         {
             this.valorTotalServico = valorTotalServico;
         }
@@ -126,6 +131,53 @@ namespace TCC_SIA.Model
         {
             this.observacao = observacao;
         }
+
+        public string getMarcaVeiculo()
+        {
+            return marcaVeiculo;
+        }
+
+        public void setMarcaVeiculo(string marcaVeiculo)
+        {
+            this.marcaVeiculo = marcaVeiculo;
+        }
+
+        public string getCorVeiculo()
+        {
+            return corVeiculo;
+        }
+
+        public void setCorVeiculo(string corVeiculo)
+        {
+            this.corVeiculo = corVeiculo;
+        }
+
+        public DateTime getDataInicio()
+        {
+            return this.dataInicio;
+        }
+        public void setDataInicio(DateTime dataInicio)
+        {
+            this.dataInicio = dataInicio;
+        }
+
+        public DateTime getDataFim()
+        {
+            return this.dataFim;
+        }
+        public void setDataFim(DateTime dataFim)
+        {
+            this.dataFim = dataFim;
+        }
         #endregion
+
+        public int getIdCliente()
+        {
+            return idCliente;
+        }
+        public void setIdCliente(int idCliente)
+        {
+            this.idCliente = idCliente;
+        }
     }
 }
