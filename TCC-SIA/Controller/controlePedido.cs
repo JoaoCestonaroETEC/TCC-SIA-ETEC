@@ -14,7 +14,7 @@ namespace TCC_SIA.Controller
     {
         public string cadastroPedido(Pedido mPedido)
         {
-            string sql = "INSERT INTO pedido(corveiculo, marcaveiculo, tipoveiculo, placaveiculo, modeloveiculo, valortotal, observacao, datainicio, datafim, idcliente) " + "values(@corveiculo, @marcaveiculo, @tipoveiculo, @placaveiculo, @modeloveiculo, @valortotal, @observacao, @datainicio, @datafim, @idcliente);";
+            string sql = "INSERT INTO pedido(corveiculo, marcaveiculo, tipoveiculo, placaveiculo, modeloveiculo, valortotal, observacao, datainicio, datafim) " + "values(@corveiculo, @marcaveiculo, @tipoveiculo, @placaveiculo, @modeloveiculo, @valortotal, @observacao, @datainicio, @datafim);";
 
             conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();
@@ -33,7 +33,6 @@ namespace TCC_SIA.Controller
                 comm.Parameters.AddWithValue("@observacao", mPedido.getObservacao());
                 comm.Parameters.AddWithValue("@datainicio", mPedido.getDataInicio());
                 comm.Parameters.AddWithValue("@datafim", mPedido.getDataFim());
-                comm.Parameters.AddWithValue("@idcliente", mPedido.getIdCliente());
 
                 comm.ExecuteNonQuery();
                 return "Pedido cadastrado com sucesso!";
