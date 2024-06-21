@@ -12,30 +12,27 @@ using TCC_SIA.Model;
 
 namespace TCC_SIA.View
 {
-    public partial class CadastroPeça : Form
+    public partial class CadastroServico : Form
     {
-        public CadastroPeça()
+        public CadastroServico()
         {
             InitializeComponent();
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonCadastrar_Click(object sender, EventArgs e)
         {
-            Peca mPeca = new Peca();
-            controlePeca cPeca = new controlePeca();
+            Servico mServico = new Servico();
+            controleServico cServico = new controleServico();
 
-            mPeca.setNomePeca(textBoxNome.Text);
-            mPeca.setGarantiaPeca(Convert.ToDateTime(dateTimePickerPeca.Text));
-            mPeca.setDescPeca(richTextBoxDesc.Text);
-            mPeca.setValorPeca(Convert.ToInt64(maskedTextBoxValor.Text));
-            mPeca.setMarcaPeca(comboBoxMarca.Text);
-            mPeca.setQuantPeca(Convert.ToInt32(numericUpDownQuant.Text));
+            mServico.setNomeServico(textBoxNome.Text);
+            mServico.setGarantiaServico(Convert.ToDateTime(dateTimePickerGarantia.Text));
+            mServico.setValorServico(Convert.ToInt32(maskedTextBoxValor.Text));
+            mServico.setDescServico(richTextBoxDesc.Text);
 
-            string res = cPeca.cadastroPeca(mPeca);
+            string res = cServico.cadastroServico(mServico);
             MessageBox.Show(res);
         }
 
-        private void CadastroPeça_Load(object sender, EventArgs e)
+        private void CadastroServico_Load(object sender, EventArgs e)
         {
             // Definir eventos para validar a entrada
             maskedTextBoxValor.KeyPress += new KeyPressEventHandler(maskedTextBoxValor_KeyPress);

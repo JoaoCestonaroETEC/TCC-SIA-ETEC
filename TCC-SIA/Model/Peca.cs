@@ -9,10 +9,10 @@ namespace TCC_SIA.Model
     internal class Peca
     {
         private string nomePeca;
-        private string tipoPeca;
         private string descPeca;
         private long valorPeca;
         private int quantPeca;
+        private DateTime garantiaPeca;
         private string marcaPeca;
 
         public string getNomePeca()
@@ -25,14 +25,14 @@ namespace TCC_SIA.Model
             this.nomePeca = nomePeca;
         }
 
-        public string getTipoPeca()
+        public DateTime getGarantiaPeca()
         {
-            return tipoPeca;
+            return garantiaPeca;
         }
 
-        public void setTipoPeca(string tipoPeca)
+        public void setGarantiaPeca(DateTime garantiaPeca)
         {
-            this.tipoPeca = tipoPeca;
+            this.garantiaPeca = garantiaPeca;
         }
 
         public string getDescPeca()

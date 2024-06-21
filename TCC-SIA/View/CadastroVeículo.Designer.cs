@@ -35,12 +35,12 @@
             labelTipo = new Label();
             labelPlaca = new Label();
             labelModelo = new Label();
-            textBoxMarca = new TextBox();
             textBoxModelo = new TextBox();
-            textBoxPlaca = new TextBox();
             maskedTextBoxCpf = new MaskedTextBox();
             comboBoxCor = new ComboBox();
             comboBoxTipo = new ComboBox();
+            comboBoxMarca = new ComboBox();
+            maskedTextBoxPlaca = new MaskedTextBox();
             SuspendLayout();
             // 
             // labelCpf
@@ -108,14 +108,6 @@
             labelModelo.TabIndex = 21;
             labelModelo.Text = "Modelo:";
             // 
-            // textBoxMarca
-            // 
-            textBoxMarca.Location = new Point(122, 75);
-            textBoxMarca.Margin = new Padding(3, 2, 3, 2);
-            textBoxMarca.Name = "textBoxMarca";
-            textBoxMarca.Size = new Size(215, 23);
-            textBoxMarca.TabIndex = 28;
-            // 
             // textBoxModelo
             // 
             textBoxModelo.Location = new Point(122, 125);
@@ -124,19 +116,11 @@
             textBoxModelo.Size = new Size(215, 23);
             textBoxModelo.TabIndex = 30;
             // 
-            // textBoxPlaca
-            // 
-            textBoxPlaca.Location = new Point(122, 150);
-            textBoxPlaca.Margin = new Padding(3, 2, 3, 2);
-            textBoxPlaca.Name = "textBoxPlaca";
-            textBoxPlaca.Size = new Size(215, 23);
-            textBoxPlaca.TabIndex = 31;
-            // 
             // maskedTextBoxCpf
             // 
             maskedTextBoxCpf.Location = new Point(122, 19);
             maskedTextBoxCpf.Margin = new Padding(3, 2, 3, 2);
-            maskedTextBoxCpf.Mask = "00000000000";
+            maskedTextBoxCpf.Mask = "000000000-00";
             maskedTextBoxCpf.Name = "maskedTextBoxCpf";
             maskedTextBoxCpf.Size = new Size(215, 23);
             maskedTextBoxCpf.TabIndex = 32;
@@ -158,17 +142,32 @@
             comboBoxTipo.Size = new Size(215, 23);
             comboBoxTipo.TabIndex = 34;
             // 
+            // comboBoxMarca
+            // 
+            comboBoxMarca.FormattingEnabled = true;
+            comboBoxMarca.Location = new Point(122, 75);
+            comboBoxMarca.Name = "comboBoxMarca";
+            comboBoxMarca.Size = new Size(215, 23);
+            comboBoxMarca.TabIndex = 35;
+            // 
+            // maskedTextBoxPlaca
+            // 
+            maskedTextBoxPlaca.Location = new Point(122, 149);
+            maskedTextBoxPlaca.Name = "maskedTextBoxPlaca";
+            maskedTextBoxPlaca.Size = new Size(215, 23);
+            maskedTextBoxPlaca.TabIndex = 36;
+            // 
             // CadastroVeículo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(391, 282);
+            Controls.Add(maskedTextBoxPlaca);
+            Controls.Add(comboBoxMarca);
             Controls.Add(comboBoxTipo);
             Controls.Add(comboBoxCor);
             Controls.Add(maskedTextBoxCpf);
-            Controls.Add(textBoxPlaca);
             Controls.Add(textBoxModelo);
-            Controls.Add(textBoxMarca);
             Controls.Add(labelTipo);
             Controls.Add(labelPlaca);
             Controls.Add(labelModelo);
@@ -179,6 +178,7 @@
             Margin = new Padding(3, 2, 3, 2);
             Name = "CadastroVeículo";
             Text = "CadastroVeículo";
+            Load += CadastroVeículo_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -191,11 +191,11 @@
         private Label labelTipo;
         private Label labelPlaca;
         private Label labelModelo;
-        private TextBox textBoxMarca;
         private TextBox textBoxModelo;
-        private TextBox textBoxPlaca;
         private MaskedTextBox maskedTextBoxCpf;
         private ComboBox comboBoxCor;
         private ComboBox comboBoxTipo;
+        private ComboBox comboBoxMarca;
+        private MaskedTextBox maskedTextBoxPlaca;
     }
 }

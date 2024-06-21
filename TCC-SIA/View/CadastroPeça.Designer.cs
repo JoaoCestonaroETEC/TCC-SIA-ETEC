@@ -30,23 +30,23 @@
         {
             textBoxNome = new TextBox();
             label2 = new Label();
-            label1 = new Label();
-            comboBoxTipo = new ComboBox();
             label3 = new Label();
             richTextBoxDesc = new RichTextBox();
             maskedTextBoxValor = new MaskedTextBox();
             label4 = new Label();
-            textBoxMarca = new TextBox();
             label5 = new Label();
             numericUpDownQuant = new NumericUpDown();
             label6 = new Label();
             button1 = new Button();
+            dateTimePickerPeca = new DateTimePicker();
+            label1 = new Label();
+            comboBoxMarca = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)numericUpDownQuant).BeginInit();
             SuspendLayout();
             // 
             // textBoxNome
             // 
-            textBoxNome.Location = new Point(98, 27);
+            textBoxNome.Location = new Point(98, 32);
             textBoxNome.Name = "textBoxNome";
             textBoxNome.Size = new Size(209, 23);
             textBoxNome.TabIndex = 20;
@@ -54,28 +54,11 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(49, 30);
+            label2.Location = new Point(49, 35);
             label2.Name = "label2";
             label2.Size = new Size(43, 15);
             label2.TabIndex = 19;
             label2.Text = "Nome:";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(59, 64);
-            label1.Name = "label1";
-            label1.Size = new Size(33, 15);
-            label1.TabIndex = 21;
-            label1.Text = "Tipo:";
-            // 
-            // comboBoxTipo
-            // 
-            comboBoxTipo.FormattingEnabled = true;
-            comboBoxTipo.Location = new Point(98, 61);
-            comboBoxTipo.Name = "comboBoxTipo";
-            comboBoxTipo.Size = new Size(209, 23);
-            comboBoxTipo.TabIndex = 22;
             // 
             // label3
             // 
@@ -96,32 +79,26 @@
             // 
             // maskedTextBoxValor
             // 
-            maskedTextBoxValor.Location = new Point(98, 93);
-            maskedTextBoxValor.Mask = "0000.00";
+            maskedTextBoxValor.Location = new Point(98, 64);
             maskedTextBoxValor.Name = "maskedTextBoxValor";
             maskedTextBoxValor.Size = new Size(209, 23);
             maskedTextBoxValor.TabIndex = 25;
+            maskedTextBoxValor.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            maskedTextBoxValor.KeyPress += maskedTextBoxValor_KeyPress;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(56, 96);
+            label4.Location = new Point(56, 64);
             label4.Name = "label4";
             label4.Size = new Size(36, 15);
             label4.TabIndex = 26;
             label4.Text = "Valor:";
             // 
-            // textBoxMarca
-            // 
-            textBoxMarca.Location = new Point(98, 121);
-            textBoxMarca.Name = "textBoxMarca";
-            textBoxMarca.Size = new Size(209, 23);
-            textBoxMarca.TabIndex = 28;
-            // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(49, 124);
+            label5.Location = new Point(49, 92);
             label5.Name = "label5";
             label5.Size = new Size(43, 15);
             label5.TabIndex = 27;
@@ -129,7 +106,7 @@
             // 
             // numericUpDownQuant
             // 
-            numericUpDownQuant.Location = new Point(98, 150);
+            numericUpDownQuant.Location = new Point(98, 122);
             numericUpDownQuant.Name = "numericUpDownQuant";
             numericUpDownQuant.Size = new Size(209, 23);
             numericUpDownQuant.TabIndex = 29;
@@ -137,7 +114,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(20, 152);
+            label6.Location = new Point(20, 121);
             label6.Name = "label6";
             label6.Size = new Size(72, 15);
             label6.TabIndex = 30;
@@ -145,7 +122,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(201, 197);
+            button1.Location = new Point(201, 199);
             button1.Name = "button1";
             button1.Size = new Size(106, 75);
             button1.TabIndex = 31;
@@ -153,26 +130,52 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // dateTimePickerPeca
+            // 
+            dateTimePickerPeca.Format = DateTimePickerFormat.Short;
+            dateTimePickerPeca.Location = new Point(98, 150);
+            dateTimePickerPeca.Name = "dateTimePickerPeca";
+            dateTimePickerPeca.Size = new Size(200, 23);
+            dateTimePickerPeca.TabIndex = 32;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(38, 148);
+            label1.Name = "label1";
+            label1.Size = new Size(54, 15);
+            label1.TabIndex = 33;
+            label1.Text = "Garantia:";
+            // 
+            // comboBoxMarca
+            // 
+            comboBoxMarca.FormattingEnabled = true;
+            comboBoxMarca.Location = new Point(98, 93);
+            comboBoxMarca.Name = "comboBoxMarca";
+            comboBoxMarca.Size = new Size(209, 23);
+            comboBoxMarca.TabIndex = 34;
+            // 
             // CadastroPeça
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 312);
+            Controls.Add(comboBoxMarca);
+            Controls.Add(label1);
+            Controls.Add(dateTimePickerPeca);
             Controls.Add(button1);
             Controls.Add(label6);
             Controls.Add(numericUpDownQuant);
-            Controls.Add(textBoxMarca);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(maskedTextBoxValor);
             Controls.Add(richTextBoxDesc);
             Controls.Add(label3);
-            Controls.Add(comboBoxTipo);
-            Controls.Add(label1);
             Controls.Add(textBoxNome);
             Controls.Add(label2);
             Name = "CadastroPeça";
             Text = "CadastroPeça";
+            Load += CadastroPeça_Load;
             ((System.ComponentModel.ISupportInitialize)numericUpDownQuant).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -182,16 +185,16 @@
 
         private TextBox textBoxNome;
         private Label label2;
-        private Label label1;
-        private ComboBox comboBoxTipo;
         private Label label3;
         private RichTextBox richTextBoxDesc;
         private MaskedTextBox maskedTextBoxValor;
         private Label label4;
-        private TextBox textBoxMarca;
         private Label label5;
         private NumericUpDown numericUpDownQuant;
         private Label label6;
         private Button button1;
+        private DateTimePicker dateTimePickerPeca;
+        private Label label1;
+        private ComboBox comboBoxMarca;
     }
 }
