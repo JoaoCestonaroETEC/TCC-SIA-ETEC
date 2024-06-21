@@ -20,39 +20,26 @@ namespace TCC_SIA.View
             InitializeComponent();
         }
 
-        private void Pedido_Load(object sender, EventArgs e)
+
+        private void buttonCadastrar_Click(object sender, EventArgs e)
         {
             Pedido mPedido = new Pedido();
             controlePedido cPedido = new controlePedido();
 
-            string res = cPedido.verificarPedidoCliente(mPedido);
+            mPedido.setIdVeiculo(Convert.ToInt64(comboBoxVeiculo.Text));
+            mPedido.setCpfCliente(Convert.ToInt64(comboBoxCliente.Text));
+
+            mPedido.setValorTotalPedido(Convert.ToInt64(maskedTextBoxValor.Text));
+            mPedido.setValorTotalPeca(Convert.ToInt64(maskedTextBoxValorTotalPeca.Text));
+            mPedido.setValorTotalServico(Convert.ToInt64(maskedTextBoxValorTotalServico.Text));
+            mPedido.setObservacao(richTextBoxObs.Text);
+            mPedido.setDataInicio(Convert.ToDateTime(dataTimePickerInicio.Text));
+            mPedido.setDataFim(Convert.ToDateTime(dataTimePickerFim.Text));
+
+
+            string res = cPedido.cadastroPedido(mPedido);
             MessageBox.Show(res);
-        }
 
-        private void Cadastrar_Pedidos(object sender, EventArgs e)
-        {
-            Pedido mPedido = new Pedido();
-            controlePedido cPedido = new controlePedido();
-
-            try
-            {
-                mPedido.setPlacaVeiculo(maskPlaca.Text);
-                mPedido.setTipoVeiculo(Convert.ToString(cbbTipoVeiculo.SelectedValue));
-                mPedido.setMarcaVeiculo(Convert.ToString(cbbMarca.SelectedValue));
-                mPedido.setModeloVeiculo(Convert.ToString(cbbModelo.SelectedValue));
-                mPedido.setCorVeiculo(Convert.ToString(cbbCor.SelectedValue));
-                mPedido.setObservacao(richTextBox1.Text);
-                mPedido.setValorTotal(Convert.ToDecimal(txbValorTotal.Text));
-                mPedido.setDataInicio(Convert.ToDateTime(dataTimeInicio.Text));
-                mPedido.setDataFim(Convert.ToDateTime(dataTimeFim.Text));
-
-
-                string res = cPedido.cadastroPedido(mPedido);
-                MessageBox.Show(res);
-            }catch
-            {
-                MessageBox.Show("Preencha corretamente os campos!");
-            }
         }
     }
 }

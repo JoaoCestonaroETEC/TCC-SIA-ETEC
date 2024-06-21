@@ -8,68 +8,28 @@ namespace TCC_SIA.Model
 {
     internal class Pedido
     {
-        private int idPedido;
-        private string placaVeiculo;
-        private string modeloVeiculo;
-        private string marcaVeiculo;
-        private string tipoVeiculo;
-        private string servico;
+        private string servicos;
         private string pecas;
-        private decimal valorTotal;
-        private string formaPagamento;
+
+        private long cpfCliente;
+        private long idVeiculo;
+        private long valorTotalPedido;
         private string observacao;
-        private decimal valorTotalPeca;
-        private decimal valorTotalServico;
-        private string corVeiculo;
+        private long valorTotalPeca;
+        private long valorTotalServico;
         private DateTime dataInicio;
         private DateTime dataFim;
-        private int fk_cpfCliente;
 
         #region Encapsulamento
 
-        public int getIdPedido()
-        {
-            return idPedido;
-        }
-        public void setIdPedido(int idPedido)
-        {
-            this.idPedido = idPedido;
-        }
-
-        public string getPlacaVeiculo()
-        {
-            return placaVeiculo;
-        }
-        public void setPlacaVeiculo(string placaVeiculo)
-        {
-            this.placaVeiculo = placaVeiculo;
-        }
-        public string getModeloVeiculo()
-        {
-            return modeloVeiculo;
-        }
-        public void setModeloVeiculo(string modeloVeiculo)
-        {
-            this.modeloVeiculo = modeloVeiculo;
-        }
-        public string getTipoVeiculo()
-        {
-            return tipoVeiculo;
-        }
-
-        public void setTipoVeiculo(string tipoVeiculo)
-        {
-            this.tipoVeiculo = tipoVeiculo;
-        }
-
         public string getServico()
         {
-            return servico;
+            return servicos;
         }
 
-        public void setServico(string servico)
+        public void setServico(string servicos)
         {
-            this.servico = servico;
+            this.servicos = servicos;
         }
 
         public string getPecas()
@@ -82,46 +42,56 @@ namespace TCC_SIA.Model
             this.pecas = pecas;
         }
 
-        public decimal getValorTotal()
+
+
+
+        public long getCpfCliente()
         {
-            return valorTotal;
+            return cpfCliente;
+        }
+        public void setCpfCliente(long cpfCliente)
+        {
+            this.cpfCliente = cpfCliente;
         }
 
-        public void setValorTotal(decimal valorTotal)
+        public long getIdVeiculo()
         {
-            this.valorTotal = valorTotal;
+            return idVeiculo;
+        }
+        public void setIdVeiculo(long idVeiculo)
+        {
+            this.idVeiculo = idVeiculo;
         }
 
-        public decimal getValorTotalPeca()
+        public long getValorTotalPedido()
+        {
+            return valorTotalPedido;
+        }
+
+        public void setValorTotalPedido(long valorTotalPedido)
+        {
+            this.valorTotalPedido = valorTotalPedido;
+        }
+
+        public long getValorTotalPeca()
         {
             return valorTotalPeca;
         }
 
-        public void setValorTotalPeca(decimal valorTotalPeca)
+        public void setValorTotalPeca(long valorTotalPeca)
         {
             this.valorTotalPeca = valorTotalPeca;
         }
 
-        public decimal getValorTotalServico()
+        public long getValorTotalServico()
         {
             return valorTotalServico;
         }
 
-        public void setValorTotalServico(decimal valorTotalServico)
+        public void setValorTotalServico(long valorTotalServico)
         {
             this.valorTotalServico = valorTotalServico;
         }
-
-        public string getFormaPagamento()
-        {
-            return formaPagamento;
-        }
-
-        public void setFormaPagamento(string formaPagamento)
-        {
-            this.formaPagamento = formaPagamento;
-        }
-
         public string getObservacao()
         {
             return observacao;
@@ -132,30 +102,11 @@ namespace TCC_SIA.Model
             this.observacao = observacao;
         }
 
-        public string getMarcaVeiculo()
+        public DateTime getDataInicio ()
         {
-            return marcaVeiculo;
+            return dataInicio;
         }
 
-        public void setMarcaVeiculo(string marcaVeiculo)
-        {
-            this.marcaVeiculo = marcaVeiculo;
-        }
-
-        public string getCorVeiculo()
-        {
-            return corVeiculo;
-        }
-
-        public void setCorVeiculo(string corVeiculo)
-        {
-            this.corVeiculo = corVeiculo;
-        }
-
-        public DateTime getDataInicio()
-        {
-            return this.dataInicio;
-        }
         public void setDataInicio(DateTime dataInicio)
         {
             this.dataInicio = dataInicio;
@@ -163,21 +114,14 @@ namespace TCC_SIA.Model
 
         public DateTime getDataFim()
         {
-            return this.dataFim;
+            return dataFim;
         }
+
         public void setDataFim(DateTime dataFim)
         {
             this.dataFim = dataFim;
         }
-        #endregion
 
-        public int getIdCliente()
-        {
-            return idCliente;
-        }
-        public void setIdCliente(int idCliente)
-        {
-            this.idCliente = idCliente;
-        }
+        #endregion
     }
 }
