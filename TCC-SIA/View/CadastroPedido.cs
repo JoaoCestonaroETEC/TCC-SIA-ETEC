@@ -22,7 +22,11 @@ namespace TCC_SIA.View
 
         private void Pedido_Load(object sender, EventArgs e)
         {
+            Pedido mPedido = new Pedido();
+            controlePedido cPedido = new controlePedido();
 
+            string res = cPedido.verificarPedidoCliente(mPedido);
+            MessageBox.Show(res);
         }
 
         private void Cadastrar_Pedidos(object sender, EventArgs e)

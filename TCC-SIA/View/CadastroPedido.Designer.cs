@@ -53,6 +53,8 @@
             tabPagePecas = new TabPage();
             dataGridView1 = new DataGridView();
             button1 = new Button();
+            comboBox1 = new ComboBox();
+            comboBox2 = new ComboBox();
             AbaServico.SuspendLayout();
             tabPageServico.SuspendLayout();
             tabPagePecas.SuspendLayout();
@@ -66,11 +68,13 @@
             AbaServico.Location = new Point(12, 12);
             AbaServico.Name = "AbaServico";
             AbaServico.SelectedIndex = 0;
-            AbaServico.Size = new Size(972, 396);
+            AbaServico.Size = new Size(1327, 396);
             AbaServico.TabIndex = 0;
             // 
             // tabPageServico
             // 
+            tabPageServico.Controls.Add(comboBox2);
+            tabPageServico.Controls.Add(comboBox1);
             tabPageServico.Controls.Add(dataTimeFim);
             tabPageServico.Controls.Add(label10);
             tabPageServico.Controls.Add(maskPlaca);
@@ -94,7 +98,7 @@
             tabPageServico.Location = new Point(4, 29);
             tabPageServico.Name = "tabPageServico";
             tabPageServico.Padding = new Padding(3);
-            tabPageServico.Size = new Size(964, 363);
+            tabPageServico.Size = new Size(1319, 363);
             tabPageServico.TabIndex = 0;
             tabPageServico.Text = "Geral";
             tabPageServico.UseVisualStyleBackColor = true;
@@ -297,17 +301,33 @@
             // 
             button1.Location = new Point(16, 414);
             button1.Name = "button1";
-            button1.Size = new Size(232, 106);
+            button1.Size = new Size(235, 106);
             button1.TabIndex = 1;
             button1.Text = "button1";
             button1.UseVisualStyleBackColor = true;
             button1.Click += Cadastrar_Pedidos;
             // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(1150, 25);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(151, 28);
+            comboBox1.TabIndex = 37;
+            // 
+            // comboBox2
+            // 
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Location = new Point(1150, 64);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(151, 28);
+            comboBox2.TabIndex = 38;
+            // 
             // CadastroPedido
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(996, 542);
+            ClientSize = new Size(1351, 702);
             Controls.Add(button1);
             Controls.Add(AbaServico);
             Name = "CadastroPedido";
@@ -348,5 +368,7 @@
         private MaskedTextBox maskPlaca;
         private DateTimePicker dataTimeFim;
         private Label label10;
+        private ComboBox comboBox2;
+        private ComboBox comboBox1;
     }
 }

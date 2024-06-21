@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using TCC_SIA.Model;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace TCC_SIA.Controller
 {
@@ -40,6 +42,56 @@ namespace TCC_SIA.Controller
             {
                 return ex.ToString();
             }
+        }
+
+        public string verificarPedidoCliente(Pedido mPedido)
+        {
+            bool registroExistente = false;
+
+            string sql = "SELECT EXISTS(SELECT 1 FROM CLIENTE c INNER JOIN CLIENTE_TELEFONE ct ON c.CPFCLIENTE = ct.CPFCLIENTE WHERE c.CPFCLIENTE = @cpf AND c.NOMECLIENTE = @nome AND ct.TELEFONE = @telefone)";
+
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            try
+            {
+                comm.Parameters.AddWithValue("cpf", 1);
+                comm.Parameters.AddWithValue("nome", "1");
+                comm.Parameters.AddWithValue("telefone", "1");
+
+                registroExistente = (bool)comm.ExecuteScalar();
+                return "Cadastro genérico efetuado com sucesso. (teste)";
+            }
+            catch (NpgsqlException ex)
+            {
+                return ex.ToString();
+            }
+        }
+    }
+
+    public string adicionarPedidoCliente(Pedido mPedido)
+    {
+        bool registroExistente = false;
+
+        string sql = "SELECT EXISTS(SELECT 1 FROM CLIENTE c INNER JOIN CLIENTE_TELEFONE ct ON c.CPFCLIENTE = ct.CPFCLIENTE WHERE c.CPFCLIENTE = @cpf AND c.NOMECLIENTE = @nome AND ct.TELEFONE = @telefone)";
+
+        conexaoBD con = new conexaoBD();
+        NpgsqlConnection conn = con.conectar();
+        NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+        try
+        {
+            comm.Parameters.AddWithValue("cpf", 1);
+            comm.Parameters.AddWithValue("nome", "1");
+            comm.Parameters.AddWithValue("telefone", "1");
+
+            registroExistente = (bool)comm.ExecuteScalar();
+            return "Cadastro genérico efetuado com sucesso. (teste)";
+        }
+        catch (NpgsqlException ex)
+        {
+            return ex.ToString();
         }
     }
 }
