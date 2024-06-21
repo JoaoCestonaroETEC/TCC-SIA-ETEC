@@ -12,30 +12,46 @@ namespace TCC_SIA.Model
         private string nomeServico;
         private string descServico;
         private DateTime garantiaServico;
-        private decimal valorServico;
+        private long valorServico;
 
-        public string NomeServico
+        public string getNomeServico()
         {
-            get { return nomeServico; }
-            set { nomeServico = value; }
+            return nomeServico;
         }
 
-        public string DescServico
+        public void setNomeServico(string nomeServico)
         {
-            get { return descServico; }
-            set { descServico = value; }
+            this.nomeServico = nomeServico;
         }
 
-        public DateTime GarantiaServico
+        public DateTime getGarantiaServico()
         {
-            get { return garantiaServico; }
-            set { GarantiaServico = value; }
+            return garantiaServico;
         }
 
-        public decimal ValorServico
+        public void setGarantiaServico(DateTime garantiaServico)
         {
-            get { return valorServico; }
-            set { valorServico = value; }
+            this.garantiaServico = garantiaServico;
+        }
+
+        public string getDescServico()
+        {
+            return descServico;
+        }
+
+        public void setDescServico(string descServico)
+        {
+            this.descServico = descServico;
+        }
+
+        public long getValorServico()
+        {
+            return valorServico;
+        }
+
+        public void setValorServico(long valorServico)
+        {
+            this.valorServico = valorServico;
         }
     }
 }

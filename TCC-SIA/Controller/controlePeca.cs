@@ -12,7 +12,7 @@ namespace TCC_SIA.Controller
     {
         public string cadastroPeca(Peca mPeca)
         {
-            string sql = "INSERT INTO PECA(NOMEPECA, TIPOPECA, DESCPECA, VALORPECA, QUANTPECA, MARCAPECA) " + "values(@NOMEPECA, @TIPOPECA, @DESCPECA, @VALORPECA, @QUANTPECA, @MARCAPECA);";
+            string sql = "INSERT INTO PECA(NOMEPECA, DESCPECA, VALORPECA, QUANTPECA, MARCAPECA, GARANTIAPECA) " + "values(@NOMEPECA, @DESCPECA, @VALORPECA, @QUANTPECA, @MARCAPECA, @GARANTIAPECA);";
 
             conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();
@@ -21,11 +21,11 @@ namespace TCC_SIA.Controller
             try
             {
                 comm.Parameters.AddWithValue("@NOMEPECA", mPeca.getNomePeca());
-                comm.Parameters.AddWithValue("@TIPOPECA", mPeca.getTipoPeca());
                 comm.Parameters.AddWithValue("@DESCPECA", mPeca.getDescPeca());
                 comm.Parameters.AddWithValue("@VALORPECA", mPeca.getValorPeca());
                 comm.Parameters.AddWithValue("@QUANTPECA", mPeca.getQuantPeca());
                 comm.Parameters.AddWithValue("@MARCAPECA", mPeca.getMarcaPeca());
+                comm.Parameters.AddWithValue("@GARANTIAPECA", mPeca.getGarantiaPeca());
 
                 comm.ExecuteNonQuery();
                 return "Veículo cadastrado com sucesso!";

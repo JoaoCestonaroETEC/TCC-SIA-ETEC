@@ -23,10 +23,10 @@ namespace TCC_SIA.View
             Servico mServico = new Servico();
             controleServico cServico = new controleServico();
 
-            mServico.NomeServico = textBoxNome.Text;
-            mServico.GarantiaServico = Convert.ToDateTime(dateTimePicker1.Text);
-            mServico.ValorServico = Convert.ToInt32(maskedTextBoxValor.Text);
-            mServico.DescServico = richTextBoxDesc.Text;
+            mServico.setNomeServico(textBoxNome.Text);
+            mServico.setGarantiaServico(Convert.ToDateTime(dateTimePickerGarantia.Text));
+            mServico.setValorServico(Convert.ToInt32(maskedTextBoxValor.Text));
+            mServico.setDescServico(richTextBoxDesc.Text);
 
             string res = cServico.cadastroServico(mServico);
             MessageBox.Show(res);

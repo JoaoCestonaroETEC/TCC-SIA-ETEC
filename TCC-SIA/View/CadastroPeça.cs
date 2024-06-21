@@ -25,7 +25,7 @@ namespace TCC_SIA.View
             controlePeca cPeca = new controlePeca();
 
             mPeca.setNomePeca(textBoxNome.Text);
-            mPeca.setGarantiaPeca(Convert.ToDateTime(dateTimePickerPeca.Text);
+            mPeca.setGarantiaPeca(Convert.ToDateTime(dateTimePickerPeca.Text));
             mPeca.setDescPeca(richTextBoxDesc.Text);
             mPeca.setValorPeca(Convert.ToInt64(maskedTextBoxValor.Text));
             mPeca.setMarcaPeca(comboBoxMarca.Text);
@@ -33,6 +33,21 @@ namespace TCC_SIA.View
 
             string res = cPeca.cadastroPeca(mPeca);
             MessageBox.Show(res);
+        }
+
+        private void CadastroPeça_Load(object sender, EventArgs e)
+        {
+            // Definir eventos para validar a entrada
+            maskedTextBoxValor.KeyPress += new KeyPressEventHandler(maskedTextBoxValor_KeyPress);
+        }
+
+        private void maskedTextBoxValor_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verifica se a tecla pressionada é um dígito ou uma tecla de controle (como Backspace)
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // Impede a entrada de caracteres não numéricos
+            }
         }
     }
 }

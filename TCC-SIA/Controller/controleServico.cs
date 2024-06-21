@@ -12,7 +12,7 @@ namespace TCC_SIA.Controller
     {
         public string cadastroServico(Servico mServico)
         {
-            string sql = "INSERT INTO SERVICO(NOMESERVICO, TIPOSERVICO, DESCSERVICO, VALORSERVICO) " + "values(@NOMESERVICO, @TIPOSERVICO, @DESCSERVICO, @VALORSERVICO);";
+            string sql = "INSERT INTO SERVICO(NOMESERVICO, DESCSERVICO, VALORSERVICO, GARANTIASERVICO) " + "values(@NOMESERVICO, @DESCSERVICO, @VALORSERVICO, @GARANTIASERVICO);";
 
             conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();
@@ -20,10 +20,10 @@ namespace TCC_SIA.Controller
 
             try
             {
-                comm.Parameters.AddWithValue("@NOMESERVICO", mServico.NomeServico);
-                comm.Parameters.AddWithValue("@TIPOSERVICO", mServico.TipoServico);
-                comm.Parameters.AddWithValue("@DESCSERVICO", mServico.DescServico);
-                comm.Parameters.AddWithValue("@VALORSERVICO", mServico.ValorServico);
+                comm.Parameters.AddWithValue("@NOMESERVICO", mServico.getNomeServico());
+                comm.Parameters.AddWithValue("@GARANTIASERVICO", mServico.getGarantiaServico());
+                comm.Parameters.AddWithValue("@DESCSERVICO", mServico.getDescServico());
+                comm.Parameters.AddWithValue("@VALORSERVICO", mServico.getValorServico());
 
                 comm.ExecuteNonQuery();
                 return "Serviço cadastrado com sucesso!";

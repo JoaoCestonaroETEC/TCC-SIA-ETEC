@@ -36,7 +36,7 @@
             maskedTextBoxValor = new MaskedTextBox();
             buttonCadastrar = new Button();
             label2 = new Label();
-            dateTimePicker1 = new DateTimePicker();
+            dateTimePickerGarantia = new DateTimePicker();
             SuspendLayout();
             // 
             // label1
@@ -87,6 +87,7 @@
             maskedTextBoxValor.Name = "maskedTextBoxValor";
             maskedTextBoxValor.Size = new Size(236, 23);
             maskedTextBoxValor.TabIndex = 7;
+            maskedTextBoxValor.KeyPress += maskedTextBoxValor_KeyPress;
             // 
             // buttonCadastrar
             // 
@@ -107,20 +108,20 @@
             label2.TabIndex = 9;
             label2.Text = "Garantia:";
             // 
-            // dateTimePicker1
+            // dateTimePickerGarantia
             // 
-            dateTimePicker1.Format = DateTimePickerFormat.Short;
-            dateTimePicker1.Location = new Point(72, 83);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(102, 23);
-            dateTimePicker1.TabIndex = 10;
+            dateTimePickerGarantia.Format = DateTimePickerFormat.Short;
+            dateTimePickerGarantia.Location = new Point(72, 83);
+            dateTimePickerGarantia.Name = "dateTimePickerGarantia";
+            dateTimePickerGarantia.Size = new Size(102, 23);
+            dateTimePickerGarantia.TabIndex = 10;
             // 
             // CadastroServico
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(dateTimePickerGarantia);
             Controls.Add(label2);
             Controls.Add(buttonCadastrar);
             Controls.Add(maskedTextBoxValor);
@@ -146,6 +147,6 @@
         private MaskedTextBox maskedTextBoxValor;
         private Button buttonCadastrar;
         private Label label2;
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dateTimePickerGarantia;
     }
 }

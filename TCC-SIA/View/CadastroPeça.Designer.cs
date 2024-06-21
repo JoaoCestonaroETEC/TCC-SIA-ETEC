@@ -84,6 +84,7 @@
             maskedTextBoxValor.Size = new Size(209, 23);
             maskedTextBoxValor.TabIndex = 25;
             maskedTextBoxValor.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            maskedTextBoxValor.KeyPress += maskedTextBoxValor_KeyPress;
             // 
             // label4
             // 
@@ -174,6 +175,7 @@
             Controls.Add(label2);
             Name = "CadastroPeça";
             Text = "CadastroPeça";
+            Load += CadastroPeça_Load;
             ((System.ComponentModel.ISupportInitialize)numericUpDownQuant).EndInit();
             ResumeLayout(false);
             PerformLayout();
