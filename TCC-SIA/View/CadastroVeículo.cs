@@ -39,10 +39,10 @@ namespace TCC_SIA.View
 
             mVeiculo.setCpfCliente(Convert.ToInt64(maskedTextBoxCpf.Text));
             mVeiculo.setCor(comboBoxCor.Text);
-            mVeiculo.setMarca(textBoxMarca.Text);
+            mVeiculo.setMarca(comboBoxMarca.Text);
             mVeiculo.setTipo(comboBoxTipo.Text);
             mVeiculo.setModelo(textBoxModelo.Text);
-            mVeiculo.setPlaca(textBoxPlaca.Text);
+            mVeiculo.setPlaca(maskedTextBoxPlaca.Text);
 
             string res = cVeiculo.cadastroVeiculo(mVeiculo);
             MessageBox.Show(res);

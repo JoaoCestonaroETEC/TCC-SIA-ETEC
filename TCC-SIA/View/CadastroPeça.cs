@@ -25,10 +25,10 @@ namespace TCC_SIA.View
             controlePeca cPeca = new controlePeca();
 
             mPeca.setNomePeca(textBoxNome.Text);
-            mPeca.setTipoPeca(comboBoxTipo.Text);
+            mPeca.setGarantiaPeca(Convert.ToDateTime(dateTimePickerPeca.Text);
             mPeca.setDescPeca(richTextBoxDesc.Text);
             mPeca.setValorPeca(Convert.ToInt64(maskedTextBoxValor.Text));
-            mPeca.setMarcaPeca(textBoxMarca.Text);
+            mPeca.setMarcaPeca(comboBoxMarca.Text);
             mPeca.setQuantPeca(Convert.ToInt32(numericUpDownQuant.Text));
 
             string res = cPeca.cadastroPeca(mPeca);

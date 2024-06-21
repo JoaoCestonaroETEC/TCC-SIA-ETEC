@@ -11,7 +11,7 @@ namespace TCC_SIA.Model
     {
         private string nomeServico;
         private string descServico;
-        private string tipoServico;
+        private DateTime garantiaServico;
         private decimal valorServico;
 
         public string NomeServico
@@ -26,10 +26,10 @@ namespace TCC_SIA.Model
             set { descServico = value; }
         }
 
-        public string TipoServico
+        public DateTime GarantiaServico
         {
-            get { return tipoServico; }
-            set { tipoServico = value; }
+            get { return garantiaServico; }
+            set { GarantiaServico = value; }
         }
 
         public decimal ValorServico

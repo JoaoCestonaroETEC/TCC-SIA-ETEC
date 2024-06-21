@@ -18,19 +18,33 @@ namespace TCC_SIA.View
         {
             InitializeComponent();
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonCadastrar_Click(object sender, EventArgs e)
         {
             Servico mServico = new Servico();
             controleServico cServico = new controleServico();
 
-            mServico.NomeServico = textBox1.Text;
-            mServico.TipoServico = comboBox1.Text;
-            mServico.ValorServico = Convert.ToInt32(maskedTextBox1.Text);
-            mServico.DescServico = richTextBox1.Text;
+            mServico.NomeServico = textBoxNome.Text;
+            mServico.GarantiaServico = Convert.ToDateTime(dateTimePicker1.Text);
+            mServico.ValorServico = Convert.ToInt32(maskedTextBoxValor.Text);
+            mServico.DescServico = richTextBoxDesc.Text;
 
             string res = cServico.cadastroServico(mServico);
             MessageBox.Show(res);
+        }
+
+        private void CadastroServico_Load(object sender, EventArgs e)
+        {
+            // Definir eventos para validar a entrada
+            maskedTextBoxValor.KeyPress += new KeyPressEventHandler(maskedTextBoxValor_KeyPress);
+        }
+
+        private void maskedTextBoxValor_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verifica se a tecla pressionada é um dígito ou uma tecla de controle (como Backspace)
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // Impede a entrada de caracteres não numéricos
+            }
         }
     }
 }
