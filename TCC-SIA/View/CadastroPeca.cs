@@ -41,7 +41,7 @@ namespace TCC_SIA.View
             controlePeca cPeca = new controlePeca();
 
             //Definindo os valores nos atributos
-            mPeca.setIdMarca(Convert.ToInt64(comboBoxMarca.Text));
+            mPeca.setIdMarca(Convert.ToInt64(comboBoxMarca.SelectedValue));
             mPeca.setNomePeca(textBoxNome.Text);
             mPeca.setTipoPeca(comboBoxTIpo.Text);
             mPeca.setDescPeca(richTextBoxDesc.Text);

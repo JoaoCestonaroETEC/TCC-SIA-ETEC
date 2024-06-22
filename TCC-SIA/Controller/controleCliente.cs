@@ -68,13 +68,51 @@ namespace TCC_SIA.Controller
         }
         #endregion
 
+        #region Listar cliente
+        //Criação do método de listar cliente
+        public NpgsqlDataReader listarCliente()
+        {
+            //String sql de listar
+            string sql = "SELECT CPFCLIENTE, NOMECLIENTE FROM CLIENTE;";
+
+            //Abrindo conexão com o banco de dados
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            //Fazendo o try
+            try
+            {
+                //Retornando os valores
+                return comm.ExecuteReader();
+            }
+            //Fazendo o catch
+            catch (NpgsqlException ex)
+            {
+                //Retornando como nulo
+                return null;
+            }
+            //Encerrando a conexão
+            finally
+            {
+                //Método de desconectar
+                con.desconectar();
+            }
+
+        }
+        #endregion
+
         #region Pesquisar cliente
         //Criação do método de pesquisar cliente
         public NpgsqlDataReader pesquisarCliente(string cliente)
         {
             //String sql de pesquisar
-            string sql = "SELECT CPFCLIENTE, NOMECLIENTE FROM CLIENTE " +
-                "WHERE NOMECLIENTE LIKE '" + cliente + "%';";
+            string sql = "SELECT C.CPFCLIENTE, C.NOMECLIENTE, C.EMAILCLIENTE, C.DATANASC_CLIENTE, C.SEXO, " +
+             "E.NUMERO, E.RUA, E.CIDADE, E.CEP, E.BAIRRO, E.ESTADO, T.TELEFONE " +
+             "FROM CLIENTE C " +
+             "INNER JOIN CLIENTE_ENDERECO E ON C.CPFCLIENTE = E.CPFCLIENTE " +
+             "INNER JOIN CLIENTE_TELEFONE T ON C.CPFCLIENTE = T.CPFCLIENTE " +
+             "WHERE C.NOMECLIENTE LIKE '" + cliente + "%';";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();

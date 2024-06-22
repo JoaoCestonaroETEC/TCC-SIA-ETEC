@@ -64,7 +64,7 @@ namespace TCC_SIA.View
 
             //Definindo os valores nos atributos
             mVeiculo.setCpfCliente(Convert.ToInt64(maskedTextBoxCpf.Text));
-            mVeiculo.setIdMarca(Convert.ToInt64(comboBoxMarca.Text));
+            mVeiculo.setIdMarca(Convert.ToInt64(comboBoxMarca.SelectedValue));
             mVeiculo.setNomeVeiculo(textBoxNome.Text);
             mVeiculo.setTipoVeiculo(comboBoxTipo.Text);
             mVeiculo.setCorVeiculo(comboBoxTipo.Text);

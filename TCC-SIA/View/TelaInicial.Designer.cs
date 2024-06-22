@@ -114,35 +114,35 @@
             // sERVIÇOToolStripMenuItem1
             // 
             sERVIÇOToolStripMenuItem1.Name = "sERVIÇOToolStripMenuItem1";
-            sERVIÇOToolStripMenuItem1.Size = new Size(180, 34);
+            sERVIÇOToolStripMenuItem1.Size = new Size(168, 34);
             sERVIÇOToolStripMenuItem1.Text = "SERVIÇO";
             sERVIÇOToolStripMenuItem1.Click += sERVIÇOToolStripMenuItem1_Click;
             // 
             // pEÇAToolStripMenuItem1
             // 
             pEÇAToolStripMenuItem1.Name = "pEÇAToolStripMenuItem1";
-            pEÇAToolStripMenuItem1.Size = new Size(180, 34);
+            pEÇAToolStripMenuItem1.Size = new Size(168, 34);
             pEÇAToolStripMenuItem1.Text = "PEÇA";
             pEÇAToolStripMenuItem1.Click += pEÇAToolStripMenuItem1_Click;
             // 
             // cLIENTEToolStripMenuItem1
             // 
             cLIENTEToolStripMenuItem1.Name = "cLIENTEToolStripMenuItem1";
-            cLIENTEToolStripMenuItem1.Size = new Size(180, 34);
+            cLIENTEToolStripMenuItem1.Size = new Size(168, 34);
             cLIENTEToolStripMenuItem1.Text = "CLIENTE";
             cLIENTEToolStripMenuItem1.Click += cLIENTEToolStripMenuItem1_Click;
             // 
             // vEÍCULOToolStripMenuItem1
             // 
             vEÍCULOToolStripMenuItem1.Name = "vEÍCULOToolStripMenuItem1";
-            vEÍCULOToolStripMenuItem1.Size = new Size(180, 34);
+            vEÍCULOToolStripMenuItem1.Size = new Size(168, 34);
             vEÍCULOToolStripMenuItem1.Text = "VEÍCULO";
             vEÍCULOToolStripMenuItem1.Click += vEÍCULOToolStripMenuItem1_Click;
             // 
             // mARCAToolStripMenuItem1
             // 
             mARCAToolStripMenuItem1.Name = "mARCAToolStripMenuItem1";
-            mARCAToolStripMenuItem1.Size = new Size(180, 34);
+            mARCAToolStripMenuItem1.Size = new Size(168, 34);
             mARCAToolStripMenuItem1.Text = "MARCA";
             mARCAToolStripMenuItem1.Click += mARCAToolStripMenuItem1_Click;
             // 

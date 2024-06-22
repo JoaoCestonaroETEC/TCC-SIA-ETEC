@@ -47,10 +47,5 @@ namespace TCC_SIA.View
             MessageBox.Show(res);
         }
         #endregion
-
-        private void CadastroMarca_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
