@@ -43,10 +43,10 @@
             // 
             // buttonCadastrar
             // 
-            buttonCadastrar.Location = new Point(233, 168);
+            buttonCadastrar.Location = new Point(219, 144);
             buttonCadastrar.Margin = new Padding(3, 2, 3, 2);
             buttonCadastrar.Name = "buttonCadastrar";
-            buttonCadastrar.Size = new Size(82, 22);
+            buttonCadastrar.Size = new Size(96, 46);
             buttonCadastrar.TabIndex = 9;
             buttonCadastrar.Text = "Cadastrar";
             buttonCadastrar.UseVisualStyleBackColor = true;
@@ -145,7 +145,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(343, 247);
+            ClientSize = new Size(343, 203);
             Controls.Add(textBoxNome);
             Controls.Add(maskedTextBoxTelefone);
             Controls.Add(label5);

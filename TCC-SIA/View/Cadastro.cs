@@ -30,7 +30,7 @@ namespace TCC_SIA.View
             mLogin.setSenha(maskedTextBoxSenha.Text);
             mLogin.setTelefone(Convert.ToInt64(maskedTextBoxTelefone.Text));
 
-            string res = cCliente.cadastroCliente(mLogin);
+            string res = cCliente.cadastroLogin(mLogin);
             MessageBox.Show(res);
         }
     }

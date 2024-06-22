@@ -12,29 +12,46 @@ namespace TCC_SIA.Controller
 {
     internal class controleVeiculo
     {
+        //Criação do método de cadastrar tipo
         public string cadastroVeiculo(Veiculo mVeiculo)
         {
-            string sql = "insert into Veiculo(cpfcliente, corveiculo, marcaveiculo, tipoveiculo, placaveiculo, modeloveiculo) " + "values(@cpfcliente, @corveiculo, @marcaveiculo, @tipoveiculo, @placaveiculo, @modeloveiculo);";
+            //String sql de inserção
+            string sql = "INSERT INTO VEICULO(CPFCLIENTE, IDMARCA, NOMEVEICULO, TIPOVEICULO, CORVEICULO, PLACAVEICULO, MODELOVEICULO) " +
+                "VALUES(@CPFCLIENTE, @IDMARCA, @NOMEVEICULO, @TIPOVEICULO, @CORVEICULO, @PLACAVEICULO, @MODELOVEICULO);";
 
+            //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();
             NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
 
+            //Fazendo o try
             try
             {
-                comm.Parameters.AddWithValue("@cpfcliente", mVeiculo.getCpfCliente());
-                comm.Parameters.AddWithValue("@corveiculo", mVeiculo.getCor());
-                comm.Parameters.AddWithValue("@marcaveiculo", mVeiculo.getMarca());
-                comm.Parameters.AddWithValue("@tipoveiculo", mVeiculo.getTipo());
-                comm.Parameters.AddWithValue("@modeloveiculo", mVeiculo.getModelo());
-                comm.Parameters.AddWithValue("@placaveiculo", mVeiculo.getPlaca());
+                //Definindo os valores a serem postos nos campos
+                comm.Parameters.AddWithValue("@CPFCLIENTE", mVeiculo.getCpfCliente());
+                comm.Parameters.AddWithValue("@IDMARCA", mVeiculo.getIdMarca());
+                comm.Parameters.AddWithValue("@NOMEVEICULO", mVeiculo.getNomeVeiculo());
+                comm.Parameters.AddWithValue("@TIPOVEICULO", mVeiculo.getTipoVeiculo());
+                comm.Parameters.AddWithValue("@CORVEICULO", mVeiculo.getCorVeiculo());
+                comm.Parameters.AddWithValue("@PLACAVEICULO", mVeiculo.getPlacaVeiculo());
+                comm.Parameters.AddWithValue("@MODELOVEICULO", mVeiculo.getModeloVeiculo());
 
+                //Executando o Query
                 comm.ExecuteNonQuery();
+
+                //Retornando um valor
                 return "Veículo cadastrado com sucesso!";
             }
+            //Fazendo o catch
             catch (NpgsqlException ex)
             {
+                //Retornando o erro
                 return ex.ToString();
+            }
+            finally
+            {
+                //Método de desconectar
+                con.desconectar();
             }
         }
     }

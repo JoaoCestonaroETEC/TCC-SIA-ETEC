@@ -11,7 +11,6 @@ namespace TCC_SIA.Model
     {
         private string nomeServico;
         private string descServico;
-        private DateTime garantiaServico;
         private long valorServico;
 
         public string getNomeServico()
@@ -22,16 +21,6 @@ namespace TCC_SIA.Model
         public void setNomeServico(string nomeServico)
         {
             this.nomeServico = nomeServico;
-        }
-
-        public DateTime getGarantiaServico()
-        {
-            return garantiaServico;
-        }
-
-        public void setGarantiaServico(DateTime garantiaServico)
-        {
-            this.garantiaServico = garantiaServico;
         }
 
         public string getDescServico()

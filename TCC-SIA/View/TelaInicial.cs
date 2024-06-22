@@ -27,13 +27,13 @@ namespace TCC_SIA.View
 
         private void pEÇAToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CadastroPeça formPeça = new CadastroPeça();
+            CadastroPeca formPeça = new CadastroPeca();
             formPeça.Show();
         }
 
         private void vEÍCULOToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CadastroVeículo formVeiculo = new CadastroVeículo();
+            CadastroVeiculo formVeiculo = new CadastroVeiculo();
             formVeiculo.Show();
         }
 
@@ -43,16 +43,14 @@ namespace TCC_SIA.View
             formCliente.Show();
         }
 
+        private void tIPOToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+        }
+
         private void mARCAToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CadastroMarca formMarca = new CadastroMarca();
             formMarca.Show();
-        }
-
-        private void tIPOToolStripMenuItem3_Click(object sender, EventArgs e)
-        {
-            CadastroTipo formTipo = new CadastroTipo();
-            formTipo.Show();
         }
     }
 }

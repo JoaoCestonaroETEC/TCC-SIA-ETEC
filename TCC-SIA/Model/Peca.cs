@@ -8,12 +8,23 @@ namespace TCC_SIA.Model
 {
     internal class Peca
     {
+        private long idMarca;
         private string nomePeca;
+        private string tipoPeca;
         private string descPeca;
         private long valorPeca;
         private int quantPeca;
         private DateTime garantiaPeca;
-        private string marcaPeca;
+
+        public long getIdMarca()
+        {
+            return idMarca;
+        }
+
+        public void setIdMarca(long idMarca)
+        {
+            this.idMarca = idMarca;
+        }
 
         public string getNomePeca()
         {
@@ -25,14 +36,13 @@ namespace TCC_SIA.Model
             this.nomePeca = nomePeca;
         }
 
-        public DateTime getGarantiaPeca()
+        public string getTipoPeca()
         {
-            return garantiaPeca;
+            return this.tipoPeca;
         }
-
-        public void setGarantiaPeca(DateTime garantiaPeca)
+        public void setTipoPeca(string tipoPeca)
         {
-            this.garantiaPeca = garantiaPeca;
+            this.tipoPeca = tipoPeca;
         }
 
         public string getDescPeca()
@@ -64,15 +74,14 @@ namespace TCC_SIA.Model
         {
             this.quantPeca = quantPeca;
         }
-
-        public string getMarcaPeca()
+        public DateTime getGarantiaPeca()
         {
-            return marcaPeca;
+            return garantiaPeca;
         }
 
-        public void setMarcaPeca(string marcaPeca)
+        public void setGarantiaPeca(DateTime garantiaPeca)
         {
-            this.marcaPeca = marcaPeca;
+            this.garantiaPeca = garantiaPeca;
         }
     }
 }

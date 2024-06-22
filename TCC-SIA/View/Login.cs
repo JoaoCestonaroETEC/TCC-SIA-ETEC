@@ -24,11 +24,11 @@ namespace TCC_SIA.View
             IdLogin mIdLogin = new IdLogin();
             controleLogin cCliente = new controleLogin();
 
-            mIdLogin.setUsuario(maskedTextBox1.Text);
-            mIdLogin.setEmail(maskedTextBox1.Text);
-            mIdLogin.setSenha(maskedTextBox2.Text);
+            mIdLogin.setUsuarioLogin(maskedTextBox1.Text);
+            mIdLogin.setEmailLogin(maskedTextBox1.Text);
+            mIdLogin.setSenhaLogin(maskedTextBox2.Text);
 
-            string res = cCliente.loginCadastro(mIdLogin);
+            string res = cCliente.efetuarLogin(mIdLogin);
             MessageBox.Show(res);
         }
     }

@@ -1,6 +1,6 @@
 ﻿namespace TCC_SIA.View
 {
-    partial class CadastroVeículo
+    partial class CadastroVeiculo
     {
         /// <summary>
         /// Required designer variable.
@@ -41,12 +41,14 @@
             comboBoxTipo = new ComboBox();
             comboBoxMarca = new ComboBox();
             maskedTextBoxPlaca = new MaskedTextBox();
+            label1 = new Label();
+            textBoxNome = new TextBox();
             SuspendLayout();
             // 
             // labelCpf
             // 
             labelCpf.AutoSize = true;
-            labelCpf.Location = new Point(24, 21);
+            labelCpf.Location = new Point(15, 22);
             labelCpf.Name = "labelCpf";
             labelCpf.Size = new Size(86, 15);
             labelCpf.TabIndex = 19;
@@ -55,7 +57,7 @@
             // labelMarca
             // 
             labelMarca.AutoSize = true;
-            labelMarca.Location = new Point(71, 78);
+            labelMarca.Location = new Point(58, 50);
             labelMarca.Name = "labelMarca";
             labelMarca.Size = new Size(43, 15);
             labelMarca.TabIndex = 17;
@@ -63,7 +65,7 @@
             // 
             // buttonCadastrar
             // 
-            buttonCadastrar.Location = new Point(200, 184);
+            buttonCadastrar.Location = new Point(185, 233);
             buttonCadastrar.Margin = new Padding(3, 2, 3, 2);
             buttonCadastrar.Name = "buttonCadastrar";
             buttonCadastrar.Size = new Size(137, 76);
@@ -75,7 +77,7 @@
             // labelCor
             // 
             labelCor.AutoSize = true;
-            labelCor.Location = new Point(87, 48);
+            labelCor.Location = new Point(72, 133);
             labelCor.Name = "labelCor";
             labelCor.Size = new Size(29, 15);
             labelCor.TabIndex = 14;
@@ -84,7 +86,7 @@
             // labelTipo
             // 
             labelTipo.AutoSize = true;
-            labelTipo.Location = new Point(83, 103);
+            labelTipo.Location = new Point(71, 75);
             labelTipo.Name = "labelTipo";
             labelTipo.Size = new Size(30, 15);
             labelTipo.TabIndex = 25;
@@ -93,7 +95,7 @@
             // labelPlaca
             // 
             labelPlaca.AutoSize = true;
-            labelPlaca.Location = new Point(71, 152);
+            labelPlaca.Location = new Point(63, 162);
             labelPlaca.Name = "labelPlaca";
             labelPlaca.Size = new Size(38, 15);
             labelPlaca.TabIndex = 23;
@@ -102,7 +104,7 @@
             // labelModelo
             // 
             labelModelo.AutoSize = true;
-            labelModelo.Location = new Point(61, 127);
+            labelModelo.Location = new Point(50, 190);
             labelModelo.Name = "labelModelo";
             labelModelo.Size = new Size(51, 15);
             labelModelo.TabIndex = 21;
@@ -110,7 +112,7 @@
             // 
             // textBoxModelo
             // 
-            textBoxModelo.Location = new Point(122, 125);
+            textBoxModelo.Location = new Point(107, 187);
             textBoxModelo.Margin = new Padding(3, 2, 3, 2);
             textBoxModelo.Name = "textBoxModelo";
             textBoxModelo.Size = new Size(215, 23);
@@ -118,7 +120,7 @@
             // 
             // maskedTextBoxCpf
             // 
-            maskedTextBoxCpf.Location = new Point(122, 19);
+            maskedTextBoxCpf.Location = new Point(107, 19);
             maskedTextBoxCpf.Margin = new Padding(3, 2, 3, 2);
             maskedTextBoxCpf.Mask = "000000000-00";
             maskedTextBoxCpf.Name = "maskedTextBoxCpf";
@@ -129,7 +131,7 @@
             // comboBoxCor
             // 
             comboBoxCor.FormattingEnabled = true;
-            comboBoxCor.Location = new Point(122, 47);
+            comboBoxCor.Location = new Point(107, 130);
             comboBoxCor.Name = "comboBoxCor";
             comboBoxCor.Size = new Size(215, 23);
             comboBoxCor.TabIndex = 33;
@@ -137,7 +139,7 @@
             // comboBoxTipo
             // 
             comboBoxTipo.FormattingEnabled = true;
-            comboBoxTipo.Location = new Point(122, 100);
+            comboBoxTipo.Location = new Point(107, 72);
             comboBoxTipo.Name = "comboBoxTipo";
             comboBoxTipo.Size = new Size(215, 23);
             comboBoxTipo.TabIndex = 34;
@@ -145,23 +147,42 @@
             // comboBoxMarca
             // 
             comboBoxMarca.FormattingEnabled = true;
-            comboBoxMarca.Location = new Point(122, 75);
+            comboBoxMarca.Location = new Point(107, 47);
             comboBoxMarca.Name = "comboBoxMarca";
             comboBoxMarca.Size = new Size(215, 23);
             comboBoxMarca.TabIndex = 35;
             // 
             // maskedTextBoxPlaca
             // 
-            maskedTextBoxPlaca.Location = new Point(122, 149);
+            maskedTextBoxPlaca.Location = new Point(107, 159);
+            maskedTextBoxPlaca.Mask = "AAAAAAA";
             maskedTextBoxPlaca.Name = "maskedTextBoxPlaca";
             maskedTextBoxPlaca.Size = new Size(215, 23);
             maskedTextBoxPlaca.TabIndex = 36;
             // 
-            // CadastroVeículo
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(58, 104);
+            label1.Name = "label1";
+            label1.Size = new Size(43, 15);
+            label1.TabIndex = 37;
+            label1.Text = "Nome:";
+            // 
+            // textBoxNome
+            // 
+            textBoxNome.Location = new Point(107, 101);
+            textBoxNome.Name = "textBoxNome";
+            textBoxNome.Size = new Size(215, 23);
+            textBoxNome.TabIndex = 38;
+            // 
+            // CadastroVeiculo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(391, 282);
+            ClientSize = new Size(347, 334);
+            Controls.Add(textBoxNome);
+            Controls.Add(label1);
             Controls.Add(maskedTextBoxPlaca);
             Controls.Add(comboBoxMarca);
             Controls.Add(comboBoxTipo);
@@ -176,9 +197,8 @@
             Controls.Add(buttonCadastrar);
             Controls.Add(labelCor);
             Margin = new Padding(3, 2, 3, 2);
-            Name = "CadastroVeículo";
+            Name = "CadastroVeiculo";
             Text = "CadastroVeículo";
-            Load += CadastroVeículo_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -197,5 +217,7 @@
         private ComboBox comboBoxTipo;
         private ComboBox comboBoxMarca;
         private MaskedTextBox maskedTextBoxPlaca;
+        private Label label1;
+        private TextBox textBoxNome;
     }
 }

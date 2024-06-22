@@ -35,8 +35,6 @@
             richTextBoxDesc = new RichTextBox();
             maskedTextBoxValor = new MaskedTextBox();
             buttonCadastrar = new Button();
-            label2 = new Label();
-            dateTimePickerGarantia = new DateTimePicker();
             SuspendLayout();
             // 
             // label1
@@ -60,7 +58,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(343, 28);
+            label4.Location = new Point(313, 28);
             label4.Name = "label4";
             label4.Size = new Size(61, 15);
             label4.TabIndex = 3;
@@ -75,7 +73,7 @@
             // 
             // richTextBoxDesc
             // 
-            richTextBoxDesc.Location = new Point(410, 25);
+            richTextBoxDesc.Location = new Point(380, 25);
             richTextBoxDesc.Name = "richTextBoxDesc";
             richTextBoxDesc.Size = new Size(298, 140);
             richTextBoxDesc.TabIndex = 6;
@@ -91,7 +89,7 @@
             // 
             // buttonCadastrar
             // 
-            buttonCadastrar.Location = new Point(12, 113);
+            buttonCadastrar.Location = new Point(23, 83);
             buttonCadastrar.Name = "buttonCadastrar";
             buttonCadastrar.Size = new Size(144, 78);
             buttonCadastrar.TabIndex = 8;
@@ -99,30 +97,11 @@
             buttonCadastrar.UseVisualStyleBackColor = true;
             buttonCadastrar.Click += buttonCadastrar_Click;
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(12, 89);
-            label2.Name = "label2";
-            label2.Size = new Size(54, 15);
-            label2.TabIndex = 9;
-            label2.Text = "Garantia:";
-            // 
-            // dateTimePickerGarantia
-            // 
-            dateTimePickerGarantia.Format = DateTimePickerFormat.Short;
-            dateTimePickerGarantia.Location = new Point(72, 83);
-            dateTimePickerGarantia.Name = "dateTimePickerGarantia";
-            dateTimePickerGarantia.Size = new Size(102, 23);
-            dateTimePickerGarantia.TabIndex = 10;
-            // 
             // CadastroServico
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(dateTimePickerGarantia);
-            Controls.Add(label2);
+            ClientSize = new Size(706, 187);
             Controls.Add(buttonCadastrar);
             Controls.Add(maskedTextBoxValor);
             Controls.Add(richTextBoxDesc);
@@ -146,7 +125,5 @@
         private RichTextBox richTextBoxDesc;
         private MaskedTextBox maskedTextBoxValor;
         private Button buttonCadastrar;
-        private Label label2;
-        private DateTimePicker dateTimePickerGarantia;
     }
 }

@@ -12,14 +12,13 @@ namespace TCC_SIA.Model
         private string emailogin;
         private string senhaLogin;
         private string nomeLogin;
-        private long telefoneLogin;
+        private long telefone;
 
         public long getCnpj()
         {
             return this.cnpjLogin;
         }
 
-        // Método para definir o nome do cliente
         public void setCnpj(long cnpjLogin)
         {
             this.cnpjLogin = cnpjLogin;
@@ -30,7 +29,6 @@ namespace TCC_SIA.Model
             return this.nomeLogin;
         }
 
-        // Método para definir o nome do cliente
         public void setNome(string nomeLogin)
         {
             this.nomeLogin = nomeLogin;
@@ -41,7 +39,6 @@ namespace TCC_SIA.Model
             return this.emailogin;
         }
 
-        // Método para definir o nome do cliente
         public void setEmail(string emailLogin)
         {
             this.emailogin = emailLogin;
@@ -53,7 +50,6 @@ namespace TCC_SIA.Model
             return this.senhaLogin;
         }
 
-        // Método para definir o nome do cliente
         public void setSenha(string senha)
         {
             this.senhaLogin = senhaLogin;
@@ -61,13 +57,12 @@ namespace TCC_SIA.Model
 
         public long getTelefone()
         {
-            return this.telefoneLogin;
+            return this.telefone;
         }
 
-        // Método para definir o nome do cliente
-        public void setTelefone(long telefoneLogin)
+        public void setTelefone(long telefone)
         {
-            this.telefoneLogin = telefoneLogin;
+            this.telefone = telefone;
         }
     }
 }

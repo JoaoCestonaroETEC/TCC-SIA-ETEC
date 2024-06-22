@@ -8,54 +8,50 @@ namespace TCC_SIA.Model
 {
     internal class IdLogin
     {
-        private string cnpj;
-        private string usuario;
-        private string email;
-        private string senha;
+        private string cnpjLogin;
+        private string usuarioLogin;
+        private string emailLogin;
+        private string senhaLogin;
+        private string telefoneLogin;
 
-        // Propriedade automática para idCliente
-        public string getUsuario()
+        public string getCnpjLogin()
         {
-            return this.usuario;
+            return this.cnpjLogin;
         }
 
-        // Método para definir o nome do cliente
-        public void setUsuario(string usuario)
+        public void setCnpjLogin(string cnpjLogin)
         {
-            this.usuario = usuario;
+            this.cnpjLogin = cnpjLogin;
         }
 
-        public string getEmail()
+        public string getUsuarioLogin()
         {
-            return this.email;
+            return this.usuarioLogin;
         }
 
-        // Método para definir o nome do cliente
-        public void setEmail(string email)
+        public void setUsuarioLogin(string usuarioLogin)
         {
-            this.email = email;
+            this.usuarioLogin = usuarioLogin;
         }
 
-        // Método para obter o email do cliente
-        public string getSenha()
+        public string getEmailLogin()
         {
-            return this.senha;
+            return this.emailLogin;
         }
 
-        // Método para definir o email do cliente
-        public void setSenha(string senha)
+        public void setEmailLogin(string emailLogin)
         {
-            this.senha = senha;
+            this.emailLogin = emailLogin;
         }
 
-        public string getCnpj()
+        public string getSenhaLogin()
         {
-            return this.cnpj;
+            return this.senhaLogin;
         }
 
-        public void setCnpj(string cnpj)
+        public void setSenhaLogin(string senhaLogin)
         {
-            this.cnpj = cnpj;
+            this.senhaLogin = senhaLogin;
         }
     }
 }

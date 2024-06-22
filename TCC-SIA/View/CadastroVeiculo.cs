@@ -13,10 +13,11 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace TCC_SIA.View
 {
-    public partial class CadastroVeículo : Form
+    public partial class CadastroVeiculo : Form
     {
-        public CadastroVeículo()
+        public CadastroVeiculo()
         {
+            //Adiciona campos de cores de veículos mais comuns
             InitializeComponent();
             comboBoxCor.Items.Add("Branco");
             comboBoxCor.Items.Add("Preto");
@@ -24,7 +25,11 @@ namespace TCC_SIA.View
             comboBoxCor.Items.Add("Cinza");
             comboBoxCor.Items.Add("Azul");
             comboBoxCor.Items.Add("Vermelho");
+            comboBoxCor.Items.Add("Amarelo");
+            comboBoxCor.Items.Add("Verde");
+            comboBoxCor.Items.Add("Roxo");
 
+            //Adiciona campos de tipos de veículos mais comuns
             comboBoxTipo.Items.Add("Carro");
             comboBoxTipo.Items.Add("Moto");
             comboBoxTipo.Items.Add("Bicileta");
@@ -32,25 +37,27 @@ namespace TCC_SIA.View
             comboBoxTipo.Items.Add("Caminhão");
         }
 
+        //Evento de cadastrar veículo
         private void buttonCadastrar_Click(object sender, EventArgs e)
         {
+            // Criação do objeto Veiculo e ControleVeiculo
             Veiculo mVeiculo = new Veiculo();
             controleVeiculo cVeiculo = new controleVeiculo();
 
+            //Definindo os valores nos atributos
             mVeiculo.setCpfCliente(Convert.ToInt64(maskedTextBoxCpf.Text));
-            mVeiculo.setCor(comboBoxCor.Text);
-            mVeiculo.setMarca(comboBoxMarca.Text);
-            mVeiculo.setTipo(comboBoxTipo.Text);
-            mVeiculo.setModelo(textBoxModelo.Text);
-            mVeiculo.setPlaca(maskedTextBoxPlaca.Text);
+            mVeiculo.setIdMarca(Convert.ToInt64(comboBoxMarca.Text));
+            mVeiculo.setNomeVeiculo(textBoxNome.Text);
+            mVeiculo.setTipoVeiculo(comboBoxTipo.Text);
+            mVeiculo.setCorVeiculo(comboBoxTipo.Text);
+            mVeiculo.setPlacaVeiculo(maskedTextBoxPlaca.Text);
+            mVeiculo.setModeloVeiculo(textBoxModelo.Text);
 
+            //Chamada ao método de cadastro no ControleServico
             string res = cVeiculo.cadastroVeiculo(mVeiculo);
+
+            //Mostra o resultado
             MessageBox.Show(res);
-        }
-
-        private void CadastroVeículo_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -18,6 +18,8 @@ namespace TCC_SIA.View
         public CadastroCliente()
         {
             InitializeComponent();
+
+            //Adiciona campos de estados do Brasil
             comboBoxUf.Items.AddRange(new string[]
             {
                 "AC",
@@ -48,44 +50,54 @@ namespace TCC_SIA.View
                 "SE",
                 "TO"
             });
+
+            //Adiciona gêneros
+            comboBoxSexo.Items.AddRange(new string[]
+            {
+                "Masculino",
+                "Feminino",
+                "Outro"
+            });
         }
 
+        //Evento de cadastrar cliente
         private void buttonCadastrar_Click(object sender, EventArgs e)
         {
             // Verifica se os campos obrigatórios foram preenchidos
             if (string.IsNullOrWhiteSpace(maskedTextBoxCPF.Text) ||
-                string.IsNullOrWhiteSpace(maskedTextBoxTelefone.Text) ||
-                string.IsNullOrWhiteSpace(textBoxNome.Text))
+                string.IsNullOrWhiteSpace(textBoxNome.Text) ||
+                string.IsNullOrWhiteSpace(maskedTextBoxNumero.Text) ||
+                string.IsNullOrWhiteSpace(maskedTextBoxCep.Text) ||
+                string.IsNullOrWhiteSpace(textBoxBairro.Text) ||
+                string.IsNullOrWhiteSpace(textBoxCidade.Text) ||
+                string.IsNullOrWhiteSpace(textBoxRua.Text) ||
+                string.IsNullOrWhiteSpace(comboBoxUf.Text))
             {
-                MessageBox.Show("CPF, telefone e nome são campos obrigatórios.");
+                MessageBox.Show("Preencha todos os campos! (exceto email, data de nascimento, sexo e telefone)");
                 return;
             }
 
-            // Criação do objeto Cliente e ControleCliente
+            //Criação do objeto Cliente e ControleCliente
             Cliente mCliente = new Cliente();
-            ControleCliente cCliente = new ControleCliente();
+            controleCliente cCliente = new controleCliente();
 
-            // Validação e atribuição dos campos obrigatórios
+            //Definindo os valores nos atributos
+
+            //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
             long cpf;
             if (!long.TryParse(maskedTextBoxCPF.Text, out cpf))
             {
-                MessageBox.Show("CPF inválido.");
+                mCliente.setCpfCliente(cpf);
                 return;
             }
-            mCliente.setCpfCliente(cpf);
 
-            mCliente.setTelefoneCliente(maskedTextBoxTelefone.Text);
             mCliente.setNomeCliente(textBoxNome.Text);
+            mCliente.setEmailCliente(maskedTextBoxEmail.Text);
+            mCliente.setDataNascCliente(Convert.ToDateTime(dateTimePickerNasc.Text));
+            mCliente.setSexo(comboBoxSexo.Text);
+            mCliente.setTelefone(maskedTextBoxTelefone.Text);
 
-            // Atribuição dos demais campos
-            mCliente.setEmailCliente(textBoxEmail.Text);
-
-            DateTime dataNascimento;
-            if (DateTime.TryParse(dateTimePickerNasc.Text, out dataNascimento))
-            {
-                mCliente.setDataNascCliente(dataNascimento);
-            }
-
+            //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
             int numero;
             if (int.TryParse(maskedTextBoxNumero.Text, out numero))
             {
@@ -93,35 +105,37 @@ namespace TCC_SIA.View
             }
 
             mCliente.setRua(textBoxRua.Text);
-            mCliente.setBairro(textBoxBairro.Text);
             mCliente.setCidade(textBoxCidade.Text);
 
+            //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
             int cep;
             if (int.TryParse(maskedTextBoxCep.Text, out cep))
             {
                 mCliente.setCep(cep);
             }
 
+            mCliente.setBairro(textBoxBairro.Text);
             mCliente.setUf(comboBoxUf.Text);
-            mCliente.setSexo(textBoxSexo.Text);
 
-            // Chamada ao método de cadastro no ControleCliente
+            //Chamada ao método de cadastro no ControleCliente
             string res = cCliente.cadastroCliente(mCliente);
+
+            //Mostra o resultado
             MessageBox.Show(res);
         }
 
         private void CadastroCliente_Load(object sender, EventArgs e)
         {
-            // Definir eventos para validar a entrada
+            //Definir eventos para validar a entrada
             maskedTextBoxNumero.KeyPress += new KeyPressEventHandler(maskedTextBoxNumero_KeyPress);
         }
 
         private void maskedTextBoxNumero_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Verifica se a tecla pressionada é um dígito ou uma tecla de controle (como Backspace)
+            //Verifica se a tecla pressionada é um dígito ou uma tecla de controle (como Backspace)
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
-                e.Handled = true; // Impede a entrada de caracteres não numéricos
+                e.Handled = true; //Impede a entrada de caracteres não numéricos
             }
         }
     }

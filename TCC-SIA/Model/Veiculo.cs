@@ -9,70 +9,79 @@ namespace TCC_SIA.Model
     internal class Veiculo
     {
         private long cpfcliente;
-        private string cor;
-        private string marca;
-        private string tipo;
-        private string modelo;
-        private string placa;
+        private long idMarca;
+        private string nomeVeiculo;
+        private string tipoVeiculo;
+        private string corVeiculo;
+        private string placaVeiculo;
+        private string modeloVeiculo;
 
         public long getCpfCliente()
         {
             return this.cpfcliente;
         }
 
-        public void setCpfCliente(long CpfCliente)
+        public void setCpfCliente(long cpfCliente)
         {
-            this.cpfcliente = CpfCliente;
+            this.cpfcliente = cpfCliente;
         }
 
-        public string getCor()
+        public long getIdMarca()
         {
-            return this.cor;
+            return this.idMarca;
         }
 
-        public void setCor(string Cor)
+        public void setIdMarca(long idMarca)
         {
-            this.cor = Cor;
+            this.idMarca = idMarca;
         }
 
-        public string getMarca()
+        public string getNomeVeiculo()
         {
-            return this.marca;
+            return this.nomeVeiculo;
         }
 
-        public void setMarca(string Marca)
+        public void setNomeVeiculo(string nomeVeiculo)
         {
-            this.marca = Marca;
+            this.nomeVeiculo = nomeVeiculo;
+        }
+        public string getTipoVeiculo()
+        {
+            return this.tipoVeiculo;
         }
 
-        public string getTipo()
+        public void setTipoVeiculo(string tipoVeiculo)
         {
-            return this.tipo;
+            this.tipoVeiculo = tipoVeiculo;
         }
 
-        public void setTipo(string Tipo)
+        public string getCorVeiculo()
         {
-            this.tipo = Tipo;
+            return this.corVeiculo;
         }
 
-        public string getModelo()
+        public void setCorVeiculo(string corVeiculo)
         {
-            return this.modelo;
+            this.corVeiculo = corVeiculo;
+        }
+        public string getPlacaVeiculo()
+        {
+            return this.placaVeiculo;
         }
 
-        public void setModelo(string Modelo)
+        public void setPlacaVeiculo(string placaVeiculo)
         {
-            this.modelo = Modelo;
+            this.placaVeiculo = placaVeiculo;
         }
 
-        public string getPlaca()
+        public string getModeloVeiculo()
         {
-            return this.placa;
+            return this.modeloVeiculo;
         }
 
-        public void setPlaca(string Placa)
+        public void setModeloVeiculo(string modeloVeiculo)
         {
-            this.placa = Placa;
+            this.modeloVeiculo = modeloVeiculo;
         }
     }
 }

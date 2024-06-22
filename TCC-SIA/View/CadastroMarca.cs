@@ -19,15 +19,21 @@ namespace TCC_SIA.View
             InitializeComponent();
         }
 
+        //Evento de cadastrar marca
         private void buttonCadastrar_Click(object sender, EventArgs e)
         {
+            //Criação do objeto Marca e ControleMarca
             Marca mMarca = new Marca();
             controleMarca cMarca = new controleMarca();
 
+            //Definindo os valores nos atributos
             mMarca.setNomeMarca(comboBoxNome.Text);
             mMarca.setDescMarca(richTextBoxDesc.Text);
 
+            //Chamada ao método de cadastro no ControleMarca
             string res = cMarca.cadastroMarca(mMarca);
+
+            //Mostra o resultado
             MessageBox.Show(res);
         }
     }
