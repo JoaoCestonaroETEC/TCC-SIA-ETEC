@@ -24,7 +24,7 @@ namespace TCC_SIA.View
         #endregion
 
         #region Pesquisar cliente
-        private void pesquisarCliente(object sender, EventArgs e)
+        private void buttonPesquisar_Click(object sender, EventArgs e)
         {
             controleCliente cCliente = new controleCliente();
 
@@ -57,10 +57,5 @@ namespace TCC_SIA.View
 
         }
         #endregion
-
-        private void buttonPesquisar_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
