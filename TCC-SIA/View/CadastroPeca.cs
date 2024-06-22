@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TCC_SIA.Controller;
 using TCC_SIA.Model;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace TCC_SIA.View
 {
@@ -25,6 +26,15 @@ namespace TCC_SIA.View
         //Evento de cadastrar peça
         private void buttonCadastrar_Click(object sender, EventArgs e)
         {
+            // Verifica se os campos obrigatórios foram preenchidos
+            if (string.IsNullOrWhiteSpace(textBoxNome.Text) ||
+                string.IsNullOrWhiteSpace(maskedTextBoxValor.Text))
+
+            {
+                MessageBox.Show("Insira pelo menos o nome e o valor!");
+                return;
+            }
+
             // Criação do objeto Peca e ControlePeca
             Peca mPeca = new Peca();
             controlePeca cPeca = new controlePeca();
@@ -34,7 +44,14 @@ namespace TCC_SIA.View
             mPeca.setNomePeca(textBoxNome.Text);
             mPeca.setTipoPeca(comboBoxTIpo.Text);
             mPeca.setDescPeca(richTextBoxDesc.Text);
-            mPeca.setValorPeca(Convert.ToInt64(maskedTextBoxValor.Text));
+
+            long valor;
+            if (!long.TryParse(maskedTextBoxValor.Text, out valor))
+            {
+                mPeca.setValorPeca(valor);
+                return;
+            }
+
             mPeca.setQuantPeca(Convert.ToInt32(numericUpDownQuant.Text));
             mPeca.setGarantiaPeca(Convert.ToDateTime(dateTimePickerGarantia.Text));
 

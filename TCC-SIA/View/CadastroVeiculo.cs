@@ -47,6 +47,16 @@ namespace TCC_SIA.View
         //Evento de cadastrar veículo
         private void buttonCadastrar_Click(object sender, EventArgs e)
         {
+            // Verifica se os campos obrigatórios foram preenchidos
+            if (string.IsNullOrWhiteSpace(maskedTextBoxCpf.Text) ||
+                string.IsNullOrWhiteSpace(textBoxNome.Text) ||
+                string.IsNullOrWhiteSpace(comboBoxTipo.Text) ||
+                string.IsNullOrWhiteSpace(maskedTextBoxPlaca.Text))
+
+            {
+                MessageBox.Show("Insira o cpf, o nome, o tipo e a placa!");
+                return;
+            }
             // Criação do objeto Veiculo e ControleVeiculo
             Veiculo mVeiculo = new Veiculo();
             controleVeiculo cVeiculo = new controleVeiculo();

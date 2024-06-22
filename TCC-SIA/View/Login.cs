@@ -24,12 +24,20 @@ namespace TCC_SIA.View
         #region Efetuar login
         private void buttonCadastrar_Click(object sender, EventArgs e)
         {
+            // Verifica se os campos obrigatórios foram preenchidos
+            if (string.IsNullOrWhiteSpace(textBoxNomeOuEmail.Text) ||
+                string.IsNullOrWhiteSpace(textBoxSenha.Text))
+
+            {
+                MessageBox.Show("Insira pelo menos o nome e o valor!");
+                return;
+            }
             IdLogin mIdLogin = new IdLogin();
             controleLogin cCliente = new controleLogin();
 
-            mIdLogin.setUsuarioLogin(maskedTextBox1.Text);
-            mIdLogin.setEmailLogin(maskedTextBox1.Text);
-            mIdLogin.setSenhaLogin(maskedTextBox2.Text);
+            mIdLogin.setUsuarioLogin(textBoxNomeOuEmail.Text);
+            mIdLogin.setEmailLogin(textBoxNomeOuEmail.Text);
+            mIdLogin.setSenhaLogin(textBoxSenha.Text);
 
             string res = cCliente.efetuarLogin(mIdLogin);
             MessageBox.Show(res);

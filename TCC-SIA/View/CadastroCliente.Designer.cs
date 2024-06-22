@@ -104,6 +104,7 @@
             // 
             // maskedTextBoxCPF
             // 
+            maskedTextBoxCPF.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             maskedTextBoxCPF.Location = new Point(68, 46);
             maskedTextBoxCPF.Margin = new Padding(3, 2, 3, 2);
             maskedTextBoxCPF.Mask = "000000000-00";
@@ -117,6 +118,7 @@
             textBoxNome.Location = new Point(78, 73);
             textBoxNome.Margin = new Padding(3, 2, 3, 2);
             textBoxNome.Name = "textBoxNome";
+            textBoxNome.PlaceholderText = "Insira seu nome";
             textBoxNome.Size = new Size(180, 23);
             textBoxNome.TabIndex = 7;
             // 
@@ -140,6 +142,7 @@
             // 
             // maskedTextBoxTelefone
             // 
+            maskedTextBoxTelefone.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             maskedTextBoxTelefone.Location = new Point(89, 183);
             maskedTextBoxTelefone.Margin = new Padding(3, 2, 3, 2);
             maskedTextBoxTelefone.Mask = "(99) 00000-0000";
@@ -221,6 +224,7 @@
             // 
             // maskedTextBoxCep
             // 
+            maskedTextBoxCep.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             maskedTextBoxCep.Location = new Point(317, 130);
             maskedTextBoxCep.Margin = new Padding(3, 2, 3, 2);
             maskedTextBoxCep.Mask = "00000-000";

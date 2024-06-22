@@ -30,9 +30,9 @@
         {
             label1 = new Label();
             label2 = new Label();
-            maskedTextBox1 = new MaskedTextBox();
-            maskedTextBox2 = new MaskedTextBox();
             buttonCadastrar = new Button();
+            textBoxNomeOuEmail = new TextBox();
+            textBoxSenha = new TextBox();
             SuspendLayout();
             // 
             // label1
@@ -47,28 +47,11 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(88, 52);
+            label2.Location = new Point(82, 52);
             label2.Name = "label2";
             label2.Size = new Size(42, 15);
             label2.TabIndex = 1;
             label2.Text = "Senha:";
-            // 
-            // maskedTextBox1
-            // 
-            maskedTextBox1.Location = new Point(138, 21);
-            maskedTextBox1.Margin = new Padding(3, 2, 3, 2);
-            maskedTextBox1.Name = "maskedTextBox1";
-            maskedTextBox1.Size = new Size(232, 23);
-            maskedTextBox1.TabIndex = 2;
-            // 
-            // maskedTextBox2
-            // 
-            maskedTextBox2.Location = new Point(138, 50);
-            maskedTextBox2.Margin = new Padding(3, 2, 3, 2);
-            maskedTextBox2.Name = "maskedTextBox2";
-            maskedTextBox2.PasswordChar = '*';
-            maskedTextBox2.Size = new Size(232, 23);
-            maskedTextBox2.TabIndex = 3;
             // 
             // buttonCadastrar
             // 
@@ -81,14 +64,33 @@
             buttonCadastrar.UseVisualStyleBackColor = true;
             buttonCadastrar.Click += buttonCadastrar_Click;
             // 
+            // textBoxNomeOuEmail
+            // 
+            textBoxNomeOuEmail.Location = new Point(130, 20);
+            textBoxNomeOuEmail.Name = "textBoxNomeOuEmail";
+            textBoxNomeOuEmail.PlaceholderText = "Nome ou Email";
+            textBoxNomeOuEmail.ReadOnly = true;
+            textBoxNomeOuEmail.Size = new Size(239, 23);
+            textBoxNomeOuEmail.TabIndex = 5;
+            // 
+            // textBoxSenha
+            // 
+            textBoxSenha.Location = new Point(130, 49);
+            textBoxSenha.Name = "textBoxSenha";
+            textBoxSenha.PasswordChar = '*';
+            textBoxSenha.PlaceholderText = "Senha";
+            textBoxSenha.ReadOnly = true;
+            textBoxSenha.Size = new Size(239, 23);
+            textBoxSenha.TabIndex = 6;
+            // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(393, 134);
+            Controls.Add(textBoxSenha);
+            Controls.Add(textBoxNomeOuEmail);
             Controls.Add(buttonCadastrar);
-            Controls.Add(maskedTextBox2);
-            Controls.Add(maskedTextBox1);
             Controls.Add(label2);
             Controls.Add(label1);
             Margin = new Padding(3, 2, 3, 2);
@@ -102,8 +104,8 @@
 
         private Label label1;
         private Label label2;
-        private MaskedTextBox maskedTextBox1;
-        private MaskedTextBox maskedTextBox2;
         private Button buttonCadastrar;
+        private TextBox textBoxNomeOuEmail;
+        private TextBox textBoxSenha;
     }
 }

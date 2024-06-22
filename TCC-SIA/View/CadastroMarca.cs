@@ -25,6 +25,13 @@ namespace TCC_SIA.View
         //Evento de cadastrar marca
         private void buttonCadastrar_Click(object sender, EventArgs e)
         {
+            // Verifica se os campos obrigatórios foram preenchidos
+            if (string.IsNullOrWhiteSpace(comboBoxNome.Text))
+            {
+                MessageBox.Show("Insira pelo menos o nome!");
+                return;
+            }
+
             //Criação do objeto Marca e ControleMarca
             Marca mMarca = new Marca();
             controleMarca cMarca = new controleMarca();

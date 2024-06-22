@@ -25,6 +25,15 @@ namespace TCC_SIA.View
         //Evento de cadastrar serviço
         private void buttonCadastrar_Click(object sender, EventArgs e)
         {
+            // Verifica se os campos obrigatórios foram preenchidos
+            if (string.IsNullOrWhiteSpace(textBoxNome.Text) ||
+                string.IsNullOrWhiteSpace(maskedTextBoxValor.Text))
+
+            {
+                MessageBox.Show("Insira pelo menos o nome e o valor!");
+                return;
+            }
+
             // Criação do objeto Servico e ControleServico
             Servico mServico = new Servico();
             controleServico cServico = new controleServico();

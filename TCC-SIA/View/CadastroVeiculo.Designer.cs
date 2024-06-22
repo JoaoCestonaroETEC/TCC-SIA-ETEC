@@ -120,6 +120,7 @@
             // 
             // maskedTextBoxCpf
             // 
+            maskedTextBoxCpf.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             maskedTextBoxCpf.Location = new Point(107, 19);
             maskedTextBoxCpf.Margin = new Padding(3, 2, 3, 2);
             maskedTextBoxCpf.Mask = "000000000-00";
@@ -154,6 +155,7 @@
             // 
             // maskedTextBoxPlaca
             // 
+            maskedTextBoxPlaca.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             maskedTextBoxPlaca.Location = new Point(107, 159);
             maskedTextBoxPlaca.Mask = "AAAAAAA";
             maskedTextBoxPlaca.Name = "maskedTextBoxPlaca";

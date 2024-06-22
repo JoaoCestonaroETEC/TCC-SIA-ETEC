@@ -70,35 +70,35 @@
             // sERVIÇOToolStripMenuItem
             // 
             sERVIÇOToolStripMenuItem.Name = "sERVIÇOToolStripMenuItem";
-            sERVIÇOToolStripMenuItem.Size = new Size(180, 34);
+            sERVIÇOToolStripMenuItem.Size = new Size(168, 34);
             sERVIÇOToolStripMenuItem.Text = "SERVIÇO";
             sERVIÇOToolStripMenuItem.Click += sERVIÇOToolStripMenuItem_Click;
             // 
             // pEÇAToolStripMenuItem
             // 
             pEÇAToolStripMenuItem.Name = "pEÇAToolStripMenuItem";
-            pEÇAToolStripMenuItem.Size = new Size(180, 34);
+            pEÇAToolStripMenuItem.Size = new Size(168, 34);
             pEÇAToolStripMenuItem.Text = "PEÇA";
             pEÇAToolStripMenuItem.Click += pEÇAToolStripMenuItem_Click;
             // 
             // cLIENTEToolStripMenuItem
             // 
             cLIENTEToolStripMenuItem.Name = "cLIENTEToolStripMenuItem";
-            cLIENTEToolStripMenuItem.Size = new Size(180, 34);
+            cLIENTEToolStripMenuItem.Size = new Size(168, 34);
             cLIENTEToolStripMenuItem.Text = "CLIENTE";
             cLIENTEToolStripMenuItem.Click += cLIENTEToolStripMenuItem_Click;
             // 
             // vEÍCULOToolStripMenuItem
             // 
             vEÍCULOToolStripMenuItem.Name = "vEÍCULOToolStripMenuItem";
-            vEÍCULOToolStripMenuItem.Size = new Size(180, 34);
+            vEÍCULOToolStripMenuItem.Size = new Size(168, 34);
             vEÍCULOToolStripMenuItem.Text = "VEÍCULO";
             vEÍCULOToolStripMenuItem.Click += vEÍCULOToolStripMenuItem_Click;
             // 
             // mARCAToolStripMenuItem
             // 
             mARCAToolStripMenuItem.Name = "mARCAToolStripMenuItem";
-            mARCAToolStripMenuItem.Size = new Size(180, 34);
+            mARCAToolStripMenuItem.Size = new Size(168, 34);
             mARCAToolStripMenuItem.Text = "MARCA";
             mARCAToolStripMenuItem.Click += mARCAToolStripMenuItem_Click;
             // 
@@ -170,9 +170,9 @@
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.Location = new Point(76, 121);
             label1.Name = "label1";
-            label1.Size = new Size(454, 32);
+            label1.Size = new Size(467, 32);
             label1.TabIndex = 1;
-            label1.Text = "FAÇAM SUAS PARTE SEUS PREGUIÇOSOS!";
+            label1.Text = "FAÇAM SUAS PARTES SEUS PREGUIÇOSOS!";
             // 
             // TelaInicial
             // 
