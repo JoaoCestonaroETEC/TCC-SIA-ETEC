@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TCC_SIA.Controller;
+using TCC_SIA.Model;
 
 namespace TCC_SIA.View
 {
@@ -18,39 +19,83 @@ namespace TCC_SIA.View
         public PesquisaPeca()
         {
             InitializeComponent();
+
+            #region Carrega as informações gerais das peças
+            //Criação do objeto NpgsqlDataReader peca e controlePeca
+            controlePeca cPeca = new controlePeca();
+            NpgsqlDataReader peca = cPeca.pesquisaPeca(textBoxPesquisar.Text);
+
+            //Apaga as colunas da datagridview
+            dataGridViewPesquisar.Columns.Clear();
+
+            //Definindo a quant. de colunas que a grid terá
+            dataGridViewPesquisar.ColumnCount = peca.FieldCount;
+
+            //Definindo seis colunas na DataGridView para exibir as descrições
+            dataGridViewPesquisar.ColumnCount = 6;
+            dataGridViewPesquisar.Columns[0].Name = "Id";
+            dataGridViewPesquisar.Columns[1].Name = "Marca";
+            dataGridViewPesquisar.Columns[2].Name = "Nome";
+            dataGridViewPesquisar.Columns[3].Name = "Tipo";
+            dataGridViewPesquisar.Columns[4].Name = "Valor";
+            dataGridViewPesquisar.Columns[5].Name = "Quantidade";
+
+            //Adicionando as descrições de peças
+            while (peca.Read())
+            {
+                string idPeca = peca["IDPECA"].ToString();
+                string idMarca = peca["IDMARCAPECA"].ToString();
+                string nomePeca = peca["NOMEPECA"].ToString();
+                string tipoPeca = peca["TIPOPECA"].ToString();
+                string valorPeca = peca["VALORPECA"].ToString();
+                string quantPeca = peca["QUANTPECA"].ToString();
+
+                //Consulta o nome da marca pelo id
+                string marca = cPeca.pesquisaMarcaPecaPorId(idMarca);
+
+                dataGridViewPesquisar.Rows.Add(idPeca, marca, nomePeca, tipoPeca, valorPeca, quantPeca);
+            }
+            #endregion
         }
         #endregion
 
         #region Pesquisar peça
+        //Evento de pesquisar peça
         private void buttonPesquisar_Click(object sender, EventArgs e)
         {
+            //Criação do objeto NpgsqlDataReader peca e controlePeca
             controlePeca cPeca = new controlePeca();
-
             NpgsqlDataReader peca = cPeca.pesquisaPeca(textBoxPesquisar.Text);
 
-            // Apaga as colunas da datagridview
+            //Apaga as colunas da datagridview
             dataGridViewPesquisar.Columns.Clear();
 
-            // Definindo a quant. de colunas que a grid terá
+            //Definindo a quant. de colunas que a grid terá
             dataGridViewPesquisar.ColumnCount = peca.FieldCount;
 
-            // Definindo os cabeçalhos das colunas
-            for (int i = 0; i < peca.FieldCount; i++)
-            {
-                dataGridViewPesquisar.Columns[i].Name = peca.GetName(i);
-            }
+            //Definindo seis colunas na DataGridView para exibir as descrições
+            dataGridViewPesquisar.ColumnCount = 6;
+            dataGridViewPesquisar.Columns[0].Name = "Id";
+            dataGridViewPesquisar.Columns[1].Name = "Marca";
+            dataGridViewPesquisar.Columns[2].Name = "Nome";
+            dataGridViewPesquisar.Columns[3].Name = "Tipo";
+            dataGridViewPesquisar.Columns[4].Name = "Valor";
+            dataGridViewPesquisar.Columns[5].Name = "Quantidade";
 
-            // Aqui criamos um vetor para representar uma linha da consulta(registro)
-            string[] linha = new string[peca.FieldCount];
-
+            //Adicionando as descrições de peças
             while (peca.Read())
             {
-                for (int i = 0; i < peca.FieldCount; i++)
-                {
-                    linha[i] = peca.GetValue(i).ToString();
-                }
+                string idPeca = peca["IDPECA"].ToString();
+                string idMarca = peca["IDMARCAPECA"].ToString();
+                string nomePeca = peca["NOMEPECA"].ToString();
+                string tipoPeca = peca["TIPOPECA"].ToString();
+                string valorPeca = peca["VALORPECA"].ToString();
+                string quantPeca = peca["QUANTPECA"].ToString();
 
-                dataGridViewPesquisar.Rows.Add(linha);
+                //Consulta o nome da marca pelo id
+                string marca = cPeca.pesquisaMarcaPecaPorId(idMarca);
+
+                dataGridViewPesquisar.Rows.Add(idPeca, marca, nomePeca, tipoPeca, valorPeca, quantPeca);
             }
         }
         #endregion

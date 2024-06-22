@@ -36,7 +36,7 @@ namespace TCC_SIA.View
                 return;
             }
 
-            // Criação do objeto Peca e ControlePeca
+            // Criação do objeto Peca e controlePeca
             Peca mPeca = new Peca();
             controlePeca cPeca = new controlePeca();
 
@@ -46,11 +46,11 @@ namespace TCC_SIA.View
             mPeca.setTipoPeca(comboBoxTIpo.Text);
             mPeca.setDescPeca(richTextBoxDesc.Text);
 
+            //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
             long valor;
-            if (!long.TryParse(maskedTextBoxValor.Text, out valor))
+            if (long.TryParse(maskedTextBoxValor.Text, out valor))
             {
                 mPeca.setValorPeca(valor);
-                return;
             }
 
             mPeca.setQuantPeca(Convert.ToInt32(numericUpDownQuant.Text));
@@ -69,7 +69,7 @@ namespace TCC_SIA.View
         {
             controleMarca cMarca = new controleMarca();
             //Recebe os dados da consulta e salva no dataReader (Tipo)
-            NpgsqlDataReader marca = cMarca.listarMarca();
+            NpgsqlDataReader marca = cMarca.listarMarcaPeca();
 
             //Converter o dataReader em DataTable
             DataTable dtMarca = new DataTable();
@@ -79,10 +79,10 @@ namespace TCC_SIA.View
             comboBoxMarca.DataSource = dtMarca;
 
             //Define qual coluna do DataTable que será exibida (nome da coluna)
-            comboBoxMarca.DisplayMember = "NOMEMARCA";
+            comboBoxMarca.DisplayMember = "NOMEMARCAPECA";
 
             //Define qual o valor da linha será utilizado ao selecionar um valor
-            comboBoxMarca.ValueMember = "IDMARCA";
+            comboBoxMarca.ValueMember = "IDMARCAPECA";
         }
         #endregion
 

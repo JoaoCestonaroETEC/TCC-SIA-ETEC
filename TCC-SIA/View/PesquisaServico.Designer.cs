@@ -68,7 +68,6 @@
             dataGridViewPesquisar.Name = "dataGridViewPesquisar";
             dataGridViewPesquisar.Size = new Size(514, 295);
             dataGridViewPesquisar.TabIndex = 12;
-            dataGridViewPesquisar.CellContentClick += dataGridViewPesquisar_CellContentClick;
             // 
             // PesquisaServico
             // 

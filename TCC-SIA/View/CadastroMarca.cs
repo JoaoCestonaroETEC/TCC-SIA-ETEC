@@ -26,25 +26,45 @@ namespace TCC_SIA.View
         private void buttonCadastrar_Click(object sender, EventArgs e)
         {
             // Verifica se os campos obrigatórios foram preenchidos
-            if (string.IsNullOrWhiteSpace(comboBoxNome.Text))
+            if (string.IsNullOrWhiteSpace(textBoxNome.Text) ||
+                !checkBoxPeca.Checked &&
+                !checkBoxVeiculo.Checked)
             {
-                MessageBox.Show("Insira pelo menos o nome!");
+                MessageBox.Show("Insira pelo menos o nome e qual o tipo de marca!");
                 return;
             }
 
-            //Criação do objeto Marca e ControleMarca
-            Marca mMarca = new Marca();
-            controleMarca cMarca = new controleMarca();
+            //Criação de verificação para qual tipo de marca será cadastrada
+            if (checkBoxVeiculo.Checked)
+            {
+                //Criação do objeto Marca e controleMarca
+                Marca mMarca = new Marca();
+                controleMarca cMarca = new controleMarca();
 
-            //Definindo os valores nos atributos
-            mMarca.setNomeMarca(comboBoxNome.Text);
-            mMarca.setDescMarca(richTextBoxDesc.Text);
+                //Definindo os valores nos atributos
+                mMarca.setNomeMarca(textBoxNome.Text);
+                mMarca.setDescMarca(richTextBoxDesc.Text);
 
-            //Chamada ao método de cadastro no ControleMarca
-            string res = cMarca.cadastroMarca(mMarca);
+                //Chamada ao método de cadastro no ControleMarcaVeiculo
+                string res = cMarca.cadastroMarcaVeiculo(mMarca);
+                MessageBox.Show(res);
+            }
 
-            //Mostra o resultado
-            MessageBox.Show(res);
+            //Criação de verificação para qual tipo de marca será cadastrada
+            if (checkBoxPeca.Checked)
+            {
+                //Criação do objeto Marca e ControleMarca
+                Marca mMarca = new Marca();
+                controleMarca cMarca = new controleMarca();
+
+                //Definindo os valores nos atributos
+                mMarca.setNomeMarca(textBoxNome.Text);
+                mMarca.setDescMarca(richTextBoxDesc.Text);
+
+                //Chamada ao método de cadastro no ControleMarcaPeca
+                string res = cMarca.cadastroMarcaPeca(mMarca);
+                MessageBox.Show(res);
+            }
         }
         #endregion
     }

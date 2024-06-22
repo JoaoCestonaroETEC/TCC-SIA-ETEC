@@ -17,7 +17,7 @@ namespace TCC_SIA.Controller
         public string cadastroVeiculo(Veiculo mVeiculo)
         {
             //String sql de inserção
-            string sql = "INSERT INTO VEICULO(CPFCLIENTE, IDMARCA, NOMEVEICULO, TIPOVEICULO, CORVEICULO, PLACAVEICULO, MODELOVEICULO) " +
+            string sql = "INSERT INTO VEICULO(CPFCLIENTE, IDMARCAVEICULO, NOMEVEICULO, TIPOVEICULO, CORVEICULO, PLACAVEICULO, MODELOVEICULO) " +
                 "VALUES(@CPFCLIENTE, @IDMARCA, @NOMEVEICULO, @TIPOVEICULO, @CORVEICULO, @PLACAVEICULO, @MODELOVEICULO);";
 
             //Abrindo conexão com o banco de dados
@@ -122,6 +122,41 @@ namespace TCC_SIA.Controller
                 con.desconectar();
             }
 
+        }
+        #endregion
+
+        #region Pesquisar marca de veiculo por id
+        //Criação do método de pesquisar marca de veículo por id
+        public string pesquisaMarcaVeiculoPorId(string idMarca)
+        {
+            //String sql de pesquisar
+            string sql = "SELECT NOMEMARCAVEICULO FROM MARCA_VEICULO WHERE IDMARCAVEICULO = '" + idMarca + "';";
+
+            //Abrindo conexão com o banco de dados
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            //Fazendo o try
+            try
+            {
+
+                //Execute a consulta e retorne o resultado como string
+                object result = comm.ExecuteScalar();
+                return result != null ? result.ToString() : "Marca não encontrada";
+            }
+            //Fazendo o catch
+            catch (NpgsqlException ex)
+            {
+                //Retornando como nulo
+                return null;
+            }
+            //Encerrando a conexão
+            finally
+            {
+                //Método de desconectar
+                con.desconectar();
+            }
         }
         #endregion
     }

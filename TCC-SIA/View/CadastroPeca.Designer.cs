@@ -130,7 +130,7 @@
             buttonCadastrar.TabIndex = 31;
             buttonCadastrar.Text = "Cadastrar";
             buttonCadastrar.UseVisualStyleBackColor = true;
-            buttonCadastrar.Click += this.buttonCadastrar_Click;
+            buttonCadastrar.Click += buttonCadastrar_Click;
             // 
             // dateTimePickerGarantia
             // 

@@ -18,46 +18,65 @@ namespace TCC_SIA.View
         public PesquisaServico()
         {
             InitializeComponent();
+
+            #region Carrega as informações gerais dos serviços
+            //Criação do objeto NpgsqlDataReader servico e controleServico
+            controleServico cServico = new controleServico();
+            NpgsqlDataReader servico = cServico.pesquisaServico(textBoxPesquisar.Text);
+
+            //Apaga as colunas da datagridview
+            dataGridViewPesquisar.Columns.Clear();
+
+            //Definindo a quant. de colunas que a grid terá
+            dataGridViewPesquisar.ColumnCount = servico.FieldCount;
+
+            //Definindo três colunas na DataGridView para exibir as descrições
+            dataGridViewPesquisar.ColumnCount = 3;
+            dataGridViewPesquisar.Columns[0].Name = "Id";
+            dataGridViewPesquisar.Columns[1].Name = "Nome";
+            dataGridViewPesquisar.Columns[2].Name = "Valor";
+
+            //Adicionando as descrições dos serviços
+            while (servico.Read())
+            {
+                string idServico = servico["IDSERVICO"].ToString();
+                string nomeServico = servico["NOMESERVICO"].ToString();
+                string valorServico = servico["VALORSERVICO"].ToString();
+                dataGridViewPesquisar.Rows.Add(idServico, nomeServico, valorServico);
+            }
+            #endregion
         }
         #endregion
 
         #region Pesquisar serviço
+        //Evento de pesquisar serviço
         private void buttonPesquisar_Click(object sender, EventArgs e)
         {
+            //Criação do objeto NpgsqlDataReader servico e controleServico
             controleServico cServico = new controleServico();
-
             NpgsqlDataReader servico = cServico.pesquisaServico(textBoxPesquisar.Text);
 
-            // Apaga as colunas da datagridview
+            //Apaga as colunas da datagridview
             dataGridViewPesquisar.Columns.Clear();
 
-            // Definindo a quant. de colunas que a grid terá
+            //Definindo a quant. de colunas que a grid terá
             dataGridViewPesquisar.ColumnCount = servico.FieldCount;
 
-            // Definindo os cabeçalhos das colunas
-            for (int i = 0; i < servico.FieldCount; i++)
-            {
-                dataGridViewPesquisar.Columns[i].Name = servico.GetName(i);
-            }
+            //Definindo três colunas na DataGridView para exibir as descrições
+            dataGridViewPesquisar.ColumnCount = 3;
+            dataGridViewPesquisar.Columns[0].Name = "Id";
+            dataGridViewPesquisar.Columns[1].Name = "Nome";
+            dataGridViewPesquisar.Columns[2].Name = "Valor";
 
-            // Aqui criamos um vetor para representar uma linha da consulta(registro)
-            string[] linha = new string[servico.FieldCount];
-
+            //Adicionando as descrições dos serviços
             while (servico.Read())
             {
-                for (int i = 0; i < servico.FieldCount; i++)
-                {
-                    linha[i] = servico.GetValue(i).ToString();
-                }
-
-                dataGridViewPesquisar.Rows.Add(linha);
+                string idServico = servico["IDSERVICO"].ToString();
+                string nomeServico = servico["NOMESERVICO"].ToString();
+                string valorServico = servico["VALORSERVICO"].ToString();
+                dataGridViewPesquisar.Rows.Add(idServico, nomeServico, valorServico);
             }
         }
         #endregion
-
-        private void dataGridViewPesquisar_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
     }
 }

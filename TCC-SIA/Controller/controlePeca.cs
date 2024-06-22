@@ -15,7 +15,7 @@ namespace TCC_SIA.Controller
         public string cadastroPeca(Peca mPeca)
         {
             //String sql de inserção
-            string sql = "INSERT INTO PECA(IDMARCA, NOMEPECA, TIPOPECA, DESCPECA, VALORPECA, QUANTPECA, GARANTIAPECA) " +
+            string sql = "INSERT INTO PECA(IDMARCAPECA, NOMEPECA, TIPOPECA, DESCPECA, VALORPECA, QUANTPECA, GARANTIAPECA) " +
                 "VALUES(@IDMARCA, @NOMEPECA, @TIPOPECA, @DESCPECA, @VALORPECA, @QUANTPECA, @GARANTIAPECA);";
 
             //Abrindo conexão com o banco de dados
@@ -107,6 +107,42 @@ namespace TCC_SIA.Controller
             {
                 //Retornando os valores
                 return comm.ExecuteReader();
+            }
+            //Fazendo o catch
+            catch (NpgsqlException ex)
+            {
+                //Retornando como nulo
+                return null;
+            }
+            //Encerrando a conexão
+            finally
+            {
+                //Método de desconectar
+                con.desconectar();
+            }
+
+        }
+        #endregion
+
+        #region Pesquisar marca de peça por id
+        //Criação do método de pesquisar marca de peça por id
+        public string pesquisaMarcaPecaPorId(string idMarca)
+        {
+            //String sql de pesquisar
+            string sql = "SELECT NOMEMARCAPECA FROM MARCA_PECA WHERE IDMARCAPECA = '"+ idMarca+ "';";
+
+            //Abrindo conexão com o banco de dados
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            //Fazendo o try
+            try
+            {
+
+                //Execute a consulta e retorne o resultado como string
+                object result = comm.ExecuteScalar();
+                return result != null ? result.ToString() : "Marca não encontrada";
             }
             //Fazendo o catch
             catch (NpgsqlException ex)

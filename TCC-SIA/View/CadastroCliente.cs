@@ -71,20 +71,20 @@ namespace TCC_SIA.View
         private void buttonCadastrar_Click(object sender, EventArgs e)
         {
             // Verifica se os campos obrigatórios foram preenchidos
-            if (string.IsNullOrWhiteSpace(maskedTextBoxCPF.Text) ||
-                string.IsNullOrWhiteSpace(textBoxNome.Text) ||
-                string.IsNullOrWhiteSpace(maskedTextBoxNumero.Text) ||
-                string.IsNullOrWhiteSpace(maskedTextBoxCep.Text) ||
-                string.IsNullOrWhiteSpace(textBoxBairro.Text) ||
-                string.IsNullOrWhiteSpace(textBoxCidade.Text) ||
-                string.IsNullOrWhiteSpace(textBoxRua.Text) ||
+            if (string.IsNullOrWhiteSpace(maskedTextBoxCPF.Text) &&
+                string.IsNullOrWhiteSpace(textBoxNome.Text) &&
+                string.IsNullOrWhiteSpace(maskedTextBoxNumero.Text) &&
+                string.IsNullOrWhiteSpace(maskedTextBoxCep.Text) &&
+                string.IsNullOrWhiteSpace(textBoxBairro.Text) &&
+                string.IsNullOrWhiteSpace(textBoxCidade.Text) &&
+                string.IsNullOrWhiteSpace(textBoxRua.Text) &&
                 string.IsNullOrWhiteSpace(comboBoxUf.Text))
             {
                 MessageBox.Show("Preencha todos os campos! (exceto email, data de nascimento, sexo e telefone)");
                 return;
             }
 
-            //Criação do objeto Cliente e ControleCliente
+            //Criação do objeto Cliente e controleCliente
             Cliente mCliente = new Cliente();
             controleCliente cCliente = new controleCliente();
 

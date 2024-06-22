@@ -58,7 +58,7 @@ namespace TCC_SIA.View
                 MessageBox.Show("Insira o cpf, o nome, o tipo e a placa!");
                 return;
             }
-            // Criação do objeto Veiculo e ControleVeiculo
+            // Criação do objeto Veiculo e controleVeiculo
             Veiculo mVeiculo = new Veiculo();
             controleVeiculo cVeiculo = new controleVeiculo();
 
@@ -84,7 +84,7 @@ namespace TCC_SIA.View
         {
             controleMarca cMarca = new controleMarca();
             //Recebe os dados da consulta e salva no dataReader (Tipo)
-            NpgsqlDataReader marca = cMarca.listarMarca();
+            NpgsqlDataReader marca = cMarca.listarMarcaVeiculo();
 
             //Converter o dataReader em DataTable
             DataTable dtMarca = new DataTable();
@@ -94,10 +94,10 @@ namespace TCC_SIA.View
             comboBoxMarca.DataSource = dtMarca;
 
             //Define qual coluna do DataTable que será exibida (nome da coluna)
-            comboBoxMarca.DisplayMember = "NOMEMARCA";
+            comboBoxMarca.DisplayMember = "NOMEMARCAVEICULO";
 
             //Define qual o valor da linha será utilizado ao selecionar um valor
-            comboBoxMarca.ValueMember = "IDMARCA";
+            comboBoxMarca.ValueMember = "IDMARCAVEICULO";
         }
         #endregion
 

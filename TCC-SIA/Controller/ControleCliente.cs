@@ -51,7 +51,7 @@ namespace TCC_SIA.Controller
                 comm.ExecuteNonQuery();
 
                 //Retornando um valor
-                return "Login cadastrado com sucesso!";
+                return "Cliente cadastrado com sucesso!";
             }
             //Fazendo o catch
             catch (NpgsqlException ex)

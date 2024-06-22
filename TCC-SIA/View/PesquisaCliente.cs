@@ -20,47 +20,71 @@ namespace TCC_SIA.View
         public PesquisaCliente()
         {
             InitializeComponent();
+
+            #region Carrega as informações gerais dos clientes
+            // Criação do objeto NpgsqlDataReader cliente e ControleVeiculo
+            controleCliente cCliente = new controleCliente();
+            NpgsqlDataReader cliente = cCliente.pesquisarCliente(textBoxPesquisar.Text);
+
+            //Apaga as colunas da datagridview
+            dataGridViewPesquisar.Columns.Clear();
+
+            //Definindo a quant. de colunas que a grid terá
+            dataGridViewPesquisar.ColumnCount = cliente.FieldCount;
+
+            //Definindo três colunas na DataGridView para exibir as caracteristícas dos clientes
+            dataGridViewPesquisar.ColumnCount = 3;
+            dataGridViewPesquisar.Columns[0].Name = "Cpf";
+            dataGridViewPesquisar.Columns[1].Name = "Nome";
+            dataGridViewPesquisar.Columns[2].Name = "Telefone";
+
+            //Aqui criamos um vetor para representar uma linha da consulta(registro)
+            string[] linha = new string[cliente.FieldCount];
+
+            //Adicionando as descrições dos clientes
+            while (cliente.Read())
+            {
+                string cpfCliente = cliente["CPFCLIENTE"].ToString();
+                string nomeCliente = cliente["NOMECLIENTE"].ToString();
+                string telefone = cliente["TELEFONE"].ToString();
+                dataGridViewPesquisar.Rows.Add(cpfCliente, nomeCliente, telefone);
+            }
+            #endregion
         }
         #endregion
 
         #region Pesquisar cliente
+        //Evento de pesquisar cliente
         private void buttonPesquisar_Click(object sender, EventArgs e)
         {
+            //Criação do objeto NpgsqlDataReader cliente e controleCliente
             controleCliente cCliente = new controleCliente();
-
             NpgsqlDataReader cliente = cCliente.pesquisarCliente(textBoxPesquisar.Text);
 
-            // Apaga as colunas da datagridview
+            //Apaga as colunas da datagridview
             dataGridViewPesquisar.Columns.Clear();
 
-            // Definindo a quant. de colunas que a grid terá
+            //Definindo a quant. de colunas que a grid terá
             dataGridViewPesquisar.ColumnCount = cliente.FieldCount;
 
-            // Definindo os cabeçalhos das colunas
-            for (int i = 0; i < cliente.FieldCount; i++)
-            {
-                dataGridViewPesquisar.Columns[i].Name = cliente.GetName(i);
-            }
+            //Definindo três colunas na DataGridView para exibir as caracteristícas dos clientes
+            dataGridViewPesquisar.ColumnCount = 3;
+            dataGridViewPesquisar.Columns[0].Name = "Cpf";
+            dataGridViewPesquisar.Columns[1].Name = "Nome";
+            dataGridViewPesquisar.Columns[2].Name = "Telefone";
 
-            // Aqui criamos um vetor para representar uma linha da consulta(registro)
+            //Aqui criamos um vetor para representar uma linha da consulta(registro)
             string[] linha = new string[cliente.FieldCount];
 
+            //Adicionando as descrições dos clientes
             while (cliente.Read())
             {
-                for (int i = 0; i < cliente.FieldCount; i++)
-                {
-                    linha[i] = cliente.GetValue(i).ToString();
-                }
-
-                dataGridViewPesquisar.Rows.Add(linha);
+                string cpfCliente = cliente["CPFCLIENTE"].ToString();
+                string nomeCliente = cliente["NOMECLIENTE"].ToString();
+                string telefone = cliente["TELEFONE"].ToString();
+                dataGridViewPesquisar.Rows.Add(cpfCliente, nomeCliente, telefone);
             }
-
         }
         #endregion
-
-        private void textBoxPesquisar_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

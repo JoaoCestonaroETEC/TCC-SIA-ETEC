@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TCC_SIA.Controller;
+using TCC_SIA.Model;
 
 namespace TCC_SIA.View
 {
@@ -18,39 +19,85 @@ namespace TCC_SIA.View
         public PesquisaVeiculo()
         {
             InitializeComponent();
+
+            #region Carrega as informações gerais das dos veículos
+            //Criação do objeto NpgsqlDataReader veiculo e controleVeiculo
+            controleVeiculo cVeiculo = new controleVeiculo();
+            NpgsqlDataReader veiculo = cVeiculo.pesquisarVeiculo(textBoxPesquisar.Text);
+
+            //Apaga as colunas da datagridview
+            dataGridViewPesquisar.Columns.Clear();
+
+            //Definindo a quant. de colunas que a grid terá
+            dataGridViewPesquisar.ColumnCount = veiculo.FieldCount;
+
+            //Definindo seis colunas na DataGridView para exibir as descrições
+            dataGridViewPesquisar.ColumnCount = 6;
+            dataGridViewPesquisar.Columns[0].Name = "Id";
+            dataGridViewPesquisar.Columns[1].Name = "Cpf do cliente";
+            dataGridViewPesquisar.Columns[2].Name = "Marca";
+            dataGridViewPesquisar.Columns[3].Name = "Nome";
+            dataGridViewPesquisar.Columns[4].Name = "Tipo";
+            dataGridViewPesquisar.Columns[5].Name = "Placa";
+
+            //Adicionando as descrições de peças
+            while (veiculo.Read())
+            {
+                string idVeiculo = veiculo["IDVEICULO"].ToString();
+                string cpfCliente = veiculo["CPFCLIENTE"].ToString();
+                string idMarca = veiculo["IDMARCAVEICULO"].ToString();
+                string nomeVeiculo = veiculo["NOMEVEICULO"].ToString();
+                string tipoVeiculo = veiculo["TIPOVEICULO"].ToString();
+                string placaVeiculo = veiculo["PLACAVEICULO"].ToString();
+
+                //Consulta o nome da marca pelo id
+                string marca = cVeiculo.pesquisaMarcaVeiculoPorId(idMarca);
+
+                dataGridViewPesquisar.Rows.Add(idVeiculo, cpfCliente, marca, nomeVeiculo, tipoVeiculo, placaVeiculo);
+            }
+            #endregion
         }
         #endregion
 
         #region Pesquisar veículo
+        //Evento de pesquisar veículo
         private void buttonPesquisar_Click(object sender, EventArgs e)
         {
+            //Criação do objeto NpgsqlDataReader veiculo e controleVeiculo 
             controleVeiculo cVeiculo = new controleVeiculo();
-
             NpgsqlDataReader veiculo = cVeiculo.pesquisarVeiculo(textBoxPesquisar.Text);
 
-            // Apaga as colunas da datagridview
+            //Apaga as colunas da datagridview
             dataGridViewPesquisar.Columns.Clear();
 
-            // Definindo a quant. de colunas que a grid terá
+            //Definindo a quant. de colunas que a grid terá
             dataGridViewPesquisar.ColumnCount = veiculo.FieldCount;
 
-            // Definindo os cabeçalhos das colunas
-            for (int i = 0; i < veiculo.FieldCount; i++)
-            {
-                dataGridViewPesquisar.Columns[i].Name = veiculo.GetName(i);
-            }
+            //Definindo seis colunas na DataGridView para exibir as descrições
+            dataGridViewPesquisar.ColumnCount = 6;
+            dataGridViewPesquisar.Columns[0].Name = "Id";
+            dataGridViewPesquisar.Columns[1].Name = "Cpf do cliente";
+            dataGridViewPesquisar.Columns[2].Name = "Marca";
+            dataGridViewPesquisar.Columns[3].Name = "Nome";
+            dataGridViewPesquisar.Columns[4].Name = "Tipo";
+            dataGridViewPesquisar.Columns[5].Name = "Placa";
 
-            // Aqui criamos um vetor para representar uma linha da consulta(registro)
-            string[] linha = new string[veiculo.FieldCount];
-
+            //Adicionando as descrições de peças
             while (veiculo.Read())
             {
-                for (int i = 0; i < veiculo.FieldCount; i++)
-                {
-                    linha[i] = veiculo.GetValue(i).ToString();
-                }
+                string idVeiculo = veiculo["IDVEICULO"].ToString();
+                string cpfCliente = veiculo["CPFCLIENTE"].ToString();
+                string idMarca = veiculo["IDMARCAVEICULO"].ToString();
+                string nomeVeiculo = veiculo["NOMEVEICULO"].ToString();
+                string tipoVeiculo = veiculo["TIPOVEICULO"].ToString();
+                string placaVeiculo = veiculo["PLACAVEICULO"].ToString();
 
-                dataGridViewPesquisar.Rows.Add(linha);
+                //Consulta o nome da marca pelo id
+
+                //Consulta o nome da marca pelo id
+                string marca = cVeiculo.pesquisaMarcaVeiculoPorId(idMarca);
+
+                dataGridViewPesquisar.Rows.Add(idVeiculo, cpfCliente, marca, nomeVeiculo, tipoVeiculo, placaVeiculo);
             }
         }
         #endregion

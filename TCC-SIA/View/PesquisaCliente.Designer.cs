@@ -49,7 +49,6 @@
             textBoxPesquisar.Name = "textBoxPesquisar";
             textBoxPesquisar.Size = new Size(448, 23);
             textBoxPesquisar.TabIndex = 1;
-            textBoxPesquisar.TextChanged += textBoxPesquisar_TextChanged;
             // 
             // label1
             // 
@@ -70,7 +69,7 @@
             buttonPesquisar.UseVisualStyleBackColor = true;
             buttonPesquisar.Click += buttonPesquisar_Click;
             // 
-            // PesquisarCliente
+            // PesquisaCliente
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -79,7 +78,7 @@
             Controls.Add(label1);
             Controls.Add(textBoxPesquisar);
             Controls.Add(dataGridViewPesquisar);
-            Name = "PesquisarCliente";
+            Name = "PesquisaCliente";
             Text = "PesquisarCliente";
             ((System.ComponentModel.ISupportInitialize)dataGridViewPesquisar).EndInit();
             ResumeLayout(false);
