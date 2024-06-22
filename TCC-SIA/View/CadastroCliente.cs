@@ -92,7 +92,7 @@ namespace TCC_SIA.View
 
             //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
             long cpf;
-            if (!long.TryParse(maskedTextBoxCPF.Text, out cpf))
+            if (long.TryParse(maskedTextBoxCPF.Text, out cpf))
             {
                 mCliente.setCpfCliente(cpf);
                 return;
@@ -105,8 +105,8 @@ namespace TCC_SIA.View
             mCliente.setTelefone(maskedTextBoxTelefone.Text);
 
             //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
-            int numero;
-            if (int.TryParse(maskedTextBoxNumero.Text, out numero))
+            long numero;
+            if (long.TryParse(maskedTextBoxNumero.Text, out numero))
             {
                 mCliente.setNumero(numero);
             }
@@ -115,8 +115,8 @@ namespace TCC_SIA.View
             mCliente.setCidade(textBoxCidade.Text);
 
             //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
-            int cep;
-            if (int.TryParse(maskedTextBoxCep.Text, out cep))
+            long cep;
+            if (long.TryParse(maskedTextBoxCep.Text, out cep))
             {
                 mCliente.setCep(cep);
             }

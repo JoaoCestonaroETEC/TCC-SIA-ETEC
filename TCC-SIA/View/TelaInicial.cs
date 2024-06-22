@@ -60,5 +60,13 @@ namespace TCC_SIA.View
             formMarca.Show();
         }
         #endregion
+
+        #region pesquisar cliente
+        private void cLIENTEToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            PesquisarCliente formCliente = new PesquisarCliente();
+            formCliente.Show();
+        }
+        #endregion
     }
 }
