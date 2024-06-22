@@ -55,5 +55,73 @@ namespace TCC_SIA.Controller
             }
         }
         #endregion
+
+        #region Listar peça
+        //Criação do método de listar peça
+        public NpgsqlDataReader listarPeca()
+        {
+            //String sql de listar
+            string sql = "SELECT IDPECA, NOMEPECA FROM PECA;";
+
+            //Abrindo conexão com o banco de dados
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            //Fazendo o try
+            try
+            {
+                //Retornando os valores
+                return comm.ExecuteReader();
+            }
+            //Fazendo o catch
+            catch (NpgsqlException ex)
+            {
+                //Retornando como nulo
+                return null;
+            }
+            //Encerrando a conexão
+            finally
+            {
+                //Método de desconectar
+                con.desconectar();
+            }
+
+        }
+        #endregion
+
+        #region Pesquisar peça
+        //Criação do método de pesquisar cliente
+        public NpgsqlDataReader pesquisaPeca(string peca)
+        {
+            //String sql de pesquisar
+            string sql = "SELECT * FROM PECA WHERE NOMEPECA LIKE '" + peca + "%';";
+
+            //Abrindo conexão com o banco de dados
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            //Fazendo o try
+            try
+            {
+                //Retornando os valores
+                return comm.ExecuteReader();
+            }
+            //Fazendo o catch
+            catch (NpgsqlException ex)
+            {
+                //Retornando como nulo
+                return null;
+            }
+            //Encerrando a conexão
+            finally
+            {
+                //Método de desconectar
+                con.desconectar();
+            }
+
+        }
+        #endregion
     }
 }

@@ -12,7 +12,7 @@ namespace TCC_SIA.Controller
 {
     internal class controleVeiculo
     {
-        #region Cadastrar tipo
+        #region Cadastrar veículo
         //Criação do método de cadastrar tipo
         public string cadastroVeiculo(Veiculo mVeiculo)
         {
@@ -54,6 +54,74 @@ namespace TCC_SIA.Controller
                 //Método de desconectar
                 con.desconectar();
             }
+        }
+        #endregion
+
+        #region Listar veículo
+        //Criação do método de listar cliente
+        public NpgsqlDataReader listarVeiculo()
+        {
+            //String sql de listar
+            string sql = "SELECT IDVEICULO, NOMEVEICULO FROM VEICULO";
+
+            //Abrindo conexão com o banco de dados
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            //Fazendo o try
+            try
+            {
+                //Retornando os valores
+                return comm.ExecuteReader();
+            }
+            //Fazendo o catch
+            catch (NpgsqlException ex)
+            {
+                //Retornando como nulo
+                return null;
+            }
+            //Encerrando a conexão
+            finally
+            {
+                //Método de desconectar
+                con.desconectar();
+            }
+
+        }
+        #endregion
+
+        #region Pesquisar veículo
+        //Criação do método de pesquisar cliente
+        public NpgsqlDataReader pesquisarVeiculo(string veiculo)
+        {
+            //String sql de pesquisar
+            string sql = "SELECT * FROM VEICULO WHERE NOMEVEICULO LIKE '" + veiculo + "%';";
+
+            //Abrindo conexão com o banco de dados
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            //Fazendo o try
+            try
+            {
+                //Retornando os valores
+                return comm.ExecuteReader();
+            }
+            //Fazendo o catch
+            catch (NpgsqlException ex)
+            {
+                //Retornando como nulo
+                return null;
+            }
+            //Encerrando a conexão
+            finally
+            {
+                //Método de desconectar
+                con.desconectar();
+            }
+
         }
         #endregion
     }

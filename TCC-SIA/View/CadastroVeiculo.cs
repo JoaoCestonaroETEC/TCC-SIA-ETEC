@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -75,6 +76,35 @@ namespace TCC_SIA.View
 
             //Mostra o resultado
             MessageBox.Show(res);
+        }
+        #endregion
+
+        #region Listar marca
+        public void listarMarca()
+        {
+            controleMarca cMarca = new controleMarca();
+            //Recebe os dados da consulta e salva no dataReader (Tipo)
+            NpgsqlDataReader marca = cMarca.listarMarca();
+
+            //Converter o dataReader em DataTable
+            DataTable dtMarca = new DataTable();
+            dtMarca.Load(marca);
+
+            //Preencher a combobox com os dados do DataTable
+            comboBoxMarca.DataSource = dtMarca;
+
+            //Define qual coluna do DataTable que será exibida (nome da coluna)
+            comboBoxMarca.DisplayMember = "NOMEMARCA";
+
+            //Define qual o valor da linha será utilizado ao selecionar um valor
+            comboBoxMarca.ValueMember = "IDMARCA";
+        }
+        #endregion
+
+        #region Carrega o formulário
+        private void CadastroVeiculo_Load(object sender, EventArgs e)
+        {
+            listarMarca();
         }
         #endregion
     }

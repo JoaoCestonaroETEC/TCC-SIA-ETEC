@@ -1,6 +1,6 @@
 ﻿namespace TCC_SIA.View
 {
-    partial class PesquisarCliente
+    partial class PesquisaMarca
     {
         /// <summary>
         /// Required designer variable.
@@ -28,58 +28,58 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dataGridViewPesquisar = new DataGridView();
-            textBoxPesquisar = new TextBox();
-            label1 = new Label();
             buttonPesquisar = new Button();
+            label1 = new Label();
+            textBoxPesquisar = new TextBox();
+            dataGridViewPesquisar = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dataGridViewPesquisar).BeginInit();
             SuspendLayout();
             // 
-            // dataGridViewPesquisar
-            // 
-            dataGridViewPesquisar.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewPesquisar.Location = new Point(12, 43);
-            dataGridViewPesquisar.Name = "dataGridViewPesquisar";
-            dataGridViewPesquisar.Size = new Size(514, 295);
-            dataGridViewPesquisar.TabIndex = 0;
-            // 
-            // textBoxPesquisar
-            // 
-            textBoxPesquisar.Location = new Point(78, 12);
-            textBoxPesquisar.Name = "textBoxPesquisar";
-            textBoxPesquisar.Size = new Size(448, 23);
-            textBoxPesquisar.TabIndex = 1;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(12, 15);
-            label1.Name = "label1";
-            label1.Size = new Size(60, 15);
-            label1.TabIndex = 2;
-            label1.Text = "Pesquisar:";
-            // 
             // buttonPesquisar
             // 
-            buttonPesquisar.Location = new Point(12, 344);
+            buttonPesquisar.Location = new Point(12, 341);
             buttonPesquisar.Name = "buttonPesquisar";
             buttonPesquisar.Size = new Size(119, 71);
-            buttonPesquisar.TabIndex = 3;
+            buttonPesquisar.TabIndex = 7;
             buttonPesquisar.Text = "Pesquisar";
             buttonPesquisar.UseVisualStyleBackColor = true;
             buttonPesquisar.Click += buttonPesquisar_Click;
             // 
-            // PesquisarCliente
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 12);
+            label1.Name = "label1";
+            label1.Size = new Size(60, 15);
+            label1.TabIndex = 6;
+            label1.Text = "Pesquisar:";
+            // 
+            // textBoxPesquisar
+            // 
+            textBoxPesquisar.Location = new Point(78, 9);
+            textBoxPesquisar.Name = "textBoxPesquisar";
+            textBoxPesquisar.Size = new Size(448, 23);
+            textBoxPesquisar.TabIndex = 5;
+            // 
+            // dataGridViewPesquisar
+            // 
+            dataGridViewPesquisar.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewPesquisar.Location = new Point(12, 40);
+            dataGridViewPesquisar.Name = "dataGridViewPesquisar";
+            dataGridViewPesquisar.Size = new Size(514, 295);
+            dataGridViewPesquisar.TabIndex = 4;
+            // 
+            // PesquisarMarca
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(538, 427);
+            ClientSize = new Size(539, 421);
             Controls.Add(buttonPesquisar);
             Controls.Add(label1);
             Controls.Add(textBoxPesquisar);
             Controls.Add(dataGridViewPesquisar);
-            Name = "PesquisarCliente";
-            Text = "PesquisarCliente";
+            Name = "PesquisarMarca";
+            Text = "PesquisarMarca";
             ((System.ComponentModel.ISupportInitialize)dataGridViewPesquisar).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -87,9 +87,9 @@
 
         #endregion
 
-        private DataGridView dataGridViewPesquisar;
-        private TextBox textBoxPesquisar;
-        private Label label1;
         private Button buttonPesquisar;
+        private Label label1;
+        private TextBox textBoxPesquisar;
+        private DataGridView dataGridViewPesquisar;
     }
 }

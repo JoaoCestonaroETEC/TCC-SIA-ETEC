@@ -61,11 +61,43 @@ namespace TCC_SIA.View
         }
         #endregion
 
+        #region pesquisar serviço
+        private void sERVIÇOToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            PesquisaServico formServico = new PesquisaServico();
+            formServico.Show();
+        }
+        #endregion
+
+        #region pesquisar peça
+        private void pEÇAToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            PesquisaPeca formPeca = new PesquisaPeca();
+            formPeca.Show();
+        }
+        #endregion
+
         #region pesquisar cliente
         private void cLIENTEToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            PesquisarCliente formCliente = new PesquisarCliente();
+            PesquisaCliente formCliente = new PesquisaCliente();
             formCliente.Show();
+        }
+        #endregion
+
+        #region pesquisar veículo
+        private void vEÍCULOToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            PesquisaVeiculo formVeiculo = new PesquisaVeiculo();
+            formVeiculo.Show();
+        }
+        #endregion
+
+        #region pesquisar veículo
+        private void mARCAToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            PesquisaMarca formMarca = new PesquisaMarca();
+            formMarca.Show();
         }
         #endregion
     }

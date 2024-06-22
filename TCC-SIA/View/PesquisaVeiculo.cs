@@ -8,53 +8,50 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
 using TCC_SIA.Controller;
-using TCC_SIA.Model;
 
 namespace TCC_SIA.View
 {
-    public partial class PesquisarCliente : Form
+    public partial class PesquisaVeiculo : Form
     {
         #region Inicializa o formulário
-        public PesquisarCliente()
+        public PesquisaVeiculo()
         {
             InitializeComponent();
         }
         #endregion
 
-        #region Pesquisar cliente
+        #region Pesquisar veículo
         private void buttonPesquisar_Click(object sender, EventArgs e)
         {
-            controleCliente cCliente = new controleCliente();
+            controleVeiculo cVeiculo = new controleVeiculo();
 
-            NpgsqlDataReader clientes = cCliente.pesquisarCliente(textBoxPesquisar.Text);
+            NpgsqlDataReader veiculo = cVeiculo.pesquisarVeiculo(textBoxPesquisar.Text);
 
             // Apaga as colunas da datagridview
             dataGridViewPesquisar.Columns.Clear();
 
             // Definindo a quant. de colunas que a grid terá
-            dataGridViewPesquisar.ColumnCount = clientes.FieldCount;
+            dataGridViewPesquisar.ColumnCount = veiculo.FieldCount;
 
             // Definindo os cabeçalhos das colunas
-            for (int i = 0; i < clientes.FieldCount; i++)
+            for (int i = 0; i < veiculo.FieldCount; i++)
             {
-                dataGridViewPesquisar.Columns[i].Name = clientes.GetName(i);
+                dataGridViewPesquisar.Columns[i].Name = veiculo.GetName(i);
             }
 
             // Aqui criamos um vetor para representar uma linha da consulta(registro)
-            string[] linha = new string[clientes.FieldCount];
+            string[] linha = new string[veiculo.FieldCount];
 
-            while (clientes.Read())
+            while (veiculo.Read())
             {
-                for (int i = 0; i < clientes.FieldCount; i++)
+                for (int i = 0; i < veiculo.FieldCount; i++)
                 {
-                    linha[i] = clientes.GetValue(i).ToString();
+                    linha[i] = veiculo.GetValue(i).ToString();
                 }
 
                 dataGridViewPesquisar.Rows.Add(linha);
             }
-
         }
         #endregion
     }

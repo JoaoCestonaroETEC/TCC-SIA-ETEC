@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -63,11 +64,25 @@ namespace TCC_SIA.View
         }
         #endregion
 
-        #region Carrega o formulário
-        private void CadastroPeça_Load(object sender, EventArgs e)
+        #region Listar marca
+        public void listarMarca()
         {
-            //Definir eventos para validar a entrada
-            maskedTextBoxValor.KeyPress += new KeyPressEventHandler(maskedTextBoxValor_KeyPress);
+            controleMarca cMarca = new controleMarca();
+            //Recebe os dados da consulta e salva no dataReader (Tipo)
+            NpgsqlDataReader marca = cMarca.listarMarca();
+
+            //Converter o dataReader em DataTable
+            DataTable dtMarca = new DataTable();
+            dtMarca.Load(marca);
+
+            //Preencher a combobox com os dados do DataTable
+            comboBoxMarca.DataSource = dtMarca;
+
+            //Define qual coluna do DataTable que será exibida (nome da coluna)
+            comboBoxMarca.DisplayMember = "NOMEMARCA";
+
+            //Define qual o valor da linha será utilizado ao selecionar um valor
+            comboBoxMarca.ValueMember = "IDMARCA";
         }
         #endregion
 
@@ -79,6 +94,15 @@ namespace TCC_SIA.View
             {
                 e.Handled = true; //Impede a entrada de caracteres não numéricos
             }
+        }
+        #endregion
+
+        #region Carrega o formulário
+        private void CadastroPeça_Load(object sender, EventArgs e)
+        {
+            //Definir eventos para validar a entrada
+            maskedTextBoxValor.KeyPress += new KeyPressEventHandler(maskedTextBoxValor_KeyPress);
+            listarMarca();
         }
         #endregion
     }

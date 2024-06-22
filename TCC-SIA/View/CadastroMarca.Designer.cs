@@ -95,6 +95,7 @@
             Margin = new Padding(3, 2, 3, 2);
             Name = "CadastroMarca";
             Text = "CadastroMarca";
+            Load += CadastroMarca_Load;
             ResumeLayout(false);
             PerformLayout();
         }

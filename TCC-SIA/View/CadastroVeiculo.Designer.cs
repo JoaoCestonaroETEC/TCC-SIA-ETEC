@@ -36,13 +36,13 @@
             labelPlaca = new Label();
             labelModelo = new Label();
             textBoxModelo = new TextBox();
-            maskedTextBoxCpf = new MaskedTextBox();
             comboBoxCor = new ComboBox();
             comboBoxTipo = new ComboBox();
             comboBoxMarca = new ComboBox();
             maskedTextBoxPlaca = new MaskedTextBox();
             label1 = new Label();
             textBoxNome = new TextBox();
+            maskedTextBoxCpf = new MaskedTextBox();
             SuspendLayout();
             // 
             // labelCpf
@@ -118,17 +118,6 @@
             textBoxModelo.Size = new Size(215, 23);
             textBoxModelo.TabIndex = 30;
             // 
-            // maskedTextBoxCpf
-            // 
-            maskedTextBoxCpf.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            maskedTextBoxCpf.Location = new Point(107, 19);
-            maskedTextBoxCpf.Margin = new Padding(3, 2, 3, 2);
-            maskedTextBoxCpf.Mask = "000000000-00";
-            maskedTextBoxCpf.Name = "maskedTextBoxCpf";
-            maskedTextBoxCpf.Size = new Size(215, 23);
-            maskedTextBoxCpf.TabIndex = 32;
-            maskedTextBoxCpf.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            // 
             // comboBoxCor
             // 
             comboBoxCor.FormattingEnabled = true;
@@ -178,6 +167,17 @@
             textBoxNome.Size = new Size(215, 23);
             textBoxNome.TabIndex = 38;
             // 
+            // maskedTextBoxCpf
+            // 
+            maskedTextBoxCpf.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            maskedTextBoxCpf.Location = new Point(107, 19);
+            maskedTextBoxCpf.Margin = new Padding(3, 2, 3, 2);
+            maskedTextBoxCpf.Mask = "000000000-00";
+            maskedTextBoxCpf.Name = "maskedTextBoxCpf";
+            maskedTextBoxCpf.Size = new Size(215, 23);
+            maskedTextBoxCpf.TabIndex = 32;
+            maskedTextBoxCpf.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            // 
             // CadastroVeiculo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -201,6 +201,7 @@
             Margin = new Padding(3, 2, 3, 2);
             Name = "CadastroVeiculo";
             Text = "CadastroVeículo";
+            Load += CadastroVeiculo_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -214,12 +215,12 @@
         private Label labelPlaca;
         private Label labelModelo;
         private TextBox textBoxModelo;
-        private MaskedTextBox maskedTextBoxCpf;
         private ComboBox comboBoxCor;
         private ComboBox comboBoxTipo;
         private ComboBox comboBoxMarca;
         private MaskedTextBox maskedTextBoxPlaca;
         private Label label1;
         private TextBox textBoxNome;
+        private MaskedTextBox maskedTextBoxCpf;
     }
 }
