@@ -10,6 +10,7 @@ namespace TCC_SIA.Controller
 {
     internal class controleMarca
     {
+        #region Cadastrar marca
         //Criação do método de cadastrar marca
         public string cadastroMarca(Marca mMarca)
         {
@@ -48,5 +49,6 @@ namespace TCC_SIA.Controller
                 con.desconectar();
             }
         }
+        #endregion
     }
 }

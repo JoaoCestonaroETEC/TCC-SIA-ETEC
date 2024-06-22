@@ -10,6 +10,7 @@ namespace TCC_SIA.Model
 {
     internal class Cliente
     {
+        #region Criação de atributo
         private long cpfCliente;
         private string nomeCliente;
         private string emailCliente;
@@ -22,7 +23,9 @@ namespace TCC_SIA.Model
         private string bairro;
         private string uf;
         private string telefone;
+        #endregion
 
+        #region Encapsulamento
         public long getCpfCliente()
         {
             return this.cpfCliente;
@@ -142,6 +145,7 @@ namespace TCC_SIA.Model
         {
             this.telefone = telefone;
         }
+        #endregion
     }
 
 }

@@ -8,6 +8,7 @@ namespace TCC_SIA.Model
 {
     internal class Peca
     {
+        #region Criação de atributo
         private long idMarca;
         private string nomePeca;
         private string tipoPeca;
@@ -15,7 +16,9 @@ namespace TCC_SIA.Model
         private long valorPeca;
         private int quantPeca;
         private DateTime garantiaPeca;
+        #endregion
 
+        #region Encapsulamento
         public long getIdMarca()
         {
             return idMarca;
@@ -83,5 +86,6 @@ namespace TCC_SIA.Model
         {
             this.garantiaPeca = garantiaPeca;
         }
+        #endregion
     }
 }

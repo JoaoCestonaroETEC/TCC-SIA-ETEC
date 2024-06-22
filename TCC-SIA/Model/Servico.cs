@@ -9,10 +9,13 @@ namespace TCC_SIA.Model
 {
     internal class Servico
     {
+        #region Criação de atributo
         private string nomeServico;
         private string descServico;
         private long valorServico;
+        #endregion
 
+        #region Encapsulamento
         public string getNomeServico()
         {
             return nomeServico;
@@ -42,5 +45,6 @@ namespace TCC_SIA.Model
         {
             this.valorServico = valorServico;
         }
+        #endregion
     }
 }

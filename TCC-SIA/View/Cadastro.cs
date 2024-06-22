@@ -14,12 +14,15 @@ namespace TCC_SIA.View
 {
     public partial class Cadastro : Form
     {
+        #region Inicializa o formulário
         public Cadastro()
         {
             InitializeComponent();
         }
+        #endregion
 
-        private void Cadastar_Cliente(object sender, EventArgs e)
+        #region Cadastrar login
+        private void buttonCadastrar_Click(object sender, EventArgs e)
         {
             LoginEmpresa mLogin = new LoginEmpresa();
             controleLogin cCliente = new controleLogin();
@@ -33,5 +36,6 @@ namespace TCC_SIA.View
             string res = cCliente.cadastroLogin(mLogin);
             MessageBox.Show(res);
         }
+        #endregion
     }
 }

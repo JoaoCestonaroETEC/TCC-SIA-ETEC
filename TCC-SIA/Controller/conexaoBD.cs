@@ -9,6 +9,7 @@ namespace TCC_SIA.Controller
 {
     internal class conexaoBD
     {
+        #region Abrir conexão
         //Definindo os atributos para conexão com o banco
         static string server = "127.0.0.1";
         static string porta = "5432";
@@ -41,7 +42,9 @@ namespace TCC_SIA.Controller
                 return null;
             }
         }
+        #endregion
 
+        #region Fechar conexão
         //Método para desconectar o banco de dados
         public NpgsqlConnection desconectar()
         {
@@ -60,5 +63,6 @@ namespace TCC_SIA.Controller
                 return null;
             }
         }
+        #endregion
     }
 }

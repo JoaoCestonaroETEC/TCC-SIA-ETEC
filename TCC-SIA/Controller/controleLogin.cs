@@ -13,6 +13,7 @@ namespace TCC_SIA.Controller
 {
     internal class controleLogin
     {
+        #region Cadastrar login
         //Criação do método de cadastrar login
         public string cadastroLogin(LoginEmpresa mLogin)
         {
@@ -56,7 +57,9 @@ namespace TCC_SIA.Controller
                 return ex.ToString();
             }
         }
+        #endregion
 
+        #region Efetuar login
         //Criação do método de efetuar um login
         public string efetuarLogin(IdLogin mLogin)
         {
@@ -127,5 +130,6 @@ namespace TCC_SIA.Controller
                 con.desconectar();
             }
         }
+        #endregion
     }
 }

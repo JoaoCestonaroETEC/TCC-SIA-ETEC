@@ -32,7 +32,7 @@
             label2 = new Label();
             maskedTextBox1 = new MaskedTextBox();
             maskedTextBox2 = new MaskedTextBox();
-            button1 = new Button();
+            buttonCadastrar = new Button();
             SuspendLayout();
             // 
             // label1
@@ -70,23 +70,23 @@
             maskedTextBox2.Size = new Size(232, 23);
             maskedTextBox2.TabIndex = 3;
             // 
-            // button1
+            // buttonCadastrar
             // 
-            button1.Location = new Point(287, 91);
-            button1.Margin = new Padding(3, 2, 3, 2);
-            button1.Name = "button1";
-            button1.Size = new Size(82, 22);
-            button1.TabIndex = 4;
-            button1.Text = "Login";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            buttonCadastrar.Location = new Point(287, 91);
+            buttonCadastrar.Margin = new Padding(3, 2, 3, 2);
+            buttonCadastrar.Name = "buttonCadastrar";
+            buttonCadastrar.Size = new Size(82, 22);
+            buttonCadastrar.TabIndex = 4;
+            buttonCadastrar.Text = "Login";
+            buttonCadastrar.UseVisualStyleBackColor = true;
+            buttonCadastrar.Click += buttonCadastrar_Click;
             // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(393, 134);
-            Controls.Add(button1);
+            Controls.Add(buttonCadastrar);
             Controls.Add(maskedTextBox2);
             Controls.Add(maskedTextBox1);
             Controls.Add(label2);
@@ -104,6 +104,6 @@
         private Label label2;
         private MaskedTextBox maskedTextBox1;
         private MaskedTextBox maskedTextBox2;
-        private Button button1;
+        private Button buttonCadastrar;
     }
 }

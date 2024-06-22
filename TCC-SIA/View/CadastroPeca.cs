@@ -14,11 +14,14 @@ namespace TCC_SIA.View
 {
     public partial class CadastroPeca : Form
     {
+        #region Inicializa o formulário
         public CadastroPeca()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region Cadastrar peça
         //Evento de cadastrar peça
         private void buttonCadastrar_Click(object sender, EventArgs e)
         {
@@ -41,13 +44,17 @@ namespace TCC_SIA.View
             //Mostra o resultado
             MessageBox.Show(res);
         }
+        #endregion
 
+        #region Carrega o formulário
         private void CadastroPeça_Load(object sender, EventArgs e)
         {
             //Definir eventos para validar a entrada
             maskedTextBoxValor.KeyPress += new KeyPressEventHandler(maskedTextBoxValor_KeyPress);
         }
+        #endregion
 
+        #region Método de aceitar apenas números
         private void maskedTextBoxValor_KeyPress(object sender, KeyPressEventArgs e)
         {
             //Verifica se a tecla pressionada é um dígito ou uma tecla de controle (como Backspace)
@@ -56,5 +63,6 @@ namespace TCC_SIA.View
                 e.Handled = true; //Impede a entrada de caracteres não numéricos
             }
         }
+        #endregion
     }
 }

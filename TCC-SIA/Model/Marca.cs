@@ -8,9 +8,12 @@ namespace TCC_SIA.Model
 {
     internal class Marca
     {
+        #region Criação de atributo
         private string nomeMarca;
         private string descMarca;
+        #endregion
 
+        #region Encapsulamento
         public string getNomeMarca() 
         {  
             return nomeMarca; 
@@ -29,5 +32,6 @@ namespace TCC_SIA.Model
         {
             this.descMarca = descMarca;
         }
+        #endregion
     }
 }

@@ -15,8 +15,10 @@ namespace TCC_SIA.View
 {
     public partial class CadastroVeiculo : Form
     {
+        #region Inicializa o formulário
         public CadastroVeiculo()
         {
+            #region Campos de cores
             //Adiciona campos de cores de veículos mais comuns
             InitializeComponent();
             comboBoxCor.Items.Add("Branco");
@@ -28,15 +30,20 @@ namespace TCC_SIA.View
             comboBoxCor.Items.Add("Amarelo");
             comboBoxCor.Items.Add("Verde");
             comboBoxCor.Items.Add("Roxo");
+            #endregion
 
+            #region Campos dos tipos de veículos
             //Adiciona campos de tipos de veículos mais comuns
             comboBoxTipo.Items.Add("Carro");
             comboBoxTipo.Items.Add("Moto");
             comboBoxTipo.Items.Add("Bicileta");
             comboBoxTipo.Items.Add("Moto-cicleta");
             comboBoxTipo.Items.Add("Caminhão");
+            #endregion
         }
+        #endregion
 
+        #region Cadastrar veículo
         //Evento de cadastrar veículo
         private void buttonCadastrar_Click(object sender, EventArgs e)
         {
@@ -59,5 +66,6 @@ namespace TCC_SIA.View
             //Mostra o resultado
             MessageBox.Show(res);
         }
+        #endregion
     }
 }

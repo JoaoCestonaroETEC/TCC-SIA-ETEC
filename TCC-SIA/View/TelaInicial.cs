@@ -14,43 +14,51 @@ namespace TCC_SIA.View
 {
     public partial class TelaInicial : Form
     {
+        #region Inicializa o formulário
         public TelaInicial()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region Abrir cadastro de serviço
         private void sERVIÇOToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CadastroServico formServico = new CadastroServico();
             formServico.Show();
         }
+        #endregion
 
+        #region Abrir cadastro de peça
         private void pEÇAToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CadastroPeca formPeça = new CadastroPeca();
             formPeça.Show();
         }
+        #endregion
 
-        private void vEÍCULOToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CadastroVeiculo formVeiculo = new CadastroVeiculo();
-            formVeiculo.Show();
-        }
-
+        #region Abrir cadastro de cliente
         private void cLIENTEToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CadastroCliente formCliente = new CadastroCliente();
             formCliente.Show();
         }
+        #endregion
 
-        private void tIPOToolStripMenuItem3_Click(object sender, EventArgs e)
+        #region Abrir cadastro de veículo
+        private void vEÍCULOToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            CadastroVeiculo formVeiculo = new CadastroVeiculo();
+            formVeiculo.Show();
         }
+        #endregion
 
+        #region Abrir cadastro de marca
         private void mARCAToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CadastroMarca formMarca = new CadastroMarca();
             formMarca.Show();
         }
+        #endregion
     }
 }

@@ -12,6 +12,7 @@ namespace TCC_SIA.Controller
 {
     internal class controleVeiculo
     {
+        #region Cadastrar tipo
         //Criação do método de cadastrar tipo
         public string cadastroVeiculo(Veiculo mVeiculo)
         {
@@ -54,5 +55,6 @@ namespace TCC_SIA.Controller
                 con.desconectar();
             }
         }
+        #endregion
     }
 }

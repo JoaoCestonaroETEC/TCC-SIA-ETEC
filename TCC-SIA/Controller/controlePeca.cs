@@ -10,6 +10,7 @@ namespace TCC_SIA.Controller
 {
     internal class controlePeca
     {
+        #region Cadastrar peça
         //Criação do método de cadastrar peça
         public string cadastroPeca(Peca mPeca)
         {
@@ -53,5 +54,6 @@ namespace TCC_SIA.Controller
                 con.desconectar();
             }
         }
+        #endregion
     }
 }

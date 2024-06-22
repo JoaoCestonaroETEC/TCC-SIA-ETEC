@@ -8,12 +8,15 @@ namespace TCC_SIA.Model
 {
     internal class IdLogin
     {
+        #region Criação de atributo
         private string cnpjLogin;
         private string usuarioLogin;
         private string emailLogin;
         private string senhaLogin;
         private string telefoneLogin;
+        #endregion
 
+        #region Encapsulamento
         public string getCnpjLogin()
         {
             return this.cnpjLogin;
@@ -48,10 +51,10 @@ namespace TCC_SIA.Model
         {
             return this.senhaLogin;
         }
-
         public void setSenhaLogin(string senhaLogin)
         {
             this.senhaLogin = senhaLogin;
         }
+        #endregion
     }
 }

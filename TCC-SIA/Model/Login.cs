@@ -8,12 +8,15 @@ namespace TCC_SIA.Model
 {
     internal class LoginEmpresa
     {
+        #region Criação de atributo
         private long cnpjLogin;
         private string emailogin;
         private string senhaLogin;
         private string nomeLogin;
         private long telefone;
+        #endregion
 
+        #region Encapsulamento
         public long getCnpj()
         {
             return this.cnpjLogin;
@@ -64,5 +67,6 @@ namespace TCC_SIA.Model
         {
             this.telefone = telefone;
         }
+        #endregion
     }
 }

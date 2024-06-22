@@ -50,7 +50,7 @@
             buttonCadastrar.TabIndex = 9;
             buttonCadastrar.Text = "Cadastrar";
             buttonCadastrar.UseVisualStyleBackColor = true;
-            buttonCadastrar.Click += Cadastar_Cliente;
+            buttonCadastrar.Click += buttonCadastrar_Click;
             // 
             // maskedTextBoxEmail
             // 

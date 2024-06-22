@@ -15,10 +15,12 @@ namespace TCC_SIA.View
 {
     public partial class CadastroCliente : Form
     {
+        #region Inicializa o formulário
         public CadastroCliente()
         {
             InitializeComponent();
 
+            #region Campos dos estados
             //Adiciona campos de estados do Brasil
             comboBoxUf.Items.AddRange(new string[]
             {
@@ -50,7 +52,9 @@ namespace TCC_SIA.View
                 "SE",
                 "TO"
             });
+            #endregion
 
+            #region Campos de gêneros
             //Adiciona gêneros
             comboBoxSexo.Items.AddRange(new string[]
             {
@@ -58,8 +62,11 @@ namespace TCC_SIA.View
                 "Feminino",
                 "Outro"
             });
+            #endregion
         }
+        #endregion
 
+        #region Cadastrar cliente
         //Evento de cadastrar cliente
         private void buttonCadastrar_Click(object sender, EventArgs e)
         {
@@ -123,13 +130,17 @@ namespace TCC_SIA.View
             //Mostra o resultado
             MessageBox.Show(res);
         }
+        #endregion
 
+        #region Carrega o formulário
         private void CadastroCliente_Load(object sender, EventArgs e)
         {
             //Definir eventos para validar a entrada
             maskedTextBoxNumero.KeyPress += new KeyPressEventHandler(maskedTextBoxNumero_KeyPress);
         }
+        #endregion
 
+        #region Método de aceitar apenas números
         private void maskedTextBoxNumero_KeyPress(object sender, KeyPressEventArgs e)
         {
             //Verifica se a tecla pressionada é um dígito ou uma tecla de controle (como Backspace)
@@ -138,5 +149,6 @@ namespace TCC_SIA.View
                 e.Handled = true; //Impede a entrada de caracteres não numéricos
             }
         }
+        #endregion
     }
 }

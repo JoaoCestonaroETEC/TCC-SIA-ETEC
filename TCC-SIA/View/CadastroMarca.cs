@@ -14,11 +14,14 @@ namespace TCC_SIA.View
 {
     public partial class CadastroMarca : Form
     {
+        #region Inicializa o formulário
         public CadastroMarca()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region Cadastrar marca
         //Evento de cadastrar marca
         private void buttonCadastrar_Click(object sender, EventArgs e)
         {
@@ -36,5 +39,6 @@ namespace TCC_SIA.View
             //Mostra o resultado
             MessageBox.Show(res);
         }
+        #endregion
     }
 }
