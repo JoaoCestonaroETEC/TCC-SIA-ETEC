@@ -11,6 +11,7 @@ namespace TCC_SIA.Controller
 {
     internal class controleCliente
     {
+        #region Cadastrar cliente
         //Criação do método de cadastrar cliente
         public string cadastroCliente(Cliente mCliente)
         {
@@ -64,5 +65,6 @@ namespace TCC_SIA.Controller
                 con.desconectar();
             }
         }
+        #endregion
     }
 }
