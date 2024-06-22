@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Npgsql;
 using TCC_SIA.Model;
+using System.Text.RegularExpressions;
 
 namespace TCC_SIA.Controller
 {
@@ -64,6 +65,41 @@ namespace TCC_SIA.Controller
                 //Método de desconectar
                 con.desconectar();
             }
+        }
+        #endregion
+
+        #region Pesquisar cliente
+        //Criação do método de pesquisar cliente
+        public NpgsqlDataReader pesquisarCliente(string cliente)
+        {
+            //String sql de pesquisar
+            string sql = "SELECT CPFCLIENTE, NOMECLIENTE FROM CLIENTE " +
+                "WHERE NOMECLIENTE LIKE '" + cliente + "%';";
+
+            //Abrindo conexão com o banco de dados
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            //Fazendo o try
+            try
+            {
+                //Retornando os valores
+                return comm.ExecuteReader();
+            }
+            //Fazendo o catch
+            catch (NpgsqlException ex)
+            {
+                //Retornando como nulo
+                return null;
+            }
+            //Encerrando a conexão
+            finally
+            {
+                //Método de desconectar
+                con.desconectar();
+            }
+
         }
         #endregion
     }
