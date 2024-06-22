@@ -40,7 +40,14 @@ namespace TCC_SIA.View
 
             //Definindo os valores nos atributos
             mServico.setNomeServico(textBoxNome.Text);
-            mServico.setValorServico(Convert.ToInt32(maskedTextBoxValor.Text));
+
+            long valor;
+            if (!long.TryParse(maskedTextBoxValor.Text, out valor))
+            {
+                mServico.setValorServico(valor);
+                return;
+            }
+
             mServico.setDescServico(richTextBoxDesc.Text);
 
             //Chamada ao método de cadastro no ControleServico
