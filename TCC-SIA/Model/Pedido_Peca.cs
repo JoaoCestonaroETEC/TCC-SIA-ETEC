@@ -13,7 +13,7 @@ namespace TCC_SIA.Model
         private string nomePeca;
         private string tipoPeca;
         private string descPeca;
-        private long valorPeca;
+        private decimal valorPeca;
         private int quantPeca;
         private DateTime garantiaPeca;
         #endregion
@@ -58,12 +58,12 @@ namespace TCC_SIA.Model
             this.descPeca = descPeca;
         }
 
-        public long getValorPeca()
+        public decimal getValorPeca()
         {
             return valorPeca;
         }
 
-        public void setValorPeca(long valorPeca)
+        public void setValorPeca(decimal valorPeca)
         {
             this.valorPeca = valorPeca;
         }

@@ -67,7 +67,7 @@ namespace TCC_SIA.View
             {
                 //Criação do objeto NpgsqlDataReader marcaVeiculo e controleMarca
                 controleMarca cMarca = new controleMarca();
-                NpgsqlDataReader marcaVeiculo = cMarca.pesquisaMarcaVeiculo(textBoxPesquisar.Text);
+                NpgsqlDataReader marcaVeiculo = cMarca.listarMarcaVeiculo();
 
                 //Apaga as colunas da datagridview
                 dataGridViewPesquisar.Columns.Clear();
@@ -97,7 +97,7 @@ namespace TCC_SIA.View
             {
                 //Criação do objeto NpgsqlDataReader marcaVeiculo e controleMarca
                 controleMarca cMarca = new controleMarca();
-                NpgsqlDataReader marcaPeca = cMarca.pesquisaMarcaPeca(textBoxPesquisar.Text);
+                NpgsqlDataReader marcaPeca = cMarca.listarMarcaPeca();
 
                 //Apaga as colunas da DataGridView
                 dataGridViewPesquisar.Columns.Clear();

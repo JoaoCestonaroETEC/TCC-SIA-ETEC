@@ -59,10 +59,10 @@ namespace TCC_SIA.Controller
 
         #region Listar veículo
         //Criação do método de listar cliente
-        public NpgsqlDataReader listarVeiculo()
+        public NpgsqlDataReader listaVeiculo()
         {
             //String sql de listar
-            string sql = "SELECT IDVEICULO, NOMEVEICULO FROM VEICULO";
+            string sql = "SELECT * FROM VEICULO";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
@@ -93,10 +93,10 @@ namespace TCC_SIA.Controller
 
         #region Listar veículo por cliente
         //Criação do método de listar veículo por cliente
-        public NpgsqlDataReader listarVeiculoPorCliente(string cliente)
+        public NpgsqlDataReader listaVeiculoPorCliente(string cliente)
         {
             //String sql de listar
-            string sql = "SELECT IDVEICULO, NOMEVEICULO FROM VEICULO WHERE CPFCLIENTE ='" + cliente + "';";
+            string sql = "SELECT * FROM VEICULO WHERE CPFCLIENTE ='" + cliente + "';";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
@@ -127,7 +127,7 @@ namespace TCC_SIA.Controller
 
         #region Pesquisar veículo
         //Criação do método de pesquisar cliente
-        public NpgsqlDataReader pesquisarVeiculo(string veiculo)
+        public NpgsqlDataReader pesquisaVeiculo(string veiculo)
         {
             //String sql de pesquisar
             string sql = "SELECT * FROM VEICULO WHERE NOMEVEICULO LIKE '" + veiculo + "%';";

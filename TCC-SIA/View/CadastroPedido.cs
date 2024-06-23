@@ -25,10 +25,12 @@ namespace TCC_SIA.View
             listarPeca();
             listarServico();
             listarVeiculo();
+            #endregion 
 
+            #region Carrega os dados de pesquisa de serviços
             //Criação do objeto NpgsqlDataReader servico e controleServico
             controleServico cServico = new controleServico();
-            NpgsqlDataReader servico = cServico.pesquisaServico(comboBoxServico.Text);
+            NpgsqlDataReader servico = cServico.listaServico();
 
             //Apaga as colunas da datagridview
             dataGridViewServico.Columns.Clear();
@@ -38,25 +40,24 @@ namespace TCC_SIA.View
 
             //Definindo três colunas na DataGridView para exibir as descrições
             dataGridViewServico.ColumnCount = 3;
-            dataGridViewServico.Columns[0].Name = "Id";
-            dataGridViewServico.Columns[1].Name = "Nome";
-            dataGridViewServico.Columns[2].Name = "Valor";
+            dataGridViewServico.Columns[0].Name = "Nome";
+            dataGridViewServico.Columns[1].Name = "Valor";
+            dataGridViewServico.Columns[2].Name = "Descrição";
 
             //Adicionando as descrições dos serviços
             while (servico.Read())
             {
-                string idServico = servico["IDSERVICO"].ToString();
                 string nomeServico = servico["NOMESERVICO"].ToString();
                 string valorServico = servico["VALORSERVICO"].ToString();
-                dataGridViewServico.Rows.Add(idServico, nomeServico, valorServico);
+                string descServico = servico["DESCSERVICO"].ToString();
+                dataGridViewServico.Rows.Add(nomeServico, valorServico, descServico);
             }
-            #endregion 
+            #endregion
 
             #region Carrega os dados de pesquisa de peças
-
             //Criação do objeto NpgsqlDataReader peca e controlePeca
             controlePeca cPeca = new controlePeca();
-            NpgsqlDataReader peca = cPeca.pesquisaPeca(comboBoxPeca.Text);
+            NpgsqlDataReader peca = cPeca.listaPeca();
 
             //Apaga as colunas da datagridview
             dataGridViewPeca.Columns.Clear();
@@ -64,14 +65,15 @@ namespace TCC_SIA.View
             //Definindo a quant. de colunas que a grid terá
             dataGridViewPeca.ColumnCount = peca.FieldCount;
 
-            //Definindo seis colunas na DataGridView para exibir as descrições
-            dataGridViewPeca.ColumnCount = 6;
+            //Definindo sete colunas na DataGridView para exibir as descrições
+            dataGridViewPeca.ColumnCount = 7;
             dataGridViewPeca.Columns[0].Name = "Marca";
             dataGridViewPeca.Columns[1].Name = "Nome";
             dataGridViewPeca.Columns[2].Name = "Tipo";
             dataGridViewPeca.Columns[3].Name = "Valor";
             dataGridViewPeca.Columns[4].Name = "Quantidade";
             dataGridViewPeca.Columns[5].Name = "Garantia";
+            dataGridViewPeca.Columns[6].Name = "Descrição";
 
             //Adicionando as descrições de peças
             while (peca.Read())
@@ -82,14 +84,31 @@ namespace TCC_SIA.View
                 string valorPeca = peca["VALORPECA"].ToString();
                 string quantPeca = peca["QUANTPECA"].ToString();
                 string garantiaPeca = peca["GARANTIAPECA"].ToString();
+                string descPeca = peca["DESCPECA"].ToString();
 
                 //Consulta o nome da marca pelo id
                 string marca = cPeca.pesquisaMarcaPecaPorId(idMarca);
 
-                dataGridViewPeca.Rows.Add(marca, nomePeca, tipoPeca, valorPeca, quantPeca, garantiaPeca);
+                dataGridViewPeca.Rows.Add(marca, nomePeca, tipoPeca, valorPeca, quantPeca, garantiaPeca, descPeca);
             }
             #endregion
 
+            #region Puxa o maior id de pedido
+            //Criação do objeto NpgsqlDataReader idPedido, mPedido e controlePedido 
+            controlePedido cPedido = new controlePedido();
+            Pedido mPedido = new Pedido();
+            NpgsqlDataReader pedido = cPedido.listarIdPedido();
+
+            //Converter o dataReader em DataTable
+            DataTable dtPedido = new DataTable();
+            dtPedido.Load(pedido);
+
+            //Puxa o valor da consulta da tabela e coloca numa variável
+            long idPedido = Convert.ToInt64(dtPedido.Rows[0]["MAX"].ToString());
+
+            //Soma mais um para impedir a restrição por chave primária no banco
+            idPedido = idPedido + 1;
+            #endregion
         }
         #endregion
 
@@ -123,42 +142,66 @@ namespace TCC_SIA.View
             mPedido.setObservacao(richTextBoxObs.Text);
 
             //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
-            long valor;
-            if (long.TryParse(maskedTextBoxValorTotal.Text, out valor))
+            decimal valor;
+            if (decimal.TryParse(maskedTextBoxValorTotal.Text, out valor))
             {
                 mPedido.setValorTotalPeca(valor);
             }
 
             //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
-            long valorPeca;
-            if (long.TryParse(maskedTextBoxValorTotalPecas.Text, out valorPeca))
+            decimal valorPeca;
+            if (decimal.TryParse(maskedTextBoxValorTotalPecas.Text, out valorPeca))
             {
                 mPedido.setValorTotalPeca(valorPeca);
             }
 
             //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
-            long valorServico;
-            if (long.TryParse(maskedTextBoxValorTotal.Text, out valorServico))
+            decimal valorServico;
+            if (decimal.TryParse(maskedTextBoxValorTotal.Text, out valorServico))
             {
                 mPedido.setValorTotalServico(valorServico);
             }
 
-            List<Pedido_Peca> pecas = ExtrairPecasDataGridView(dataGridViewPeca);
-            List<Pedido_Peca> servicos = ExtrairPecasDataGridView(dataGridViewServico);
+            //Cria as listas para extrair os valores das datagridview
+            List<Pedido_Peca> ListaDePecas = ExtrairPecasDataGridView(dataGridViewPeca);
+            List<Servico> ListaDeServicos = ExtrairServicosDataGridView(dataGridViewServico);
 
-            //Chamada ao método de cadastro no controlePedido
-            string res = cPedido.cadastroPedido(mPedido, mPedido_Peca, mServico);
+            #region Puxa o maior id de pedido
+            //Criação do objeto NpgsqlDataReader pedido
+            NpgsqlDataReader pedido = cPedido.listarIdPedido();
 
-            //Mostra o resultado
+            //Converter o dataReader em DataTable
+            DataTable dtPedido = new DataTable();
+            dtPedido.Load(pedido);
+
+            //Puxa o valor da consulta da tabela e coloca numa variável
+            long idPedido = Convert.ToInt64(dtPedido.Rows[0]["MAX"].ToString());
+
+            //Soma mais um para impedir a restrição por chave primária no banco
+            idPedido = idPedido + 1;
+
+            mPedido.setIdPedido(idPedido);
+            #endregion
+
+            //Chamada aos métodos de cadastros no controlePedido
+            string res = cPedido.cadastroPedido(mPedido);
+            string resPeca = cPedido.cadastroPedidoPecas(ListaDePecas, mPedido);
+            string resServ = cPedido.cadastroPedidoServicos(ListaDeServicos, mPedido);
+
+            //Mostra os resultados
             MessageBox.Show(res);
+            MessageBox.Show(resPeca);
+            MessageBox.Show(resServ);
         }
         #endregion
 
         #region Listar cliente
         public void listarCliente()
         {
+            //Criação do objeto cliente e controleCliente
             controleCliente cCliente = new controleCliente();
-            //Recebe os dados da consulta e salva no dataReader (Tipo)
+
+            //Recebe os dados da consulta e salva no dataReader (Cliente)
             NpgsqlDataReader cliente = cCliente.listarCliente();
 
             //Converter o dataReader em DataTable
@@ -179,9 +222,11 @@ namespace TCC_SIA.View
         #region Listar veículo
         public void listarVeiculo()
         {
+            //Criação do objeto veiculo e controleVeiculo
             controleVeiculo cVeiculo = new controleVeiculo();
-            //Recebe os dados da consulta e salva no dataReader (Tipo)
-            NpgsqlDataReader veiculo = cVeiculo.listarVeiculo();
+
+            //Recebe os dados da consulta e salva no dataReader (Veiculo)
+            NpgsqlDataReader veiculo = cVeiculo.listaVeiculo();
 
             //Converter o dataReader em DataTable
             DataTable dtVeiculo = new DataTable();
@@ -203,7 +248,9 @@ namespace TCC_SIA.View
         {
             //Criação do objeto NpgsqlDataReader veiculo e controleVeiculo
             controleVeiculo cVeiculo = new controleVeiculo();
-            NpgsqlDataReader veiculo = cVeiculo.listarVeiculoPorCliente(Convert.ToString(comboBoxCliente.SelectedValue));
+
+            //Recebe os dados da consulta e salva no dataReader (Veiculo)
+            NpgsqlDataReader veiculo = cVeiculo.listaVeiculoPorCliente(Convert.ToString(comboBoxCliente.SelectedValue));
 
             //Converter o dataReader em DataTable
             DataTable dtVeiculo = new DataTable();
@@ -224,9 +271,11 @@ namespace TCC_SIA.View
         #region Listar peça
         public void listarPeca()
         {
+            //Criação do objeto peca e controlePeca
             controlePeca cPeca = new controlePeca();
-            //Recebe os dados da consulta e salva no dataReader (Tipo)
-            NpgsqlDataReader peca = cPeca.listarPeca();
+
+            //Recebe os dados da consulta e salva no dataReader (Peca)
+            NpgsqlDataReader peca = cPeca.listaPeca();
 
             //Converter o dataReader em DataTable
             DataTable dtPeca = new DataTable();
@@ -246,8 +295,10 @@ namespace TCC_SIA.View
         #region Listar serviço
         public void listarServico()
         {
+            //Criação do objeto servico e controleServico
             controleServico cServico = new controleServico();
-            //Recebe os dados da consulta e salva no dataReader (Tipo)
+
+            //Recebe os dados da consulta e salva no dataReader (Servico)
             NpgsqlDataReader servico = cServico.listaServico();
 
             //Converter o dataReader em DataTable
@@ -279,7 +330,7 @@ namespace TCC_SIA.View
             //Definindo a quant. de colunas que a grid terá
             dataGridViewPeca.ColumnCount = peca.FieldCount;
 
-            //Definindo seis colunas na DataGridView para exibir as descrições
+            //Definindo sete colunas na DataGridView para exibir as descrições
             dataGridViewPeca.ColumnCount = 7;
             dataGridViewPeca.Columns[0].Name = "Marca";
             dataGridViewPeca.Columns[1].Name = "Nome";
@@ -298,11 +349,12 @@ namespace TCC_SIA.View
                 string valorPeca = peca["VALORPECA"].ToString();
                 string quantPeca = peca["QUANTPECA"].ToString();
                 string garantiaPeca = peca["GARANTIAPECA"].ToString();
+                string descPeca = peca["DESCPECA"].ToString();
 
                 //Consulta o nome da marca pelo id
                 string marca = cPeca.pesquisaMarcaPecaPorId(idMarca);
 
-                dataGridViewPeca.Rows.Add(marca, nomePeca, tipoPeca, valorPeca, quantPeca, garantiaPeca);
+                dataGridViewPeca.Rows.Add(marca, nomePeca, tipoPeca, valorPeca, quantPeca, garantiaPeca, descPeca);
             }
         }
         #endregion
@@ -323,89 +375,105 @@ namespace TCC_SIA.View
 
             //Definindo três colunas na DataGridView para exibir as descrições
             dataGridViewServico.ColumnCount = 3;
-            dataGridViewServico.Columns[0].Name = "Id";
-            dataGridViewServico.Columns[1].Name = "Nome";
-            dataGridViewServico.Columns[2].Name = "Valor";
+            dataGridViewServico.Columns[0].Name = "Nome";
+            dataGridViewServico.Columns[1].Name = "Valor";
+            dataGridViewServico.Columns[2].Name = "Descrição";
 
             //Adicionando as descrições dos serviços
             while (servico.Read())
             {
-                string idServico = servico["IDSERVICO"].ToString();
                 string nomeServico = servico["NOMESERVICO"].ToString();
                 string valorServico = servico["VALORSERVICO"].ToString();
-                dataGridViewServico.Rows.Add(idServico, nomeServico, valorServico);
+                string descServico = servico["DESCSERVICO"].ToString();
+                dataGridViewServico.Rows.Add(nomeServico, valorServico, descServico);
             }
         }
         #endregion
 
         #region Extrai as peças
+        //Cria o método de extrar os serviços através de uma lista genérica da classe Pedido_Peca
         public List<Pedido_Peca> ExtrairPecasDataGridView(DataGridView dataGridView)
         {
+            //Criação da lista e do objeto controlePeca
             List<Pedido_Peca> Pecas = new List<Pedido_Peca>();
             controlePeca cPeca = new controlePeca();
 
+            //Loop de repetição para cada linha selecionada, adiciona um objeto Pedido_Peca na lista
             foreach (DataGridViewRow row in dataGridView.SelectedRows)
             {
                 string nomePeca = row.Cells["Nome"].Value?.ToString();
+
+                //Lê o nome da marca de peça e trás o Id dessa peça
                 NpgsqlDataReader peca = cPeca.pesquisaPecaParaOPedido(nomePeca);
 
+                //Verificação da consulta do banco de dados
                 if (peca != null)
                 {
+                    //Carrega os valores da consulta
                     DataTable dtPecas = new DataTable();
                     dtPecas.Load(peca);
 
+                    //Se trás o valor de id da marca, carrega a lista
                     if (dtPecas.Rows.Count > 0)
                     {
-                        Pedido_Peca pecas = new Pedido_Peca();
+                       Pedido_Peca pecas = new Pedido_Peca();
 
+                        //Definição aos atributos da classe
                         if (long.TryParse(dtPecas.Rows[0]["IDMARCAPECA"].ToString(), out long idNomeMarca))
                         {
                             pecas.setIdMarca(idNomeMarca);
                         }
-                        string nomePecaVar = row.Cells["Nome"].Value?.ToString();
+
+                        string nomePecaVar = (row.Cells["Nome"].Value?.ToString());
                         string tipoPecaVar = (row.Cells["Tipo"].Value?.ToString());
 
-                       if (long.TryParse(row.Cells["Valor"].Value?.ToString(), out long valor))
-                       {
-                            pecas.setValorPeca(valor);
-                       }
+                        
 
-                       if (int.TryParse(row.Cells["Quantidade"].Value?.ToString(), out int quant))
-                       {
+                        if (int.TryParse(row.Cells["Quantidade"].Value?.ToString(), out int quant))
+                        {
                             pecas.setQuantPeca(quant);
-                       }
+                        }
 
-                       string descPecaVar = (row.Cells["Descrição"].Value?.ToString());
+                        string descPecaVar = (row.Cells["Descrição"].Value?.ToString());
 
-                       if (DateTime.TryParse(row.Cells["Garantia"].Value?.ToString(), out DateTime garantia))
-                       {
+                        if (DateTime.TryParse(row.Cells["Garantia"].Value?.ToString(), out DateTime garantia))
+                        {
                             pecas.setGarantiaPeca(garantia);
-                       }
+                        }
 
-                       pecas.setNomePeca(nomePecaVar);
-                       pecas.setTipoPeca(tipoPecaVar);
+                        pecas.setNomePeca(nomePecaVar);
+                        pecas.setTipoPeca(tipoPecaVar);
+                        pecas.setDescPeca(descPecaVar);
 
+                        //Adiciona a classe Pedido_Peca na lista
                         Pecas.Add(pecas);
 
                     }
 
+                    //Fecha a consulta do banco de dados
                     peca.Close();
                 }
             }
 
+            //Retorna a lista
             return Pecas;
         }
         #endregion
 
         #region Extrai os serviços
+        //Cria o método de extrar os serviços através de uma lista genérica da classe Servico
         public List<Servico> ExtrairServicosDataGridView(DataGridView dataGridView)
         {
+            //Criação da lista
             List<Servico> Servicos = new List<Servico>();
 
+            //Loop de repetição para cada linha selecionada, adiciona um objeto Servico na lista
             foreach (DataGridViewRow row in dataGridView.SelectedRows)
             {
+                //Verificação da consulta do banco de dados
                 if (!row.IsNewRow)
                 {
+                    //Definição aos atributos da classe
                     Servico servicos = new Servico();
                     servicos.setNomeServico(row.Cells["Nome"].Value?.ToString());
 
@@ -416,10 +484,12 @@ namespace TCC_SIA.View
 
                     servicos.setDescServico(row.Cells["Descrição"].Value?.ToString());
 
+                    //Adiciona a classe Servico na lista
                     Servicos.Add(servicos);
                 }
             }
 
+            //Retorna a lista
             return Servicos;
         }
         #endregion

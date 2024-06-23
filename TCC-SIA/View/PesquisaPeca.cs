@@ -23,7 +23,7 @@ namespace TCC_SIA.View
             #region Carrega as informações gerais das peças
             //Criação do objeto NpgsqlDataReader peca e controlePeca
             controlePeca cPeca = new controlePeca();
-            NpgsqlDataReader peca = cPeca.pesquisaPeca(textBoxPesquisar.Text);
+            NpgsqlDataReader peca = cPeca.listaPeca();
 
             //Apaga as colunas da datagridview
             dataGridViewPesquisar.Columns.Clear();

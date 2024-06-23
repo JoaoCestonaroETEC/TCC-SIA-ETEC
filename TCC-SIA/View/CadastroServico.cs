@@ -42,8 +42,8 @@ namespace TCC_SIA.View
             mServico.setNomeServico(textBoxNome.Text);
 
             //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
-            long valor;
-            if (long.TryParse(maskedTextBoxValor.Text, out valor))
+            decimal valor;
+            if (decimal.TryParse(maskedTextBoxValor.Text, out valor))
             {
                 mServico.setValorServico(valor);
             }

@@ -12,7 +12,7 @@ namespace TCC_SIA.Model
         #region Criação de atributo
         private string nomeServico;
         private string descServico;
-        private long valorServico;
+        private decimal valorServico;
         #endregion
 
         #region Encapsulamento
@@ -36,12 +36,12 @@ namespace TCC_SIA.Model
             this.descServico = descServico;
         }
 
-        public long getValorServico()
+        public decimal getValorServico()
         {
             return valorServico;
         }
 
-        public void setValorServico(long valorServico)
+        public void setValorServico(decimal valorServico)
         {
             this.valorServico = valorServico;
         }

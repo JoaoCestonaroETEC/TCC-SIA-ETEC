@@ -57,7 +57,7 @@ namespace TCC_SIA.Controller
         public NpgsqlDataReader listaServico()
         {
             //String sql de listar
-            string sql = "SELECT IDSERVICO, NOMESERVICO FROM SERVICO;";
+            string sql = "SELECT * FROM SERVICO;";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();

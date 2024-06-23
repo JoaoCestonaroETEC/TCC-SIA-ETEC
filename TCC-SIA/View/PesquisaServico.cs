@@ -22,7 +22,7 @@ namespace TCC_SIA.View
             #region Carrega as informações gerais dos serviços
             //Criação do objeto NpgsqlDataReader servico e controleServico
             controleServico cServico = new controleServico();
-            NpgsqlDataReader servico = cServico.pesquisaServico(textBoxPesquisar.Text);
+            NpgsqlDataReader servico = cServico.listaServico();
 
             //Apaga as colunas da datagridview
             dataGridViewPesquisar.Columns.Clear();

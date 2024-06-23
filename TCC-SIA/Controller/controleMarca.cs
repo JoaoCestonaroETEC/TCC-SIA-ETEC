@@ -97,7 +97,7 @@ namespace TCC_SIA.Controller
         public NpgsqlDataReader listarMarcaVeiculo()
         {
             //String sql de listar
-            string sql = "SELECT IDMARCAVEICULO, NOMEMARCAVEICULO FROM MARCA_VEICULO;";
+            string sql = "SELECT * FROM MARCA_VEICULO;";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
@@ -131,7 +131,7 @@ namespace TCC_SIA.Controller
         public NpgsqlDataReader listarMarcaPeca()
         {
             //String sql de listar
-            string sql = "SELECT IDMARCAPECA, NOMEMARCAPECA FROM MARCA_PECA;";
+            string sql = "SELECT * FROM MARCA_PECA;";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();

@@ -23,7 +23,7 @@ namespace TCC_SIA.View
             #region Carrega as informações gerais das dos veículos
             //Criação do objeto NpgsqlDataReader veiculo e controleVeiculo
             controleVeiculo cVeiculo = new controleVeiculo();
-            NpgsqlDataReader veiculo = cVeiculo.pesquisarVeiculo(textBoxPesquisar.Text);
+            NpgsqlDataReader veiculo = cVeiculo.listaVeiculo();
 
             //Apaga as colunas da datagridview
             dataGridViewPesquisar.Columns.Clear();
@@ -65,7 +65,7 @@ namespace TCC_SIA.View
         {
             //Criação do objeto NpgsqlDataReader veiculo e controleVeiculo 
             controleVeiculo cVeiculo = new controleVeiculo();
-            NpgsqlDataReader veiculo = cVeiculo.pesquisarVeiculo(textBoxPesquisar.Text);
+            NpgsqlDataReader veiculo = cVeiculo.pesquisaVeiculo(textBoxPesquisar.Text);
 
             //Apaga as colunas da datagridview
             dataGridViewPesquisar.Columns.Clear();

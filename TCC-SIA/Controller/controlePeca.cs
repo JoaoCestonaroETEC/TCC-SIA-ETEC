@@ -58,10 +58,10 @@ namespace TCC_SIA.Controller
 
         #region Listar peça
         //Criação do método de listar peça
-        public NpgsqlDataReader listarPeca()
+        public NpgsqlDataReader listaPeca()
         {
             //String sql de listar
-            string sql = "SELECT IDPECA, NOMEPECA FROM PECA;";
+            string sql = "SELECT * FROM PECA;";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();

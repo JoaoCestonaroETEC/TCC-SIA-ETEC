@@ -12,9 +12,9 @@ namespace TCC_SIA.Model
         private long idPedido;
         private long cpfCliente;
         private long idVeiculo;
-        private long valorTotalPedido;
-        private long valorTotalPeca;
-        private long valorTotalServico;
+        private decimal valorTotalPedido;
+        private decimal valorTotalPeca;
+        private decimal valorTotalServico;
         private string observacao;
         private DateTime dataInicio;
         private DateTime dataFim;
@@ -50,32 +50,32 @@ namespace TCC_SIA.Model
             this.idVeiculo = idVeiculo;
         }
 
-        public long getValorTotalPedido()
+        public decimal getValorTotalPedido()
         {
             return valorTotalPedido;
         }
 
-        public void setValorTotalPedido(long valorTotalPedido)
+        public void setValorTotalPedido(decimal valorTotalPedido)
         {
             this.valorTotalPedido = valorTotalPedido;
         }
 
-        public long getValorTotalPeca()
+        public decimal getValorTotalPeca()
         {
             return valorTotalPeca;
         }
 
-        public void setValorTotalPeca(long valorTotalPeca)
+        public void setValorTotalPeca(decimal valorTotalPeca)
         {
             this.valorTotalPeca = valorTotalPeca;
         }
 
-        public long getValorTotalServico()
+        public decimal getValorTotalServico()
         {
             return valorTotalServico;
         }
 
-        public void setValorTotalServico(long valorTotalServico)
+        public void setValorTotalServico(decimal valorTotalServico)
         {
             this.valorTotalServico = valorTotalServico;
         }
