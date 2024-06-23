@@ -73,7 +73,7 @@ namespace TCC_SIA.Controller
         public NpgsqlDataReader listarCliente()
         {
             //String sql de listar
-            string sql = "SELECT CPFCLIENTE, NOMECLIENTE FROM CLIENTE;";
+            string sql = "SELECT * FROM CLIENTE;";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
