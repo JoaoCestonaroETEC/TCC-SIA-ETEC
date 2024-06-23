@@ -114,7 +114,7 @@
             // dateTimePickerDataFim
             // 
             dateTimePickerDataFim.Format = DateTimePickerFormat.Short;
-            dateTimePickerDataFim.Location = new Point(124, 180);
+            dateTimePickerDataFim.Location = new Point(124, 178);
             dateTimePickerDataFim.Name = "dateTimePickerDataFim";
             dateTimePickerDataFim.Size = new Size(76, 23);
             dateTimePickerDataFim.TabIndex = 7;
@@ -122,7 +122,7 @@
             // dateTimePickerDataInicio
             // 
             dateTimePickerDataInicio.Format = DateTimePickerFormat.Short;
-            dateTimePickerDataInicio.Location = new Point(97, 129);
+            dateTimePickerDataInicio.Location = new Point(97, 127);
             dateTimePickerDataInicio.Name = "dateTimePickerDataInicio";
             dateTimePickerDataInicio.Size = new Size(103, 23);
             dateTimePickerDataInicio.TabIndex = 6;
@@ -148,7 +148,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(12, 186);
+            label4.Location = new Point(12, 184);
             label4.Name = "label4";
             label4.Size = new Size(106, 15);
             label4.TabIndex = 3;
@@ -157,7 +157,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(12, 129);
+            label3.Location = new Point(12, 127);
             label3.Name = "label3";
             label3.Size = new Size(79, 15);
             label3.TabIndex = 2;

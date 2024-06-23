@@ -24,7 +24,7 @@ namespace TCC_SIA.View
             #region Carrega as informações gerais dos clientes
             // Criação do objeto NpgsqlDataReader cliente e ControleVeiculo
             controleCliente cCliente = new controleCliente();
-            NpgsqlDataReader cliente = cCliente.listarCliente();
+            NpgsqlDataReader cliente = cCliente.pesquisarCliente("");
 
             //Apaga as colunas da datagridview
             dataGridViewPesquisar.Columns.Clear();
