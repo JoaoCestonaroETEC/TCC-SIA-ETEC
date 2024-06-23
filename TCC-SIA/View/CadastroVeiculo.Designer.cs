@@ -42,7 +42,7 @@
             maskedTextBoxPlaca = new MaskedTextBox();
             label1 = new Label();
             textBoxNome = new TextBox();
-            maskedTextBoxCpf = new MaskedTextBox();
+            comboBoxCpf = new ComboBox();
             SuspendLayout();
             // 
             // labelCpf
@@ -167,29 +167,26 @@
             textBoxNome.Size = new Size(215, 23);
             textBoxNome.TabIndex = 38;
             // 
-            // maskedTextBoxCpf
+            // comboBoxCpf
             // 
-            maskedTextBoxCpf.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            maskedTextBoxCpf.Location = new Point(107, 19);
-            maskedTextBoxCpf.Margin = new Padding(3, 2, 3, 2);
-            maskedTextBoxCpf.Mask = "000000000-00";
-            maskedTextBoxCpf.Name = "maskedTextBoxCpf";
-            maskedTextBoxCpf.Size = new Size(215, 23);
-            maskedTextBoxCpf.TabIndex = 32;
-            maskedTextBoxCpf.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            comboBoxCpf.FormattingEnabled = true;
+            comboBoxCpf.Location = new Point(107, 19);
+            comboBoxCpf.Name = "comboBoxCpf";
+            comboBoxCpf.Size = new Size(215, 23);
+            comboBoxCpf.TabIndex = 39;
             // 
             // CadastroVeiculo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(347, 334);
+            Controls.Add(comboBoxCpf);
             Controls.Add(textBoxNome);
             Controls.Add(label1);
             Controls.Add(maskedTextBoxPlaca);
             Controls.Add(comboBoxMarca);
             Controls.Add(comboBoxTipo);
             Controls.Add(comboBoxCor);
-            Controls.Add(maskedTextBoxCpf);
             Controls.Add(textBoxModelo);
             Controls.Add(labelTipo);
             Controls.Add(labelPlaca);
@@ -221,6 +218,6 @@
         private MaskedTextBox maskedTextBoxPlaca;
         private Label label1;
         private TextBox textBoxNome;
-        private MaskedTextBox maskedTextBoxCpf;
+        private ComboBox comboBoxCpf;
     }
 }

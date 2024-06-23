@@ -20,6 +20,10 @@ namespace TCC_SIA.View
         public CadastroPeca()
         {
             InitializeComponent();
+
+            #region Carrega os dados nas comboBoxs
+            listarMarca();
+            #endregion
         }
         #endregion
 

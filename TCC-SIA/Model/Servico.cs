@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TCC_SIA.Model
 {
-    internal class Servico
+    public class Servico
     {
         #region Criação de atributo
         private string nomeServico;

@@ -91,11 +91,43 @@ namespace TCC_SIA.Controller
         #endregion
 
         #region Pesquisar peça
-        //Criação do método de pesquisar cliente
+        //Criação do método de pesquisar peça
         public NpgsqlDataReader pesquisaPeca(string peca)
         {
             //String sql de pesquisar
             string sql = "SELECT * FROM PECA WHERE NOMEPECA LIKE '" + peca + "%';";
+
+            //Abrindo conexão com o banco de dados
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            //Fazendo o try
+            try
+            {
+                //Retornando os valores
+                return comm.ExecuteReader();
+            }
+            //Fazendo o catch
+            catch (NpgsqlException ex)
+            {
+                //Retornando como nulo
+                return null;
+            }
+            //Encerrando a conexão
+            finally
+            {
+                //Método de desconectar
+                con.desconectar();
+            }
+
+        }
+
+        //Criação do método de pesquisar peça
+        public NpgsqlDataReader pesquisaPecaParaOPedido(string peca)
+        {
+            //String sql de pesquisar
+            string sql = "SELECT IDMARCAPECA FROM PECA WHERE NOMEPECA LIKE '" + peca + "%';";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
@@ -139,7 +171,6 @@ namespace TCC_SIA.Controller
             //Fazendo o try
             try
             {
-
                 //Execute a consulta e retorne o resultado como string
                 object result = comm.ExecuteScalar();
                 return result != null ? result.ToString() : "Marca não encontrada";

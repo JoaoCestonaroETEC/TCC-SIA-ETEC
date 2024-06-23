@@ -41,6 +41,11 @@ namespace TCC_SIA.View
             comboBoxTipo.Items.Add("Moto-cicleta");
             comboBoxTipo.Items.Add("Caminhão");
             #endregion
+
+            #region Carrega os dados nas comboBoxs
+            listarMarca();
+            listarCliente();
+            #endregion
         }
         #endregion
 
@@ -49,7 +54,7 @@ namespace TCC_SIA.View
         private void buttonCadastrar_Click(object sender, EventArgs e)
         {
             // Verifica se os campos obrigatórios foram preenchidos
-            if (string.IsNullOrWhiteSpace(maskedTextBoxCpf.Text) ||
+            if (string.IsNullOrWhiteSpace(comboBoxCpf.Text) ||
                 string.IsNullOrWhiteSpace(textBoxNome.Text) ||
                 string.IsNullOrWhiteSpace(comboBoxTipo.Text) ||
                 string.IsNullOrWhiteSpace(maskedTextBoxPlaca.Text))
@@ -63,7 +68,7 @@ namespace TCC_SIA.View
             controleVeiculo cVeiculo = new controleVeiculo();
 
             //Definindo os valores nos atributos
-            mVeiculo.setCpfCliente(Convert.ToInt64(maskedTextBoxCpf.Text));
+            mVeiculo.setCpfCliente(Convert.ToInt64(comboBoxCpf.SelectedValue));
             mVeiculo.setIdMarca(Convert.ToInt64(comboBoxMarca.SelectedValue));
             mVeiculo.setNomeVeiculo(textBoxNome.Text);
             mVeiculo.setTipoVeiculo(comboBoxTipo.Text);
@@ -76,6 +81,28 @@ namespace TCC_SIA.View
 
             //Mostra o resultado
             MessageBox.Show(res);
+        }
+        #endregion
+
+        #region Listar cliente
+        public void listarCliente()
+        {
+            controleCliente cCliente = new controleCliente();
+            //Recebe os dados da consulta e salva no dataReader (Tipo)
+            NpgsqlDataReader cliente = cCliente.listarCliente();
+
+            //Converter o dataReader em DataTable
+            DataTable dtCliente = new DataTable();
+            dtCliente.Load(cliente);
+
+            //Preencher a combobox com os dados do DataTable
+            comboBoxCpf.DataSource = dtCliente;
+
+            //Define qual coluna do DataTable que será exibida (nome da coluna)
+            comboBoxCpf.DisplayMember = "NOMECLIENTE";
+
+            //Define qual o valor da linha será utilizado ao selecionar um valor
+            comboBoxCpf.ValueMember = "CPFCLIENTE";
         }
         #endregion
 

@@ -48,6 +48,7 @@
             vEÍCULOToolStripMenuItem2 = new ToolStripMenuItem();
             mARCAToolStripMenuItem2 = new ToolStripMenuItem();
             label1 = new Label();
+            pEDIDOToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -64,7 +65,7 @@
             // 
             // cADASTRARToolStripMenuItem
             // 
-            cADASTRARToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { sERVIÇOToolStripMenuItem, pEÇAToolStripMenuItem, cLIENTEToolStripMenuItem, vEÍCULOToolStripMenuItem, mARCAToolStripMenuItem });
+            cADASTRARToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { sERVIÇOToolStripMenuItem, pEÇAToolStripMenuItem, cLIENTEToolStripMenuItem, vEÍCULOToolStripMenuItem, mARCAToolStripMenuItem, pEDIDOToolStripMenuItem });
             cADASTRARToolStripMenuItem.Name = "cADASTRARToolStripMenuItem";
             cADASTRARToolStripMenuItem.Size = new Size(142, 34);
             cADASTRARToolStripMenuItem.Text = "CADASTRAR";
@@ -72,35 +73,35 @@
             // sERVIÇOToolStripMenuItem
             // 
             sERVIÇOToolStripMenuItem.Name = "sERVIÇOToolStripMenuItem";
-            sERVIÇOToolStripMenuItem.Size = new Size(168, 34);
+            sERVIÇOToolStripMenuItem.Size = new Size(180, 34);
             sERVIÇOToolStripMenuItem.Text = "SERVIÇO";
             sERVIÇOToolStripMenuItem.Click += sERVIÇOToolStripMenuItem_Click;
             // 
             // pEÇAToolStripMenuItem
             // 
             pEÇAToolStripMenuItem.Name = "pEÇAToolStripMenuItem";
-            pEÇAToolStripMenuItem.Size = new Size(168, 34);
+            pEÇAToolStripMenuItem.Size = new Size(180, 34);
             pEÇAToolStripMenuItem.Text = "PEÇA";
             pEÇAToolStripMenuItem.Click += pEÇAToolStripMenuItem_Click;
             // 
             // cLIENTEToolStripMenuItem
             // 
             cLIENTEToolStripMenuItem.Name = "cLIENTEToolStripMenuItem";
-            cLIENTEToolStripMenuItem.Size = new Size(168, 34);
+            cLIENTEToolStripMenuItem.Size = new Size(180, 34);
             cLIENTEToolStripMenuItem.Text = "CLIENTE";
             cLIENTEToolStripMenuItem.Click += cLIENTEToolStripMenuItem_Click;
             // 
             // vEÍCULOToolStripMenuItem
             // 
             vEÍCULOToolStripMenuItem.Name = "vEÍCULOToolStripMenuItem";
-            vEÍCULOToolStripMenuItem.Size = new Size(168, 34);
+            vEÍCULOToolStripMenuItem.Size = new Size(180, 34);
             vEÍCULOToolStripMenuItem.Text = "VEÍCULO";
             vEÍCULOToolStripMenuItem.Click += vEÍCULOToolStripMenuItem_Click;
             // 
             // mARCAToolStripMenuItem
             // 
             mARCAToolStripMenuItem.Name = "mARCAToolStripMenuItem";
-            mARCAToolStripMenuItem.Size = new Size(168, 34);
+            mARCAToolStripMenuItem.Size = new Size(180, 34);
             mARCAToolStripMenuItem.Text = "MARCA";
             mARCAToolStripMenuItem.Click += mARCAToolStripMenuItem_Click;
             // 
@@ -193,6 +194,13 @@
             label1.TabIndex = 1;
             label1.Text = "FAÇAM SUAS PARTES SEUS PREGUIÇOSOS!";
             // 
+            // pEDIDOToolStripMenuItem
+            // 
+            pEDIDOToolStripMenuItem.Name = "pEDIDOToolStripMenuItem";
+            pEDIDOToolStripMenuItem.Size = new Size(180, 34);
+            pEDIDOToolStripMenuItem.Text = "PEDIDO";
+            pEDIDOToolStripMenuItem.Click += pEDIDOToolStripMenuItem_Click;
+            // 
             // TelaInicial
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -234,5 +242,6 @@
         private ToolStripMenuItem mARCAToolStripMenuItem;
         private ToolStripMenuItem mARCAToolStripMenuItem1;
         private ToolStripMenuItem mARCAToolStripMenuItem2;
+        private ToolStripMenuItem pEDIDOToolStripMenuItem;
     }
 }

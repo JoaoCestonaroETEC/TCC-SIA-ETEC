@@ -13,7 +13,7 @@ namespace TCC_SIA.Controller
     internal class controleVeiculo
     {
         #region Cadastrar veículo
-        //Criação do método de cadastrar tipo
+        //Criação do método de cadastrar veículo
         public string cadastroVeiculo(Veiculo mVeiculo)
         {
             //String sql de inserção
@@ -63,6 +63,40 @@ namespace TCC_SIA.Controller
         {
             //String sql de listar
             string sql = "SELECT IDVEICULO, NOMEVEICULO FROM VEICULO";
+
+            //Abrindo conexão com o banco de dados
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            //Fazendo o try
+            try
+            {
+                //Retornando os valores
+                return comm.ExecuteReader();
+            }
+            //Fazendo o catch
+            catch (NpgsqlException ex)
+            {
+                //Retornando como nulo
+                return null;
+            }
+            //Encerrando a conexão
+            finally
+            {
+                //Método de desconectar
+                con.desconectar();
+            }
+
+        }
+        #endregion
+
+        #region Listar veículo por cliente
+        //Criação do método de listar veículo por cliente
+        public NpgsqlDataReader listarVeiculoPorCliente(string cliente)
+        {
+            //String sql de listar
+            string sql = "SELECT IDVEICULO, NOMEVEICULO FROM VEICULO WHERE CPFCLIENTE ='" + cliente + "';";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
