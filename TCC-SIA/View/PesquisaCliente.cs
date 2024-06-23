@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
 using TCC_SIA.Controller;
 using TCC_SIA.Model;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace TCC_SIA.View
 {
@@ -86,5 +87,27 @@ namespace TCC_SIA.View
             }
         }
         #endregion
+
+        private void atualiza_Cliente(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (dataGridViewPesquisar.SelectedRows.Count > 0)
+            {
+                DialogResult res = MessageBox.Show("Deseja atualizar este registro?", "Atualização de registro",
+                    MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+                if (res == DialogResult.OK)
+                {
+                    /*TODO: redefinir máscara de acordo com o preço de venda */
+
+                    maskedTextBoxCPF.Text = dataGridViewPesquisar.CurrentRow.Cells[1].Value.ToString();
+                    textBoxNome.Text = dataGridViewPesquisar.CurrentRow.Cells[2].Value.ToString();
+                    maskedTextBoxTelefone.Text = dataGridViewPesquisar.CurrentRow.Cells[3].Value.ToString();
+
+                    tabControl1.SelectedTab = tabPage2;
+                }
+            }
+
+        }
     }
+
 }
