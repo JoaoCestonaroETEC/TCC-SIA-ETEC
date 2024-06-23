@@ -126,7 +126,7 @@ namespace TCC_SIA.Controller
         #endregion
 
         #region Pesquisar veículo
-        //Criação do método de pesquisar cliente
+        //Criação do método de pesquisar veículo
         public NpgsqlDataReader pesquisaVeiculo(string veiculo)
         {
             //String sql de pesquisar

@@ -53,7 +53,7 @@ namespace TCC_SIA.Controller
         #endregion
 
         #region Listar serviço
-        //Criação do método de listar cliente
+        //Criação do método de listar serviço
         public NpgsqlDataReader listaServico()
         {
             //String sql de listar
@@ -87,7 +87,7 @@ namespace TCC_SIA.Controller
         #endregion
 
         #region Pesquisar serviço
-        //Criação do método de pesquisar cliente
+        //Criação do método de pesquisar serviço
         public NpgsqlDataReader pesquisaServico(string servico)
         {
             //String sql de pesquisar

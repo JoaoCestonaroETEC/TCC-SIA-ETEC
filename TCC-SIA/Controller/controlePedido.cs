@@ -158,7 +158,7 @@ namespace TCC_SIA.Controller
         }
 
         #region Cadastrar peças
-        //Criação do método de cadastrar pedido de peças
+        //Criação do método de listar o id do pedido
         public NpgsqlDataReader listarIdPedido()
         {
             //String sql de inserção

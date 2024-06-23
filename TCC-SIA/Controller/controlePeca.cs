@@ -123,7 +123,7 @@ namespace TCC_SIA.Controller
 
         }
 
-        //Criação do método de pesquisar peça
+        //Criação do método de pesquisar peça do pedido
         public NpgsqlDataReader pesquisaPecaParaOPedido(string peca)
         {
             //String sql de pesquisar
