@@ -174,10 +174,6 @@ namespace TCC_SIA.View
                 mPedido.setValorTotalServico(valorServico);
             }
 
-            //Cria as listas para extrair os valores das datagridview
-            List<Pedido_Peca> ListaDePecas = ExtrairPecasDataGridView(dataGridViewPeca);
-            List<Servico> ListaDeServicos = ExtrairServicosDataGridView(dataGridViewServico);
-
             #region Puxa o maior id de pedido
             //Criação do objeto NpgsqlDataReader pedido
             NpgsqlDataReader pedido = cPedido.listarIdPedido();
@@ -205,6 +201,37 @@ namespace TCC_SIA.View
 
             mPedido.setIdPedido(idPedido);
             #endregion
+
+            foreach (DataGridViewRow row in dataGridViewPeca.SelectedRows)
+            {
+                if (row.Cells["Nome"].Value == null)
+                {
+                    MessageBox.Show("Preencha o nome do campo!)");
+                    return;
+                }
+
+                if (row.Cells["Valor"].Value == null)
+                {
+                    MessageBox.Show("Preencha o nome de valor!)");
+                    return;
+                }
+
+                if (row.Cells["Quantidade"].Value == null)
+                {
+                    MessageBox.Show("Preencha o nome de quantidade!)");
+                    return;
+                }
+
+                if (row.Cells["Garantia"].Value == null)
+                {
+                    MessageBox.Show("Coloque uma garantia!");
+                    return;
+                }
+            }
+
+            //Cria as listas para extrair os valores das datagridview
+            List<Pedido_Peca> ListaDePecas = ExtrairPecasDataGridView(dataGridViewPeca);
+            List<Servico> ListaDeServicos = ExtrairServicosDataGridView(dataGridViewServico);
 
             //Chamada aos métodos de cadastros no controlePedido
             string res = cPedido.cadastroPedido(mPedido);
@@ -481,7 +508,7 @@ namespace TCC_SIA.View
                     //Se trás o valor de id da marca, carrega a lista
                     if (dtPecas.Rows.Count > 0)
                     {
-                       Pedido_Peca pecas = new Pedido_Peca();
+                        Pedido_Peca pecas = new Pedido_Peca();
 
                         //Definição aos atributos da classe
                         if (long.TryParse(dtPecas.Rows[0]["IDMARCAPECA"].ToString(), out long idNomeMarca))
@@ -492,7 +519,7 @@ namespace TCC_SIA.View
                         string nomePecaVar = (row.Cells["Nome"].Value?.ToString());
                         string tipoPecaVar = (row.Cells["Tipo"].Value?.ToString());
 
-                        
+
 
                         if (int.TryParse(row.Cells["Quantidade"].Value?.ToString(), out int quant))
                         {
@@ -587,5 +614,33 @@ namespace TCC_SIA.View
             listarServico();
         }
         #endregion
+
+        private void dataGridViewPeca_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridViewPeca.Rows[e.RowIndex].Selected = true;
+            // Verifica se o índice da célula é válido e está dentro do range de linhas e colunas
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 &&
+                e.RowIndex < dataGridViewPeca.Rows.Count && e.ColumnIndex < dataGridViewPeca.Columns.Count)
+            {
+                // Inicia a edição da célula clicada
+                dataGridViewPeca.BeginEdit(true);
+            }
+
+        }
+
+        private void dataGridViewPeca_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridViewPeca.Rows[e.RowIndex].Selected = true;
+
+            // Verifica se o índice da célula é válido e está dentro do range de linhas
+            if (e.RowIndex >= 0 && e.RowIndex < dataGridViewPeca.Rows.Count)
+            {
+                // Obtém a linha clicada
+                DataGridViewRow clickedRow = dataGridViewPeca.Rows[e.RowIndex];
+
+                // Alterna o estado de seleção da linha clicada
+                clickedRow.Selected = !clickedRow.Selected;
+            }
+        }
     }
 }

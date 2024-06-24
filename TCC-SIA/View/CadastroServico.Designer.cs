@@ -40,58 +40,62 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(23, 28);
+            label1.Location = new Point(26, 37);
             label1.Name = "label1";
-            label1.Size = new Size(43, 15);
+            label1.Size = new Size(53, 20);
             label1.TabIndex = 0;
             label1.Text = "Nome:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(30, 57);
+            label3.Location = new Point(34, 76);
             label3.Name = "label3";
-            label3.Size = new Size(36, 15);
+            label3.Size = new Size(46, 20);
             label3.TabIndex = 2;
             label3.Text = "Valor:";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(313, 28);
+            label4.Location = new Point(358, 37);
             label4.Name = "label4";
-            label4.Size = new Size(61, 15);
+            label4.Size = new Size(77, 20);
             label4.TabIndex = 3;
             label4.Text = "Descrição:";
             // 
             // textBoxNome
             // 
-            textBoxNome.Location = new Point(72, 25);
+            textBoxNome.Location = new Point(82, 33);
+            textBoxNome.Margin = new Padding(3, 4, 3, 4);
             textBoxNome.Name = "textBoxNome";
-            textBoxNome.Size = new Size(236, 23);
+            textBoxNome.Size = new Size(269, 27);
             textBoxNome.TabIndex = 4;
             // 
             // richTextBoxDesc
             // 
-            richTextBoxDesc.Location = new Point(380, 25);
+            richTextBoxDesc.Location = new Point(434, 33);
+            richTextBoxDesc.Margin = new Padding(3, 4, 3, 4);
             richTextBoxDesc.Name = "richTextBoxDesc";
-            richTextBoxDesc.Size = new Size(298, 140);
+            richTextBoxDesc.Size = new Size(340, 185);
             richTextBoxDesc.TabIndex = 6;
             richTextBoxDesc.Text = "";
             // 
             // maskedTextBoxValor
             // 
-            maskedTextBoxValor.Location = new Point(72, 54);
+            maskedTextBoxValor.Location = new Point(82, 72);
+            maskedTextBoxValor.Margin = new Padding(3, 4, 3, 4);
             maskedTextBoxValor.Name = "maskedTextBoxValor";
-            maskedTextBoxValor.Size = new Size(236, 23);
+            maskedTextBoxValor.Size = new Size(269, 27);
             maskedTextBoxValor.TabIndex = 7;
             maskedTextBoxValor.KeyPress += maskedTextBoxValor_KeyPress;
             // 
             // buttonCadastrar
             // 
-            buttonCadastrar.Location = new Point(23, 83);
+            buttonCadastrar.Location = new Point(26, 114);
+            buttonCadastrar.Margin = new Padding(3, 4, 3, 4);
             buttonCadastrar.Name = "buttonCadastrar";
-            buttonCadastrar.Size = new Size(144, 78);
+            buttonCadastrar.Size = new Size(165, 104);
             buttonCadastrar.TabIndex = 8;
             buttonCadastrar.Text = "Cadastrar";
             buttonCadastrar.UseVisualStyleBackColor = true;
@@ -99,9 +103,9 @@
             // 
             // CadastroServico
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(706, 187);
+            ClientSize = new Size(807, 249);
             Controls.Add(buttonCadastrar);
             Controls.Add(maskedTextBoxValor);
             Controls.Add(richTextBoxDesc);
@@ -109,6 +113,7 @@
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "CadastroServico";
             Text = "CadastroServico";
             Load += CadastroServico_Load;
