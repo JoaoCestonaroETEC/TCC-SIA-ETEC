@@ -615,19 +615,6 @@ namespace TCC_SIA.View
         }
         #endregion
 
-        private void dataGridViewPeca_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            dataGridViewPeca.Rows[e.RowIndex].Selected = true;
-            // Verifica se o índice da célula é válido e está dentro do range de linhas e colunas
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 &&
-                e.RowIndex < dataGridViewPeca.Rows.Count && e.ColumnIndex < dataGridViewPeca.Columns.Count)
-            {
-                // Inicia a edição da célula clicada
-                dataGridViewPeca.BeginEdit(true);
-            }
-
-        }
-
         private void dataGridViewPeca_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             dataGridViewPeca.Rows[e.RowIndex].Selected = true;
