@@ -138,7 +138,47 @@ namespace TCC_SIA.Controller
                 con.desconectar();
             }
 
+            #endregion
+
+            
+
         }
-        #endregion
+        public string atualizaCliente(Cliente cliente)
+        {
+            string sql = "SELECT C.CPFCLIENTE, C.NOMECLIENTE, C.EMAILCLIENTE, C.DATANASC_CLIENTE, C.SEXO, " +
+                         "E.NUMERO, E.RUA, E.CIDADE, E.CEP, E.BAIRRO, E.ESTADO, T.TELEFONE " +
+                         "FROM CLIENTE C " +
+                         "INNER JOIN CLIENTE_ENDERECO E ON C.CPFCLIENTE = E.CPFCLIENTE " +
+                         "INNER JOIN CLIENTE_TELEFONE T ON C.CPFCLIENTE = T.CPFCLIENTE " +
+                         "WHERE C.NOMECLIENTE LIKE '" + cliente + "%';";
+
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            //Fazendo o try
+            try
+            {
+                comm.Parameters.AddWithValue("@nomecliente", Cliente.getNomeCliente());
+
+
+                comm.ExecuteNonQuery();
+                return "Produto atualizado!";
+            }
+            //Fazendo o catch
+            catch (NpgsqlException ex)
+            {
+                //Retornando como nulo
+                return null;
+            }
+            //Encerrando a conexão
+            finally
+            {
+                //Método de desconectar
+                con.desconectar();
+            }
+
+
+        }
     }
 }
