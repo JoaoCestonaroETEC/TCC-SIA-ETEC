@@ -159,7 +159,18 @@ namespace TCC_SIA.Controller
             //Fazendo o try
             try
             {
-                comm.Parameters.AddWithValue("@nomecliente", Cliente.getNomeCliente());
+                comm.Parameters.AddWithValue("@cpfCliente", cliente.getCpfCliente());
+                comm.Parameters.AddWithValue("@nomeCliente", cliente.getNomeCliente());
+                comm.Parameters.AddWithValue("@emailCliente", cliente.getEmailCliente());
+                comm.Parameters.AddWithValue("@datanascCliente", cliente.getNomeCliente());
+                comm.Parameters.AddWithValue("@nomecliente", cliente.getNomeCliente());
+                comm.Parameters.AddWithValue("@nomecliente", cliente.getNomeCliente());
+                comm.Parameters.AddWithValue("@nomecliente", cliente.getNomeCliente());
+                comm.Parameters.AddWithValue("@nomecliente", cliente.getNomeCliente());
+                comm.Parameters.AddWithValue("@nomecliente", cliente.getNomeCliente());
+                comm.Parameters.AddWithValue("@nomecliente", cliente.getNomeCliente());
+                comm.Parameters.AddWithValue("@nomecliente", cliente.getNomeCliente());
+                comm.Parameters.AddWithValue("@nomecliente", cliente.getNomeCliente());
 
 
                 comm.ExecuteNonQuery();
