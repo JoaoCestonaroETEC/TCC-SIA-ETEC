@@ -30,6 +30,7 @@
         {
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            linkLabel1 = new LinkLabel();
             buttonPesquisar = new Button();
             label1 = new Label();
             textBoxPesquisar = new TextBox();
@@ -60,7 +61,6 @@
             label3 = new Label();
             label2 = new Label();
             label13 = new Label();
-            linkLabel1 = new LinkLabel();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewPesquisar).BeginInit();
@@ -91,6 +91,17 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Pesquisar";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // linkLabel1
+            // 
+            linkLabel1.AutoSize = true;
+            linkLabel1.Location = new Point(3, 46);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new Size(68, 20);
+            linkLabel1.TabIndex = 8;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "Atualizar";
+            linkLabel1.LinkClicked += atualiza_Cliente;
             // 
             // buttonPesquisar
             // 
@@ -226,7 +237,7 @@
             // 
             // maskedTextBoxCep
             // 
-            maskedTextBoxCep.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            maskedTextBoxCep.CutCopyMaskFormat = MaskFormat.IncludePromptAndLiterals;
             maskedTextBoxCep.Location = new Point(339, 134);
             maskedTextBoxCep.Mask = "00000-000";
             maskedTextBoxCep.Name = "maskedTextBoxCep";
@@ -383,17 +394,6 @@
             label13.Size = new Size(36, 20);
             label13.TabIndex = 32;
             label13.Text = "CPF:";
-            // 
-            // linkLabel1
-            // 
-            linkLabel1.AutoSize = true;
-            linkLabel1.Location = new Point(3, 46);
-            linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(68, 20);
-            linkLabel1.TabIndex = 8;
-            linkLabel1.TabStop = true;
-            linkLabel1.Text = "Atualizar";
-            linkLabel1.LinkClicked += atualiza_Cliente;
             // 
             // PesquisaCliente
             // 

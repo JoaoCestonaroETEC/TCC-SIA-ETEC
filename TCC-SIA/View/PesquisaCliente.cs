@@ -34,10 +34,19 @@ namespace TCC_SIA.View
             dataGridViewPesquisar.ColumnCount = cliente.FieldCount;
 
             //Definindo três colunas na DataGridView para exibir as caracteristícas dos clientes
-            dataGridViewPesquisar.ColumnCount = 3;
+            dataGridViewPesquisar.ColumnCount = 12;
             dataGridViewPesquisar.Columns[0].Name = "Cpf";
             dataGridViewPesquisar.Columns[1].Name = "Nome";
-            dataGridViewPesquisar.Columns[2].Name = "Telefone";
+            dataGridViewPesquisar.Columns[2].Name = "Email";
+            dataGridViewPesquisar.Columns[3].Name = "DataNasc";
+            dataGridViewPesquisar.Columns[4].Name = "Sexo";
+            dataGridViewPesquisar.Columns[5].Name = "Telefone";
+            dataGridViewPesquisar.Columns[6].Name = "NumeroCasa";
+            dataGridViewPesquisar.Columns[7].Name = "Rua";
+            dataGridViewPesquisar.Columns[8].Name = "Cidade";
+            dataGridViewPesquisar.Columns[9].Name = "Cep";
+            dataGridViewPesquisar.Columns[10].Name = "Bairro";
+            dataGridViewPesquisar.Columns[11].Name = "Estado";
 
             //Aqui criamos um vetor para representar uma linha da consulta(registro)
             string[] linha = new string[cliente.FieldCount];
@@ -47,8 +56,18 @@ namespace TCC_SIA.View
             {
                 string cpfCliente = cliente["CPFCLIENTE"].ToString();
                 string nomeCliente = cliente["NOMECLIENTE"].ToString();
+                string emailCliente = cliente["EMAILCLIENTE"].ToString();
+                string dataNasc = cliente["DATANASC_CLIENTE"].ToString();
+                string sexo = cliente["SEXO"].ToString();
                 string telefone = cliente["TELEFONE"].ToString();
-                dataGridViewPesquisar.Rows.Add(cpfCliente, nomeCliente, telefone);
+                string numCasa = cliente["NUMERO"].ToString();
+                string rua = cliente["RUA"].ToString();
+                string cidade = cliente["CIDADE"].ToString();
+                string cep = cliente["CEP"].ToString();
+                string bairro = cliente["BAIRRO"].ToString();
+                string estado = cliente["ESTADO"].ToString();
+
+                dataGridViewPesquisar.Rows.Add(cpfCliente, nomeCliente, emailCliente, dataNasc, sexo, telefone,numCasa, rua, cidade, rua, cidade, cep, bairro, estado);
             }
             #endregion
         }
@@ -97,11 +116,24 @@ namespace TCC_SIA.View
 
                 if (res == DialogResult.OK)
                 {
-                    /*TODO: redefinir máscara de acordo com o preço de venda */
 
-                    maskedTextBoxCPF.Text = dataGridViewPesquisar.CurrentRow.Cells[1].Value.ToString();
-                    textBoxNome.Text = dataGridViewPesquisar.CurrentRow.Cells[2].Value.ToString();
-                    maskedTextBoxTelefone.Text = dataGridViewPesquisar.CurrentRow.Cells[3].Value.ToString();
+                    textBoxNome.Text = dataGridViewPesquisar.CurrentRow.Cells[1].Value.ToString();
+                    maskedTextBoxEmail.Text = dataGridViewPesquisar.CurrentRow.Cells[2].Value.ToString();
+                    dateTimePickerNasc.Value = Convert.ToDateTime(dataGridViewPesquisar.CurrentRow.Cells[3].Value.ToString());
+
+                    comboBoxSexo.SelectedIndex = comboBoxSexo.FindStringExact(dataGridViewPesquisar.CurrentRow.Cells[4].Value.ToString());
+
+                    maskedTextBoxTelefone.Text = dataGridViewPesquisar.CurrentRow.Cells[5].Value.ToString();
+                    maskedTextBoxNumero.Text = dataGridViewPesquisar.CurrentRow.Cells[6].Value.ToString();
+                    textBoxRua.Text = dataGridViewPesquisar.CurrentRow.Cells[7].Value.ToString();
+                    textBoxCidade.Text = dataGridViewPesquisar.CurrentRow.Cells[8].Value.ToString();
+
+                    maskedTextBoxCep.Text = dataGridViewPesquisar.CurrentRow.Cells[9].Value.ToString();
+
+                    textBoxBairro.Text = dataGridViewPesquisar.CurrentRow.Cells[10].Value.ToString();
+
+                    comboBoxUf.SelectedIndex = comboBoxUf.FindStringExact(dataGridViewPesquisar.CurrentRow.Cells[11].Value.ToString());
+
 
                     tabControl1.SelectedTab = tabPage2;
                 }
