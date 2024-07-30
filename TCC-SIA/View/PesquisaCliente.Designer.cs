@@ -40,7 +40,7 @@
             maskedTextBoxEmail = new MaskedTextBox();
             comboBoxSexo = new ComboBox();
             maskedTextBoxNumero = new MaskedTextBox();
-            comboBoxUf = new ComboBox();
+            comboBoxEstado = new ComboBox();
             textBoxRua = new TextBox();
             label12 = new Label();
             maskedTextBoxCep = new MaskedTextBox();
@@ -146,7 +146,7 @@
             tabPage2.Controls.Add(maskedTextBoxEmail);
             tabPage2.Controls.Add(comboBoxSexo);
             tabPage2.Controls.Add(maskedTextBoxNumero);
-            tabPage2.Controls.Add(comboBoxUf);
+            tabPage2.Controls.Add(comboBoxEstado);
             tabPage2.Controls.Add(textBoxRua);
             tabPage2.Controls.Add(label12);
             tabPage2.Controls.Add(maskedTextBoxCep);
@@ -209,14 +209,14 @@
             maskedTextBoxNumero.TabIndex = 53;
             maskedTextBoxNumero.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
-            // comboBoxUf
+            // comboBoxEstado
             // 
-            comboBoxUf.FormattingEnabled = true;
-            comboBoxUf.Location = new Point(324, 209);
-            comboBoxUf.Margin = new Padding(3, 4, 3, 4);
-            comboBoxUf.Name = "comboBoxUf";
-            comboBoxUf.Size = new Size(54, 28);
-            comboBoxUf.TabIndex = 52;
+            comboBoxEstado.FormattingEnabled = true;
+            comboBoxEstado.Location = new Point(324, 209);
+            comboBoxEstado.Margin = new Padding(3, 4, 3, 4);
+            comboBoxEstado.Name = "comboBoxEstado";
+            comboBoxEstado.Size = new Size(54, 28);
+            comboBoxEstado.TabIndex = 52;
             // 
             // textBoxRua
             // 
@@ -237,7 +237,7 @@
             // 
             // maskedTextBoxCep
             // 
-            maskedTextBoxCep.CutCopyMaskFormat = MaskFormat.IncludePromptAndLiterals;
+            maskedTextBoxCep.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             maskedTextBoxCep.Location = new Point(339, 134);
             maskedTextBoxCep.Mask = "00000-000";
             maskedTextBoxCep.Name = "maskedTextBoxCep";
@@ -320,7 +320,7 @@
             maskedTextBoxTelefone.Location = new Point(79, 205);
             maskedTextBoxTelefone.Mask = "(99) 00000-0000";
             maskedTextBoxTelefone.Name = "maskedTextBoxTelefone";
-            maskedTextBoxTelefone.Size = new Size(97, 27);
+            maskedTextBoxTelefone.Size = new Size(157, 27);
             maskedTextBoxTelefone.TabIndex = 40;
             maskedTextBoxTelefone.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
@@ -425,7 +425,7 @@
         private MaskedTextBox maskedTextBoxEmail;
         private ComboBox comboBoxSexo;
         private MaskedTextBox maskedTextBoxNumero;
-        private ComboBox comboBoxUf;
+        private ComboBox comboBoxEstado;
         private TextBox textBoxRua;
         private Label label12;
         private MaskedTextBox maskedTextBoxCep;
