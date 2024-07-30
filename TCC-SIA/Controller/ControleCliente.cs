@@ -159,22 +159,22 @@ namespace TCC_SIA.Controller
             //Fazendo o try
             try
             {
-                comm.Parameters.AddWithValue("@cpfCliente", cliente.getCpfCliente());
-                comm.Parameters.AddWithValue("@nomeCliente", cliente.getNomeCliente());
-                comm.Parameters.AddWithValue("@emailCliente", cliente.getEmailCliente());
-                comm.Parameters.AddWithValue("@datanascCliente", cliente.getNomeCliente());
-                comm.Parameters.AddWithValue("@nomecliente", cliente.getNomeCliente());
-                comm.Parameters.AddWithValue("@nomecliente", cliente.getNomeCliente());
-                comm.Parameters.AddWithValue("@nomecliente", cliente.getNomeCliente());
-                comm.Parameters.AddWithValue("@nomecliente", cliente.getNomeCliente());
-                comm.Parameters.AddWithValue("@nomecliente", cliente.getNomeCliente());
-                comm.Parameters.AddWithValue("@nomecliente", cliente.getNomeCliente());
-                comm.Parameters.AddWithValue("@nomecliente", cliente.getNomeCliente());
-                comm.Parameters.AddWithValue("@nomecliente", cliente.getNomeCliente());
+                comm.Parameters.AddWithValue("@CPFCLIENTE", cliente.getCpfCliente());
+                comm.Parameters.AddWithValue("@NOMECLIENTE", cliente.getNomeCliente());
+                comm.Parameters.AddWithValue("@EMAILCLIENTE", cliente.getEmailCliente());
+                comm.Parameters.AddWithValue("@DATANASC_CLIENTE", cliente.getDataNascCliente());
+                comm.Parameters.AddWithValue("@SEXO", cliente.getSexo());
+                comm.Parameters.AddWithValue("@NUMERO", cliente.getNumero());
+                comm.Parameters.AddWithValue("@RUA", cliente.getRua());
+                comm.Parameters.AddWithValue("@CIDADE", cliente.getCidade());
+                comm.Parameters.AddWithValue("@CEP", cliente.getCep());
+                comm.Parameters.AddWithValue("@BAIRRO", cliente.getBairro());
+                comm.Parameters.AddWithValue("@ESTADO", cliente.getUf());
+                comm.Parameters.AddWithValue("@TELEFONE", cliente.getTelefone());
 
 
                 comm.ExecuteNonQuery();
-                return "Produto atualizado!";
+                return "Cliente Atualizado!";
             }
             //Fazendo o catch
             catch (NpgsqlException ex)

@@ -30,6 +30,7 @@
         {
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            linkLabel1 = new LinkLabel();
             buttonPesquisar = new Button();
             label1 = new Label();
             textBoxPesquisar = new TextBox();
@@ -39,7 +40,7 @@
             maskedTextBoxEmail = new MaskedTextBox();
             comboBoxSexo = new ComboBox();
             maskedTextBoxNumero = new MaskedTextBox();
-            comboBoxUf = new ComboBox();
+            comboBoxEstado = new ComboBox();
             textBoxRua = new TextBox();
             label12 = new Label();
             maskedTextBoxCep = new MaskedTextBox();
@@ -60,7 +61,6 @@
             label3 = new Label();
             label2 = new Label();
             label13 = new Label();
-            linkLabel1 = new LinkLabel();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewPesquisar).BeginInit();
@@ -91,6 +91,17 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Pesquisar";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // linkLabel1
+            // 
+            linkLabel1.AutoSize = true;
+            linkLabel1.Location = new Point(3, 46);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new Size(68, 20);
+            linkLabel1.TabIndex = 8;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "Atualizar";
+            linkLabel1.LinkClicked += atualiza_Cliente;
             // 
             // buttonPesquisar
             // 
@@ -135,7 +146,7 @@
             tabPage2.Controls.Add(maskedTextBoxEmail);
             tabPage2.Controls.Add(comboBoxSexo);
             tabPage2.Controls.Add(maskedTextBoxNumero);
-            tabPage2.Controls.Add(comboBoxUf);
+            tabPage2.Controls.Add(comboBoxEstado);
             tabPage2.Controls.Add(textBoxRua);
             tabPage2.Controls.Add(label12);
             tabPage2.Controls.Add(maskedTextBoxCep);
@@ -198,14 +209,14 @@
             maskedTextBoxNumero.TabIndex = 53;
             maskedTextBoxNumero.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
-            // comboBoxUf
+            // comboBoxEstado
             // 
-            comboBoxUf.FormattingEnabled = true;
-            comboBoxUf.Location = new Point(324, 209);
-            comboBoxUf.Margin = new Padding(3, 4, 3, 4);
-            comboBoxUf.Name = "comboBoxUf";
-            comboBoxUf.Size = new Size(54, 28);
-            comboBoxUf.TabIndex = 52;
+            comboBoxEstado.FormattingEnabled = true;
+            comboBoxEstado.Location = new Point(324, 209);
+            comboBoxEstado.Margin = new Padding(3, 4, 3, 4);
+            comboBoxEstado.Name = "comboBoxEstado";
+            comboBoxEstado.Size = new Size(54, 28);
+            comboBoxEstado.TabIndex = 52;
             // 
             // textBoxRua
             // 
@@ -309,7 +320,7 @@
             maskedTextBoxTelefone.Location = new Point(79, 205);
             maskedTextBoxTelefone.Mask = "(99) 00000-0000";
             maskedTextBoxTelefone.Name = "maskedTextBoxTelefone";
-            maskedTextBoxTelefone.Size = new Size(97, 27);
+            maskedTextBoxTelefone.Size = new Size(157, 27);
             maskedTextBoxTelefone.TabIndex = 40;
             maskedTextBoxTelefone.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
@@ -384,17 +395,6 @@
             label13.TabIndex = 32;
             label13.Text = "CPF:";
             // 
-            // linkLabel1
-            // 
-            linkLabel1.AutoSize = true;
-            linkLabel1.Location = new Point(3, 46);
-            linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(68, 20);
-            linkLabel1.TabIndex = 8;
-            linkLabel1.TabStop = true;
-            linkLabel1.Text = "Atualizar";
-            linkLabel1.LinkClicked += atualiza_Cliente;
-            // 
             // PesquisaCliente
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -425,7 +425,7 @@
         private MaskedTextBox maskedTextBoxEmail;
         private ComboBox comboBoxSexo;
         private MaskedTextBox maskedTextBoxNumero;
-        private ComboBox comboBoxUf;
+        private ComboBox comboBoxEstado;
         private TextBox textBoxRua;
         private Label label12;
         private MaskedTextBox maskedTextBoxCep;
