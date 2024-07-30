@@ -138,7 +138,58 @@ namespace TCC_SIA.Controller
                 con.desconectar();
             }
 
+            #endregion
+
+            
+
         }
-        #endregion
+        public string atualizaCliente(Cliente cliente)
+        {
+            string sql = "SELECT C.CPFCLIENTE, C.NOMECLIENTE, C.EMAILCLIENTE, C.DATANASC_CLIENTE, C.SEXO, " +
+                         "E.NUMERO, E.RUA, E.CIDADE, E.CEP, E.BAIRRO, E.ESTADO, T.TELEFONE " +
+                         "FROM CLIENTE C " +
+                         "INNER JOIN CLIENTE_ENDERECO E ON C.CPFCLIENTE = E.CPFCLIENTE " +
+                         "INNER JOIN CLIENTE_TELEFONE T ON C.CPFCLIENTE = T.CPFCLIENTE " +
+                         "WHERE C.NOMECLIENTE LIKE '" + cliente + "%';";
+
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            //Fazendo o try
+            try
+            {
+                comm.Parameters.AddWithValue("@CPFCLIENTE", cliente.getCpfCliente());
+                comm.Parameters.AddWithValue("@NOMECLIENTE", cliente.getNomeCliente());
+                comm.Parameters.AddWithValue("@EMAILCLIENTE", cliente.getEmailCliente());
+                comm.Parameters.AddWithValue("@DATANASC_CLIENTE", cliente.getDataNascCliente());
+                comm.Parameters.AddWithValue("@SEXO", cliente.getSexo());
+                comm.Parameters.AddWithValue("@NUMERO", cliente.getNumero());
+                comm.Parameters.AddWithValue("@RUA", cliente.getRua());
+                comm.Parameters.AddWithValue("@CIDADE", cliente.getCidade());
+                comm.Parameters.AddWithValue("@CEP", cliente.getCep());
+                comm.Parameters.AddWithValue("@BAIRRO", cliente.getBairro());
+                comm.Parameters.AddWithValue("@ESTADO", cliente.getUf());
+                comm.Parameters.AddWithValue("@TELEFONE", cliente.getTelefone());
+
+
+                comm.ExecuteNonQuery();
+                return "Cliente Atualizado!";
+            }
+            //Fazendo o catch
+            catch (NpgsqlException ex)
+            {
+                //Retornando como nulo
+                return null;
+            }
+            //Encerrando a conexão
+            finally
+            {
+                //Método de desconectar
+                con.desconectar();
+            }
+
+
+        }
     }
 }

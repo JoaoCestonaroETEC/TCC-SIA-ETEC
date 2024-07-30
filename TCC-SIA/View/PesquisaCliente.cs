@@ -34,7 +34,7 @@ namespace TCC_SIA.View
             dataGridViewPesquisar.ColumnCount = cliente.FieldCount;
 
             //Definindo três colunas na DataGridView para exibir as caracteristícas dos clientes
-            dataGridViewPesquisar.ColumnCount = 12;
+            dataGridViewPesquisar.ColumnCount = 13;
             dataGridViewPesquisar.Columns[0].Name = "Cpf";
             dataGridViewPesquisar.Columns[1].Name = "Nome";
             dataGridViewPesquisar.Columns[2].Name = "Email";
@@ -67,7 +67,7 @@ namespace TCC_SIA.View
                 string bairro = cliente["BAIRRO"].ToString();
                 string estado = cliente["ESTADO"].ToString();
 
-                dataGridViewPesquisar.Rows.Add(cpfCliente, nomeCliente, emailCliente, dataNasc, sexo, telefone,numCasa, rua, cidade, rua, cidade, cep, bairro, estado);
+                dataGridViewPesquisar.Rows.Add(cpfCliente, nomeCliente, emailCliente, dataNasc, sexo, telefone, numCasa, rua, cidade, rua, cidade, cep, bairro, estado);
             }
             #endregion
         }
