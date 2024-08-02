@@ -9,7 +9,7 @@ namespace TCC_SIA.Model
     internal class Veiculo
     {
         #region Criação de atributo
-        private long cpfcliente;
+        private string cpfcliente;
         private long idMarca;
         private string nomeVeiculo;
         private string tipoVeiculo;
@@ -19,12 +19,12 @@ namespace TCC_SIA.Model
         #endregion
 
         #region Encapsulamento
-        public long getCpfCliente()
+        public string getCpfCliente()
         {
             return this.cpfcliente;
         }
 
-        public void setCpfCliente(long cpfCliente)
+        public void setCpfCliente(string cpfCliente)
         {
             this.cpfcliente = cpfCliente;
         }

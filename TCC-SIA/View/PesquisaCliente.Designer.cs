@@ -112,6 +112,7 @@
             buttonPesquisar.TabIndex = 7;
             buttonPesquisar.Text = "Pesquisar";
             buttonPesquisar.UseVisualStyleBackColor = true;
+            buttonPesquisar.Click += buttonPesquisar_Click_1;
             // 
             // label1
             // 
@@ -183,6 +184,7 @@
             button1.TabIndex = 56;
             button1.Text = "Salvar";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // maskedTextBoxEmail
             // 
