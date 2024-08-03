@@ -56,15 +56,6 @@ namespace TCC_SIA.View
             });
             #endregion
 
-            #region Campos de gêneros
-            //Adiciona gêneros
-            comboBoxSexo.Items.AddRange(new string[]
-            {
-                "Masculino",
-                "Feminino",
-                "Outro"
-            });
-            #endregion
 
             #region Carrega as informações gerais dos clientes
             // Criação do objeto NpgsqlDataReader cliente e ControleVeiculo
