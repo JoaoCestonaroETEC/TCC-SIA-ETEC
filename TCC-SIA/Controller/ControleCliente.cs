@@ -19,10 +19,10 @@ namespace TCC_SIA.Controller
             //String sql de inserção
             string sql = "INSERT INTO CLIENTE(CPFCLIENTE, NOMECLIENTE, EMAILCLIENTE, DATANASC_CLIENTE, SEXO) " +
                 "VALUES(@CPFCLIENTE, @NOMECLIENTE, @EMAILCLIENTE, @DATANASC_CLIENTE, @SEXO);" +
-                "INSERT INTO CLIENTE_ENDERECO(CPFCLIENTE, NUMERO, RUA, CIDADE, CEP, BAIRRO, ESTADO) " +
-                "VALUES(@CPFCLIENTE, @NUMERO, @RUA, @CIDADE, @CEP, @BAIRRO, @ESTADO);" +
-                "INSERT INTO CLIENTE_TELEFONE(CPFCLIENTE, TELEFONE) " +
-                "VALUES(@CPFCLIENTE, @TELEFONE);";
+                "INSERT INTO CLIENTE_ENDERECO(NUMERO, RUA, CIDADE, CEP, BAIRRO, ESTADO) " +
+                "VALUES(@NUMERO, @RUA, @CIDADE, @CEP, @BAIRRO, @ESTADO);" +
+                "INSERT INTO CLIENTE_TELEFONE(TELEFONE) " +
+                "VALUES(@TELEFONE);";
 
 
             //Abrindo conexão com o banco de dados
@@ -33,9 +33,8 @@ namespace TCC_SIA.Controller
             //Fazendo o try
             try
             {
-                string Cpf = mCliente.setCpfCliente
                 //Definindo os valores a serem postos nos campos
-                comm.Parameters.AddWithValue("@CPFCLIENTE", mCliente.Cpf();
+                comm.Parameters.AddWithValue("@CPFCLIENTE", mCliente.getCpfCliente());
                 comm.Parameters.AddWithValue("@NOMECLIENTE", mCliente.getNomeCliente());
                 comm.Parameters.AddWithValue("@EMAILCLIENTE", mCliente.getEmailCliente());
                 comm.Parameters.AddWithValue("@DATANASC_CLIENTE", mCliente.getDataNascCliente());
@@ -111,8 +110,8 @@ namespace TCC_SIA.Controller
             string sql = "SELECT C.CPFCLIENTE, C.NOMECLIENTE, C.EMAILCLIENTE, C.DATANASC_CLIENTE, C.SEXO, " +
              "E.NUMERO, E.RUA, E.CIDADE, E.CEP, E.BAIRRO, E.ESTADO, T.TELEFONE " +
              "FROM CLIENTE C " +
-             "INNER JOIN CLIENTE_ENDERECO E ON C.CPFCLIENTE = E.CPFCLIENTE " +
-             "INNER JOIN CLIENTE_TELEFONE T ON C.CPFCLIENTE = T.CPFCLIENTE " +
+             "INNER JOIN CLIENTE_ENDERECO E ON C.IDCLIENTE = E.IDCLIENTE " +
+             "INNER JOIN CLIENTE_TELEFONE T ON C.IDCLIENTE = T.IDCLIENTE " +
              "WHERE C.NOMECLIENTE LIKE '" + cliente + "%';";
 
             //Abrindo conexão com o banco de dados
@@ -144,53 +143,46 @@ namespace TCC_SIA.Controller
 
 
         }
-        public string atualizaCliente(Cliente cliente)
+        public string atualizaCliente(Cliente mCliente)
         {
-            string sql = "SELECT C.CPFCLIENTE, C.NOMECLIENTE, C.EMAILCLIENTE, C.DATANASC_CLIENTE, C.SEXO, " +
-                         "E.NUMERO, E.RUA, E.CIDADE, E.CEP, E.BAIRRO, E.ESTADO, T.TELEFONE " +
-                         "FROM CLIENTE C " +
-                         "INNER JOIN CLIENTE_ENDERECO E ON C.CPFCLIENTE = E.CPFCLIENTE " +
-                         "INNER JOIN CLIENTE_TELEFONE T ON C.CPFCLIENTE = T.CPFCLIENTE " +
-                         "WHERE C.NOMECLIENTE LIKE '" + cliente + "%';";
+            string sql = "update cliente set nomecliente = @nomecliente," +
+                "emailcliente = @emailcliente, datanasc_cliente = @datanasc_cliente, " +
+                "sexo = @sexo, cpfcliente = @cpfcliente;"
+                + "update cliente_endereco set numero = @numero, rua = @rua, cidade = @cidade, cep = @cep, bairro = @bairro, estado = @estado;"
+                + "update cliente_telefone set telefone = @telefone;";
+
+
 
             conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();
             NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
 
-            //Fazendo o try
             try
             {
-                comm.Parameters.AddWithValue("@CPFCLIENTE", cliente.getCpfCliente());
-                comm.Parameters.AddWithValue("@NOMECLIENTE", cliente.getNomeCliente());
-                comm.Parameters.AddWithValue("@EMAILCLIENTE", cliente.getEmailCliente());
-                comm.Parameters.AddWithValue("@DATANASC_CLIENTE", cliente.getDataNascCliente());
-                comm.Parameters.AddWithValue("@SEXO", cliente.getSexo());
-                comm.Parameters.AddWithValue("@NUMERO", cliente.getNumero());
-                comm.Parameters.AddWithValue("@RUA", cliente.getRua());
-                comm.Parameters.AddWithValue("@CIDADE", cliente.getCidade());
-                comm.Parameters.AddWithValue("@CEP", cliente.getCep());
-                comm.Parameters.AddWithValue("@BAIRRO", cliente.getBairro());
-                comm.Parameters.AddWithValue("@ESTADO", cliente.getUf());
-                comm.Parameters.AddWithValue("@TELEFONE", cliente.getTelefone());
-
+                comm.Parameters.AddWithValue("@CPFCLIENTE", mCliente.getCpfCliente());
+                comm.Parameters.AddWithValue("@NOMECLIENTE", mCliente.getNomeCliente());
+                comm.Parameters.AddWithValue("@EMAILCLIENTE", mCliente.getEmailCliente());
+                comm.Parameters.AddWithValue("@DATANASC_CLIENTE", mCliente.getDataNascCliente());
+                comm.Parameters.AddWithValue("@SEXO", mCliente.getSexo());
+                comm.Parameters.AddWithValue("@NUMERO", mCliente.getNumero());
+                comm.Parameters.AddWithValue("@RUA", mCliente.getRua());
+                comm.Parameters.AddWithValue("@CIDADE", mCliente.getCidade());
+                comm.Parameters.AddWithValue("@CEP", mCliente.getCep());
+                comm.Parameters.AddWithValue("@BAIRRO", mCliente.getBairro());
+                comm.Parameters.AddWithValue("@ESTADO", mCliente.getUf());
+                comm.Parameters.AddWithValue("@TELEFONE", mCliente.getTelefone());
 
                 comm.ExecuteNonQuery();
-                return "Cliente Atualizado!";
+                return "Cliente atualizado!";
             }
-            //Fazendo o catch
             catch (NpgsqlException ex)
             {
-                //Retornando como nulo
-                return null;
+                return ex.ToString();
+                //return "Erro ao atualizar!";
             }
-            //Encerrando a conexão
-            finally
-            {
-                //Método de desconectar
-                con.desconectar();
-            }
-
-
         }
+
+
     }
+    
 }

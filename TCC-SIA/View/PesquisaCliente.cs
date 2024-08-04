@@ -68,7 +68,7 @@ namespace TCC_SIA.View
             //Definindo a quant. de colunas que a grid terá
             dataGridViewPesquisar.ColumnCount = cliente.FieldCount;
 
-            //Definindo doze colunas na DataGridView para exibir as caracteristícas dos clientes
+            //Definindo treze colunas na DataGridView para exibir as caracteristícas dos clientes
             dataGridViewPesquisar.ColumnCount = 12;
             dataGridViewPesquisar.Columns[0].Name = "Cpf";
             dataGridViewPesquisar.Columns[1].Name = "Nome";
@@ -152,9 +152,6 @@ namespace TCC_SIA.View
                 if (res == DialogResult.OK)
                 {
 
-                    string ValSexo;
-                    string ValUF;
-
                     maskedTextBoxCPF.Text = dataGridViewPesquisar.CurrentRow.Cells[0].Value.ToString();
                     textBoxNome.Text = dataGridViewPesquisar.CurrentRow.Cells[1].Value.ToString();
                     maskedTextBoxEmail.Text = dataGridViewPesquisar.CurrentRow.Cells[2].Value.ToString();
@@ -231,69 +228,42 @@ namespace TCC_SIA.View
 
         private void button1_Click(object sender, EventArgs e)
         {
-            #region Atualizar clientes
-            // Verifica se os campos obrigatórios foram preenchidos
-            if (string.IsNullOrWhiteSpace(maskedTextBoxCPF.Text) &&
-                string.IsNullOrWhiteSpace(textBoxNome.Text) &&
-                string.IsNullOrWhiteSpace(maskedTextBoxNumero.Text) &&
-                string.IsNullOrWhiteSpace(maskedTextBoxCep.Text) &&
-                string.IsNullOrWhiteSpace(textBoxBairro.Text) &&
-                string.IsNullOrWhiteSpace(textBoxCidade.Text) &&
-                string.IsNullOrWhiteSpace(textBoxRua.Text) &&
-                string.IsNullOrWhiteSpace(comboBoxEstado.Text))
-            {
-                MessageBox.Show("Preencha todos os campos! (exceto email, data de nascimento, sexo e telefone)");
-                return;
-            }
 
-            //Criação do objeto Cliente e controleCliente
+            string sql = "update cliente set nomecliente = @nomecliente," +
+                "emailcliente = @emailcliente, datanasc_cliente = @datanasc_cliente, " +
+                "sexo = @sexo, cpfcliente = @cpfcliente;"
+                + "update cliente_endereco set numero = @numero, rua = @rua, cidade = @cidade, cep = @cep, bairro = @bairro, estado = @estado;"
+                + "update cliente_telefone set telefone = @telefone;";
+
             Cliente mCliente = new Cliente();
-            controleCliente cCliente = new controleCliente();
 
-            //Definindo os valores nos atributos
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
 
-            //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
-            long cpf;
-            if (!long.TryParse(maskedTextBoxCPF.Text, out cpf))
+            try
             {
-                MessageBox.Show("CPF inválido.");
-                return;
+                comm.Parameters.AddWithValue("@CPFCLIENTE", mCliente.getCpfCliente());
+                comm.Parameters.AddWithValue("@NOMECLIENTE", mCliente.getNomeCliente());
+                comm.Parameters.AddWithValue("@EMAILCLIENTE", mCliente.getEmailCliente());
+                comm.Parameters.AddWithValue("@DATANASC_CLIENTE", mCliente.getDataNascCliente());
+                comm.Parameters.AddWithValue("@SEXO", mCliente.getSexo());
+                comm.Parameters.AddWithValue("@NUMERO", mCliente.getNumero());
+                comm.Parameters.AddWithValue("@RUA", mCliente.getRua());
+                comm.Parameters.AddWithValue("@CIDADE", mCliente.getCidade());
+                comm.Parameters.AddWithValue("@CEP", mCliente.getCep());
+                comm.Parameters.AddWithValue("@BAIRRO", mCliente.getBairro());
+                comm.Parameters.AddWithValue("@ESTADO", mCliente.getUf());
+                comm.Parameters.AddWithValue("@TELEFONE", mCliente.getTelefone());
+
+                comm.ExecuteNonQuery();
+                return "Cliente atualizado!";
             }
-
-            mCliente.setCpfCliente(Convert.ToString(maskedTextBoxCPF));
-            mCliente.setNomeCliente(textBoxNome.Text);
-            mCliente.setEmailCliente(maskedTextBoxEmail.Text);
-            mCliente.setDataNascCliente(Convert.ToDateTime(dateTimePickerNasc.Text));
-            mCliente.setSexo(comboBoxSexo.Text);
-            mCliente.setTelefone(maskedTextBoxTelefone.Text);
-
-            //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
-            long numero;
-            if (long.TryParse(maskedTextBoxNumero.Text, out numero))
+            catch (NpgsqlException ex)
             {
-                mCliente.setNumero(numero);
+                return ex.ToString();
+                //return "Erro ao atualizar!";
             }
-
-            mCliente.setRua(textBoxRua.Text);
-            mCliente.setCidade(textBoxCidade.Text);
-
-            //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
-            long cep;
-            if (long.TryParse(maskedTextBoxCep.Text, out cep))
-            {
-                mCliente.setCep(cep);
-            }
-
-            mCliente.setBairro(textBoxBairro.Text);
-            mCliente.setUf(comboBoxEstado.Text);
-
-            //Chamada ao método de cadastro no ControleCliente
-            string res = cCliente.atualizarCliente(mCliente);
-
-            //Mostra o resultado
-            MessageBox.Show(res);
-            #endregion
         }
-    }
 
-}
+    }

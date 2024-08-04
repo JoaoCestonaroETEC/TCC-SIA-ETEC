@@ -85,7 +85,8 @@ namespace TCC_SIA.View
                 return;
             }
 
-            mCliente.setCpfCliente(Convert.ToString(maskedTextBoxCPF));
+            
+            mCliente.setCpfCliente(maskedTextBoxCPF.Text);
             mCliente.setNomeCliente(textBoxNome.Text);
             mCliente.setEmailCliente(maskedTextBoxEmail.Text);
             mCliente.setDataNascCliente(Convert.ToDateTime(dateTimePickerNasc.Text));

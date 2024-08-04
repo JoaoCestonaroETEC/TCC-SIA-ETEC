@@ -11,6 +11,7 @@ namespace TCC_SIA.Model
     internal class Cliente
     {
         #region Criação de atributo
+        private int idcliente;
         private string cpfCliente;
         private string nomeCliente;
         private string emailCliente;
@@ -26,6 +27,16 @@ namespace TCC_SIA.Model
         #endregion
 
         #region Encapsulamento
+
+        public int getIdCLiente()
+        {
+            return this.idcliente;
+        }
+        public void setIdCliente(int idcliente)
+        {
+            this.idcliente = idcliente;
+        }
+
         public string getCpfCliente()
         {
             return this.cpfCliente;
