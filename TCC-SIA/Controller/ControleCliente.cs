@@ -107,7 +107,7 @@ namespace TCC_SIA.Controller
         public NpgsqlDataReader pesquisarCliente(string cliente)
         {
             //String sql de pesquisar
-            string sql = "SELECT C.CPFCLIENTE, C.NOMECLIENTE, C.EMAILCLIENTE, C.DATANASC_CLIENTE, C.SEXO, " +
+            string sql = "SELECT C.IDCLIENTE, C.CPFCLIENTE, C.NOMECLIENTE, C.EMAILCLIENTE, C.DATANASC_CLIENTE, C.SEXO, " +
              "E.NUMERO, E.RUA, E.CIDADE, E.CEP, E.BAIRRO, E.ESTADO, T.TELEFONE " +
              "FROM CLIENTE C " +
              "INNER JOIN CLIENTE_ENDERECO E ON C.IDCLIENTE = E.IDCLIENTE " +
@@ -145,11 +145,12 @@ namespace TCC_SIA.Controller
         }
         public string atualizaCliente(Cliente mCliente)
         {
-            string sql = "update cliente set nomecliente = @nomecliente," +
+            string sql = "update cliente set nomecliente = @nomecliente, " +
                 "emailcliente = @emailcliente, datanasc_cliente = @datanasc_cliente, " +
-                "sexo = @sexo, cpfcliente = @cpfcliente;"
-                + "update cliente_endereco set numero = @numero, rua = @rua, cidade = @cidade, cep = @cep, bairro = @bairro, estado = @estado;"
-                + "update cliente_telefone set telefone = @telefone;";
+                "sexo = @sexo, cpfcliente = @cpfcliente where idcliente = @idcliente;" +
+                "update cliente_endereco set numero = @numero, rua = @rua, cidade = @cidade, " +
+                "cep = @cep, bairro = @bairro, estado = @estado where idcliente = @idcliente;" +
+                "update cliente_telefone set telefone = @telefone where idcliente = @idcliente;";
 
 
 
@@ -159,6 +160,7 @@ namespace TCC_SIA.Controller
 
             try
             {
+                comm.Parameters.AddWithValue("@IDCLIENTE", mCliente.getIdCLiente());
                 comm.Parameters.AddWithValue("@CPFCLIENTE", mCliente.getCpfCliente());
                 comm.Parameters.AddWithValue("@NOMECLIENTE", mCliente.getNomeCliente());
                 comm.Parameters.AddWithValue("@EMAILCLIENTE", mCliente.getEmailCliente());
