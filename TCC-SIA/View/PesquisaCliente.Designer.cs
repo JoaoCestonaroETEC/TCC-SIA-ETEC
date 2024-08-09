@@ -30,40 +30,40 @@
         {
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            btnDeletar = new Button();
+            btnAtualizar = new Button();
             buttonPesquisar = new Button();
             label1 = new Label();
             textBoxPesquisar = new TextBox();
             dataGridViewPesquisar = new DataGridView();
             tabPage2 = new TabPage();
-            btnAtualizar = new Button();
-            label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
-            label5 = new Label();
-            label6 = new Label();
-            label7 = new Label();
-            label8 = new Label();
-            label9 = new Label();
-            label10 = new Label();
-            label11 = new Label();
-            label12 = new Label();
-            label13 = new Label();
-            label14 = new Label();
-            maskedCPF = new MaskedTextBox();
-            txbNome = new TextBox();
-            txbEmail = new TextBox();
-            dtpNasc = new DateTimePicker();
-            cbSexo = new ComboBox();
-            btnDeletar = new Button();
-            maskNumero = new MaskedTextBox();
-            txbRua = new TextBox();
-            maskCep = new MaskedTextBox();
-            txbBairro = new TextBox();
-            cbEstado = new ComboBox();
-            txbCidade = new TextBox();
-            maskTelefone = new MaskedTextBox();
-            maskedID = new MaskedTextBox();
             btnSalvarA = new Button();
+            maskedID = new MaskedTextBox();
+            maskTelefone = new MaskedTextBox();
+            txbCidade = new TextBox();
+            cbEstado = new ComboBox();
+            txbBairro = new TextBox();
+            maskCep = new MaskedTextBox();
+            txbRua = new TextBox();
+            maskNumero = new MaskedTextBox();
+            cbSexo = new ComboBox();
+            dtpNasc = new DateTimePicker();
+            txbEmail = new TextBox();
+            txbNome = new TextBox();
+            maskedCPF = new MaskedTextBox();
+            label14 = new Label();
+            label13 = new Label();
+            label12 = new Label();
+            label11 = new Label();
+            label10 = new Label();
+            label9 = new Label();
+            label8 = new Label();
+            label7 = new Label();
+            label6 = new Label();
+            label5 = new Label();
+            label4 = new Label();
+            label3 = new Label();
+            label2 = new Label();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewPesquisar).BeginInit();
@@ -95,6 +95,25 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Pesquisar";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // btnDeletar
+            // 
+            btnDeletar.Location = new Point(709, 441);
+            btnDeletar.Name = "btnDeletar";
+            btnDeletar.Size = new Size(131, 64);
+            btnDeletar.TabIndex = 9;
+            btnDeletar.Text = "Deletar";
+            btnDeletar.UseVisualStyleBackColor = true;
+            // 
+            // btnAtualizar
+            // 
+            btnAtualizar.Location = new Point(562, 441);
+            btnAtualizar.Name = "btnAtualizar";
+            btnAtualizar.Size = new Size(131, 64);
+            btnAtualizar.TabIndex = 8;
+            btnAtualizar.Text = "Atualizar";
+            btnAtualizar.UseVisualStyleBackColor = true;
+            btnAtualizar.Click += AtualizarCliente;
             // 
             // buttonPesquisar
             // 
@@ -170,122 +189,112 @@
             tabPage2.Text = "Atualizar";
             tabPage2.UseVisualStyleBackColor = true;
             // 
-            // btnAtualizar
+            // btnSalvarA
             // 
-            btnAtualizar.Location = new Point(562, 441);
-            btnAtualizar.Name = "btnAtualizar";
-            btnAtualizar.Size = new Size(131, 64);
-            btnAtualizar.TabIndex = 8;
-            btnAtualizar.Text = "Atualizar";
-            btnAtualizar.UseVisualStyleBackColor = true;
+            btnSalvarA.Location = new Point(22, 421);
+            btnSalvarA.Name = "btnSalvarA";
+            btnSalvarA.Size = new Size(148, 70);
+            btnSalvarA.TabIndex = 27;
+            btnSalvarA.Text = "Salvar";
+            btnSalvarA.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // maskedID
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(22, 76);
-            label2.Name = "label2";
-            label2.Size = new Size(36, 20);
-            label2.TabIndex = 0;
-            label2.Text = "CPF:";
+            maskedID.Enabled = false;
+            maskedID.Location = new Point(714, 173);
+            maskedID.Name = "maskedID";
+            maskedID.Size = new Size(126, 27);
+            maskedID.TabIndex = 26;
             // 
-            // label3
+            // maskTelefone
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(22, 125);
-            label3.Name = "label3";
-            label3.Size = new Size(53, 20);
-            label3.TabIndex = 1;
-            label3.Text = "Nome:";
+            maskTelefone.Location = new Point(683, 122);
+            maskTelefone.Mask = "(00) 00000-0000";
+            maskTelefone.Name = "maskTelefone";
+            maskTelefone.Size = new Size(157, 27);
+            maskTelefone.TabIndex = 25;
             // 
-            // label4
+            // txbCidade
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(22, 176);
-            label4.Name = "label4";
-            label4.Size = new Size(49, 20);
-            label4.TabIndex = 2;
-            label4.Text = "Email:";
+            txbCidade.Location = new Point(393, 173);
+            txbCidade.Name = "txbCidade";
+            txbCidade.Size = new Size(186, 27);
+            txbCidade.TabIndex = 24;
             // 
-            // label5
+            // cbEstado
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(22, 220);
-            label5.Name = "label5";
-            label5.Size = new Size(148, 20);
-            label5.TabIndex = 3;
-            label5.Text = "Data de Nascimento:";
+            cbEstado.FormattingEnabled = true;
+            cbEstado.Location = new Point(674, 73);
+            cbEstado.Name = "cbEstado";
+            cbEstado.Size = new Size(72, 28);
+            cbEstado.TabIndex = 23;
             // 
-            // label6
+            // txbBairro
             // 
-            label6.AutoSize = true;
-            label6.Location = new Point(22, 268);
-            label6.Name = "label6";
-            label6.Size = new Size(44, 20);
-            label6.TabIndex = 4;
-            label6.Text = "Sexo:";
+            txbBairro.Location = new Point(397, 265);
+            txbBairro.Name = "txbBairro";
+            txbBairro.Size = new Size(182, 27);
+            txbBairro.TabIndex = 22;
             // 
-            // label7
+            // maskCep
             // 
-            label7.AutoSize = true;
-            label7.Location = new Point(329, 76);
-            label7.Name = "label7";
-            label7.Size = new Size(122, 20);
-            label7.TabIndex = 5;
-            label7.Text = "Numero da Casa:";
+            maskCep.Location = new Point(393, 217);
+            maskCep.Mask = "00000-000";
+            maskCep.Name = "maskCep";
+            maskCep.Size = new Size(186, 27);
+            maskCep.TabIndex = 21;
             // 
-            // label8
+            // txbRua
             // 
-            label8.AutoSize = true;
-            label8.Location = new Point(329, 125);
-            label8.Name = "label8";
-            label8.Size = new Size(37, 20);
-            label8.TabIndex = 6;
-            label8.Text = "Rua:";
+            txbRua.Location = new Point(372, 122);
+            txbRua.Name = "txbRua";
+            txbRua.Size = new Size(207, 27);
+            txbRua.TabIndex = 19;
             // 
-            // label9
+            // maskNumero
             // 
-            label9.AutoSize = true;
-            label9.Location = new Point(329, 176);
-            label9.Name = "label9";
-            label9.Size = new Size(59, 20);
-            label9.TabIndex = 7;
-            label9.Text = "Cidade:";
+            maskNumero.Location = new Point(454, 76);
+            maskNumero.Name = "maskNumero";
+            maskNumero.Size = new Size(125, 27);
+            maskNumero.TabIndex = 18;
             // 
-            // label10
+            // cbSexo
             // 
-            label10.AutoSize = true;
-            label10.Location = new Point(329, 220);
-            label10.Name = "label10";
-            label10.Size = new Size(38, 20);
-            label10.TabIndex = 8;
-            label10.Text = "Cep:";
+            cbSexo.FormattingEnabled = true;
+            cbSexo.Location = new Point(78, 265);
+            cbSexo.Name = "cbSexo";
+            cbSexo.Size = new Size(106, 28);
+            cbSexo.TabIndex = 17;
             // 
-            // label11
+            // dtpNasc
             // 
-            label11.AutoSize = true;
-            label11.Location = new Point(611, 176);
-            label11.Name = "label11";
-            label11.Size = new Size(97, 20);
-            label11.TabIndex = 9;
-            label11.Text = "Id do Cliente:";
+            dtpNasc.Format = DateTimePickerFormat.Custom;
+            dtpNasc.Location = new Point(176, 215);
+            dtpNasc.Name = "dtpNasc";
+            dtpNasc.Size = new Size(99, 27);
+            dtpNasc.TabIndex = 16;
             // 
-            // label12
+            // txbEmail
             // 
-            label12.AutoSize = true;
-            label12.Location = new Point(329, 268);
-            label12.Name = "label12";
-            label12.Size = new Size(52, 20);
-            label12.TabIndex = 10;
-            label12.Text = "Bairro:";
+            txbEmail.Location = new Point(78, 173);
+            txbEmail.Name = "txbEmail";
+            txbEmail.Size = new Size(197, 27);
+            txbEmail.TabIndex = 15;
             // 
-            // label13
+            // txbNome
             // 
-            label13.AutoSize = true;
-            label13.Location = new Point(611, 76);
-            label13.Name = "label13";
-            label13.Size = new Size(57, 20);
-            label13.TabIndex = 11;
-            label13.Text = "Estado:";
+            txbNome.Location = new Point(78, 122);
+            txbNome.Name = "txbNome";
+            txbNome.Size = new Size(197, 27);
+            txbNome.TabIndex = 14;
+            // 
+            // maskedCPF
+            // 
+            maskedCPF.Location = new Point(78, 76);
+            maskedCPF.Mask = "000000000-00";
+            maskedCPF.Name = "maskedCPF";
+            maskedCPF.Size = new Size(197, 27);
+            maskedCPF.TabIndex = 13;
             // 
             // label14
             // 
@@ -296,121 +305,113 @@
             label14.TabIndex = 12;
             label14.Text = "Telefone:";
             // 
-            // maskedCPF
+            // label13
             // 
-            maskedCPF.Location = new Point(78, 76);
-            maskedCPF.Mask = "000000000-00";
-            maskedCPF.Name = "maskedCPF";
-            maskedCPF.Size = new Size(197, 27);
-            maskedCPF.TabIndex = 13;
+            label13.AutoSize = true;
+            label13.Location = new Point(611, 76);
+            label13.Name = "label13";
+            label13.Size = new Size(57, 20);
+            label13.TabIndex = 11;
+            label13.Text = "Estado:";
             // 
-            // txbNome
+            // label12
             // 
-            txbNome.Location = new Point(78, 122);
-            txbNome.Name = "txbNome";
-            txbNome.Size = new Size(197, 27);
-            txbNome.TabIndex = 14;
+            label12.AutoSize = true;
+            label12.Location = new Point(329, 268);
+            label12.Name = "label12";
+            label12.Size = new Size(52, 20);
+            label12.TabIndex = 10;
+            label12.Text = "Bairro:";
             // 
-            // txbEmail
+            // label11
             // 
-            txbEmail.Location = new Point(78, 173);
-            txbEmail.Name = "txbEmail";
-            txbEmail.Size = new Size(197, 27);
-            txbEmail.TabIndex = 15;
+            label11.AutoSize = true;
+            label11.Location = new Point(611, 176);
+            label11.Name = "label11";
+            label11.Size = new Size(97, 20);
+            label11.TabIndex = 9;
+            label11.Text = "Id do Cliente:";
             // 
-            // dtpNasc
+            // label10
             // 
-            dtpNasc.Format = DateTimePickerFormat.Custom;
-            dtpNasc.Location = new Point(176, 215);
-            dtpNasc.Name = "dtpNasc";
-            dtpNasc.Size = new Size(99, 27);
-            dtpNasc.TabIndex = 16;
+            label10.AutoSize = true;
+            label10.Location = new Point(329, 220);
+            label10.Name = "label10";
+            label10.Size = new Size(38, 20);
+            label10.TabIndex = 8;
+            label10.Text = "Cep:";
             // 
-            // cbSexo
+            // label9
             // 
-            cbSexo.FormattingEnabled = true;
-            cbSexo.Location = new Point(78, 265);
-            cbSexo.Name = "cbSexo";
-            cbSexo.Size = new Size(106, 28);
-            cbSexo.TabIndex = 17;
+            label9.AutoSize = true;
+            label9.Location = new Point(329, 176);
+            label9.Name = "label9";
+            label9.Size = new Size(59, 20);
+            label9.TabIndex = 7;
+            label9.Text = "Cidade:";
             // 
-            // btnDeletar
+            // label8
             // 
-            btnDeletar.Location = new Point(709, 441);
-            btnDeletar.Name = "btnDeletar";
-            btnDeletar.Size = new Size(131, 64);
-            btnDeletar.TabIndex = 9;
-            btnDeletar.Text = "Deletar";
-            btnDeletar.UseVisualStyleBackColor = true;
+            label8.AutoSize = true;
+            label8.Location = new Point(329, 125);
+            label8.Name = "label8";
+            label8.Size = new Size(37, 20);
+            label8.TabIndex = 6;
+            label8.Text = "Rua:";
             // 
-            // maskNumero
+            // label7
             // 
-            maskNumero.Location = new Point(454, 76);
-            maskNumero.Name = "maskNumero";
-            maskNumero.Size = new Size(125, 27);
-            maskNumero.TabIndex = 18;
+            label7.AutoSize = true;
+            label7.Location = new Point(329, 76);
+            label7.Name = "label7";
+            label7.Size = new Size(122, 20);
+            label7.TabIndex = 5;
+            label7.Text = "Numero da Casa:";
             // 
-            // txbRua
+            // label6
             // 
-            txbRua.Location = new Point(372, 122);
-            txbRua.Name = "txbRua";
-            txbRua.Size = new Size(207, 27);
-            txbRua.TabIndex = 19;
+            label6.AutoSize = true;
+            label6.Location = new Point(22, 268);
+            label6.Name = "label6";
+            label6.Size = new Size(44, 20);
+            label6.TabIndex = 4;
+            label6.Text = "Sexo:";
             // 
-            // maskCep
+            // label5
             // 
-            maskCep.Location = new Point(393, 217);
-            maskCep.Mask = "00000-000";
-            maskCep.Name = "maskCep";
-            maskCep.Size = new Size(186, 27);
-            maskCep.TabIndex = 21;
+            label5.AutoSize = true;
+            label5.Location = new Point(22, 220);
+            label5.Name = "label5";
+            label5.Size = new Size(148, 20);
+            label5.TabIndex = 3;
+            label5.Text = "Data de Nascimento:";
             // 
-            // txbBairro
+            // label4
             // 
-            txbBairro.Location = new Point(397, 265);
-            txbBairro.Name = "txbBairro";
-            txbBairro.Size = new Size(182, 27);
-            txbBairro.TabIndex = 22;
+            label4.AutoSize = true;
+            label4.Location = new Point(22, 176);
+            label4.Name = "label4";
+            label4.Size = new Size(49, 20);
+            label4.TabIndex = 2;
+            label4.Text = "Email:";
             // 
-            // cbEstado
+            // label3
             // 
-            cbEstado.FormattingEnabled = true;
-            cbEstado.Location = new Point(674, 73);
-            cbEstado.Name = "cbEstado";
-            cbEstado.Size = new Size(72, 28);
-            cbEstado.TabIndex = 23;
+            label3.AutoSize = true;
+            label3.Location = new Point(22, 125);
+            label3.Name = "label3";
+            label3.Size = new Size(53, 20);
+            label3.TabIndex = 1;
+            label3.Text = "Nome:";
             // 
-            // txbCidade
+            // label2
             // 
-            txbCidade.Location = new Point(393, 173);
-            txbCidade.Name = "txbCidade";
-            txbCidade.Size = new Size(186, 27);
-            txbCidade.TabIndex = 24;
-            // 
-            // maskTelefone
-            // 
-            maskTelefone.Location = new Point(683, 122);
-            maskTelefone.Mask = "(00) 00000-0000";
-            maskTelefone.Name = "maskTelefone";
-            maskTelefone.Size = new Size(157, 27);
-            maskTelefone.TabIndex = 25;
-            // 
-            // maskedID
-            // 
-            maskedID.Enabled = false;
-            maskedID.Location = new Point(714, 173);
-            maskedID.Name = "maskedID";
-            maskedID.Size = new Size(126, 27);
-            maskedID.TabIndex = 26;
-            // 
-            // btnSalvarA
-            // 
-            btnSalvarA.Location = new Point(22, 421);
-            btnSalvarA.Name = "btnSalvarA";
-            btnSalvarA.Size = new Size(148, 70);
-            btnSalvarA.TabIndex = 27;
-            btnSalvarA.Text = "Salvar";
-            btnSalvarA.UseVisualStyleBackColor = true;
+            label2.AutoSize = true;
+            label2.Location = new Point(22, 76);
+            label2.Name = "label2";
+            label2.Size = new Size(36, 20);
+            label2.TabIndex = 0;
+            label2.Text = "CPF:";
             // 
             // PesquisaCliente
             // 
