@@ -21,6 +21,47 @@ namespace TCC_SIA.View
         {
             InitializeComponent();
 
+            #region Campos dos estados
+            //Adiciona campos de estados do Brasil
+            cbEstado.Items.AddRange(new string[]
+            {
+                "AC",
+                "AL",
+                "AP",
+                "AM",
+                "BA",
+                "CE",
+                "DF",
+                "ES",
+                "GO",
+                "MA",
+                "MT",
+                "MS",
+                "MG",
+                "PA",
+                "PB",
+                "PR",
+                "PE",
+                "PI",
+                "RJ",
+                "RN",
+                "RS",
+                "RO",
+                "RR",
+                "SC",
+                "SP",
+                "SE",
+                "TO"
+            });
+            #endregion
+
+            cbSexo.Items.AddRange(new string[]
+           {
+               "Masculino",
+               "Feminino",
+               "Outro"
+           });
+
             #region Carrega as informações gerais dos clientes
             // Criação do objeto NpgsqlDataReader cliente e ControleVeiculo
             controleCliente cCliente = new controleCliente();
