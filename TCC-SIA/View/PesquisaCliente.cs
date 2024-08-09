@@ -86,5 +86,33 @@ namespace TCC_SIA.View
             }
         }
         #endregion
+
+        private void AtualizarCliente(object sender, EventArgs e)
+        {
+            if (dataGridViewPesquisar.SelectedRows.Count > 0)
+            {
+                DialogResult res = MessageBox.Show("Deseja atualizar este registro?", "Atualização de registro",
+                    MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+                if (res == DialogResult.OK)
+                {
+                    maskedID.Text = dataGridViewPesquisar.CurrentRow.Cells[0].Value.ToString();
+                    maskedCPF.Text = dataGridViewPesquisar.CurrentRow.Cells[1].Value.ToString();
+                    txbNome.Text = dataGridViewPesquisar.CurrentRow.Cells[2].Value.ToString();
+                    txbEmail.Text = dataGridViewPesquisar.CurrentRow.Cells[3].Value.ToString();
+                    dtpNasc.Value = Convert.ToDateTime(dataGridViewPesquisar.CurrentRow.Cells[4].Value.ToString());
+                    cbSexo.SelectedIndex = cbSexo.FindString(dataGridViewPesquisar.CurrentRow.Cells[5].Value.ToString());
+                    maskTelefone.Text = dataGridViewPesquisar.CurrentRow.Cells[6].Value.ToString();
+                    maskNumero.Text = dataGridViewPesquisar.CurrentRow.Cells[7].Value.ToString();
+                    txbRua.Text = dataGridViewPesquisar.CurrentRow.Cells[8].Value.ToString();
+                    txbCidade.Text = dataGridViewPesquisar.CurrentRow.Cells[9].Value.ToString();
+                    maskCep.Text = dataGridViewPesquisar.CurrentRow.Cells[10].Value.ToString();
+                    txbBairro.Text = dataGridViewPesquisar.CurrentRow.Cells[11].Value.ToString();
+                    cbEstado.SelectedIndex = cbEstado.FindStringExact(dataGridViewPesquisar.CurrentRow.Cells[12].Value.ToString());
+                    tabControl1.SelectedTab = tabPage2;
+
+                }
+            }
+        }
     }
 }
