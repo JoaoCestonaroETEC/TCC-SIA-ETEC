@@ -107,11 +107,11 @@ namespace TCC_SIA.Controller
         public NpgsqlDataReader pesquisarCliente(string cliente)
         {
             //String sql de pesquisar
-            string sql = "SELECT C.CPFCLIENTE, C.NOMECLIENTE, C.EMAILCLIENTE, C.DATANASC_CLIENTE, C.SEXO, " +
+            string sql = "SELECT C.IDCLIENTE, C.CPFCLIENTE, C.NOMECLIENTE, C.EMAILCLIENTE, C.DATANASC_CLIENTE, C.SEXO, " +
              "E.NUMERO, E.RUA, E.CIDADE, E.CEP, E.BAIRRO, E.ESTADO, T.TELEFONE " +
              "FROM CLIENTE C " +
-             "INNER JOIN CLIENTE_ENDERECO E ON C.CPFCLIENTE = E.CPFCLIENTE " +
-             "INNER JOIN CLIENTE_TELEFONE T ON C.CPFCLIENTE = T.CPFCLIENTE " +
+             "INNER JOIN CLIENTE_ENDERECO E ON C.IDCLIENTE = E.IDCLIENTE " +
+             "INNER JOIN CLIENTE_TELEFONE T ON C.IDCLIENTE = T.IDCLIENTE " +
              "WHERE C.NOMECLIENTE LIKE '" + cliente + "%';";
 
             //Abrindo conexão com o banco de dados
