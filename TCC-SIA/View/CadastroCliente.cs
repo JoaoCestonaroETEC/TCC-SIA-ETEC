@@ -91,14 +91,8 @@ namespace TCC_SIA.View
             //Definindo os valores nos atributos
 
             //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
-            long cpf;
-            if (!long.TryParse(maskedTextBoxCPF.Text, out cpf))
-            {
-                MessageBox.Show("CPF inválido.");
-                return;
-            }
 
-            mCliente.setCpfCliente(cpf);
+            mCliente.setCpfCliente (maskedTextBoxCPF.Text);
             mCliente.setNomeCliente(textBoxNome.Text);
             mCliente.setEmailCliente(maskedTextBoxEmail.Text);
             mCliente.setDataNascCliente(Convert.ToDateTime(dateTimePickerNasc.Text));
