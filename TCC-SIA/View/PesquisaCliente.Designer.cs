@@ -104,6 +104,7 @@
             btnDeletar.TabIndex = 9;
             btnDeletar.Text = "Deletar";
             btnDeletar.UseVisualStyleBackColor = true;
+            btnDeletar.Click += btnDeletar_Click;
             // 
             // btnAtualizar
             // 
@@ -124,6 +125,7 @@
             buttonPesquisar.TabIndex = 7;
             buttonPesquisar.Text = "Pesquisar";
             buttonPesquisar.UseVisualStyleBackColor = true;
+            buttonPesquisar.Click += buttonPesquisar_Click_1;
             // 
             // label1
             // 
@@ -197,6 +199,7 @@
             btnSalvarA.TabIndex = 27;
             btnSalvarA.Text = "Salvar";
             btnSalvarA.UseVisualStyleBackColor = true;
+            btnSalvarA.Click += btnSalvarA_Click;
             // 
             // maskedID
             // 
