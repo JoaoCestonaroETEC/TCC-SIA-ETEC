@@ -107,11 +107,11 @@ namespace TCC_SIA.Controller
         public NpgsqlDataReader pesquisarCliente(string cliente)
         {
             //String sql de pesquisar
-            string sql = "SELECT C.CPFCLIENTE, C.NOMECLIENTE, C.EMAILCLIENTE, C.DATANASC_CLIENTE, C.SEXO, " +
+            string sql = "SELECT C.IDCLIENTE, C.CPFCLIENTE, C.NOMECLIENTE, C.EMAILCLIENTE, C.DATANASC_CLIENTE, C.SEXO, " +
              "E.NUMERO, E.RUA, E.CIDADE, E.CEP, E.BAIRRO, E.ESTADO, T.TELEFONE " +
              "FROM CLIENTE C " +
-             "INNER JOIN CLIENTE_ENDERECO E ON C.CPFCLIENTE = E.CPFCLIENTE " +
-             "INNER JOIN CLIENTE_TELEFONE T ON C.CPFCLIENTE = T.CPFCLIENTE " +
+             "INNER JOIN CLIENTE_ENDERECO E ON C.IDCLIENTE = E.IDCLIENTE " +
+             "INNER JOIN CLIENTE_TELEFONE T ON C.IDCLIENTE = T.IDCLIENTE " +
              "WHERE C.NOMECLIENTE LIKE '" + cliente + "%';";
 
             //Abrindo conexão com o banco de dados
@@ -140,5 +140,47 @@ namespace TCC_SIA.Controller
 
         }
         #endregion
+
+        public string atualizaCliente(Cliente mCliente)
+        {
+            string sql = "update cliente set nomecliente = @nomecliente, " +
+                "emailcliente = @emailcliente, datanasc_cliente = @datanasc_cliente, " +
+                "sexo = @sexo, cpfcliente = @cpfcliente where idcliente = @idcliente;" +
+                "update cliente_endereco set numero = @numero, rua = @rua, cidade = @cidade, " +
+                "cep = @cep, bairro = @bairro, estado = @estado where idcliente = @idcliente;" +
+                "update cliente_telefone set telefone = @telefone where idcliente = @idcliente;";
+
+
+
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            try
+            {
+                comm.Parameters.AddWithValue("@IDCLIENTE", mCliente.getIDCliente());
+                comm.Parameters.AddWithValue("@CPFCLIENTE", mCliente.getCpfCliente());
+                comm.Parameters.AddWithValue("@NOMECLIENTE", mCliente.getNomeCliente());
+                comm.Parameters.AddWithValue("@EMAILCLIENTE", mCliente.getEmailCliente());
+                comm.Parameters.AddWithValue("@DATANASC_CLIENTE", mCliente.getDataNascCliente());
+                comm.Parameters.AddWithValue("@SEXO", mCliente.getSexo());
+                comm.Parameters.AddWithValue("@NUMERO", mCliente.getNumero());
+                comm.Parameters.AddWithValue("@RUA", mCliente.getRua());
+                comm.Parameters.AddWithValue("@CIDADE", mCliente.getCidade());
+                comm.Parameters.AddWithValue("@CEP", mCliente.getCep());
+                comm.Parameters.AddWithValue("@BAIRRO", mCliente.getBairro());
+                comm.Parameters.AddWithValue("@ESTADO", mCliente.getUf());
+                comm.Parameters.AddWithValue("@TELEFONE", mCliente.getTelefone());
+
+                comm.ExecuteNonQuery();
+                return "Cliente atualizado!";
+            }
+            catch (NpgsqlException ex)
+            {
+                //return ex.ToString();
+                return "Erro ao atualizar!";
+            }
+        }
+
     }
 }
