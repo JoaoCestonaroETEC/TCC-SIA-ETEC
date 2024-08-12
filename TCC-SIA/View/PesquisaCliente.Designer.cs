@@ -36,6 +36,8 @@
             textBoxPesquisar = new TextBox();
             dataGridViewPesquisar = new DataGridView();
             tabPage2 = new TabPage();
+            label14 = new Label();
+            maskedTextBoxID = new MaskedTextBox();
             button1 = new Button();
             maskedTextBoxEmail = new MaskedTextBox();
             comboBoxSexo = new ComboBox();
@@ -112,6 +114,7 @@
             buttonPesquisar.TabIndex = 7;
             buttonPesquisar.Text = "Pesquisar";
             buttonPesquisar.UseVisualStyleBackColor = true;
+            buttonPesquisar.Click += buttonPesquisar_Click_1;
             // 
             // label1
             // 
@@ -142,6 +145,8 @@
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(label14);
+            tabPage2.Controls.Add(maskedTextBoxID);
             tabPage2.Controls.Add(button1);
             tabPage2.Controls.Add(maskedTextBoxEmail);
             tabPage2.Controls.Add(comboBoxSexo);
@@ -175,6 +180,23 @@
             tabPage2.Text = "Atualizar";
             tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(12, 255);
+            label14.Name = "label14";
+            label14.Size = new Size(27, 20);
+            label14.TabIndex = 58;
+            label14.Text = "ID:";
+            // 
+            // maskedTextBoxID
+            // 
+            maskedTextBoxID.Enabled = false;
+            maskedTextBoxID.Location = new Point(45, 252);
+            maskedTextBoxID.Name = "maskedTextBoxID";
+            maskedTextBoxID.Size = new Size(125, 27);
+            maskedTextBoxID.TabIndex = 57;
+            // 
             // button1
             // 
             button1.Location = new Point(12, 370);
@@ -183,6 +205,7 @@
             button1.TabIndex = 56;
             button1.Text = "Salvar";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // maskedTextBoxEmail
             // 
@@ -448,5 +471,7 @@
         private Label label13;
         private Button button1;
         private LinkLabel linkLabel1;
+        private Label label14;
+        private MaskedTextBox maskedTextBoxID;
     }
 }

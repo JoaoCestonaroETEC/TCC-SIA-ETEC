@@ -69,20 +69,7 @@ namespace TCC_SIA.View
         #region Cadastrar cliente
         //Evento de cadastrar cliente
         private void buttonCadastrar_Click(object sender, EventArgs e)
-        {
-            // Verifica se os campos obrigatórios foram preenchidos
-            if (string.IsNullOrWhiteSpace(maskedTextBoxCPF.Text) &&
-                string.IsNullOrWhiteSpace(textBoxNome.Text) &&
-                string.IsNullOrWhiteSpace(maskedTextBoxNumero.Text) &&
-                string.IsNullOrWhiteSpace(maskedTextBoxCep.Text) &&
-                string.IsNullOrWhiteSpace(textBoxBairro.Text) &&
-                string.IsNullOrWhiteSpace(textBoxCidade.Text) &&
-                string.IsNullOrWhiteSpace(textBoxRua.Text) &&
-                string.IsNullOrWhiteSpace(comboBoxUf.Text))
-            {
-                MessageBox.Show("Preencha todos os campos! (exceto email, data de nascimento, sexo e telefone)");
-                return;
-            }
+        { 
 
             //Criação do objeto Cliente e controleCliente
             Cliente mCliente = new Cliente();
@@ -98,7 +85,8 @@ namespace TCC_SIA.View
                 return;
             }
 
-            mCliente.setCpfCliente(cpf);
+            
+            mCliente.setCpfCliente(maskedTextBoxCPF.Text);
             mCliente.setNomeCliente(textBoxNome.Text);
             mCliente.setEmailCliente(maskedTextBoxEmail.Text);
             mCliente.setDataNascCliente(Convert.ToDateTime(dateTimePickerNasc.Text));
@@ -121,6 +109,8 @@ namespace TCC_SIA.View
             {
                 mCliente.setCep(cep);
             }
+
+            bool cpfValido = ValidaCPF.IsCpf(maskedTextBoxCPF.Text);
 
             mCliente.setBairro(textBoxBairro.Text);
             mCliente.setUf(comboBoxUf.Text);
