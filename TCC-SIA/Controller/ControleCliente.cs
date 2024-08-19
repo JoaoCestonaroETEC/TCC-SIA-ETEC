@@ -18,22 +18,26 @@ namespace TCC_SIA.Controller
         {
             //String sql de inserção
             string sql = "INSERT INTO CLIENTE(CPFCLIENTE, NOMECLIENTE, EMAILCLIENTE, DATANASC_CLIENTE, SEXO) " +
-                "VALUES(@CPFCLIENTE, @NOMECLIENTE, @EMAILCLIENTE, @DATANASC_CLIENTE, @SEXO);" +
-                "INSERT INTO CLIENTE_ENDERECO(CPFCLIENTE, NUMERO, RUA, CIDADE, CEP, BAIRRO, ESTADO) " +
-                "VALUES(@CPFCLIENTE, @NUMERO, @RUA, @CIDADE, @CEP, @BAIRRO, @ESTADO);" +
-                "INSERT INTO CLIENTE_TELEFONE(CPFCLIENTE, TELEFONE) " +
-                "VALUES(@CPFCLIENTE, @TELEFONE);";
-
+                "VALUES(@CPFCLIENTE, @NOMECLIENTE, @EMAILCLIENTE, @DATANASC_CLIENTE, @SEXO) RETURNING IDCLIENTE;" +
+                "INSERT INTO CLIENTE_ENDERECO(IDCLIENTE, NUMERO, RUA, CIDADE, CEP, BAIRRO, ESTADO) " +
+                "VALUES(@IDCLIENTE, @NUMERO, @RUA, @CIDADE, @CEP, @BAIRRO, @ESTADO);" +
+                "INSERT INTO CLIENTE_TELEFONE(IDCLIENTE, TELEFONE) " +
+                "VALUES(@IDCLIENTE, @TELEFONE);";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();
             NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
-
             //Fazendo o try
+
+            long idCliente = 0; // Declarar a variável antes do try
             try
             {
+
+                idCliente = Convert.ToInt64(comm.ExecuteScalar());
+
                 //Definindo os valores a serem postos nos campos
+                comm.Parameters.AddWithValue("@IDCLIENTE", idCliente);
                 comm.Parameters.AddWithValue("@CPFCLIENTE", mCliente.getCpfCliente());
                 comm.Parameters.AddWithValue("@NOMECLIENTE", mCliente.getNomeCliente());
                 comm.Parameters.AddWithValue("@EMAILCLIENTE", mCliente.getEmailCliente());
