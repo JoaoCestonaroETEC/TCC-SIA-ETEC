@@ -18,42 +18,47 @@ namespace TCC_SIA.Controller
         {
             //String sql de inserção
             string sql = "INSERT INTO CLIENTE(CPFCLIENTE, NOMECLIENTE, EMAILCLIENTE, DATANASC_CLIENTE, SEXO) " +
-                "VALUES(@CPFCLIENTE, @NOMECLIENTE, @EMAILCLIENTE, @DATANASC_CLIENTE, @SEXO) RETURNING IDCLIENTE;" +
-                "INSERT INTO CLIENTE_ENDERECO(IDCLIENTE, NUMERO, RUA, CIDADE, CEP, BAIRRO, ESTADO) " +
-                "VALUES(@IDCLIENTE, @NUMERO, @RUA, @CIDADE, @CEP, @BAIRRO, @ESTADO);" +
-                "INSERT INTO CLIENTE_TELEFONE(IDCLIENTE, TELEFONE) " +
+                "VALUES(@CPFCLIENTE, @NOMECLIENTE, @EMAILCLIENTE, @DATANASC_CLIENTE, @SEXO) RETURNING IDCLIENTE;";
+            string sql2 = "INSERT INTO CLIENTE_ENDERECO(IDCLIENTE, NUMERO, RUA, CIDADE, CEP, BAIRRO, ESTADO) " +
+                "VALUES(@IDCLIENTE, @NUMERO, @RUA, @CIDADE, @CEP, @BAIRRO, @ESTADO);";
+            string sql3 = "INSERT INTO CLIENTE_TELEFONE(IDCLIENTE, TELEFONE) " +
                 "VALUES(@IDCLIENTE, @TELEFONE);";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();
             NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+            NpgsqlCommand comm2 = new NpgsqlCommand(sql2, conn);
+            NpgsqlCommand comm3 = new NpgsqlCommand(sql3, conn);
             //Fazendo o try
 
-            long idCliente = 0; // Declarar a variável antes do try
+            var idCliente = 0; // Declarar a variável antes do try
             try
             {
 
-                idCliente = Convert.ToInt64(comm.ExecuteScalar());
-
                 //Definindo os valores a serem postos nos campos
-                comm.Parameters.AddWithValue("@IDCLIENTE", idCliente);
                 comm.Parameters.AddWithValue("@CPFCLIENTE", mCliente.getCpfCliente());
                 comm.Parameters.AddWithValue("@NOMECLIENTE", mCliente.getNomeCliente());
                 comm.Parameters.AddWithValue("@EMAILCLIENTE", mCliente.getEmailCliente());
                 comm.Parameters.AddWithValue("@DATANASC_CLIENTE", mCliente.getDataNascCliente());
                 comm.Parameters.AddWithValue("@SEXO", mCliente.getSexo());
-                comm.Parameters.AddWithValue("@NUMERO", mCliente.getNumero());
-                comm.Parameters.AddWithValue("RUA", mCliente.getRua());
-                comm.Parameters.AddWithValue("@CIDADE", mCliente.getCidade());
-                comm.Parameters.AddWithValue("@CEP", mCliente.getCep());
-                comm.Parameters.AddWithValue("@BAIRRO", mCliente.getBairro());
-                comm.Parameters.AddWithValue("@ESTADO", mCliente.getUf());
-                comm.Parameters.AddWithValue("@TELEFONE", mCliente.getTelefone());
 
+                idCliente = (int)comm.ExecuteScalar();
+
+                comm2.Parameters.AddWithValue("IDCLIENTE", idCliente);
+                comm2.Parameters.AddWithValue("@NUMERO", mCliente.getNumero());
+                comm2.Parameters.AddWithValue("RUA", mCliente.getRua());
+                comm2.Parameters.AddWithValue("@CIDADE", mCliente.getCidade());
+                comm2.Parameters.AddWithValue("@CEP", mCliente.getCep());
+                comm2.Parameters.AddWithValue("@BAIRRO", mCliente.getBairro());
+                comm2.Parameters.AddWithValue("@ESTADO", mCliente.getUf());
+
+                comm2.ExecuteNonQuery();
+
+                comm3.Parameters.AddWithValue("@TELEFONE", mCliente.getTelefone());
+
+                comm3.ExecuteNonQuery();
                 //Executando o Query
-                comm.ExecuteNonQuery();
-
                 //Retornando um valor
                 return "Cliente cadastrado com sucesso!";
             }
