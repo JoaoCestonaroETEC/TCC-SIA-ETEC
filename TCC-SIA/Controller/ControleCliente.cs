@@ -18,11 +18,20 @@ namespace TCC_SIA.Controller
         {
             //String sql de inserção
             string sql = "INSERT INTO CLIENTE(CPFCLIENTE, NOMECLIENTE, EMAILCLIENTE, DATANASC_CLIENTE, SEXO) " +
+<<<<<<< HEAD
                 "VALUES(@CPFCLIENTE, @NOMECLIENTE, @EMAILCLIENTE, @DATANASC_CLIENTE, @SEXO) RETURNING IDCLIENTE;";
             string sql2 = "INSERT INTO CLIENTE_ENDERECO(IDCLIENTE, NUMERO, RUA, CIDADE, CEP, BAIRRO, ESTADO) " +
                 "VALUES(@IDCLIENTE, @NUMERO, @RUA, @CIDADE, @CEP, @BAIRRO, @ESTADO);";
             string sql3 = "INSERT INTO CLIENTE_TELEFONE(IDCLIENTE, TELEFONE) " +
                 "VALUES(@IDCLIENTE, @TELEFONE);";
+=======
+                "VALUES(@CPFCLIENTE, @NOMECLIENTE, @EMAILCLIENTE, @DATANASC_CLIENTE, @SEXO) RETURNING IDCLIENTE;" +
+                "INSERT INTO CLIENTE_ENDERECO(IDCLIENTE, NUMERO, RUA, CIDADE, CEP, BAIRRO, ESTADO) " +
+                "VALUES(@IDCLIENTE, @NUMERO, @RUA, @CIDADE, @CEP, @BAIRRO, @ESTADO);" +
+                "INSERT INTO CLIENTE_TELEFONE(IDCLIENTE, TELEFONE) " +
+                "VALUES(@IDCLIENTE, @TELEFONE);";
+
+>>>>>>> 51b85ef38cdc2500c00590ae9567cd908b46c782
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
@@ -35,8 +44,15 @@ namespace TCC_SIA.Controller
             var idCliente = 0; // Declarar a variável antes do try
             try
             {
+<<<<<<< HEAD
 
+=======
+                string idCliente = "IDCLIENTE";
+                long idCliente1 = (long)Convert.ToDouble(idCliente);
+>>>>>>> 51b85ef38cdc2500c00590ae9567cd908b46c782
                 //Definindo os valores a serem postos nos campos
+
+                comm.Parameters.AddWithValue("@IDCLIENTE", idCliente1);
                 comm.Parameters.AddWithValue("@CPFCLIENTE", mCliente.getCpfCliente());
                 comm.Parameters.AddWithValue("@NOMECLIENTE", mCliente.getNomeCliente());
                 comm.Parameters.AddWithValue("@EMAILCLIENTE", mCliente.getEmailCliente());
