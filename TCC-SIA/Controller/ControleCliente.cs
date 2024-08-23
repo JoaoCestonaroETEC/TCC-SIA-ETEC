@@ -17,9 +17,12 @@ namespace TCC_SIA.Controller
         public string cadastroCliente(Cliente mCliente)
         {
             //String SQL de inserção
+<<<<<<< HEAD
             string sqlVef = "SELECT COUNT(1) FROM CLIENTE WHERE CPFCLIENTE = @CPFCLIENTE;";
 
             //Strings de SQL de inserções
+=======
+>>>>>>> ebe40bf90bf3282c2bcb63afcc2215df943fb0da
             string sql = "INSERT INTO CLIENTE(CPFCLIENTE, NOMECLIENTE, EMAILCLIENTE, DATANASC_CLIENTE, SEXO) " +
                 "VALUES(@CPFCLIENTE, @NOMECLIENTE, @EMAILCLIENTE, @DATANASC_CLIENTE, @SEXO) RETURNING IDCLIENTE;";
             string sql2 = "INSERT INTO CLIENTE_ENDERECO(IDCLIENTE, NUMERO, RUA, CIDADE, CEP, BAIRRO, ESTADO) " +
@@ -37,6 +40,7 @@ namespace TCC_SIA.Controller
 
             try
             {
+<<<<<<< HEAD
                 //Faz a verificação de o CPF já existe no Banco
                 commVef.Parameters.AddWithValue("@CPFCLIENTE", mCliente.getCpfCliente());
                 int cpfExists = Convert.ToInt32(commVef.ExecuteScalar());
@@ -48,6 +52,8 @@ namespace TCC_SIA.Controller
 
                 commVef.ExecuteNonQuery();
 
+=======
+>>>>>>> ebe40bf90bf3282c2bcb63afcc2215df943fb0da
                 // Definindo os valores a serem postos nos campos
                 comm.Parameters.AddWithValue("@CPFCLIENTE", mCliente.getCpfCliente());
                 comm.Parameters.AddWithValue("@NOMECLIENTE", mCliente.getNomeCliente());
@@ -58,7 +64,10 @@ namespace TCC_SIA.Controller
                 // Executa a query e retorna o ID do cliente
                 var idCliente = (int)comm.ExecuteScalar();
 
+<<<<<<< HEAD
                 // Definindo os valores a serem postos nos campos
+=======
+>>>>>>> ebe40bf90bf3282c2bcb63afcc2215df943fb0da
                 comm2.Parameters.AddWithValue("@IDCLIENTE", idCliente);
                 comm2.Parameters.AddWithValue("@NUMERO", mCliente.getNumero());
                 comm2.Parameters.AddWithValue("@RUA", mCliente.getRua());
@@ -69,7 +78,10 @@ namespace TCC_SIA.Controller
 
                 comm2.ExecuteNonQuery();
 
+<<<<<<< HEAD
                 // Definindo os valores a serem postos nos campos
+=======
+>>>>>>> ebe40bf90bf3282c2bcb63afcc2215df943fb0da
                 comm3.Parameters.AddWithValue("@IDCLIENTE", idCliente);
                 comm3.Parameters.AddWithValue("@TELEFONE", mCliente.getTelefone());
 
