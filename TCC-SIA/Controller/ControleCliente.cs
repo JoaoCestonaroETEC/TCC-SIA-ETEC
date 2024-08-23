@@ -16,54 +16,52 @@ namespace TCC_SIA.Controller
         //Criação do método de cadastrar cliente
         public string cadastroCliente(Cliente mCliente)
         {
-            //String sql de inserção
+            //String SQL de inserção
+            string sqlVef = "SELECT COUNT(1) FROM CLIENTE WHERE CPFCLIENTE = @CPFCLIENTE;";
+
+            //Strings de SQL de inserções
             string sql = "INSERT INTO CLIENTE(CPFCLIENTE, NOMECLIENTE, EMAILCLIENTE, DATANASC_CLIENTE, SEXO) " +
-<<<<<<< HEAD
                 "VALUES(@CPFCLIENTE, @NOMECLIENTE, @EMAILCLIENTE, @DATANASC_CLIENTE, @SEXO) RETURNING IDCLIENTE;";
             string sql2 = "INSERT INTO CLIENTE_ENDERECO(IDCLIENTE, NUMERO, RUA, CIDADE, CEP, BAIRRO, ESTADO) " +
                 "VALUES(@IDCLIENTE, @NUMERO, @RUA, @CIDADE, @CEP, @BAIRRO, @ESTADO);";
             string sql3 = "INSERT INTO CLIENTE_TELEFONE(IDCLIENTE, TELEFONE) " +
                 "VALUES(@IDCLIENTE, @TELEFONE);";
-=======
-                "VALUES(@CPFCLIENTE, @NOMECLIENTE, @EMAILCLIENTE, @DATANASC_CLIENTE, @SEXO) RETURNING IDCLIENTE;" +
-                "INSERT INTO CLIENTE_ENDERECO(IDCLIENTE, NUMERO, RUA, CIDADE, CEP, BAIRRO, ESTADO) " +
-                "VALUES(@IDCLIENTE, @NUMERO, @RUA, @CIDADE, @CEP, @BAIRRO, @ESTADO);" +
-                "INSERT INTO CLIENTE_TELEFONE(IDCLIENTE, TELEFONE) " +
-                "VALUES(@IDCLIENTE, @TELEFONE);";
 
->>>>>>> 51b85ef38cdc2500c00590ae9567cd908b46c782
-
-            //Abrindo conexão com o banco de dados
+            // Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand commVef = new NpgsqlCommand(sqlVef, conn);
             NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
             NpgsqlCommand comm2 = new NpgsqlCommand(sql2, conn);
             NpgsqlCommand comm3 = new NpgsqlCommand(sql3, conn);
-            //Fazendo o try
 
-            var idCliente = 0; // Declarar a variável antes do try
             try
             {
-<<<<<<< HEAD
+                //Faz a verificação de o CPF já existe no Banco
+                commVef.Parameters.AddWithValue("@CPFCLIENTE", mCliente.getCpfCliente());
+                int cpfExists = Convert.ToInt32(commVef.ExecuteScalar());
 
-=======
-                string idCliente = "IDCLIENTE";
-                long idCliente1 = (long)Convert.ToDouble(idCliente);
->>>>>>> 51b85ef38cdc2500c00590ae9567cd908b46c782
-                //Definindo os valores a serem postos nos campos
+                if (cpfExists > 0)
+                {
+                    return "CPF já cadastrado no sistema.";
+                }
 
-                comm.Parameters.AddWithValue("@IDCLIENTE", idCliente1);
+                commVef.ExecuteNonQuery();
+
+                // Definindo os valores a serem postos nos campos
                 comm.Parameters.AddWithValue("@CPFCLIENTE", mCliente.getCpfCliente());
                 comm.Parameters.AddWithValue("@NOMECLIENTE", mCliente.getNomeCliente());
                 comm.Parameters.AddWithValue("@EMAILCLIENTE", mCliente.getEmailCliente());
                 comm.Parameters.AddWithValue("@DATANASC_CLIENTE", mCliente.getDataNascCliente());
                 comm.Parameters.AddWithValue("@SEXO", mCliente.getSexo());
 
-                idCliente = (int)comm.ExecuteScalar();
+                // Executa a query e retorna o ID do cliente
+                var idCliente = (int)comm.ExecuteScalar();
 
-                comm2.Parameters.AddWithValue("IDCLIENTE", idCliente);
+                // Definindo os valores a serem postos nos campos
+                comm2.Parameters.AddWithValue("@IDCLIENTE", idCliente);
                 comm2.Parameters.AddWithValue("@NUMERO", mCliente.getNumero());
-                comm2.Parameters.AddWithValue("RUA", mCliente.getRua());
+                comm2.Parameters.AddWithValue("@RUA", mCliente.getRua());
                 comm2.Parameters.AddWithValue("@CIDADE", mCliente.getCidade());
                 comm2.Parameters.AddWithValue("@CEP", mCliente.getCep());
                 comm2.Parameters.AddWithValue("@BAIRRO", mCliente.getBairro());
@@ -71,23 +69,23 @@ namespace TCC_SIA.Controller
 
                 comm2.ExecuteNonQuery();
 
+                // Definindo os valores a serem postos nos campos
+                comm3.Parameters.AddWithValue("@IDCLIENTE", idCliente);
                 comm3.Parameters.AddWithValue("@TELEFONE", mCliente.getTelefone());
 
                 comm3.ExecuteNonQuery();
-                //Executando o Query
-                //Retornando um valor
+
+                // Retornando um valor
                 return "Cliente cadastrado com sucesso!";
             }
-            //Fazendo o catch
-            catch (NpgsqlException ex)
+            catch (Exception ex)  // Capturando todas as exceções para melhor diagnóstico
             {
-                //Retornando o erro
+                // Retornando o erro
                 return ex.ToString();
             }
-            //Encerrando a conexão
             finally
             {
-                //Método de desconectar
+                // Encerrando a conexão
                 con.desconectar();
             }
         }

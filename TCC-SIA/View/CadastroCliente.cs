@@ -92,7 +92,7 @@ namespace TCC_SIA.View
 
             //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
 
-            mCliente.setCpfCliente (maskedTextBoxCPF.Text);
+            mCliente.setCpfCliente(maskedTextBoxCPF.Text);
             mCliente.setNomeCliente(textBoxNome.Text);
             mCliente.setEmailCliente(maskedTextBoxEmail.Text);
             mCliente.setDataNascCliente(Convert.ToDateTime(dateTimePickerNasc.Text));
@@ -144,6 +144,7 @@ namespace TCC_SIA.View
                 e.Handled = true; //Impede a entrada de caracteres não numéricos
             }
         }
-        #endregion
+
+#endregion
     }
 }

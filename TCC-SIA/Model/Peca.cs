@@ -16,6 +16,8 @@ namespace TCC_SIA.Model
         private decimal valorPeca;
         private int quantPeca;
         private DateTime garantiaPeca;
+        public string fornecedor;
+        public DateTime dataAquisicao;
         #endregion
 
         #region Encapsulamento
@@ -85,6 +87,24 @@ namespace TCC_SIA.Model
         public void setGarantiaPeca(DateTime garantiaPeca)
         {
             this.garantiaPeca = garantiaPeca;
+        }
+        public string getFornecedor()
+        {
+            return fornecedor;
+        }
+
+        public void setFornecedor(string fornecedor)
+        {
+            this.fornecedor = fornecedor;
+        }
+        public DateTime getDataAquisicao()
+        {
+            return dataAquisicao;
+        }
+
+        public void setDataAquisao(DateTime dataAquisao)
+        {
+            this.dataAquisicao = dataAquisicao;
         }
         #endregion
     }

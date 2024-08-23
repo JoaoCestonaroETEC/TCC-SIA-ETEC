@@ -13,6 +13,7 @@ namespace TCC_SIA.Model
         #region Criação de atributo
         private int idCliente;
         private string cpfCliente;
+        private string cnpjCliente;
         private string nomeCliente;
         private string emailCliente;
         private DateTime datanascCliente;
@@ -24,6 +25,10 @@ namespace TCC_SIA.Model
         private string bairro;
         private string uf;
         private string telefone;
+        private string status;
+        private DateTime data;
+        private string obs;
+        private string razao;
         #endregion
 
         #region Encapsulamento
@@ -45,6 +50,15 @@ namespace TCC_SIA.Model
         public void setCpfCliente(string cpfCliente)
         {
             this.cpfCliente = cpfCliente;
+        }
+        public string getCNPJCliente()
+        {
+            return this.cnpjCliente;
+        }
+
+        public void setCNPJCLiente(string cnpjCliente)
+        {
+            this.cnpjCliente = cnpjCliente;
         }
         public string getNomeCliente()
         {
@@ -155,6 +169,42 @@ namespace TCC_SIA.Model
         public void setTelefone(string telefone)
         {
             this.telefone = telefone;
+        }
+        public string getStatus()
+        {
+            return this.status;
+        }
+
+        public void setStatus(string status)
+        {
+            this.status = status;
+        }
+        public DateTime getData()
+        {
+            return this.data;
+        }
+
+        public void setData(DateTime data)
+        {
+            this.data = data;
+        }
+        public string getObs()
+        {
+            return this.obs;
+        }
+
+        public void setObs(string obs)
+        {
+            this.obs = obs;
+        }
+        public string getRazao()
+        {
+            return this.razao;
+        }
+
+        public void setRazao(string razao)
+        {
+            this.razao = razao;
         }
         #endregion
     }
