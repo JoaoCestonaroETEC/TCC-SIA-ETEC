@@ -10,7 +10,7 @@ namespace TCC_SIA.Model
     {
         #region Criação de atributo
         private long idPedido;
-        private long cpfCliente;
+        private long idcliente;
         private long idVeiculo;
         private decimal valorTotalPedido;
         private decimal valorTotalPeca;
@@ -31,14 +31,14 @@ namespace TCC_SIA.Model
             this.idPedido = idPedido;
         }
 
-        public long getCpfCliente()
+        public long getIdCliente()
         {
-            return cpfCliente;
+            return idcliente;
         }
         
-        public void setCpfCliente(long cpfCliente)
+        public void setIdCliente(long idcliente)
         {
-            this.cpfCliente = cpfCliente;
+            this.idcliente = idcliente;
         }
         public long getIdVeiculo()
         {

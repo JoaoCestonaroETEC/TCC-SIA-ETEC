@@ -17,8 +17,8 @@ namespace TCC_SIA.Controller
         public string cadastroVeiculo(Veiculo mVeiculo)
         {
             //String sql de inserção
-            string sql = "INSERT INTO VEICULO(CPFCLIENTE, IDMARCAVEICULO, NOMEVEICULO, TIPOVEICULO, CORVEICULO, PLACAVEICULO, MODELOVEICULO) " +
-                "VALUES(@CPFCLIENTE, @IDMARCA, @NOMEVEICULO, @TIPOVEICULO, @CORVEICULO, @PLACAVEICULO, @MODELOVEICULO);";
+            string sql = "INSERT INTO VEICULO(IDCLIENTE, IDMARCAVEICULO, NOMEVEICULO, TIPOVEICULO, CORVEICULO, PLACAVEICULO, MODELOVEICULO) " +
+                "VALUES(@IDCLIENTE, @IDMARCA, @NOMEVEICULO, @TIPOVEICULO, @CORVEICULO, @PLACAVEICULO, @MODELOVEICULO);";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
@@ -29,7 +29,7 @@ namespace TCC_SIA.Controller
             try
             {
                 //Definindo os valores a serem postos nos campos
-                comm.Parameters.AddWithValue("@CPFCLIENTE", mVeiculo.getCpfCliente());
+                comm.Parameters.AddWithValue("@IDCLIENTE", mVeiculo.getIdCliente());
                 comm.Parameters.AddWithValue("@IDMARCA", mVeiculo.getIdMarca());
                 comm.Parameters.AddWithValue("@NOMEVEICULO", mVeiculo.getNomeVeiculo());
                 comm.Parameters.AddWithValue("@TIPOVEICULO", mVeiculo.getTipoVeiculo());
@@ -96,7 +96,7 @@ namespace TCC_SIA.Controller
         public NpgsqlDataReader listaVeiculoPorCliente(string cliente)
         {
             //String sql de listar
-            string sql = "SELECT * FROM VEICULO WHERE CPFCLIENTE ='" + cliente + "';";
+            string sql = "SELECT * FROM VEICULO WHERE IDCLIENTE ='" + cliente + "';";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();

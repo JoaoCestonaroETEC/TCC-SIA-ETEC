@@ -42,7 +42,7 @@
             maskedTextBoxPlaca = new MaskedTextBox();
             label1 = new Label();
             textBoxNome = new TextBox();
-            comboBoxCpf = new ComboBox();
+            comboBoxIdCliente = new ComboBox();
             label2 = new Label();
             textBox1 = new TextBox();
             label3 = new Label();
@@ -64,12 +64,12 @@
             // labelCpf
             // 
             labelCpf.AutoSize = true;
-            labelCpf.Location = new Point(26, 41);
+            labelCpf.Location = new Point(86, 39);
             labelCpf.Margin = new Padding(4, 0, 4, 0);
             labelCpf.Name = "labelCpf";
-            labelCpf.Size = new Size(151, 28);
+            labelCpf.Size = new Size(83, 28);
             labelCpf.TabIndex = 19;
-            labelCpf.Text = "Cpf do Cliente:";
+            labelCpf.Text = "Cliente:";
             // 
             // labelMarca
             // 
@@ -195,14 +195,14 @@
             textBoxNome.Size = new Size(366, 34);
             textBoxNome.TabIndex = 38;
             // 
-            // comboBoxCpf
+            // comboBoxIdCliente
             // 
-            comboBoxCpf.FormattingEnabled = true;
-            comboBoxCpf.Location = new Point(183, 35);
-            comboBoxCpf.Margin = new Padding(4, 5, 4, 5);
-            comboBoxCpf.Name = "comboBoxCpf";
-            comboBoxCpf.Size = new Size(366, 36);
-            comboBoxCpf.TabIndex = 39;
+            comboBoxIdCliente.FormattingEnabled = true;
+            comboBoxIdCliente.Location = new Point(183, 35);
+            comboBoxIdCliente.Margin = new Padding(4, 5, 4, 5);
+            comboBoxIdCliente.Name = "comboBoxIdCliente";
+            comboBoxIdCliente.Size = new Size(366, 36);
+            comboBoxIdCliente.TabIndex = 39;
             // 
             // label2
             // 
@@ -374,7 +374,7 @@
             Controls.Add(label3);
             Controls.Add(textBox1);
             Controls.Add(label2);
-            Controls.Add(comboBoxCpf);
+            Controls.Add(comboBoxIdCliente);
             Controls.Add(textBoxNome);
             Controls.Add(label1);
             Controls.Add(maskedTextBoxPlaca);
@@ -413,7 +413,7 @@
         private MaskedTextBox maskedTextBoxPlaca;
         private Label label1;
         private TextBox textBoxNome;
-        private ComboBox comboBoxCpf;
+        private ComboBox comboBoxIdCliente;
         private Label label2;
         private TextBox textBox1;
         private Label label3;

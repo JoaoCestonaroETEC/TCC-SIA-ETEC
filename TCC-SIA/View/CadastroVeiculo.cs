@@ -54,7 +54,7 @@ namespace TCC_SIA.View
         private void buttonCadastrar_Click(object sender, EventArgs e)
         {
             // Verifica se os campos obrigatórios foram preenchidos
-            if (string.IsNullOrWhiteSpace(comboBoxCpf.Text) ||
+            if (string.IsNullOrWhiteSpace(comboBoxIdCliente.Text) ||
                 string.IsNullOrWhiteSpace(textBoxNome.Text) ||
                 string.IsNullOrWhiteSpace(comboBoxTipo.Text) ||
                 string.IsNullOrWhiteSpace(maskedTextBoxPlaca.Text))
@@ -68,7 +68,7 @@ namespace TCC_SIA.View
             controleVeiculo cVeiculo = new controleVeiculo();
 
             //Definindo os valores nos atributos
-            mVeiculo.setCpfCliente(Convert.ToInt64(comboBoxCpf.SelectedValue));
+            mVeiculo.setIdCliente(Convert.ToInt64(comboBoxIdCliente.SelectedValue));
             mVeiculo.setIdMarca(Convert.ToInt64(comboBoxMarca.SelectedValue));
             mVeiculo.setNomeVeiculo(textBoxNome.Text);
             mVeiculo.setTipoVeiculo(comboBoxTipo.Text);
@@ -96,13 +96,13 @@ namespace TCC_SIA.View
             dtCliente.Load(cliente);
 
             //Preencher a combobox com os dados do DataTable
-            comboBoxCpf.DataSource = dtCliente;
+            comboBoxIdCliente.DataSource = dtCliente;
 
             //Define qual coluna do DataTable que será exibida (nome da coluna)
-            comboBoxCpf.DisplayMember = "NOMECLIENTE";
+            comboBoxIdCliente.DisplayMember = "NOMECLIENTE";
 
             //Define qual o valor da linha será utilizado ao selecionar um valor
-            comboBoxCpf.ValueMember = "CPFCLIENTE";
+            comboBoxIdCliente.ValueMember = "IDCLIENTE";
         }
         #endregion
 
@@ -132,6 +132,7 @@ namespace TCC_SIA.View
         private void CadastroVeiculo_Load(object sender, EventArgs e)
         {
             listarMarca();
+            listarCliente();
         }
         #endregion
     }

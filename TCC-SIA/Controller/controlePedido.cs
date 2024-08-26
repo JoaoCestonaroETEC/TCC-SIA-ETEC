@@ -15,8 +15,8 @@ namespace TCC_SIA.Controller
         public string cadastroPedido(Pedido mPedido)
         {
             //String sql de inserção
-            string sql = "INSERT INTO PEDIDO(IDPEDIDO, IDVEICULO, CPFCLIENTE, VALORTOTALPEDIDO, VALORTOTALPECA, VALORTOTALSERVICO, OBSERVACAO, DATAINICIO, DATAFIM) " +
-                    "VALUES(@IDPEDIDO, @IDVEICULO, @CPFCLIENTE, @VALORTOTALPEDIDO, @VALORTOTALPECA, @VALORTOTALSERVICO, @OBSERVACAO, @DATAINICIO, @DATAFIM);";
+            string sql = "INSERT INTO PEDIDO(IDPEDIDO, IDVEICULO, IDCLIENTE, VALORTOTALPEDIDO, VALORTOTALPECA, VALORTOTALSERVICO, OBSERVACAO, DATAINICIO, DATAFIM) " +
+                    "VALUES(@IDPEDIDO, @IDVEICULO, @IDCLIENTE, @VALORTOTALPEDIDO, @VALORTOTALPECA, @VALORTOTALSERVICO, @OBSERVACAO, @DATAINICIO, @DATAFIM);";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
@@ -29,7 +29,7 @@ namespace TCC_SIA.Controller
                 //Definindo os valores a serem postos nos campos
                 comm.Parameters.AddWithValue("@IDPEDIDO", mPedido.getIdPedido());
                 comm.Parameters.AddWithValue("@IDVEICULO", mPedido.getIdVeiculo());
-                comm.Parameters.AddWithValue("@CPFCLIENTE", mPedido.getCpfCliente());
+                comm.Parameters.AddWithValue("@IDCLIENTE", mPedido.getIdCliente());
                 comm.Parameters.AddWithValue("@VALORTOTALPEDIDO", mPedido.getValorTotalPeca());
                 comm.Parameters.AddWithValue("@VALORTOTALPECA", mPedido.getValorTotalPeca());
                 comm.Parameters.AddWithValue("@VALORTOTALSERVICO", mPedido.getValorTotalServico());

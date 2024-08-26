@@ -44,10 +44,13 @@
             comboBoxTIpo = new ComboBox();
             label7 = new Label();
             label8 = new Label();
-            comboBox1 = new ComboBox();
+            comboBoxFornecedor = new ComboBox();
             label9 = new Label();
-            dateTimePicker1 = new DateTimePicker();
+            dateTimePickerAquis = new DateTimePicker();
+            label10 = new Label();
+            numericUpDownUnid = new NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)numericUpDownQuant).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownUnid).BeginInit();
             SuspendLayout();
             // 
             // textBoxNome
@@ -115,7 +118,7 @@
             // 
             // numericUpDownQuant
             // 
-            numericUpDownQuant.Location = new Point(123, 191);
+            numericUpDownQuant.Location = new Point(123, 222);
             numericUpDownQuant.Margin = new Padding(3, 4, 3, 4);
             numericUpDownQuant.Name = "numericUpDownQuant";
             numericUpDownQuant.Size = new Size(239, 27);
@@ -124,7 +127,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(34, 193);
+            label6.Location = new Point(34, 224);
             label6.Name = "label6";
             label6.Size = new Size(90, 20);
             label6.TabIndex = 30;
@@ -144,7 +147,7 @@
             // dateTimePickerGarantia
             // 
             dateTimePickerGarantia.Format = DateTimePickerFormat.Short;
-            dateTimePickerGarantia.Location = new Point(123, 228);
+            dateTimePickerGarantia.Location = new Point(123, 257);
             dateTimePickerGarantia.Margin = new Padding(3, 4, 3, 4);
             dateTimePickerGarantia.Name = "dateTimePickerGarantia";
             dateTimePickerGarantia.Size = new Size(238, 27);
@@ -153,7 +156,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(54, 236);
+            label1.Location = new Point(49, 258);
             label1.Name = "label1";
             label1.Size = new Size(68, 20);
             label1.TabIndex = 33;
@@ -189,45 +192,64 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(54, 272);
+            label8.Location = new Point(49, 294);
             label8.Name = "label8";
             label8.Size = new Size(87, 20);
             label8.TabIndex = 37;
             label8.Text = "Fornecedor:";
             // 
-            // comboBox1
+            // comboBoxFornecedor
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(147, 269);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(214, 28);
-            comboBox1.TabIndex = 38;
+            comboBoxFornecedor.FormattingEnabled = true;
+            comboBoxFornecedor.Location = new Point(142, 291);
+            comboBoxFornecedor.Name = "comboBoxFornecedor";
+            comboBoxFornecedor.Size = new Size(214, 28);
+            comboBoxFornecedor.TabIndex = 38;
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(10, 309);
+            label9.Location = new Point(5, 331);
             label9.Name = "label9";
             label9.Size = new Size(131, 20);
             label9.TabIndex = 39;
             label9.Text = "Data de Aquisição";
             // 
-            // dateTimePicker1
+            // dateTimePickerAquis
             // 
-            dateTimePicker1.Format = DateTimePickerFormat.Short;
-            dateTimePicker1.Location = new Point(147, 309);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(215, 27);
-            dateTimePicker1.TabIndex = 40;
+            dateTimePickerAquis.Format = DateTimePickerFormat.Short;
+            dateTimePickerAquis.Location = new Point(142, 331);
+            dateTimePickerAquis.Name = "dateTimePickerAquis";
+            dateTimePickerAquis.Size = new Size(215, 27);
+            dateTimePickerAquis.TabIndex = 40;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(48, 189);
+            label10.Name = "label10";
+            label10.Size = new Size(68, 20);
+            label10.TabIndex = 42;
+            label10.Text = "Unidade:";
+            // 
+            // numericUpDownUnid
+            // 
+            numericUpDownUnid.Location = new Point(122, 187);
+            numericUpDownUnid.Margin = new Padding(3, 4, 3, 4);
+            numericUpDownUnid.Name = "numericUpDownUnid";
+            numericUpDownUnid.Size = new Size(239, 27);
+            numericUpDownUnid.TabIndex = 41;
             // 
             // CadastroPeca
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(820, 486);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(label10);
+            Controls.Add(numericUpDownUnid);
+            Controls.Add(dateTimePickerAquis);
             Controls.Add(label9);
-            Controls.Add(comboBox1);
+            Controls.Add(comboBoxFornecedor);
             Controls.Add(label8);
             Controls.Add(comboBoxTIpo);
             Controls.Add(label7);
@@ -249,6 +271,7 @@
             Text = "CadastroPeça";
             Load += CadastroPeça_Load;
             ((System.ComponentModel.ISupportInitialize)numericUpDownQuant).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownUnid).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -271,8 +294,10 @@
         private ComboBox comboBoxTIpo;
         private Label label7;
         private Label label8;
-        private ComboBox comboBox1;
+        private ComboBox comboBoxFornecedor;
         private Label label9;
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dateTimePickerAquis;
+        private Label label10;
+        private NumericUpDown numericUpDownUnid;
     }
 }

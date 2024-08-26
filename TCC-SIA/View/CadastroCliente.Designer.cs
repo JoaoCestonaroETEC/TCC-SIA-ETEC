@@ -30,7 +30,8 @@
         {
             tabControlCliente = new TabControl();
             tabPageFIsica = new TabPage();
-            tabPageJuridica = new TabPage();
+            richTextBoxObs = new RichTextBox();
+            label29 = new Label();
             label14 = new Label();
             dateTimePickerData = new DateTimePicker();
             label13 = new Label();
@@ -60,6 +61,9 @@
             label2 = new Label();
             label1 = new Label();
             buttonCadastrar = new Button();
+            tabPageJuridica = new TabPage();
+            richTextBoxRazao = new RichTextBox();
+            label17 = new Label();
             label15 = new Label();
             dateTimeDataJ = new DateTimePicker();
             label16 = new Label();
@@ -85,10 +89,6 @@
             label27 = new Label();
             label28 = new Label();
             button1 = new Button();
-            label17 = new Label();
-            richTextBoxRazao = new RichTextBox();
-            richTextBoxObs = new RichTextBox();
-            label29 = new Label();
             tabControlCliente.SuspendLayout();
             tabPageFIsica.SuspendLayout();
             tabPageJuridica.SuspendLayout();
@@ -145,42 +145,22 @@
             tabPageFIsica.Text = "Pessoa Física";
             tabPageFIsica.UseVisualStyleBackColor = true;
             // 
-            // tabPageJuridica
+            // richTextBoxObs
             // 
-            tabPageJuridica.Controls.Add(richTextBoxRazao);
-            tabPageJuridica.Controls.Add(label17);
-            tabPageJuridica.Controls.Add(label15);
-            tabPageJuridica.Controls.Add(dateTimeDataJ);
-            tabPageJuridica.Controls.Add(label16);
-            tabPageJuridica.Controls.Add(comboBoxStatusJ);
-            tabPageJuridica.Controls.Add(maskedTextBoxEmailJ);
-            tabPageJuridica.Controls.Add(maskedTextBoxNumeroJ);
-            tabPageJuridica.Controls.Add(comboBoxEstadoJ);
-            tabPageJuridica.Controls.Add(textBoxRuaJ);
-            tabPageJuridica.Controls.Add(maskedTextBoxCepJ);
-            tabPageJuridica.Controls.Add(textBoxCidadeJ);
-            tabPageJuridica.Controls.Add(textBoxBairroJ);
-            tabPageJuridica.Controls.Add(label18);
-            tabPageJuridica.Controls.Add(label19);
-            tabPageJuridica.Controls.Add(label20);
-            tabPageJuridica.Controls.Add(label21);
-            tabPageJuridica.Controls.Add(label22);
-            tabPageJuridica.Controls.Add(label23);
-            tabPageJuridica.Controls.Add(maskedTextBoxTelefoneJ);
-            tabPageJuridica.Controls.Add(label24);
-            tabPageJuridica.Controls.Add(textBoxNomeJ);
-            tabPageJuridica.Controls.Add(maskedTextBoxCNPJ);
-            tabPageJuridica.Controls.Add(label26);
-            tabPageJuridica.Controls.Add(label27);
-            tabPageJuridica.Controls.Add(label28);
-            tabPageJuridica.Controls.Add(button1);
-            tabPageJuridica.Location = new Point(4, 29);
-            tabPageJuridica.Name = "tabPageJuridica";
-            tabPageJuridica.Padding = new Padding(3);
-            tabPageJuridica.Size = new Size(989, 363);
-            tabPageJuridica.TabIndex = 1;
-            tabPageJuridica.Text = "Pessoa Jurídica";
-            tabPageJuridica.UseVisualStyleBackColor = true;
+            richTextBoxObs.Location = new Point(650, 22);
+            richTextBoxObs.Name = "richTextBoxObs";
+            richTextBoxObs.Size = new Size(320, 270);
+            richTextBoxObs.TabIndex = 97;
+            richTextBoxObs.Text = "";
+            // 
+            // label29
+            // 
+            label29.AutoSize = true;
+            label29.Location = new Point(606, 21);
+            label29.Name = "label29";
+            label29.Size = new Size(38, 20);
+            label29.TabIndex = 96;
+            label29.Text = "Obs:";
             // 
             // label14
             // 
@@ -193,6 +173,7 @@
             // 
             // dateTimePickerData
             // 
+            dateTimePickerData.Enabled = false;
             dateTimePickerData.Format = DateTimePickerFormat.Short;
             dateTimePickerData.Location = new Point(340, 259);
             dateTimePickerData.Name = "dateTimePickerData";
@@ -210,6 +191,7 @@
             // 
             // comboBoxStatus
             // 
+            comboBoxStatus.Enabled = false;
             comboBoxStatus.FormattingEnabled = true;
             comboBoxStatus.Location = new Point(353, 225);
             comboBoxStatus.Name = "comboBoxStatus";
@@ -436,6 +418,60 @@
             buttonCadastrar.Text = "Cadastrar";
             buttonCadastrar.UseVisualStyleBackColor = true;
             // 
+            // tabPageJuridica
+            // 
+            tabPageJuridica.Controls.Add(richTextBoxRazao);
+            tabPageJuridica.Controls.Add(label17);
+            tabPageJuridica.Controls.Add(label15);
+            tabPageJuridica.Controls.Add(dateTimeDataJ);
+            tabPageJuridica.Controls.Add(label16);
+            tabPageJuridica.Controls.Add(comboBoxStatusJ);
+            tabPageJuridica.Controls.Add(maskedTextBoxEmailJ);
+            tabPageJuridica.Controls.Add(maskedTextBoxNumeroJ);
+            tabPageJuridica.Controls.Add(comboBoxEstadoJ);
+            tabPageJuridica.Controls.Add(textBoxRuaJ);
+            tabPageJuridica.Controls.Add(maskedTextBoxCepJ);
+            tabPageJuridica.Controls.Add(textBoxCidadeJ);
+            tabPageJuridica.Controls.Add(textBoxBairroJ);
+            tabPageJuridica.Controls.Add(label18);
+            tabPageJuridica.Controls.Add(label19);
+            tabPageJuridica.Controls.Add(label20);
+            tabPageJuridica.Controls.Add(label21);
+            tabPageJuridica.Controls.Add(label22);
+            tabPageJuridica.Controls.Add(label23);
+            tabPageJuridica.Controls.Add(maskedTextBoxTelefoneJ);
+            tabPageJuridica.Controls.Add(label24);
+            tabPageJuridica.Controls.Add(textBoxNomeJ);
+            tabPageJuridica.Controls.Add(maskedTextBoxCNPJ);
+            tabPageJuridica.Controls.Add(label26);
+            tabPageJuridica.Controls.Add(label27);
+            tabPageJuridica.Controls.Add(label28);
+            tabPageJuridica.Controls.Add(button1);
+            tabPageJuridica.Location = new Point(4, 29);
+            tabPageJuridica.Name = "tabPageJuridica";
+            tabPageJuridica.Padding = new Padding(3);
+            tabPageJuridica.Size = new Size(989, 363);
+            tabPageJuridica.TabIndex = 1;
+            tabPageJuridica.Text = "Pessoa Jurídica";
+            tabPageJuridica.UseVisualStyleBackColor = true;
+            // 
+            // richTextBoxRazao
+            // 
+            richTextBoxRazao.Location = new Point(651, 23);
+            richTextBoxRazao.Name = "richTextBoxRazao";
+            richTextBoxRazao.Size = new Size(319, 270);
+            richTextBoxRazao.TabIndex = 95;
+            richTextBoxRazao.Text = "";
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Location = new Point(592, 23);
+            label17.Name = "label17";
+            label17.Size = new Size(53, 20);
+            label17.TabIndex = 94;
+            label17.Text = "Razão:";
+            // 
             // label15
             // 
             label15.AutoSize = true;
@@ -655,40 +691,6 @@
             button1.TabIndex = 65;
             button1.Text = "Cadastrar";
             button1.UseVisualStyleBackColor = true;
-            // 
-            // label17
-            // 
-            label17.AutoSize = true;
-            label17.Location = new Point(592, 23);
-            label17.Name = "label17";
-            label17.Size = new Size(53, 20);
-            label17.TabIndex = 94;
-            label17.Text = "Razão:";
-            // 
-            // richTextBoxRazao
-            // 
-            richTextBoxRazao.Location = new Point(651, 23);
-            richTextBoxRazao.Name = "richTextBoxRazao";
-            richTextBoxRazao.Size = new Size(319, 270);
-            richTextBoxRazao.TabIndex = 95;
-            richTextBoxRazao.Text = "";
-            // 
-            // richTextBoxObs
-            // 
-            richTextBoxObs.Location = new Point(650, 22);
-            richTextBoxObs.Name = "richTextBoxObs";
-            richTextBoxObs.Size = new Size(320, 270);
-            richTextBoxObs.TabIndex = 97;
-            richTextBoxObs.Text = "";
-            // 
-            // label29
-            // 
-            label29.AutoSize = true;
-            label29.Location = new Point(606, 21);
-            label29.Name = "label29";
-            label29.Size = new Size(38, 20);
-            label29.TabIndex = 96;
-            label29.Text = "Obs:";
             // 
             // CadastroCliente
             // 

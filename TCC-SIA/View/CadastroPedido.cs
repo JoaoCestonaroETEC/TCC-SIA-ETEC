@@ -146,7 +146,7 @@ namespace TCC_SIA.View
             controlePedido cPedido = new controlePedido();
 
             //Definindo os valores nos atributos
-            mPedido.setCpfCliente(Convert.ToInt64(comboBoxCliente.SelectedValue));
+            mPedido.setIdCliente(Convert.ToInt64(comboBoxCliente.SelectedValue));
             mPedido.setIdVeiculo(Convert.ToInt64(comboBoxVeiculo.SelectedValue));
             mPedido.setDataInicio(Convert.ToDateTime(dateTimePickerDataInicio.Text));
             mPedido.setDataFim(Convert.ToDateTime(dateTimePickerDataInicio.Text));
@@ -265,7 +265,7 @@ namespace TCC_SIA.View
             comboBoxCliente.DisplayMember = "NOMECLIENTE";
 
             //Define qual o valor da linha será utilizado ao selecionar um valor
-            comboBoxCliente.ValueMember = "CPFCLIENTE";
+            comboBoxCliente.ValueMember = "IDCLIENTE";
         }
         #endregion
 
@@ -628,6 +628,11 @@ namespace TCC_SIA.View
                 // Alterna o estado de seleção da linha clicada
                 clickedRow.Selected = !clickedRow.Selected;
             }
+        }
+
+        private void CadastroPedido_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
