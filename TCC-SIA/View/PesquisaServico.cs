@@ -31,10 +31,12 @@ namespace TCC_SIA.View
             dataGridViewPesquisar.ColumnCount = servico.FieldCount;
 
             //Definindo três colunas na DataGridView para exibir as descrições
-            dataGridViewPesquisar.ColumnCount = 3;
+            dataGridViewPesquisar.ColumnCount = 4;
             dataGridViewPesquisar.Columns[0].Name = "Id";
             dataGridViewPesquisar.Columns[1].Name = "Nome";
             dataGridViewPesquisar.Columns[2].Name = "Valor";
+            dataGridViewPesquisar.Columns[3].Name = "Garantia";
+
 
             //Adicionando as descrições dos serviços
             while (servico.Read())
@@ -42,7 +44,9 @@ namespace TCC_SIA.View
                 string idServico = servico["IDSERVICO"].ToString();
                 string nomeServico = servico["NOMESERVICO"].ToString();
                 string valorServico = servico["VALORSERVICO"].ToString();
-                dataGridViewPesquisar.Rows.Add(idServico, nomeServico, valorServico);
+                string garantiaServico = servico["GARANTIASERVICO"].ToString();
+
+                dataGridViewPesquisar.Rows.Add(idServico, nomeServico, valorServico, garantiaServico);
             }
             #endregion
         }
@@ -63,10 +67,11 @@ namespace TCC_SIA.View
             dataGridViewPesquisar.ColumnCount = servico.FieldCount;
 
             //Definindo três colunas na DataGridView para exibir as descrições
-            dataGridViewPesquisar.ColumnCount = 3;
+            dataGridViewPesquisar.ColumnCount = 4;
             dataGridViewPesquisar.Columns[0].Name = "Id";
             dataGridViewPesquisar.Columns[1].Name = "Nome";
             dataGridViewPesquisar.Columns[2].Name = "Valor";
+            dataGridViewPesquisar.Columns[3].Name = "Garantia";
 
             //Adicionando as descrições dos serviços
             while (servico.Read())
@@ -74,7 +79,8 @@ namespace TCC_SIA.View
                 string idServico = servico["IDSERVICO"].ToString();
                 string nomeServico = servico["NOMESERVICO"].ToString();
                 string valorServico = servico["VALORSERVICO"].ToString();
-                dataGridViewPesquisar.Rows.Add(idServico, nomeServico, valorServico);
+                string garantiaServico = servico["GARANTIASERVICO"].ToString();
+                dataGridViewPesquisar.Rows.Add(idServico, nomeServico, valorServico, garantiaServico);
             }
         }
         #endregion

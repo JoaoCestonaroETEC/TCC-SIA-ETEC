@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -190,5 +191,36 @@ namespace TCC_SIA.Controller
 
         }
         #endregion
+
+        public string atualizaPeca (Peca mPeca)
+        {
+            string sql = "UPDATE PECA SET  NOMEPECA = @NOMEPECA, "+
+                " TIPOPECA = @TIPOPECA, DESCPECA = @DESCPECA," + 
+                " VALORPECA = @VALORPECA, QUANTPECA = @QUANTPECA," + 
+                " GARANTIAPECA = @GARANTIAPECA WHERE IDPECA = @IDPECA";
+
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            try
+            {
+                comm.Parameters.AddWithValue("@IDPECA", mPeca.getIdPeca());
+                comm.Parameters.AddWithValue("@NOMEPECA", mPeca.getNomePeca());
+                comm.Parameters.AddWithValue("@TIPOPECA", mPeca.getTipoPeca());
+                comm.Parameters.AddWithValue("@DESCPECA", mPeca.getDescPeca());
+                comm.Parameters.AddWithValue("@VALORPECA", mPeca.getValorPeca());
+                comm.Parameters.AddWithValue("@QUANTPECA", mPeca.getQuantPeca());
+                comm.Parameters.AddWithValue("@GARANTIAPECA", mPeca.getGarantiaPeca());
+
+                comm.ExecuteNonQuery();
+                return "Cliente atualizado!";
+            }
+            catch(NpgsqlException ex)
+            {
+                return ex.ToString();
+                //return "Erro ao atualizar!";
+            }
+        }
     }
 }

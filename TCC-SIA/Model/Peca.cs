@@ -9,6 +9,7 @@ namespace TCC_SIA.Model
     internal class Peca
     {
         #region Criação de atributo
+        private long idPeca;
         private long idMarca;
         private string nomePeca;
         private string tipoPeca;
@@ -21,6 +22,16 @@ namespace TCC_SIA.Model
         #endregion
 
         #region Encapsulamento
+
+        public long getIdPeca()
+        {
+            return idPeca;
+        }
+        public void setIdPeca(long idPeca)
+        {
+            this.idPeca = idPeca;
+        }
+
         public long getIdMarca()
         {
             return idMarca;

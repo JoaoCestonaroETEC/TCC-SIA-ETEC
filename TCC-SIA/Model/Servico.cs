@@ -13,6 +13,7 @@ namespace TCC_SIA.Model
         private string nomeServico;
         private string descServico;
         private decimal valorServico;
+        private DateTime garantiaServico;
         #endregion
 
         #region Encapsulamento
@@ -44,6 +45,15 @@ namespace TCC_SIA.Model
         public void setValorServico(decimal valorServico)
         {
             this.valorServico = valorServico;
+        }
+
+        public DateTime getGarantiaServico()
+        {
+            return garantiaServico;
+        }
+        public void setGarantiaServico(DateTime garantiaServico)
+        {
+            this.garantiaServico = garantiaServico;
         }
         #endregion
     }

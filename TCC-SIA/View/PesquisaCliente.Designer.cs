@@ -112,7 +112,7 @@
             btnAtualizar.Name = "btnAtualizar";
             btnAtualizar.Size = new Size(131, 64);
             btnAtualizar.TabIndex = 8;
-            btnAtualizar.Text = "Atualizar";
+            btnAtualizar.Text = "Editar";
             btnAtualizar.UseVisualStyleBackColor = true;
             btnAtualizar.Click += AtualizarCliente;
             // 
@@ -188,7 +188,7 @@
             tabPage2.Padding = new Padding(3);
             tabPage2.Size = new Size(846, 512);
             tabPage2.TabIndex = 1;
-            tabPage2.Text = "Atualizar";
+            tabPage2.Text = "Editar";
             tabPage2.UseVisualStyleBackColor = true;
             // 
             // btnSalvarA
