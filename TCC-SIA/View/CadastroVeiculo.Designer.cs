@@ -44,7 +44,6 @@
             textBoxNome = new TextBox();
             comboBoxIdCliente = new ComboBox();
             label2 = new Label();
-            textBox1 = new TextBox();
             label3 = new Label();
             dateTimePicker1 = new DateTimePicker();
             maskedTextBox1 = new MaskedTextBox();
@@ -57,36 +56,35 @@
             label7 = new Label();
             comboBox2 = new ComboBox();
             label8 = new Label();
-            label9 = new Label();
-            comboBox3 = new ComboBox();
+            maskedTextBox3 = new MaskedTextBox();
             SuspendLayout();
             // 
             // labelCpf
             // 
             labelCpf.AutoSize = true;
-            labelCpf.Location = new Point(86, 39);
+            labelCpf.Location = new Point(23, 18);
             labelCpf.Margin = new Padding(4, 0, 4, 0);
             labelCpf.Name = "labelCpf";
-            labelCpf.Size = new Size(83, 28);
+            labelCpf.Size = new Size(68, 21);
             labelCpf.TabIndex = 19;
             labelCpf.Text = "Cliente:";
             // 
             // labelMarca
             // 
             labelMarca.AutoSize = true;
-            labelMarca.Location = new Point(99, 89);
+            labelMarca.Location = new Point(36, 68);
             labelMarca.Margin = new Padding(4, 0, 4, 0);
             labelMarca.Name = "labelMarca";
-            labelMarca.Size = new Size(76, 28);
+            labelMarca.Size = new Size(61, 21);
             labelMarca.TabIndex = 17;
             labelMarca.Text = "Marca:";
             // 
             // buttonCadastrar
             // 
-            buttonCadastrar.Location = new Point(86, 412);
+            buttonCadastrar.Location = new Point(27, 369);
             buttonCadastrar.Margin = new Padding(4, 5, 4, 5);
             buttonCadastrar.Name = "buttonCadastrar";
-            buttonCadastrar.Size = new Size(236, 142);
+            buttonCadastrar.Size = new Size(164, 93);
             buttonCadastrar.TabIndex = 16;
             buttonCadastrar.Text = "Cadastrar";
             buttonCadastrar.UseVisualStyleBackColor = true;
@@ -95,271 +93,251 @@
             // labelCor
             // 
             labelCor.AutoSize = true;
-            labelCor.Location = new Point(123, 239);
+            labelCor.Location = new Point(60, 218);
             labelCor.Margin = new Padding(4, 0, 4, 0);
             labelCor.Name = "labelCor";
-            labelCor.Size = new Size(50, 28);
+            labelCor.Size = new Size(41, 21);
             labelCor.TabIndex = 14;
             labelCor.Text = "Cor:";
             // 
             // labelTipo
             // 
             labelTipo.AutoSize = true;
-            labelTipo.Location = new Point(111, 140);
+            labelTipo.Location = new Point(48, 119);
             labelTipo.Margin = new Padding(4, 0, 4, 0);
             labelTipo.Name = "labelTipo";
-            labelTipo.Size = new Size(59, 28);
+            labelTipo.Size = new Size(48, 21);
             labelTipo.TabIndex = 25;
             labelTipo.Text = "Tipo:";
             // 
             // labelPlaca
             // 
             labelPlaca.AutoSize = true;
-            labelPlaca.Location = new Point(328, 290);
+            labelPlaca.Location = new Point(265, 269);
             labelPlaca.Margin = new Padding(4, 0, 4, 0);
             labelPlaca.Name = "labelPlaca";
-            labelPlaca.Size = new Size(67, 28);
+            labelPlaca.Size = new Size(55, 21);
             labelPlaca.TabIndex = 23;
             labelPlaca.Text = "Placa:";
             // 
             // labelModelo
             // 
             labelModelo.AutoSize = true;
-            labelModelo.Location = new Point(90, 338);
+            labelModelo.Location = new Point(27, 317);
             labelModelo.Margin = new Padding(4, 0, 4, 0);
             labelModelo.Name = "labelModelo";
-            labelModelo.Size = new Size(89, 28);
+            labelModelo.Size = new Size(73, 21);
             labelModelo.TabIndex = 21;
             labelModelo.Text = "Modelo:";
             // 
             // textBoxModelo
             // 
-            textBoxModelo.Location = new Point(188, 333);
+            textBoxModelo.Location = new Point(125, 312);
             textBoxModelo.Margin = new Padding(4, 5, 4, 5);
             textBoxModelo.Name = "textBoxModelo";
-            textBoxModelo.Size = new Size(366, 34);
+            textBoxModelo.Size = new Size(366, 29);
             textBoxModelo.TabIndex = 30;
             // 
             // comboBoxCor
             // 
             comboBoxCor.FormattingEnabled = true;
-            comboBoxCor.Location = new Point(184, 235);
+            comboBoxCor.Location = new Point(121, 214);
             comboBoxCor.Margin = new Padding(4, 5, 4, 5);
             comboBoxCor.Name = "comboBoxCor";
-            comboBoxCor.Size = new Size(366, 36);
+            comboBoxCor.Size = new Size(366, 29);
             comboBoxCor.TabIndex = 33;
             // 
             // comboBoxTipo
             // 
             comboBoxTipo.FormattingEnabled = true;
-            comboBoxTipo.Location = new Point(183, 135);
+            comboBoxTipo.Location = new Point(120, 114);
             comboBoxTipo.Margin = new Padding(4, 5, 4, 5);
             comboBoxTipo.Name = "comboBoxTipo";
-            comboBoxTipo.Size = new Size(366, 36);
+            comboBoxTipo.Size = new Size(366, 29);
             comboBoxTipo.TabIndex = 34;
             // 
             // comboBoxMarca
             // 
             comboBoxMarca.FormattingEnabled = true;
-            comboBoxMarca.Location = new Point(188, 86);
+            comboBoxMarca.Location = new Point(125, 65);
             comboBoxMarca.Margin = new Padding(4, 5, 4, 5);
             comboBoxMarca.Name = "comboBoxMarca";
-            comboBoxMarca.Size = new Size(366, 36);
+            comboBoxMarca.Size = new Size(366, 29);
             comboBoxMarca.TabIndex = 35;
             // 
             // maskedTextBoxPlaca
             // 
             maskedTextBoxPlaca.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            maskedTextBoxPlaca.Location = new Point(408, 285);
+            maskedTextBoxPlaca.Location = new Point(345, 264);
             maskedTextBoxPlaca.Margin = new Padding(4, 5, 4, 5);
             maskedTextBoxPlaca.Mask = "AAAAAAA";
             maskedTextBoxPlaca.Name = "maskedTextBoxPlaca";
-            maskedTextBoxPlaca.Size = new Size(145, 34);
+            maskedTextBoxPlaca.Size = new Size(145, 29);
             maskedTextBoxPlaca.TabIndex = 36;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(105, 191);
+            label1.Location = new Point(42, 170);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(74, 28);
+            label1.Size = new Size(61, 21);
             label1.TabIndex = 37;
             label1.Text = "Nome:";
             // 
             // textBoxNome
             // 
-            textBoxNome.Location = new Point(183, 186);
+            textBoxNome.Location = new Point(120, 165);
             textBoxNome.Margin = new Padding(4, 5, 4, 5);
             textBoxNome.Name = "textBoxNome";
-            textBoxNome.Size = new Size(366, 34);
+            textBoxNome.Size = new Size(366, 29);
             textBoxNome.TabIndex = 38;
             // 
             // comboBoxIdCliente
             // 
             comboBoxIdCliente.FormattingEnabled = true;
-            comboBoxIdCliente.Location = new Point(183, 35);
+            comboBoxIdCliente.Location = new Point(120, 14);
             comboBoxIdCliente.Margin = new Padding(4, 5, 4, 5);
             comboBoxIdCliente.Name = "comboBoxIdCliente";
-            comboBoxIdCliente.Size = new Size(366, 36);
+            comboBoxIdCliente.Size = new Size(366, 29);
             comboBoxIdCliente.TabIndex = 39;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(573, 39);
+            label2.Location = new Point(510, 18);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(76, 28);
+            label2.Size = new Size(62, 21);
             label2.TabIndex = 40;
             label2.Text = "Chassi:";
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(662, 35);
-            textBox1.Margin = new Padding(4, 5, 4, 5);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(316, 34);
-            textBox1.TabIndex = 41;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(578, 89);
+            label3.Location = new Point(515, 68);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(190, 28);
+            label3.Size = new Size(154, 21);
             label3.TabIndex = 42;
             label3.Text = "Ano de Fabricação:";
             // 
             // dateTimePicker1
             // 
             dateTimePicker1.Format = DateTimePickerFormat.Short;
-            dateTimePicker1.Location = new Point(789, 81);
+            dateTimePicker1.Location = new Point(726, 60);
             dateTimePicker1.Margin = new Padding(4, 5, 4, 5);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(188, 34);
+            dateTimePicker1.Size = new Size(188, 29);
             dateTimePicker1.TabIndex = 43;
             // 
             // maskedTextBox1
             // 
-            maskedTextBox1.Location = new Point(762, 127);
+            maskedTextBox1.Location = new Point(699, 106);
             maskedTextBox1.Margin = new Padding(4, 5, 4, 5);
             maskedTextBox1.Name = "maskedTextBox1";
-            maskedTextBox1.Size = new Size(216, 34);
+            maskedTextBox1.Size = new Size(216, 29);
             maskedTextBox1.TabIndex = 44;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(578, 132);
+            label4.Location = new Point(515, 111);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(165, 28);
+            label4.Size = new Size(135, 21);
             label4.TabIndex = 45;
             label4.Text = "Quilometragem:";
             // 
             // maskedTextBox2
             // 
-            maskedTextBox2.Location = new Point(762, 173);
+            maskedTextBox2.Location = new Point(699, 152);
             maskedTextBox2.Margin = new Padding(4, 5, 4, 5);
             maskedTextBox2.Name = "maskedTextBox2";
-            maskedTextBox2.Size = new Size(216, 34);
+            maskedTextBox2.Size = new Size(216, 29);
             maskedTextBox2.TabIndex = 46;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(674, 178);
+            label5.Location = new Point(611, 157);
             label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Size = new Size(77, 28);
+            label5.Size = new Size(62, 21);
             label5.TabIndex = 47;
             label5.Text = "Motor:";
             // 
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(753, 219);
+            comboBox1.Location = new Point(690, 198);
             comboBox1.Margin = new Padding(4, 5, 4, 5);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(224, 36);
+            comboBox1.Size = new Size(224, 29);
             comboBox1.TabIndex = 48;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(612, 224);
+            label6.Location = new Point(549, 203);
             label6.Margin = new Padding(4, 0, 4, 0);
             label6.Name = "label6";
-            label6.Size = new Size(134, 28);
+            label6.Size = new Size(110, 21);
             label6.TabIndex = 49;
             label6.Text = "Combustível:";
             // 
             // dateTimePicker2
             // 
+            dateTimePicker2.Enabled = false;
             dateTimePicker2.Format = DateTimePickerFormat.Short;
-            dateTimePicker2.Location = new Point(789, 267);
+            dateTimePicker2.Location = new Point(726, 246);
             dateTimePicker2.Margin = new Padding(4, 5, 4, 5);
             dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(188, 34);
+            dateTimePicker2.Size = new Size(188, 29);
             dateTimePicker2.TabIndex = 50;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(714, 275);
+            label7.Location = new Point(651, 254);
             label7.Margin = new Padding(4, 0, 4, 0);
             label7.Name = "label7";
-            label7.Size = new Size(62, 28);
+            label7.Size = new Size(50, 21);
             label7.TabIndex = 51;
             label7.Text = "Data:";
             // 
             // comboBox2
             // 
             comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(753, 313);
+            comboBox2.Location = new Point(690, 292);
             comboBox2.Margin = new Padding(4, 5, 4, 5);
             comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(224, 36);
+            comboBox2.Size = new Size(224, 29);
             comboBox2.TabIndex = 52;
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(669, 318);
+            label8.Location = new Point(606, 297);
             label8.Margin = new Padding(4, 0, 4, 0);
             label8.Name = "label8";
-            label8.Size = new Size(83, 28);
+            label8.Size = new Size(68, 21);
             label8.TabIndex = 53;
             label8.Text = "Seguro:";
             // 
-            // label9
+            // maskedTextBox3
             // 
-            label9.AutoSize = true;
-            label9.Location = new Point(674, 364);
-            label9.Margin = new Padding(4, 0, 4, 0);
-            label9.Name = "label9";
-            label9.Size = new Size(108, 28);
-            label9.TabIndex = 54;
-            label9.Text = "Categoria:";
-            // 
-            // comboBox3
-            // 
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(798, 359);
-            comboBox3.Margin = new Padding(4, 5, 4, 5);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(180, 36);
-            comboBox3.TabIndex = 55;
+            maskedTextBox3.Location = new Point(579, 14);
+            maskedTextBox3.Name = "maskedTextBox3";
+            maskedTextBox3.Size = new Size(335, 29);
+            maskedTextBox3.TabIndex = 56;
             // 
             // CadastroVeiculo
             // 
-            AutoScaleDimensions = new SizeF(12F, 28F);
+            AutoScaleDimensions = new SizeF(10F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1156, 623);
-            Controls.Add(comboBox3);
-            Controls.Add(label9);
+            ClientSize = new Size(975, 546);
+            Controls.Add(maskedTextBox3);
             Controls.Add(label8);
             Controls.Add(comboBox2);
             Controls.Add(label7);
@@ -372,7 +350,6 @@
             Controls.Add(maskedTextBox1);
             Controls.Add(dateTimePicker1);
             Controls.Add(label3);
-            Controls.Add(textBox1);
             Controls.Add(label2);
             Controls.Add(comboBoxIdCliente);
             Controls.Add(textBoxNome);
@@ -415,7 +392,6 @@
         private TextBox textBoxNome;
         private ComboBox comboBoxIdCliente;
         private Label label2;
-        private TextBox textBox1;
         private Label label3;
         private DateTimePicker dateTimePicker1;
         private MaskedTextBox maskedTextBox1;
@@ -428,7 +404,6 @@
         private Label label7;
         private ComboBox comboBox2;
         private Label label8;
-        private Label label9;
-        private ComboBox comboBox3;
+        private MaskedTextBox maskedTextBox3;
     }
 }

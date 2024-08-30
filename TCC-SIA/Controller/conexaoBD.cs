@@ -4,14 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Npgsql;
+using TCC_SIA.Model;
 
 namespace TCC_SIA.Controller
 {
-    internal class conexaoBD
+    public class conexaoBD
     {
         #region Abrir conexão
         //Definindo os atributos para conexão com o banco
-        static string server = "127.0.0.1";
+
+        private Banco mLogin = new Banco();
+
+        static string server =  
         static string porta = "5433";
         static string user = "postgres";
         static string password = "2204";

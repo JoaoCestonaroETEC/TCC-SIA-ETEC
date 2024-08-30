@@ -37,14 +37,15 @@
             label4 = new Label();
             label3 = new Label();
             label1 = new Label();
+            label5 = new Label();
+            comboBox1 = new ComboBox();
             SuspendLayout();
             // 
             // buttonCadastrar
             // 
-            buttonCadastrar.Location = new Point(26, 173);
-            buttonCadastrar.Margin = new Padding(3, 4, 3, 4);
+            buttonCadastrar.Location = new Point(19, 132);
             buttonCadastrar.Name = "buttonCadastrar";
-            buttonCadastrar.Size = new Size(165, 104);
+            buttonCadastrar.Size = new Size(144, 78);
             buttonCadastrar.TabIndex = 8;
             buttonCadastrar.Text = "Cadastrar";
             buttonCadastrar.UseVisualStyleBackColor = true;
@@ -53,77 +54,94 @@
             // dateTimePickerGarantia
             // 
             dateTimePickerGarantia.Format = DateTimePickerFormat.Short;
-            dateTimePickerGarantia.Location = new Point(93, 101);
+            dateTimePickerGarantia.Location = new Point(81, 76);
+            dateTimePickerGarantia.Margin = new Padding(3, 2, 3, 2);
             dateTimePickerGarantia.Name = "dateTimePickerGarantia";
-            dateTimePickerGarantia.Size = new Size(122, 27);
+            dateTimePickerGarantia.Size = new Size(107, 23);
             dateTimePickerGarantia.TabIndex = 18;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(22, 101);
+            label2.Location = new Point(19, 76);
             label2.Name = "label2";
-            label2.Size = new Size(68, 20);
+            label2.Size = new Size(54, 15);
             label2.TabIndex = 17;
             label2.Text = "Garantia:";
             // 
             // maskedTextBoxValor
             // 
-            maskedTextBoxValor.Location = new Point(93, 61);
-            maskedTextBoxValor.Margin = new Padding(3, 4, 3, 4);
+            maskedTextBoxValor.Location = new Point(81, 46);
             maskedTextBoxValor.Name = "maskedTextBoxValor";
-            maskedTextBoxValor.Size = new Size(269, 27);
+            maskedTextBoxValor.Size = new Size(236, 23);
             maskedTextBoxValor.TabIndex = 16;
             // 
             // richTextBoxDesc
             // 
-            richTextBoxDesc.Location = new Point(445, 22);
-            richTextBoxDesc.Margin = new Padding(3, 4, 3, 4);
+            richTextBoxDesc.Location = new Point(389, 16);
             richTextBoxDesc.Name = "richTextBoxDesc";
-            richTextBoxDesc.Size = new Size(340, 244);
+            richTextBoxDesc.Size = new Size(298, 184);
             richTextBoxDesc.TabIndex = 15;
             richTextBoxDesc.Text = "";
             // 
             // textBoxNome
             // 
-            textBoxNome.Location = new Point(93, 22);
-            textBoxNome.Margin = new Padding(3, 4, 3, 4);
+            textBoxNome.Location = new Point(81, 16);
             textBoxNome.Name = "textBoxNome";
-            textBoxNome.Size = new Size(269, 27);
+            textBoxNome.Size = new Size(236, 23);
             textBoxNome.TabIndex = 14;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(369, 26);
+            label4.Location = new Point(323, 20);
             label4.Name = "label4";
-            label4.Size = new Size(77, 20);
+            label4.Size = new Size(61, 15);
             label4.TabIndex = 13;
             label4.Text = "Descrição:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(45, 65);
+            label3.Location = new Point(39, 49);
             label3.Name = "label3";
-            label3.Size = new Size(46, 20);
+            label3.Size = new Size(36, 15);
             label3.TabIndex = 12;
             label3.Text = "Valor:";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(37, 26);
+            label1.Location = new Point(32, 20);
             label1.Name = "label1";
-            label1.Size = new Size(53, 20);
+            label1.Size = new Size(43, 15);
             label1.TabIndex = 11;
             label1.Text = "Nome:";
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(32, 106);
+            label5.Name = "label5";
+            label5.Size = new Size(42, 15);
+            label5.TabIndex = 19;
+            label5.Text = "Status:";
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(81, 103);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(121, 23);
+            comboBox1.TabIndex = 20;
+            // 
             // CadastroServico
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(807, 289);
+            ClientSize = new Size(706, 227);
+            Controls.Add(comboBox1);
+            Controls.Add(label5);
             Controls.Add(dateTimePickerGarantia);
             Controls.Add(label2);
             Controls.Add(maskedTextBoxValor);
@@ -133,7 +151,6 @@
             Controls.Add(label3);
             Controls.Add(label1);
             Controls.Add(buttonCadastrar);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "CadastroServico";
             Text = "CadastroServico";
             Load += CadastroServico_Load;
@@ -151,5 +168,7 @@
         private Label label4;
         private Label label3;
         private Label label1;
+        private Label label5;
+        private ComboBox comboBox1;
     }
 }
