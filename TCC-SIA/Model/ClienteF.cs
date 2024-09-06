@@ -8,15 +8,15 @@ using BCrypt;
 
 namespace TCC_SIA.Model
 {
-    internal class Cliente
+    internal class ClienteF
     {
         #region Criação de atributo
-        private int idCliente;
-        private string cpfCliente;
-        private string cnpjCliente;
-        private string nomeCliente;
-        private string emailCliente;
-        private DateTime datanascCliente;
+        private int idClienteF;
+        private string cpfClienteF;
+        private string cnpjClienteF;
+        private string nomeClienteF;
+        private string emailClienteF;
+        private DateTime datanascClienteF;
         private string sexo;
         private long numero;
         private string rua;
@@ -27,67 +27,66 @@ namespace TCC_SIA.Model
         private string telefone;
         private string status;
         private DateTime data;
-        private string obs;
-        private string razao;
+        private string obsF;
         #endregion
 
         #region Encapsulamento
-        public int getIDCliente()
+        public int getIDClienteF()
         {
-            return this.idCliente;
+            return this.idClienteF;
         }
 
-        public void setIDCliente(int idCliente)
+        public void setIDClienteF(int idClienteF)
         {
-            this.idCliente = idCliente;
+            this.idClienteF = idClienteF;
         }
 
-        public string getCpfCliente()
+        public string getCpfClienteF()
         {
-            return this.cpfCliente;
+            return this.cpfClienteF;
         }
 
-        public void setCpfCliente(string cpfCliente)
+        public void setCpfClienteF(string cpfClienteF)
         {
-            this.cpfCliente = cpfCliente;
+            this.cpfClienteF = cpfClienteF;
         }
-        public string getCNPJCliente()
+        public string getCNPJClienteF()
         {
-            return this.cnpjCliente;
-        }
-
-        public void setCNPJCLiente(string cnpjCliente)
-        {
-            this.cnpjCliente = cnpjCliente;
-        }
-        public string getNomeCliente()
-        {
-            return this.nomeCliente;
+            return this.cnpjClienteF;
         }
 
-        public void setNomeCliente(string nomeCliente)
+        public void setCNPJCLienteF(string cnpjClienteF)
         {
-            this.nomeCliente = nomeCliente;
+            this.cnpjClienteF = cnpjClienteF;
+        }
+        public string getNomeClienteF()
+        {
+            return this.nomeClienteF;
         }
 
-        public string getEmailCliente()
+        public void setNomeClienteF(string nomeClienteF)
         {
-            return this.emailCliente;
+            this.nomeClienteF = nomeClienteF;
         }
 
-        public void setEmailCliente(string emailCliente)
+        public string getEmailClienteF()
         {
-            this.emailCliente = emailCliente;
+            return this.emailClienteF;
         }
 
-        public DateTime getDataNascCliente()
+        public void setEmailClienteF(string emailClienteF)
         {
-            return this.datanascCliente;
+            this.emailClienteF = emailClienteF;
         }
 
-        public void setDataNascCliente(DateTime datanascCliente)
+        public DateTime getDataNascClienteF()
         {
-            this.datanascCliente = datanascCliente;
+            return this.datanascClienteF;
+        }
+
+        public void setDataNascClienteF(DateTime datanascClienteF)
+        {
+            this.datanascClienteF = datanascClienteF;
         }
 
         public string getSexo()
@@ -188,23 +187,14 @@ namespace TCC_SIA.Model
         {
             this.data = data;
         }
-        public string getObs()
+        public string getObsF()
         {
-            return this.obs;
+            return this.obsF;
         }
 
-        public void setObs(string obs)
+        public void setObsF(string obsF)
         {
-            this.obs = obs;
-        }
-        public string getRazao()
-        {
-            return this.razao;
-        }
-
-        public void setRazao(string razao)
-        {
-            this.razao = razao;
+            this.obsF = obsF;
         }
         #endregion
     }
