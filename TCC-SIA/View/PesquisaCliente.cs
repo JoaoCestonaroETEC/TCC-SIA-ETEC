@@ -247,63 +247,10 @@ namespace TCC_SIA.View
             MessageBox.Show(res);
         }
 
-        private void buttonPesquisar_Click_1(object sender, EventArgs e)
-        {
-            #region Carrega as informações gerais dos clientes
-            // Criação do objeto NpgsqlDataReader cliente e ControleVeiculo
-            controleCliente cCliente = new controleCliente();
-            NpgsqlDataReader cliente = cCliente.pesquisarCliente(textBoxPesquisar.Text);
-
-            //Apaga as colunas da datagridview
-            dataGridViewPesquisar.Columns.Clear();
-
-            //Definindo a quant. de colunas que a grid terá
-            dataGridViewPesquisar.ColumnCount = cliente.FieldCount;
-
-            //Definindo doze colunas na DataGridView para exibir as caracteristícas dos clientes
-            dataGridViewPesquisar.ColumnCount = 13;
-            dataGridViewPesquisar.Columns[0].Name = "Id";
-            dataGridViewPesquisar.Columns[1].Name = "Cpf";
-            dataGridViewPesquisar.Columns[2].Name = "Nome";
-            dataGridViewPesquisar.Columns[3].Name = "Email";
-            dataGridViewPesquisar.Columns[4].Name = "DataNasc";
-            dataGridViewPesquisar.Columns[5].Name = "Sexo";
-            dataGridViewPesquisar.Columns[6].Name = "Telefone";
-            dataGridViewPesquisar.Columns[7].Name = "NumeroCasa";
-            dataGridViewPesquisar.Columns[8].Name = "Rua";
-            dataGridViewPesquisar.Columns[9].Name = "Cidade";
-            dataGridViewPesquisar.Columns[10].Name = "Cep";
-            dataGridViewPesquisar.Columns[11].Name = "Bairro";
-            dataGridViewPesquisar.Columns[12].Name = "Estado";
-
-            //Aqui criamos um vetor para representar uma linha da consulta(registro)
-            string[] linha = new string[cliente.FieldCount];
-
-            //Adicionando as descrições dos clientes
-            while (cliente.Read())
-            {
-                string idCliente = cliente["IDCLIENTE"].ToString();
-                string cpfCliente = cliente["CPFCLIENTE"].ToString();
-                string nomeCliente = cliente["NOMECLIENTE"].ToString();
-                string emailCliente = cliente["EMAILCLIENTE"].ToString();
-                string dataNasc = cliente["DATANASC_CLIENTE"].ToString();
-                string sexo = cliente["SEXO"].ToString();
-                string telefone = cliente["TELEFONE"].ToString();
-                string numCasa = cliente["NUMERO"].ToString();
-                string rua = cliente["RUA"].ToString();
-                string cidade = cliente["CIDADE"].ToString();
-                string cep = cliente["CEP"].ToString();
-                string bairro = cliente["BAIRRO"].ToString();
-                string estado = cliente["ESTADO"].ToString();
-
-                dataGridViewPesquisar.Rows.Add(idCliente, cpfCliente, nomeCliente, emailCliente, dataNasc, sexo, telefone, numCasa, rua, cidade, cep, bairro, estado);
-            }
-            #endregion
-        }
 
         private void btnDeletar_Click(object sender, EventArgs e)
         {
-           
+
 
         }
     }

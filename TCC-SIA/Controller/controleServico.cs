@@ -15,8 +15,8 @@ namespace TCC_SIA.Controller
         public string cadastroServico(Servico mServico)
         {
             //String sql de inserção
-            string sql = "INSERT INTO SERVICO(NOMESERVICO, DESCSERVICO, VALORSERVICO) " +
-                "VALUES(@NOMESERVICO, @DESCSERVICO, @VALORSERVICO);";
+            string sql = "INSERT INTO SERVICO(NOMESERVICO, DESCSERVICO, VALORSERVICO, GARANTIASERVICO) " +
+                "VALUES(@NOMESERVICO, @DESCSERVICO, @VALORSERVICO, @GARANTIASERVICO);";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
@@ -30,6 +30,8 @@ namespace TCC_SIA.Controller
                 comm.Parameters.AddWithValue("@NOMESERVICO", mServico.getNomeServico());
                 comm.Parameters.AddWithValue("@DESCSERVICO", mServico.getDescServico());
                 comm.Parameters.AddWithValue("@VALORSERVICO", mServico.getValorServico());
+                comm.Parameters.AddWithValue("@GARANTIASERVICO", mServico.getGarantiaServico());
+
 
                 //Executando o Query
                 comm.ExecuteNonQuery();
@@ -117,6 +119,39 @@ namespace TCC_SIA.Controller
                 con.desconectar();
             }
 
+        }
+        #endregion
+
+        #region Atualizar serviço
+        public string atualizaServico(Servico mServico)
+        {
+            string sql = "update servico set nomeservico = @nomeservico, " +
+                "descservico = @descservico, valorservico = @valorservico, " +
+                "garantiaservico = @garantiaservico where idservico = @idservico;";
+
+
+
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            try
+            {
+                comm.Parameters.AddWithValue("@IDSERVICO", mServico.getIDServico());
+                comm.Parameters.AddWithValue("@NOMESERVICO", mServico.getNomeServico());
+                comm.Parameters.AddWithValue("@DESCSERVICO", mServico.getDescServico());
+                comm.Parameters.AddWithValue("@VALORSERVICO", mServico.getValorServico());
+                comm.Parameters.AddWithValue("@GARANTIASERVICO", mServico.getGarantiaServico());
+                
+
+                comm.ExecuteNonQuery();
+                return "Cliente atualizado!";
+            }
+            catch (NpgsqlException ex)
+            {
+                //return ex.ToString();
+                return "Erro ao atualizar!";
+            }
         }
         #endregion
     }
