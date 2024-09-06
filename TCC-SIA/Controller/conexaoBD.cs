@@ -12,7 +12,10 @@ namespace TCC_SIA.Controller
     {
         #region Abrir conexão
         //Definindo os atributos para conexão com o banco
-        static string server = "127.0.0.1";
+
+        private Banco mLogin = new Banco();
+
+        static string server =  
         static string porta = "5433";
         static string user = "postgres";
         static string password = "2204";

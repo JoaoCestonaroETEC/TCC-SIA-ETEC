@@ -94,7 +94,7 @@
             tabPagePedido.Controls.Add(label1);
             tabPagePedido.Location = new Point(4, 24);
             tabPagePedido.Name = "tabPagePedido";
-            tabPagePedido.Padding = new Padding(3, 3, 3, 3);
+            tabPagePedido.Padding = new Padding(3);
             tabPagePedido.Size = new Size(685, 359);
             tabPagePedido.TabIndex = 0;
             tabPagePedido.Text = "Pedido";
@@ -194,7 +194,7 @@
             tabPagePecasUsadas.Controls.Add(comboBoxPeca);
             tabPagePecasUsadas.Location = new Point(4, 24);
             tabPagePecasUsadas.Name = "tabPagePecasUsadas";
-            tabPagePecasUsadas.Padding = new Padding(3, 3, 3, 3);
+            tabPagePecasUsadas.Padding = new Padding(3);
             tabPagePecasUsadas.Size = new Size(685, 359);
             tabPagePecasUsadas.TabIndex = 1;
             tabPagePecasUsadas.Text = "Peças usadas";
@@ -237,7 +237,7 @@
             tabPageServiçosUtilizados.Controls.Add(comboBoxServico);
             tabPageServiçosUtilizados.Location = new Point(4, 24);
             tabPageServiçosUtilizados.Name = "tabPageServiçosUtilizados";
-            tabPageServiçosUtilizados.Padding = new Padding(3, 3, 3, 3);
+            tabPageServiçosUtilizados.Padding = new Padding(3);
             tabPageServiçosUtilizados.Size = new Size(685, 359);
             tabPageServiçosUtilizados.TabIndex = 2;
             tabPageServiçosUtilizados.Text = "Serviços Usados";

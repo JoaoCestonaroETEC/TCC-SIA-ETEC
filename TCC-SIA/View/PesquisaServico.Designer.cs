@@ -30,13 +30,16 @@
         {
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
-            tabPage2 = new TabPage();
+            btnDeletar = new Button();
+            btnSalvarAtulizar = new Button();
             buttonPesquisar = new Button();
             label1 = new Label();
             textBoxPesquisar = new TextBox();
             dataGridViewPesquisar = new DataGridView();
-            btnSalvarAtulizar = new Button();
-            btnDeletar = new Button();
+            tabPage2 = new TabPage();
+            maskedTextBoxID = new MaskedTextBox();
+            label6 = new Label();
+            buttonSalvarA = new Button();
             dateTimePickerGarantia = new DateTimePicker();
             label2 = new Label();
             maskedTextBoxValor = new MaskedTextBox();
@@ -45,11 +48,10 @@
             label4 = new Label();
             label3 = new Label();
             label5 = new Label();
-            buttonSalvarA = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
-            tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewPesquisar).BeginInit();
+            tabPage2.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
@@ -78,24 +80,24 @@
             tabPage1.Text = "Pesquisar";
             tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // btnDeletar
             // 
-            tabPage2.Controls.Add(buttonSalvarA);
-            tabPage2.Controls.Add(dateTimePickerGarantia);
-            tabPage2.Controls.Add(label2);
-            tabPage2.Controls.Add(maskedTextBoxValor);
-            tabPage2.Controls.Add(richTextBoxDesc);
-            tabPage2.Controls.Add(textBoxNome);
-            tabPage2.Controls.Add(label4);
-            tabPage2.Controls.Add(label3);
-            tabPage2.Controls.Add(label5);
-            tabPage2.Location = new Point(4, 29);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(585, 507);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "Editar";
-            tabPage2.UseVisualStyleBackColor = true;
+            btnDeletar.Location = new Point(448, 425);
+            btnDeletar.Name = "btnDeletar";
+            btnDeletar.Size = new Size(130, 74);
+            btnDeletar.TabIndex = 21;
+            btnDeletar.Text = "Deletar";
+            btnDeletar.UseVisualStyleBackColor = true;
+            // 
+            // btnSalvarAtulizar
+            // 
+            btnSalvarAtulizar.Location = new Point(302, 425);
+            btnSalvarAtulizar.Name = "btnSalvarAtulizar";
+            btnSalvarAtulizar.Size = new Size(130, 74);
+            btnSalvarAtulizar.TabIndex = 20;
+            btnSalvarAtulizar.Text = "Editar";
+            btnSalvarAtulizar.UseVisualStyleBackColor = true;
+            btnSalvarAtulizar.Click += btnSalvarAtulizar_Click;
             // 
             // buttonPesquisar
             // 
@@ -106,6 +108,7 @@
             buttonPesquisar.TabIndex = 19;
             buttonPesquisar.Text = "Pesquisar";
             buttonPesquisar.UseVisualStyleBackColor = true;
+            buttonPesquisar.Click += buttonPesquisar_Click;
             // 
             // label1
             // 
@@ -134,23 +137,53 @@
             dataGridViewPesquisar.Size = new Size(572, 368);
             dataGridViewPesquisar.TabIndex = 16;
             // 
-            // btnSalvarAtulizar
+            // tabPage2
             // 
-            btnSalvarAtulizar.Location = new Point(302, 425);
-            btnSalvarAtulizar.Name = "btnSalvarAtulizar";
-            btnSalvarAtulizar.Size = new Size(130, 74);
-            btnSalvarAtulizar.TabIndex = 20;
-            btnSalvarAtulizar.Text = "Editar";
-            btnSalvarAtulizar.UseVisualStyleBackColor = true;
+            tabPage2.Controls.Add(maskedTextBoxID);
+            tabPage2.Controls.Add(label6);
+            tabPage2.Controls.Add(buttonSalvarA);
+            tabPage2.Controls.Add(dateTimePickerGarantia);
+            tabPage2.Controls.Add(label2);
+            tabPage2.Controls.Add(maskedTextBoxValor);
+            tabPage2.Controls.Add(richTextBoxDesc);
+            tabPage2.Controls.Add(textBoxNome);
+            tabPage2.Controls.Add(label4);
+            tabPage2.Controls.Add(label3);
+            tabPage2.Controls.Add(label5);
+            tabPage2.Location = new Point(4, 29);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(585, 507);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Editar";
+            tabPage2.UseVisualStyleBackColor = true;
             // 
-            // btnDeletar
+            // maskedTextBoxID
             // 
-            btnDeletar.Location = new Point(448, 425);
-            btnDeletar.Name = "btnDeletar";
-            btnDeletar.Size = new Size(130, 74);
-            btnDeletar.TabIndex = 21;
-            btnDeletar.Text = "Deletar";
-            btnDeletar.UseVisualStyleBackColor = true;
+            maskedTextBoxID.Enabled = false;
+            maskedTextBoxID.Location = new Point(417, 18);
+            maskedTextBoxID.Name = "maskedTextBoxID";
+            maskedTextBoxID.Size = new Size(125, 27);
+            maskedTextBoxID.TabIndex = 21;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(384, 21);
+            label6.Name = "label6";
+            label6.Size = new Size(27, 20);
+            label6.TabIndex = 20;
+            label6.Text = "ID:";
+            // 
+            // buttonSalvarA
+            // 
+            buttonSalvarA.Location = new Point(22, 409);
+            buttonSalvarA.Name = "buttonSalvarA";
+            buttonSalvarA.Size = new Size(149, 76);
+            buttonSalvarA.TabIndex = 19;
+            buttonSalvarA.Text = "Salvar";
+            buttonSalvarA.UseVisualStyleBackColor = true;
+            buttonSalvarA.Click += buttonSalvarA_Click;
             // 
             // dateTimePickerGarantia
             // 
@@ -182,7 +215,7 @@
             richTextBoxDesc.Location = new Point(93, 129);
             richTextBoxDesc.Margin = new Padding(3, 4, 3, 4);
             richTextBoxDesc.Name = "richTextBoxDesc";
-            richTextBoxDesc.Size = new Size(340, 244);
+            richTextBoxDesc.Size = new Size(449, 244);
             richTextBoxDesc.TabIndex = 15;
             richTextBoxDesc.Text = "";
             // 
@@ -221,15 +254,6 @@
             label5.TabIndex = 11;
             label5.Text = "Nome:";
             // 
-            // buttonSalvarA
-            // 
-            buttonSalvarA.Location = new Point(22, 409);
-            buttonSalvarA.Name = "buttonSalvarA";
-            buttonSalvarA.Size = new Size(149, 76);
-            buttonSalvarA.TabIndex = 19;
-            buttonSalvarA.Text = "Salvar";
-            buttonSalvarA.UseVisualStyleBackColor = true;
-            // 
             // PesquisaServico
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -242,9 +266,9 @@
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewPesquisar).EndInit();
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewPesquisar).EndInit();
             ResumeLayout(false);
         }
 
@@ -268,5 +292,7 @@
         private Label label4;
         private Label label3;
         private Label label5;
+        private MaskedTextBox maskedTextBoxID;
+        private Label label6;
     }
 }

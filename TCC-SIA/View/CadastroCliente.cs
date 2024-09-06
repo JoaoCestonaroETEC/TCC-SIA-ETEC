@@ -89,7 +89,7 @@ namespace TCC_SIA.View
             }
 
             //Criação do objeto Cliente e controleCliente
-            Cliente mCliente = new Cliente();
+            ClienteF mCliente = new ClienteF();
             controleCliente cCliente = new controleCliente();
 
             //Definindo os valores nos atributos
