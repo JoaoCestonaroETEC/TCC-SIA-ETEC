@@ -34,7 +34,7 @@
             buttonCadastrar = new Button();
             textBoxNome = new TextBox();
             label3 = new Label();
-            comboBox1 = new ComboBox();
+            comboBoxTipo = new ComboBox();
             SuspendLayout();
             // 
             // label1
@@ -91,20 +91,21 @@
             label3.TabIndex = 21;
             label3.Text = "Tipo:";
             // 
-            // comboBox1
+            // comboBoxTipo
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(413, 21);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 22;
+            comboBoxTipo.FormattingEnabled = true;
+            comboBoxTipo.Items.AddRange(new object[] { "Peças Automotívas", "Óleos lubrificantes", "Pneus", "Ferramentas e Equipamentos para oficinas", "Veiculos", "Outro" });
+            comboBoxTipo.Location = new Point(413, 21);
+            comboBoxTipo.Name = "comboBoxTipo";
+            comboBoxTipo.Size = new Size(121, 23);
+            comboBoxTipo.TabIndex = 22;
             // 
             // CadastroMarca
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(564, 304);
-            Controls.Add(comboBox1);
+            Controls.Add(comboBoxTipo);
             Controls.Add(label3);
             Controls.Add(textBoxNome);
             Controls.Add(buttonCadastrar);
@@ -126,6 +127,6 @@
         private Button buttonCadastrar;
         private TextBox textBoxNome;
         private Label label3;
-        private ComboBox comboBox1;
+        private ComboBox comboBoxTipo;
     }
 }

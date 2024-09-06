@@ -59,6 +59,9 @@ namespace TCC_SIA.View
 
             mPeca.setQuantPeca(Convert.ToInt32(numericUpDownQuant.Text));
             mPeca.setGarantiaPeca(Convert.ToDateTime(dateTimePickerGarantia.Text));
+            mPeca.setUnidade(Convert.ToInt32(numericUpDownUnid.Text));
+            mPeca.setFornecedor(comboBoxFornecedor.Text);
+            mPeca.setDataAquisao(Convert.ToDateTime(dateTimePickerAquis.Text));
 
             //Chamada ao método de cadastro no ControlePeca
             string res = cPeca.cadastroPeca(mPeca);
@@ -108,6 +111,7 @@ namespace TCC_SIA.View
             maskedTextBoxValor.KeyPress += new KeyPressEventHandler(maskedTextBoxValor_KeyPress);
             listarMarca();
         }
+
         #endregion
     }
 }

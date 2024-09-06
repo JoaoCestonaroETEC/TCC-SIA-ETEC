@@ -75,6 +75,13 @@ namespace TCC_SIA.View
             mVeiculo.setCorVeiculo(comboBoxTipo.Text);
             mVeiculo.setPlacaVeiculo(maskedTextBoxPlaca.Text);
             mVeiculo.setModeloVeiculo(textBoxModelo.Text);
+            mVeiculo.setChassi(maskedTextBoxChassi.Text);
+            mVeiculo.setAnoFabricacao(Convert.ToDateTime(dateTimePickerFab.Text));
+            mVeiculo.setQuilometragem(Convert.ToInt32(maskedTextBoxQuilo.Text));
+            mVeiculo.setMotor(maskedTextBoxMotor.Text);
+            mVeiculo.setCombustivel(comboBoxCombustivel.Text);
+            mVeiculo.setData(Convert.ToDateTime(dateTimePickerData.Text));
+            mVeiculo.setSeguro(comboBoxSeguro.Text);
 
             //Chamada ao método de cadastro no ControleServico
             string res = cVeiculo.cadastroVeiculo(mVeiculo);

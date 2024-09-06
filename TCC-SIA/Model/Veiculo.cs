@@ -16,14 +16,13 @@ namespace TCC_SIA.Model
         private string corVeiculo;
         private string placaVeiculo;
         private string modeloVeiculo;
-
         private string chassi;
         private DateTime anoFabricacao;
-        private long quilometragem;
+        private int quilometragem;
         private string motor;
         private string combustivel;
         private DateTime data;
-        private long seguro;
+        private string seguro;
             
         #endregion
 
@@ -115,12 +114,12 @@ namespace TCC_SIA.Model
             this.anoFabricacao = anoFabricacao;
         }
 
-        public long getQuilometragem()
+        public int getQuilometragem()
         {
             return this.quilometragem;
         }
 
-        public void setQuilometragem(long quilometragem)
+        public void setQuilometragem(int quilometragem)
         {
             this.quilometragem = quilometragem;
         }
@@ -155,12 +154,12 @@ namespace TCC_SIA.Model
             this.data = data;
         }
 
-        public long getSeguro()
+        public string getSeguro()
         {
             return this.seguro;
         }
 
-        public void setSeguro(long seguro)
+        public void setSeguro(string seguro)
         {
             this.seguro = seguro;
         }

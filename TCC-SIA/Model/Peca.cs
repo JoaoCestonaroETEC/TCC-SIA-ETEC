@@ -15,6 +15,7 @@ namespace TCC_SIA.Model
         private string tipoPeca;
         private string descPeca;
         private decimal valorPeca;
+        private int unidade;
         private int quantPeca;
         private DateTime garantiaPeca;
         public string fornecedor;
@@ -80,7 +81,15 @@ namespace TCC_SIA.Model
         {
             this.valorPeca = valorPeca;
         }
+        public int getUnidade()
+        {
+            return unidade;
+        }
 
+        public void setUnidade(int unidade)
+        {
+            this.unidade = unidade;
+        }
         public int getQuantPeca()
         {
             return quantPeca;

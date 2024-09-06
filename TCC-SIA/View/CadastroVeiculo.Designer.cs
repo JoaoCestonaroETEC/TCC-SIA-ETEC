@@ -45,18 +45,18 @@
             comboBoxIdCliente = new ComboBox();
             label2 = new Label();
             label3 = new Label();
-            dateTimePicker1 = new DateTimePicker();
-            maskedTextBox1 = new MaskedTextBox();
+            dateTimePickerFab = new DateTimePicker();
+            maskedTextBoxQuilo = new MaskedTextBox();
             label4 = new Label();
-            maskedTextBox2 = new MaskedTextBox();
+            maskedTextBoxMotor = new MaskedTextBox();
             label5 = new Label();
-            comboBox1 = new ComboBox();
+            comboBoxCombustivel = new ComboBox();
             label6 = new Label();
-            dateTimePicker2 = new DateTimePicker();
+            dateTimePickerData = new DateTimePicker();
             label7 = new Label();
-            comboBox2 = new ComboBox();
+            comboBoxSeguro = new ComboBox();
             label8 = new Label();
-            maskedTextBox3 = new MaskedTextBox();
+            maskedTextBoxChassi = new MaskedTextBox();
             SuspendLayout();
             // 
             // labelCpf
@@ -213,22 +213,22 @@
             label3.TabIndex = 42;
             label3.Text = "Ano de Fabricação:";
             // 
-            // dateTimePicker1
+            // dateTimePickerFab
             // 
-            dateTimePicker1.Format = DateTimePickerFormat.Short;
-            dateTimePicker1.Location = new Point(508, 43);
-            dateTimePicker1.Margin = new Padding(3, 4, 3, 4);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(133, 23);
-            dateTimePicker1.TabIndex = 43;
+            dateTimePickerFab.Format = DateTimePickerFormat.Short;
+            dateTimePickerFab.Location = new Point(508, 43);
+            dateTimePickerFab.Margin = new Padding(3, 4, 3, 4);
+            dateTimePickerFab.Name = "dateTimePickerFab";
+            dateTimePickerFab.Size = new Size(133, 23);
+            dateTimePickerFab.TabIndex = 43;
             // 
-            // maskedTextBox1
+            // maskedTextBoxQuilo
             // 
-            maskedTextBox1.Location = new Point(489, 76);
-            maskedTextBox1.Margin = new Padding(3, 4, 3, 4);
-            maskedTextBox1.Name = "maskedTextBox1";
-            maskedTextBox1.Size = new Size(152, 23);
-            maskedTextBox1.TabIndex = 44;
+            maskedTextBoxQuilo.Location = new Point(489, 76);
+            maskedTextBoxQuilo.Margin = new Padding(3, 4, 3, 4);
+            maskedTextBoxQuilo.Name = "maskedTextBoxQuilo";
+            maskedTextBoxQuilo.Size = new Size(152, 23);
+            maskedTextBoxQuilo.TabIndex = 44;
             // 
             // label4
             // 
@@ -239,13 +239,13 @@
             label4.TabIndex = 45;
             label4.Text = "Quilometragem:";
             // 
-            // maskedTextBox2
+            // maskedTextBoxMotor
             // 
-            maskedTextBox2.Location = new Point(489, 109);
-            maskedTextBox2.Margin = new Padding(3, 4, 3, 4);
-            maskedTextBox2.Name = "maskedTextBox2";
-            maskedTextBox2.Size = new Size(152, 23);
-            maskedTextBox2.TabIndex = 46;
+            maskedTextBoxMotor.Location = new Point(489, 109);
+            maskedTextBoxMotor.Margin = new Padding(3, 4, 3, 4);
+            maskedTextBoxMotor.Name = "maskedTextBoxMotor";
+            maskedTextBoxMotor.Size = new Size(152, 23);
+            maskedTextBoxMotor.TabIndex = 46;
             // 
             // label5
             // 
@@ -256,14 +256,14 @@
             label5.TabIndex = 47;
             label5.Text = "Motor:";
             // 
-            // comboBox1
+            // comboBoxCombustivel
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(483, 141);
-            comboBox1.Margin = new Padding(3, 4, 3, 4);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(158, 23);
-            comboBox1.TabIndex = 48;
+            comboBoxCombustivel.FormattingEnabled = true;
+            comboBoxCombustivel.Location = new Point(483, 141);
+            comboBoxCombustivel.Margin = new Padding(3, 4, 3, 4);
+            comboBoxCombustivel.Name = "comboBoxCombustivel";
+            comboBoxCombustivel.Size = new Size(158, 23);
+            comboBoxCombustivel.TabIndex = 48;
             // 
             // label6
             // 
@@ -274,15 +274,15 @@
             label6.TabIndex = 49;
             label6.Text = "Combustível:";
             // 
-            // dateTimePicker2
+            // dateTimePickerData
             // 
-            dateTimePicker2.Enabled = false;
-            dateTimePicker2.Format = DateTimePickerFormat.Short;
-            dateTimePicker2.Location = new Point(508, 176);
-            dateTimePicker2.Margin = new Padding(3, 4, 3, 4);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(133, 23);
-            dateTimePicker2.TabIndex = 50;
+            dateTimePickerData.Enabled = false;
+            dateTimePickerData.Format = DateTimePickerFormat.Short;
+            dateTimePickerData.Location = new Point(508, 176);
+            dateTimePickerData.Margin = new Padding(3, 4, 3, 4);
+            dateTimePickerData.Name = "dateTimePickerData";
+            dateTimePickerData.Size = new Size(133, 23);
+            dateTimePickerData.TabIndex = 50;
             // 
             // label7
             // 
@@ -293,14 +293,14 @@
             label7.TabIndex = 51;
             label7.Text = "Data:";
             // 
-            // comboBox2
+            // comboBoxSeguro
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(483, 209);
-            comboBox2.Margin = new Padding(3, 4, 3, 4);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(158, 23);
-            comboBox2.TabIndex = 52;
+            comboBoxSeguro.FormattingEnabled = true;
+            comboBoxSeguro.Location = new Point(483, 209);
+            comboBoxSeguro.Margin = new Padding(3, 4, 3, 4);
+            comboBoxSeguro.Name = "comboBoxSeguro";
+            comboBoxSeguro.Size = new Size(158, 23);
+            comboBoxSeguro.TabIndex = 52;
             // 
             // label8
             // 
@@ -311,31 +311,31 @@
             label8.TabIndex = 53;
             label8.Text = "Seguro:";
             // 
-            // maskedTextBox3
+            // maskedTextBoxChassi
             // 
-            maskedTextBox3.Location = new Point(405, 10);
-            maskedTextBox3.Margin = new Padding(2, 2, 2, 2);
-            maskedTextBox3.Name = "maskedTextBox3";
-            maskedTextBox3.Size = new Size(236, 23);
-            maskedTextBox3.TabIndex = 56;
+            maskedTextBoxChassi.Location = new Point(405, 10);
+            maskedTextBoxChassi.Margin = new Padding(2);
+            maskedTextBoxChassi.Name = "maskedTextBoxChassi";
+            maskedTextBoxChassi.Size = new Size(236, 23);
+            maskedTextBoxChassi.TabIndex = 56;
             // 
             // CadastroVeiculo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(682, 359);
-            Controls.Add(maskedTextBox3);
+            Controls.Add(maskedTextBoxChassi);
             Controls.Add(label8);
-            Controls.Add(comboBox2);
+            Controls.Add(comboBoxSeguro);
             Controls.Add(label7);
-            Controls.Add(dateTimePicker2);
+            Controls.Add(dateTimePickerData);
             Controls.Add(label6);
-            Controls.Add(comboBox1);
+            Controls.Add(comboBoxCombustivel);
             Controls.Add(label5);
-            Controls.Add(maskedTextBox2);
+            Controls.Add(maskedTextBoxMotor);
             Controls.Add(label4);
-            Controls.Add(maskedTextBox1);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(maskedTextBoxQuilo);
+            Controls.Add(dateTimePickerFab);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(comboBoxIdCliente);
@@ -380,17 +380,17 @@
         private ComboBox comboBoxIdCliente;
         private Label label2;
         private Label label3;
-        private DateTimePicker dateTimePicker1;
-        private MaskedTextBox maskedTextBox1;
+        private DateTimePicker dateTimePickerFab;
+        private MaskedTextBox maskedTextBoxQuilo;
         private Label label4;
-        private MaskedTextBox maskedTextBox2;
+        private MaskedTextBox maskedTextBoxMotor;
         private Label label5;
-        private ComboBox comboBox1;
+        private ComboBox comboBoxCombustivel;
         private Label label6;
-        private DateTimePicker dateTimePicker2;
+        private DateTimePicker dateTimePickerData;
         private Label label7;
-        private ComboBox comboBox2;
+        private ComboBox comboBoxSeguro;
         private Label label8;
-        private MaskedTextBox maskedTextBox3;
+        private MaskedTextBox maskedTextBoxChassi;
     }
 }

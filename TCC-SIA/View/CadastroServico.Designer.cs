@@ -38,7 +38,7 @@
             label3 = new Label();
             label1 = new Label();
             label5 = new Label();
-            comboBox1 = new ComboBox();
+            comboBoxStatus = new ComboBox();
             SuspendLayout();
             // 
             // buttonCadastrar
@@ -127,20 +127,20 @@
             label5.TabIndex = 19;
             label5.Text = "Status:";
             // 
-            // comboBox1
+            // comboBoxStatus
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(81, 103);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 20;
+            comboBoxStatus.FormattingEnabled = true;
+            comboBoxStatus.Location = new Point(81, 103);
+            comboBoxStatus.Name = "comboBoxStatus";
+            comboBoxStatus.Size = new Size(121, 23);
+            comboBoxStatus.TabIndex = 20;
             // 
             // CadastroServico
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(706, 227);
-            Controls.Add(comboBox1);
+            Controls.Add(comboBoxStatus);
             Controls.Add(label5);
             Controls.Add(dateTimePickerGarantia);
             Controls.Add(label2);
@@ -169,6 +169,6 @@
         private Label label3;
         private Label label1;
         private Label label5;
-        private ComboBox comboBox1;
+        private ComboBox comboBoxStatus;
     }
 }
