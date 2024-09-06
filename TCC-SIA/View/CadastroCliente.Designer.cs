@@ -176,6 +176,7 @@
             // 
             // dateTimePickerData
             // 
+            dateTimePickerData.Enabled = false;
             dateTimePickerData.Format = DateTimePickerFormat.Short;
             dateTimePickerData.Location = new Point(298, 194);
             dateTimePickerData.Margin = new Padding(3, 2, 3, 2);
@@ -194,6 +195,7 @@
             // 
             // comboBoxStatus
             // 
+            comboBoxStatus.Enabled = false;
             comboBoxStatus.FormattingEnabled = true;
             comboBoxStatus.Location = new Point(309, 169);
             comboBoxStatus.Margin = new Padding(3, 2, 3, 2);

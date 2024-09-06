@@ -11,6 +11,7 @@ namespace TCC_SIA.Model
         #region Criação de atributo
         private string nomeMarca;
         private string descMarca;
+        private string tipoMarca;
         #endregion
 
         #region Encapsulamento
@@ -31,6 +32,14 @@ namespace TCC_SIA.Model
         public void setDescMarca(string descMarca)
         {
             this.descMarca = descMarca;
+        }
+        public string getTipoMarca()
+        {
+            return tipoMarca;
+        }
+        public void setTipoMarca(string tipomarca)
+        {
+            this.tipoMarca = tipomarca;
         }
         #endregion
     }

@@ -113,7 +113,7 @@ namespace TCC_SIA.Model
             return dataAquisicao;
         }
 
-        public void setDataAquisao(DateTime dataAquisao)
+        public void setDataAquisao(DateTime dataAquisicao)
         {
             this.dataAquisicao = dataAquisicao;
         }
