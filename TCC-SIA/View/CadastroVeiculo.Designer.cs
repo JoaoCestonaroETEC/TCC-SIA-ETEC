@@ -57,12 +57,13 @@
             comboBoxSeguro = new ComboBox();
             label8 = new Label();
             maskedTextBoxChassi = new MaskedTextBox();
+            label9 = new Label();
             SuspendLayout();
             // 
             // labelCpf
             // 
             labelCpf.AutoSize = true;
-            labelCpf.Location = new Point(16, 13);
+            labelCpf.Location = new Point(31, 18);
             labelCpf.Name = "labelCpf";
             labelCpf.Size = new Size(47, 15);
             labelCpf.TabIndex = 19;
@@ -71,7 +72,7 @@
             // labelMarca
             // 
             labelMarca.AutoSize = true;
-            labelMarca.Location = new Point(25, 49);
+            labelMarca.Location = new Point(39, 51);
             labelMarca.Name = "labelMarca";
             labelMarca.Size = new Size(43, 15);
             labelMarca.TabIndex = 17;
@@ -79,7 +80,7 @@
             // 
             // buttonCadastrar
             // 
-            buttonCadastrar.Location = new Point(19, 264);
+            buttonCadastrar.Location = new Point(12, 235);
             buttonCadastrar.Margin = new Padding(3, 4, 3, 4);
             buttonCadastrar.Name = "buttonCadastrar";
             buttonCadastrar.Size = new Size(115, 66);
@@ -91,7 +92,7 @@
             // labelCor
             // 
             labelCor.AutoSize = true;
-            labelCor.Location = new Point(42, 156);
+            labelCor.Location = new Point(45, 143);
             labelCor.Name = "labelCor";
             labelCor.Size = new Size(29, 15);
             labelCor.TabIndex = 14;
@@ -100,7 +101,7 @@
             // labelTipo
             // 
             labelTipo.AutoSize = true;
-            labelTipo.Location = new Point(34, 85);
+            labelTipo.Location = new Point(46, 81);
             labelTipo.Name = "labelTipo";
             labelTipo.Size = new Size(33, 15);
             labelTipo.TabIndex = 25;
@@ -109,7 +110,7 @@
             // labelPlaca
             // 
             labelPlaca.AutoSize = true;
-            labelPlaca.Location = new Point(186, 192);
+            labelPlaca.Location = new Point(183, 176);
             labelPlaca.Name = "labelPlaca";
             labelPlaca.Size = new Size(38, 15);
             labelPlaca.TabIndex = 23;
@@ -118,7 +119,7 @@
             // labelModelo
             // 
             labelModelo.AutoSize = true;
-            labelModelo.Location = new Point(19, 226);
+            labelModelo.Location = new Point(34, 210);
             labelModelo.Name = "labelModelo";
             labelModelo.Size = new Size(51, 15);
             labelModelo.TabIndex = 21;
@@ -126,7 +127,7 @@
             // 
             // textBoxModelo
             // 
-            textBoxModelo.Location = new Point(88, 223);
+            textBoxModelo.Location = new Point(85, 204);
             textBoxModelo.Margin = new Padding(3, 4, 3, 4);
             textBoxModelo.Name = "textBoxModelo";
             textBoxModelo.Size = new Size(257, 23);
@@ -135,16 +136,16 @@
             // comboBoxCor
             // 
             comboBoxCor.FormattingEnabled = true;
-            comboBoxCor.Location = new Point(85, 153);
+            comboBoxCor.Location = new Point(88, 140);
             comboBoxCor.Margin = new Padding(3, 4, 3, 4);
             comboBoxCor.Name = "comboBoxCor";
-            comboBoxCor.Size = new Size(257, 23);
+            comboBoxCor.Size = new Size(253, 23);
             comboBoxCor.TabIndex = 33;
             // 
             // comboBoxTipo
             // 
             comboBoxTipo.FormattingEnabled = true;
-            comboBoxTipo.Location = new Point(84, 81);
+            comboBoxTipo.Location = new Point(85, 78);
             comboBoxTipo.Margin = new Padding(3, 4, 3, 4);
             comboBoxTipo.Name = "comboBoxTipo";
             comboBoxTipo.Size = new Size(257, 23);
@@ -156,13 +157,13 @@
             comboBoxMarca.Location = new Point(88, 46);
             comboBoxMarca.Margin = new Padding(3, 4, 3, 4);
             comboBoxMarca.Name = "comboBoxMarca";
-            comboBoxMarca.Size = new Size(257, 23);
+            comboBoxMarca.Size = new Size(253, 23);
             comboBoxMarca.TabIndex = 35;
             // 
             // maskedTextBoxPlaca
             // 
             maskedTextBoxPlaca.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            maskedTextBoxPlaca.Location = new Point(242, 189);
+            maskedTextBoxPlaca.Location = new Point(239, 173);
             maskedTextBoxPlaca.Margin = new Padding(3, 4, 3, 4);
             maskedTextBoxPlaca.Mask = "AAAAAAA";
             maskedTextBoxPlaca.Name = "maskedTextBoxPlaca";
@@ -172,7 +173,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(29, 121);
+            label1.Location = new Point(34, 112);
             label1.Name = "label1";
             label1.Size = new Size(43, 15);
             label1.TabIndex = 37;
@@ -180,7 +181,7 @@
             // 
             // textBoxNome
             // 
-            textBoxNome.Location = new Point(84, 118);
+            textBoxNome.Location = new Point(84, 109);
             textBoxNome.Margin = new Padding(3, 4, 3, 4);
             textBoxNome.Name = "textBoxNome";
             textBoxNome.Size = new Size(257, 23);
@@ -189,7 +190,7 @@
             // comboBoxIdCliente
             // 
             comboBoxIdCliente.FormattingEnabled = true;
-            comboBoxIdCliente.Location = new Point(84, 10);
+            comboBoxIdCliente.Location = new Point(84, 15);
             comboBoxIdCliente.Margin = new Padding(3, 4, 3, 4);
             comboBoxIdCliente.Name = "comboBoxIdCliente";
             comboBoxIdCliente.Size = new Size(257, 23);
@@ -207,7 +208,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(360, 49);
+            label3.Location = new Point(394, 46);
             label3.Name = "label3";
             label3.Size = new Size(108, 15);
             label3.TabIndex = 42;
@@ -233,7 +234,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(360, 79);
+            label4.Location = new Point(389, 81);
             label4.Name = "label4";
             label4.Size = new Size(94, 15);
             label4.TabIndex = 45;
@@ -250,7 +251,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(428, 112);
+            label5.Location = new Point(440, 112);
             label5.Name = "label5";
             label5.Size = new Size(43, 15);
             label5.TabIndex = 47;
@@ -319,11 +320,21 @@
             maskedTextBoxChassi.Size = new Size(236, 23);
             maskedTextBoxChassi.TabIndex = 56;
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(647, 81);
+            label9.Name = "label9";
+            label9.Size = new Size(25, 15);
+            label9.TabIndex = 57;
+            label9.Text = "KM";
+            // 
             // CadastroVeiculo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(682, 359);
+            ClientSize = new Size(682, 317);
+            Controls.Add(label9);
             Controls.Add(maskedTextBoxChassi);
             Controls.Add(label8);
             Controls.Add(comboBoxSeguro);
@@ -392,5 +403,6 @@
         private ComboBox comboBoxSeguro;
         private Label label8;
         private MaskedTextBox maskedTextBoxChassi;
+        private Label label9;
     }
 }
