@@ -32,9 +32,9 @@
             label2 = new Label();
             richTextBoxDesc = new RichTextBox();
             buttonCadastrar = new Button();
-            checkBoxPeca = new CheckBox();
-            checkBoxVeiculo = new CheckBox();
             textBoxNome = new TextBox();
+            label3 = new Label();
+            comboBoxTipo = new ComboBox();
             SuspendLayout();
             // 
             // label1
@@ -60,7 +60,7 @@
             richTextBoxDesc.Location = new Point(94, 51);
             richTextBoxDesc.Margin = new Padding(3, 2, 3, 2);
             richTextBoxDesc.Name = "richTextBoxDesc";
-            richTextBoxDesc.Size = new Size(362, 168);
+            richTextBoxDesc.Size = new Size(274, 168);
             richTextBoxDesc.TabIndex = 3;
             richTextBoxDesc.Text = "";
             // 
@@ -75,41 +75,39 @@
             buttonCadastrar.UseVisualStyleBackColor = true;
             buttonCadastrar.Click += buttonCadastrar_Click;
             // 
-            // checkBoxPeca
-            // 
-            checkBoxPeca.AutoSize = true;
-            checkBoxPeca.Location = new Point(405, 251);
-            checkBoxPeca.Name = "checkBoxPeca";
-            checkBoxPeca.Size = new Size(51, 19);
-            checkBoxPeca.TabIndex = 19;
-            checkBoxPeca.Text = "Peça";
-            checkBoxPeca.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxVeiculo
-            // 
-            checkBoxVeiculo.AutoSize = true;
-            checkBoxVeiculo.Location = new Point(335, 251);
-            checkBoxVeiculo.Name = "checkBoxVeiculo";
-            checkBoxVeiculo.Size = new Size(64, 19);
-            checkBoxVeiculo.TabIndex = 18;
-            checkBoxVeiculo.Text = "Veículo";
-            checkBoxVeiculo.UseVisualStyleBackColor = true;
-            // 
             // textBoxNome
             // 
             textBoxNome.Location = new Point(94, 21);
             textBoxNome.Name = "textBoxNome";
-            textBoxNome.Size = new Size(362, 23);
+            textBoxNome.Size = new Size(274, 23);
             textBoxNome.TabIndex = 20;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(374, 24);
+            label3.Name = "label3";
+            label3.Size = new Size(33, 15);
+            label3.TabIndex = 21;
+            label3.Text = "Tipo:";
+            // 
+            // comboBoxTipo
+            // 
+            comboBoxTipo.FormattingEnabled = true;
+            comboBoxTipo.Items.AddRange(new object[] { "Peças Automotívas", "Óleos lubrificantes", "Pneus", "Ferramentas e Equipamentos para oficinas", "Veiculos", "Outro" });
+            comboBoxTipo.Location = new Point(413, 21);
+            comboBoxTipo.Name = "comboBoxTipo";
+            comboBoxTipo.Size = new Size(121, 23);
+            comboBoxTipo.TabIndex = 22;
             // 
             // CadastroMarca
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(480, 304);
+            ClientSize = new Size(564, 304);
+            Controls.Add(comboBoxTipo);
+            Controls.Add(label3);
             Controls.Add(textBoxNome);
-            Controls.Add(checkBoxPeca);
-            Controls.Add(checkBoxVeiculo);
             Controls.Add(buttonCadastrar);
             Controls.Add(richTextBoxDesc);
             Controls.Add(label2);
@@ -127,8 +125,8 @@
         private Label label2;
         private RichTextBox richTextBoxDesc;
         private Button buttonCadastrar;
-        private CheckBox checkBoxPeca;
-        private CheckBox checkBoxVeiculo;
         private TextBox textBoxNome;
+        private Label label3;
+        private ComboBox comboBoxTipo;
     }
 }

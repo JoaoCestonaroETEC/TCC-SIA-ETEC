@@ -47,7 +47,7 @@ namespace TCC_SIA.View
             mLogin.SetSenha(maskedTextBoxPassword.Text);
             mLogin.SetBanco(maskedTextBoxDB.Text);
                
-                //MessageBox.Show(res);
+                MessageBox.Show(res);
             #endregion
         }
     }

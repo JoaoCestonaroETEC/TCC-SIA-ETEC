@@ -51,6 +51,7 @@ namespace TCC_SIA.View
             }
 
             mServico.setDescServico(richTextBoxDesc.Text);
+            mServico.setStatus(comboBoxStatus.Text);
 
             //Chamada ao método de cadastro no ControleServico
             string res = cServico.cadastroServico(mServico);

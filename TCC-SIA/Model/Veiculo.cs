@@ -16,6 +16,14 @@ namespace TCC_SIA.Model
         private string corVeiculo;
         private string placaVeiculo;
         private string modeloVeiculo;
+        private string chassi;
+        private DateTime anoFabricacao;
+        private int quilometragem;
+        private string motor;
+        private string combustivel;
+        private DateTime data;
+        private string seguro;
+            
         #endregion
 
         #region Encapsulamento
@@ -85,6 +93,75 @@ namespace TCC_SIA.Model
         public void setModeloVeiculo(string modeloVeiculo)
         {
             this.modeloVeiculo = modeloVeiculo;
+        }
+        public string getChassi()
+        {
+            return this.chassi;
+        }
+
+        public void setChassi(string chassi)
+        {
+            this.chassi = chassi;
+        }
+
+        public DateTime getAnoFabricacao()
+        {
+            return this.anoFabricacao;
+        }
+
+        public void setAnoFabricacao(DateTime anoFabricacao)
+        {
+            this.anoFabricacao = anoFabricacao;
+        }
+
+        public int getQuilometragem()
+        {
+            return this.quilometragem;
+        }
+
+        public void setQuilometragem(int quilometragem)
+        {
+            this.quilometragem = quilometragem;
+        }
+
+        public string getMotor()
+        {
+            return this.motor;
+        }
+
+        public void setMotor(string motor)
+        {
+            this.motor = motor;
+        }
+
+        public string getCombustivel()
+        {
+            return this.combustivel;
+        }
+
+        public void setCombustivel(string combustivel)
+        {
+            this.combustivel = combustivel;
+        }
+
+        public DateTime getData()
+        {
+            return this.data;
+        }
+
+        public void setData(DateTime data)
+        {
+            this.data = data;
+        }
+
+        public string getSeguro()
+        {
+            return this.seguro;
+        }
+
+        public void setSeguro(string seguro)
+        {
+            this.seguro = seguro;
         }
         #endregion
     }

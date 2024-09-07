@@ -18,6 +18,10 @@ namespace TCC_SIA.Model
         private string observacao;
         private DateTime dataInicio;
         private DateTime dataFim;
+        private long iddesconto;
+        private int desconto_porcento;
+        private int desconto_reais;
+
         #endregion
 
         #region Encapsulamento
@@ -108,6 +112,36 @@ namespace TCC_SIA.Model
         public void setDataFim(DateTime dataFim)
         {
             this.dataFim = dataFim;
+        }
+
+        public long getIdDesconto()
+        {
+            return iddesconto;
+        }
+
+        public void setIdDesconto(long idDesconto)
+        {
+            this.iddesconto = idDesconto;
+        }
+
+        public int getDescontoPorCento()
+        {
+            return desconto_porcento;
+        }
+
+        public void setDescontoPorCento(int descontoPorCento)
+        {
+            this.desconto_porcento = descontoPorCento;
+        }
+
+        public int getDescontoReais()
+        {
+            return desconto_reais;
+        }
+
+        public void setDescontoReais(int descontoReais)
+        {
+            this.desconto_reais = descontoReais;
         }
         #endregion
     }

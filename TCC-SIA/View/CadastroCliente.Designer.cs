@@ -30,47 +30,47 @@
         {
             tabControlCliente = new TabControl();
             tabPageFIsica = new TabPage();
-            richTextBoxObs = new RichTextBox();
+            richTextBoxObsF = new RichTextBox();
             label29 = new Label();
             label14 = new Label();
-            dateTimePickerData = new DateTimePicker();
+            dateTimePickerDataF = new DateTimePicker();
             label13 = new Label();
-            comboBoxStatus = new ComboBox();
-            maskedTextBoxEmail = new MaskedTextBox();
-            comboBoxSexo = new ComboBox();
-            maskedTextBoxNumero = new MaskedTextBox();
-            comboBoxUf = new ComboBox();
-            textBoxRua = new TextBox();
+            comboBoxStatusF = new ComboBox();
+            maskedTextBoxEmailF = new MaskedTextBox();
+            comboBoxSexoF = new ComboBox();
+            maskedTextBoxNumeroF = new MaskedTextBox();
+            comboBoxUfF = new ComboBox();
+            textBoxRuaF = new TextBox();
             label12 = new Label();
-            maskedTextBoxCep = new MaskedTextBox();
-            textBoxCidade = new TextBox();
-            textBoxBairro = new TextBox();
+            maskedTextBoxCepF = new MaskedTextBox();
+            textBoxCidadeF = new TextBox();
+            textBoxBairroF = new TextBox();
             label11 = new Label();
             label10 = new Label();
             label9 = new Label();
             label8 = new Label();
             label7 = new Label();
             label6 = new Label();
-            maskedTextBoxTelefone = new MaskedTextBox();
+            maskedTextBoxTelefoneF = new MaskedTextBox();
             label5 = new Label();
-            dateTimePickerNasc = new DateTimePicker();
-            textBoxNome = new TextBox();
-            maskedTextBoxCPF = new MaskedTextBox();
+            dateTimePickerNascF = new DateTimePicker();
+            textBoxNomeF = new TextBox();
+            maskedTextBoxCPFF = new MaskedTextBox();
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
-            buttonCadastrar = new Button();
+            buttonCadastrarF = new Button();
             tabPageJuridica = new TabPage();
             richTextBoxRazao = new RichTextBox();
             label17 = new Label();
             label15 = new Label();
-            dateTimeDataJ = new DateTimePicker();
+            dateTimePickerDataJ = new DateTimePicker();
             label16 = new Label();
             comboBoxStatusJ = new ComboBox();
             maskedTextBoxEmailJ = new MaskedTextBox();
             maskedTextBoxNumeroJ = new MaskedTextBox();
-            comboBoxEstadoJ = new ComboBox();
+            comboBoxUfJ = new ComboBox();
             textBoxRuaJ = new TextBox();
             maskedTextBoxCepJ = new MaskedTextBox();
             textBoxCidadeJ = new TextBox();
@@ -88,7 +88,7 @@
             label26 = new Label();
             label27 = new Label();
             label28 = new Label();
-            button1 = new Button();
+            buttonCadastrarJ = new Button();
             tabControlCliente.SuspendLayout();
             tabPageFIsica.SuspendLayout();
             tabPageJuridica.SuspendLayout();
@@ -107,37 +107,37 @@
             // 
             // tabPageFIsica
             // 
-            tabPageFIsica.Controls.Add(richTextBoxObs);
+            tabPageFIsica.Controls.Add(richTextBoxObsF);
             tabPageFIsica.Controls.Add(label29);
             tabPageFIsica.Controls.Add(label14);
-            tabPageFIsica.Controls.Add(dateTimePickerData);
+            tabPageFIsica.Controls.Add(dateTimePickerDataF);
             tabPageFIsica.Controls.Add(label13);
-            tabPageFIsica.Controls.Add(comboBoxStatus);
-            tabPageFIsica.Controls.Add(maskedTextBoxEmail);
-            tabPageFIsica.Controls.Add(comboBoxSexo);
-            tabPageFIsica.Controls.Add(maskedTextBoxNumero);
-            tabPageFIsica.Controls.Add(comboBoxUf);
-            tabPageFIsica.Controls.Add(textBoxRua);
+            tabPageFIsica.Controls.Add(comboBoxStatusF);
+            tabPageFIsica.Controls.Add(maskedTextBoxEmailF);
+            tabPageFIsica.Controls.Add(comboBoxSexoF);
+            tabPageFIsica.Controls.Add(maskedTextBoxNumeroF);
+            tabPageFIsica.Controls.Add(comboBoxUfF);
+            tabPageFIsica.Controls.Add(textBoxRuaF);
             tabPageFIsica.Controls.Add(label12);
-            tabPageFIsica.Controls.Add(maskedTextBoxCep);
-            tabPageFIsica.Controls.Add(textBoxCidade);
-            tabPageFIsica.Controls.Add(textBoxBairro);
+            tabPageFIsica.Controls.Add(maskedTextBoxCepF);
+            tabPageFIsica.Controls.Add(textBoxCidadeF);
+            tabPageFIsica.Controls.Add(textBoxBairroF);
             tabPageFIsica.Controls.Add(label11);
             tabPageFIsica.Controls.Add(label10);
             tabPageFIsica.Controls.Add(label9);
             tabPageFIsica.Controls.Add(label8);
             tabPageFIsica.Controls.Add(label7);
             tabPageFIsica.Controls.Add(label6);
-            tabPageFIsica.Controls.Add(maskedTextBoxTelefone);
+            tabPageFIsica.Controls.Add(maskedTextBoxTelefoneF);
             tabPageFIsica.Controls.Add(label5);
-            tabPageFIsica.Controls.Add(dateTimePickerNasc);
-            tabPageFIsica.Controls.Add(textBoxNome);
-            tabPageFIsica.Controls.Add(maskedTextBoxCPF);
+            tabPageFIsica.Controls.Add(dateTimePickerNascF);
+            tabPageFIsica.Controls.Add(textBoxNomeF);
+            tabPageFIsica.Controls.Add(maskedTextBoxCPFF);
             tabPageFIsica.Controls.Add(label4);
             tabPageFIsica.Controls.Add(label3);
             tabPageFIsica.Controls.Add(label2);
             tabPageFIsica.Controls.Add(label1);
-            tabPageFIsica.Controls.Add(buttonCadastrar);
+            tabPageFIsica.Controls.Add(buttonCadastrarF);
             tabPageFIsica.Location = new Point(4, 24);
             tabPageFIsica.Margin = new Padding(3, 2, 3, 2);
             tabPageFIsica.Name = "tabPageFIsica";
@@ -147,14 +147,14 @@
             tabPageFIsica.Text = "Pessoa Física";
             tabPageFIsica.UseVisualStyleBackColor = true;
             // 
-            // richTextBoxObs
+            // richTextBoxObsF
             // 
-            richTextBoxObs.Location = new Point(569, 16);
-            richTextBoxObs.Margin = new Padding(3, 2, 3, 2);
-            richTextBoxObs.Name = "richTextBoxObs";
-            richTextBoxObs.Size = new Size(280, 204);
-            richTextBoxObs.TabIndex = 97;
-            richTextBoxObs.Text = "";
+            richTextBoxObsF.Location = new Point(569, 16);
+            richTextBoxObsF.Margin = new Padding(3, 2, 3, 2);
+            richTextBoxObsF.Name = "richTextBoxObsF";
+            richTextBoxObsF.Size = new Size(280, 204);
+            richTextBoxObsF.TabIndex = 97;
+            richTextBoxObsF.Text = "";
             // 
             // label29
             // 
@@ -174,14 +174,15 @@
             label14.TabIndex = 64;
             label14.Text = "Data:";
             // 
-            // dateTimePickerData
+            // dateTimePickerDataF
             // 
-            dateTimePickerData.Format = DateTimePickerFormat.Short;
-            dateTimePickerData.Location = new Point(298, 194);
-            dateTimePickerData.Margin = new Padding(3, 2, 3, 2);
-            dateTimePickerData.Name = "dateTimePickerData";
-            dateTimePickerData.Size = new Size(122, 23);
-            dateTimePickerData.TabIndex = 63;
+            dateTimePickerDataF.Enabled = false;
+            dateTimePickerDataF.Format = DateTimePickerFormat.Short;
+            dateTimePickerDataF.Location = new Point(298, 194);
+            dateTimePickerDataF.Margin = new Padding(3, 2, 3, 2);
+            dateTimePickerDataF.Name = "dateTimePickerDataF";
+            dateTimePickerDataF.Size = new Size(122, 23);
+            dateTimePickerDataF.TabIndex = 63;
             // 
             // label13
             // 
@@ -192,51 +193,52 @@
             label13.TabIndex = 62;
             label13.Text = "Status:";
             // 
-            // comboBoxStatus
+            // comboBoxStatusF
             // 
-            comboBoxStatus.FormattingEnabled = true;
-            comboBoxStatus.Location = new Point(309, 169);
-            comboBoxStatus.Margin = new Padding(3, 2, 3, 2);
-            comboBoxStatus.Name = "comboBoxStatus";
-            comboBoxStatus.Size = new Size(133, 23);
-            comboBoxStatus.TabIndex = 61;
+            comboBoxStatusF.Enabled = false;
+            comboBoxStatusF.FormattingEnabled = true;
+            comboBoxStatusF.Location = new Point(309, 169);
+            comboBoxStatusF.Margin = new Padding(3, 2, 3, 2);
+            comboBoxStatusF.Name = "comboBoxStatusF";
+            comboBoxStatusF.Size = new Size(133, 23);
+            comboBoxStatusF.TabIndex = 61;
             // 
-            // maskedTextBoxEmail
+            // maskedTextBoxEmailF
             // 
-            maskedTextBoxEmail.Location = new Point(60, 68);
-            maskedTextBoxEmail.Name = "maskedTextBoxEmail";
-            maskedTextBoxEmail.Size = new Size(180, 23);
-            maskedTextBoxEmail.TabIndex = 60;
+            maskedTextBoxEmailF.Location = new Point(60, 68);
+            maskedTextBoxEmailF.Name = "maskedTextBoxEmailF";
+            maskedTextBoxEmailF.Size = new Size(180, 23);
+            maskedTextBoxEmailF.TabIndex = 60;
             // 
-            // comboBoxSexo
+            // comboBoxSexoF
             // 
-            comboBoxSexo.Location = new Point(51, 128);
-            comboBoxSexo.Name = "comboBoxSexo";
-            comboBoxSexo.Size = new Size(108, 23);
-            comboBoxSexo.TabIndex = 59;
+            comboBoxSexoF.Location = new Point(51, 128);
+            comboBoxSexoF.Name = "comboBoxSexoF";
+            comboBoxSexoF.Size = new Size(108, 23);
+            comboBoxSexoF.TabIndex = 59;
             // 
-            // maskedTextBoxNumero
+            // maskedTextBoxNumeroF
             // 
-            maskedTextBoxNumero.Location = new Point(351, 14);
-            maskedTextBoxNumero.Name = "maskedTextBoxNumero";
-            maskedTextBoxNumero.Size = new Size(154, 23);
-            maskedTextBoxNumero.TabIndex = 58;
-            maskedTextBoxNumero.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            maskedTextBoxNumeroF.Location = new Point(351, 14);
+            maskedTextBoxNumeroF.Name = "maskedTextBoxNumeroF";
+            maskedTextBoxNumeroF.Size = new Size(154, 23);
+            maskedTextBoxNumeroF.TabIndex = 58;
+            maskedTextBoxNumeroF.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
-            // comboBoxUf
+            // comboBoxUfF
             // 
-            comboBoxUf.FormattingEnabled = true;
-            comboBoxUf.Location = new Point(309, 142);
-            comboBoxUf.Name = "comboBoxUf";
-            comboBoxUf.Size = new Size(48, 23);
-            comboBoxUf.TabIndex = 57;
+            comboBoxUfF.FormattingEnabled = true;
+            comboBoxUfF.Location = new Point(309, 142);
+            comboBoxUfF.Name = "comboBoxUfF";
+            comboBoxUfF.Size = new Size(48, 23);
+            comboBoxUfF.TabIndex = 57;
             // 
-            // textBoxRua
+            // textBoxRuaF
             // 
-            textBoxRua.Location = new Point(286, 43);
-            textBoxRua.Name = "textBoxRua";
-            textBoxRua.Size = new Size(218, 23);
-            textBoxRua.TabIndex = 56;
+            textBoxRuaF.Location = new Point(286, 43);
+            textBoxRuaF.Name = "textBoxRuaF";
+            textBoxRuaF.Size = new Size(218, 23);
+            textBoxRuaF.TabIndex = 56;
             // 
             // label12
             // 
@@ -247,32 +249,32 @@
             label12.TabIndex = 55;
             label12.Text = "Sexo:";
             // 
-            // maskedTextBoxCep
+            // maskedTextBoxCepF
             // 
-            maskedTextBoxCep.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            maskedTextBoxCep.Location = new Point(298, 92);
-            maskedTextBoxCep.Margin = new Padding(3, 2, 3, 2);
-            maskedTextBoxCep.Mask = "00000-000";
-            maskedTextBoxCep.Name = "maskedTextBoxCep";
-            maskedTextBoxCep.Size = new Size(97, 23);
-            maskedTextBoxCep.TabIndex = 54;
-            maskedTextBoxCep.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            maskedTextBoxCepF.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            maskedTextBoxCepF.Location = new Point(298, 92);
+            maskedTextBoxCepF.Margin = new Padding(3, 2, 3, 2);
+            maskedTextBoxCepF.Mask = "00000-000";
+            maskedTextBoxCepF.Name = "maskedTextBoxCepF";
+            maskedTextBoxCepF.Size = new Size(97, 23);
+            maskedTextBoxCepF.TabIndex = 54;
+            maskedTextBoxCepF.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
-            // textBoxCidade
+            // textBoxCidadeF
             // 
-            textBoxCidade.Location = new Point(309, 68);
-            textBoxCidade.Margin = new Padding(3, 2, 3, 2);
-            textBoxCidade.Name = "textBoxCidade";
-            textBoxCidade.Size = new Size(196, 23);
-            textBoxCidade.TabIndex = 53;
+            textBoxCidadeF.Location = new Point(309, 68);
+            textBoxCidadeF.Margin = new Padding(3, 2, 3, 2);
+            textBoxCidadeF.Name = "textBoxCidadeF";
+            textBoxCidadeF.Size = new Size(196, 23);
+            textBoxCidadeF.TabIndex = 53;
             // 
-            // textBoxBairro
+            // textBoxBairroF
             // 
-            textBoxBairro.Location = new Point(298, 117);
-            textBoxBairro.Margin = new Padding(3, 2, 3, 2);
-            textBoxBairro.Name = "textBoxBairro";
-            textBoxBairro.Size = new Size(206, 23);
-            textBoxBairro.TabIndex = 52;
+            textBoxBairroF.Location = new Point(298, 117);
+            textBoxBairroF.Margin = new Padding(3, 2, 3, 2);
+            textBoxBairroF.Name = "textBoxBairroF";
+            textBoxBairroF.Size = new Size(206, 23);
+            textBoxBairroF.TabIndex = 52;
             // 
             // label11
             // 
@@ -329,16 +331,16 @@
             label6.TabIndex = 46;
             label6.Text = "Numero da casa:";
             // 
-            // maskedTextBoxTelefone
+            // maskedTextBoxTelefoneF
             // 
-            maskedTextBoxTelefone.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            maskedTextBoxTelefone.Location = new Point(74, 155);
-            maskedTextBoxTelefone.Margin = new Padding(3, 2, 3, 2);
-            maskedTextBoxTelefone.Mask = "(99) 00000-0000";
-            maskedTextBoxTelefone.Name = "maskedTextBoxTelefone";
-            maskedTextBoxTelefone.Size = new Size(85, 23);
-            maskedTextBoxTelefone.TabIndex = 45;
-            maskedTextBoxTelefone.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            maskedTextBoxTelefoneF.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            maskedTextBoxTelefoneF.Location = new Point(74, 155);
+            maskedTextBoxTelefoneF.Margin = new Padding(3, 2, 3, 2);
+            maskedTextBoxTelefoneF.Mask = "(99) 00000-0000";
+            maskedTextBoxTelefoneF.Name = "maskedTextBoxTelefoneF";
+            maskedTextBoxTelefoneF.Size = new Size(85, 23);
+            maskedTextBoxTelefoneF.TabIndex = 45;
+            maskedTextBoxTelefoneF.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // label5
             // 
@@ -349,34 +351,34 @@
             label5.TabIndex = 44;
             label5.Text = "Telefone:";
             // 
-            // dateTimePickerNasc
+            // dateTimePickerNascF
             // 
-            dateTimePickerNasc.Format = DateTimePickerFormat.Short;
-            dateTimePickerNasc.Location = new Point(146, 95);
-            dateTimePickerNasc.Margin = new Padding(3, 2, 3, 2);
-            dateTimePickerNasc.Name = "dateTimePickerNasc";
-            dateTimePickerNasc.Size = new Size(94, 23);
-            dateTimePickerNasc.TabIndex = 43;
+            dateTimePickerNascF.Format = DateTimePickerFormat.Short;
+            dateTimePickerNascF.Location = new Point(146, 95);
+            dateTimePickerNascF.Margin = new Padding(3, 2, 3, 2);
+            dateTimePickerNascF.Name = "dateTimePickerNascF";
+            dateTimePickerNascF.Size = new Size(94, 23);
+            dateTimePickerNascF.TabIndex = 43;
             // 
-            // textBoxNome
+            // textBoxNomeF
             // 
-            textBoxNome.Location = new Point(60, 40);
-            textBoxNome.Margin = new Padding(3, 2, 3, 2);
-            textBoxNome.Name = "textBoxNome";
-            textBoxNome.PlaceholderText = "Insira seu nome";
-            textBoxNome.Size = new Size(180, 23);
-            textBoxNome.TabIndex = 42;
+            textBoxNomeF.Location = new Point(60, 40);
+            textBoxNomeF.Margin = new Padding(3, 2, 3, 2);
+            textBoxNomeF.Name = "textBoxNomeF";
+            textBoxNomeF.PlaceholderText = "Insira seu nome";
+            textBoxNomeF.Size = new Size(180, 23);
+            textBoxNomeF.TabIndex = 42;
             // 
-            // maskedTextBoxCPF
+            // maskedTextBoxCPFF
             // 
-            maskedTextBoxCPF.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            maskedTextBoxCPF.Location = new Point(51, 14);
-            maskedTextBoxCPF.Margin = new Padding(3, 2, 3, 2);
-            maskedTextBoxCPF.Mask = "000000000-00";
-            maskedTextBoxCPF.Name = "maskedTextBoxCPF";
-            maskedTextBoxCPF.Size = new Size(192, 23);
-            maskedTextBoxCPF.TabIndex = 41;
-            maskedTextBoxCPF.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            maskedTextBoxCPFF.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            maskedTextBoxCPFF.Location = new Point(51, 14);
+            maskedTextBoxCPFF.Margin = new Padding(3, 2, 3, 2);
+            maskedTextBoxCPFF.Mask = "000000000-00";
+            maskedTextBoxCPFF.Name = "maskedTextBoxCPFF";
+            maskedTextBoxCPFF.Size = new Size(192, 23);
+            maskedTextBoxCPFF.TabIndex = 41;
+            maskedTextBoxCPFF.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
             // label4
             // 
@@ -414,28 +416,28 @@
             label1.TabIndex = 37;
             label1.Text = "CPF:";
             // 
-            // buttonCadastrar
+            // buttonCadastrarF
             // 
-            buttonCadastrar.Location = new Point(13, 180);
-            buttonCadastrar.Margin = new Padding(3, 2, 3, 2);
-            buttonCadastrar.Name = "buttonCadastrar";
-            buttonCadastrar.Size = new Size(178, 74);
-            buttonCadastrar.TabIndex = 36;
-            buttonCadastrar.Text = "Cadastrar";
-            buttonCadastrar.UseVisualStyleBackColor = true;
-            buttonCadastrar.Click += buttonCadastrar_Click;
+            buttonCadastrarF.Location = new Point(13, 180);
+            buttonCadastrarF.Margin = new Padding(3, 2, 3, 2);
+            buttonCadastrarF.Name = "buttonCadastrarF";
+            buttonCadastrarF.Size = new Size(178, 74);
+            buttonCadastrarF.TabIndex = 36;
+            buttonCadastrarF.Text = "Cadastrar";
+            buttonCadastrarF.UseVisualStyleBackColor = true;
+            buttonCadastrarF.Click += buttonCadastrarF_Click;
             // 
             // tabPageJuridica
             // 
             tabPageJuridica.Controls.Add(richTextBoxRazao);
             tabPageJuridica.Controls.Add(label17);
             tabPageJuridica.Controls.Add(label15);
-            tabPageJuridica.Controls.Add(dateTimeDataJ);
+            tabPageJuridica.Controls.Add(dateTimePickerDataJ);
             tabPageJuridica.Controls.Add(label16);
             tabPageJuridica.Controls.Add(comboBoxStatusJ);
             tabPageJuridica.Controls.Add(maskedTextBoxEmailJ);
             tabPageJuridica.Controls.Add(maskedTextBoxNumeroJ);
-            tabPageJuridica.Controls.Add(comboBoxEstadoJ);
+            tabPageJuridica.Controls.Add(comboBoxUfJ);
             tabPageJuridica.Controls.Add(textBoxRuaJ);
             tabPageJuridica.Controls.Add(maskedTextBoxCepJ);
             tabPageJuridica.Controls.Add(textBoxCidadeJ);
@@ -453,7 +455,7 @@
             tabPageJuridica.Controls.Add(label26);
             tabPageJuridica.Controls.Add(label27);
             tabPageJuridica.Controls.Add(label28);
-            tabPageJuridica.Controls.Add(button1);
+            tabPageJuridica.Controls.Add(buttonCadastrarJ);
             tabPageJuridica.Location = new Point(4, 24);
             tabPageJuridica.Margin = new Padding(3, 2, 3, 2);
             tabPageJuridica.Name = "tabPageJuridica";
@@ -490,15 +492,15 @@
             label15.TabIndex = 93;
             label15.Text = "Data:";
             // 
-            // dateTimeDataJ
+            // dateTimePickerDataJ
             // 
-            dateTimeDataJ.Enabled = false;
-            dateTimeDataJ.Format = DateTimePickerFormat.Short;
-            dateTimeDataJ.Location = new Point(301, 195);
-            dateTimeDataJ.Margin = new Padding(3, 2, 3, 2);
-            dateTimeDataJ.Name = "dateTimeDataJ";
-            dateTimeDataJ.Size = new Size(122, 23);
-            dateTimeDataJ.TabIndex = 92;
+            dateTimePickerDataJ.Enabled = false;
+            dateTimePickerDataJ.Format = DateTimePickerFormat.Short;
+            dateTimePickerDataJ.Location = new Point(301, 195);
+            dateTimePickerDataJ.Margin = new Padding(3, 2, 3, 2);
+            dateTimePickerDataJ.Name = "dateTimePickerDataJ";
+            dateTimePickerDataJ.Size = new Size(122, 23);
+            dateTimePickerDataJ.TabIndex = 92;
             // 
             // label16
             // 
@@ -534,13 +536,13 @@
             maskedTextBoxNumeroJ.TabIndex = 87;
             maskedTextBoxNumeroJ.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
-            // comboBoxEstadoJ
+            // comboBoxUfJ
             // 
-            comboBoxEstadoJ.FormattingEnabled = true;
-            comboBoxEstadoJ.Location = new Point(312, 143);
-            comboBoxEstadoJ.Name = "comboBoxEstadoJ";
-            comboBoxEstadoJ.Size = new Size(48, 23);
-            comboBoxEstadoJ.TabIndex = 86;
+            comboBoxUfJ.FormattingEnabled = true;
+            comboBoxUfJ.Location = new Point(312, 143);
+            comboBoxUfJ.Name = "comboBoxUfJ";
+            comboBoxUfJ.Size = new Size(48, 23);
+            comboBoxUfJ.TabIndex = 86;
             // 
             // textBoxRuaJ
             // 
@@ -698,15 +700,16 @@
             label28.TabIndex = 66;
             label28.Text = "CNPJ:";
             // 
-            // button1
+            // buttonCadastrarJ
             // 
-            button1.Location = new Point(15, 140);
-            button1.Margin = new Padding(3, 2, 3, 2);
-            button1.Name = "button1";
-            button1.Size = new Size(178, 74);
-            button1.TabIndex = 65;
-            button1.Text = "Cadastrar";
-            button1.UseVisualStyleBackColor = true;
+            buttonCadastrarJ.Location = new Point(15, 140);
+            buttonCadastrarJ.Margin = new Padding(3, 2, 3, 2);
+            buttonCadastrarJ.Name = "buttonCadastrarJ";
+            buttonCadastrarJ.Size = new Size(178, 74);
+            buttonCadastrarJ.TabIndex = 65;
+            buttonCadastrarJ.Text = "Cadastrar";
+            buttonCadastrarJ.UseVisualStyleBackColor = true;
+            buttonCadastrarJ.Click += buttonCadastrarJ_Click;
             // 
             // CadastroCliente
             // 
@@ -732,41 +735,41 @@
         private TabPage tabPageFIsica;
         private TabPage tabPageJuridica;
         private Label label14;
-        private DateTimePicker dateTimePickerData;
+        private DateTimePicker dateTimePickerDataF;
         private Label label13;
-        private ComboBox comboBoxStatus;
-        private MaskedTextBox maskedTextBoxEmail;
-        private ComboBox comboBoxSexo;
-        private MaskedTextBox maskedTextBoxNumero;
-        private ComboBox comboBoxUf;
-        private TextBox textBoxRua;
+        private ComboBox comboBoxStatusF;
+        private MaskedTextBox maskedTextBoxEmailF;
+        private ComboBox comboBoxSexoF;
+        private MaskedTextBox maskedTextBoxNumeroF;
+        private ComboBox comboBoxUfF;
+        private TextBox textBoxRuaF;
         private Label label12;
-        private MaskedTextBox maskedTextBoxCep;
-        private TextBox textBoxCidade;
-        private TextBox textBoxBairro;
+        private MaskedTextBox maskedTextBoxCepF;
+        private TextBox textBoxCidadeF;
+        private TextBox textBoxBairroF;
         private Label label11;
         private Label label10;
         private Label label9;
         private Label label8;
         private Label label7;
         private Label label6;
-        private MaskedTextBox maskedTextBoxTelefone;
+        private MaskedTextBox maskedTextBoxTelefoneF;
         private Label label5;
-        private DateTimePicker dateTimePickerNasc;
-        private TextBox textBoxNome;
-        private MaskedTextBox maskedTextBoxCPF;
+        private DateTimePicker dateTimePickerNascF;
+        private TextBox textBoxNomeF;
+        private MaskedTextBox maskedTextBoxCPFF;
         private Label label4;
         private Label label3;
         private Label label2;
         private Label label1;
-        private Button buttonCadastrar;
+        private Button buttonCadastrarF;
         private Label label15;
-        private DateTimePicker dateTimeDataJ;
+        private DateTimePicker dateTimePickerDataJ;
         private Label label16;
         private ComboBox comboBoxStatusJ;
         private MaskedTextBox maskedTextBoxEmailJ;
         private MaskedTextBox maskedTextBoxNumeroJ;
-        private ComboBox comboBoxEstadoJ;
+        private ComboBox comboBoxUfJ;
         private TextBox textBoxRuaJ;
         private MaskedTextBox maskedTextBoxCepJ;
         private TextBox textBoxCidadeJ;
@@ -784,10 +787,10 @@
         private Label label26;
         private Label label27;
         private Label label28;
-        private Button button1;
+        private Button buttonCadastrarJ;
         private RichTextBox richTextBoxRazao;
         private Label label17;
-        private RichTextBox richTextBoxObs;
+        private RichTextBox richTextBoxObsF;
         private Label label29;
     }
 }
