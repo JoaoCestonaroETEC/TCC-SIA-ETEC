@@ -8,15 +8,15 @@ using BCrypt;
 
 namespace TCC_SIA.Model
 {
-    internal class ClienteF
+    internal class Cliente
     {
         #region Criação de atributo
-        private int idClienteF;
-        private string cpfClienteF;
-        private string cnpjClienteF;
-        private string nomeClienteF;
-        private string emailClienteF;
-        private DateTime datanascClienteF;
+        private int idcliente;
+        private string cpfCliente;
+        private string cnpjCliente;
+        private string nomeCliente;
+        private string emailCliente;
+        private DateTime datanascCliente;
         private string sexo;
         private long numero;
         private string rua;
@@ -27,66 +27,66 @@ namespace TCC_SIA.Model
         private string telefone;
         private string status;
         private DateTime data;
-        private string obsF;
+        private string obs;
         #endregion
 
         #region Encapsulamento
-        public int getIDClienteF()
+        public int getIdCliente()
         {
-            return this.idClienteF;
+            return this.idcliente;
         }
 
-        public void setIDClienteF(int idClienteF)
+        public void setIdCliente(int idCliente)
         {
-            this.idClienteF = idClienteF;
+            this.idcliente = idCliente;
         }
 
-        public string getCpfClienteF()
+        public string getCpfCliente()
         {
-            return this.cpfClienteF;
+            return this.cpfCliente;
         }
 
-        public void setCpfClienteF(string cpfClienteF)
+        public void setCpfCliente(string cpfCliente)
         {
-            this.cpfClienteF = cpfClienteF;
+            this.cpfCliente = cpfCliente;
         }
-        public string getCNPJClienteF()
+        public string getCNPJCliente()
         {
-            return this.cnpjClienteF;
-        }
-
-        public void setCNPJCLienteF(string cnpjClienteF)
-        {
-            this.cnpjClienteF = cnpjClienteF;
-        }
-        public string getNomeClienteF()
-        {
-            return this.nomeClienteF;
+            return this.cnpjCliente;
         }
 
-        public void setNomeClienteF(string nomeClienteF)
+        public void setCNPJCLiente(string cnpjCliente)
         {
-            this.nomeClienteF = nomeClienteF;
+            this.cnpjCliente = cnpjCliente;
+        }
+        public string getNomeCliente()
+        {
+            return this.nomeCliente;
         }
 
-        public string getEmailClienteF()
+        public void setNomeCliente(string nomeCliente)
         {
-            return this.emailClienteF;
+            this.nomeCliente = nomeCliente;
         }
 
-        public void setEmailClienteF(string emailClienteF)
+        public string getEmailCliente()
         {
-            this.emailClienteF = emailClienteF;
+            return this.emailCliente;
         }
 
-        public DateTime getDataNascClienteF()
+        public void setEmailCliente(string emailCliente)
         {
-            return this.datanascClienteF;
+            this.emailCliente = emailCliente;
         }
 
-        public void setDataNascClienteF(DateTime datanascClienteF)
+        public DateTime getDataNascCliente()
         {
-            this.datanascClienteF = datanascClienteF;
+            return this.datanascCliente;
+        }
+
+        public void setDataNascCliente(DateTime datanascCliente)
+        {
+            this.datanascCliente = datanascCliente;
         }
 
         public string getSexo()
@@ -187,14 +187,14 @@ namespace TCC_SIA.Model
         {
             this.data = data;
         }
-        public string getObsF()
+        public string getObs()
         {
-            return this.obsF;
+            return this.obs;
         }
 
-        public void setObsF(string obsF)
+        public void setObsF(string obs)
         {
-            this.obsF = obsF;
+            this.obs = obs;
         }
         #endregion
     }

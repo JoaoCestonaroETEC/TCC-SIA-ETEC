@@ -23,8 +23,7 @@ namespace TCC_SIA.View
             #region Carrega as informações gerais das marcas
             //Criação do objeto NpgsqlDataReader marcaVeiculo, marcaPeca e controleMarca
             controleMarca cMarca = new controleMarca();
-            NpgsqlDataReader marcaVeiculo = cMarca.pesquisaMarcaVeiculo(textBoxPesquisar.Text);
-            NpgsqlDataReader marcaPeca = cMarca.pesquisaMarcaPeca(textBoxPesquisar.Text);
+            NpgsqlDataReader marcaVeiculo = cMarca.pesquisaMarca(textBoxPesquisar.Text);
 
             //Apaga as colunas da DataGridView
             dataGridViewPesquisar.Columns.Clear();
@@ -43,15 +42,6 @@ namespace TCC_SIA.View
                 string descMarcaVeiculo = marcaVeiculo["DESCMARCAVEICULO"].ToString();
                 dataGridViewPesquisar.Rows.Add(idMarcaVeiculo, nomeMarcaVeiculo, descMarcaVeiculo);
             }
-
-            //Adicionando as marcas e descrições de peças
-            while (marcaPeca.Read())
-            {
-                string idMarcaPeca = marcaPeca["IDMARCAPECA"].ToString();
-                string nomeMarcaPeca = marcaPeca["NOMEMARCAPECA"].ToString();
-                string descMarcaPeca = marcaPeca["DESCMARCAPECA"].ToString();
-                dataGridViewPesquisar.Rows.Add(idMarcaPeca, nomeMarcaPeca, descMarcaPeca);
-            }
             #endregion
         }
         #endregion
@@ -67,7 +57,7 @@ namespace TCC_SIA.View
             {
                 //Criação do objeto NpgsqlDataReader marcaVeiculo e controleMarca
                 controleMarca cMarca = new controleMarca();
-                NpgsqlDataReader marcaVeiculo = cMarca.listarMarcaVeiculo();
+                NpgsqlDataReader marcaVeiculo = cMarca.listarMarca();
 
                 //Apaga as colunas da datagridview
                 dataGridViewPesquisar.Columns.Clear();
@@ -97,7 +87,7 @@ namespace TCC_SIA.View
             {
                 //Criação do objeto NpgsqlDataReader marcaVeiculo e controleMarca
                 controleMarca cMarca = new controleMarca();
-                NpgsqlDataReader marcaPeca = cMarca.listarMarcaPeca();
+                NpgsqlDataReader marcaPeca = cMarca.listarMarca();
 
                 //Apaga as colunas da DataGridView
                 dataGridViewPesquisar.Columns.Clear();
@@ -124,8 +114,8 @@ namespace TCC_SIA.View
             {
                 //Criação do objeto NpgsqlDataReader marcaVeiculo, marcaPeca e controleMarca
                 controleMarca cMarca = new controleMarca();
-                NpgsqlDataReader marcaVeiculo = cMarca.pesquisaMarcaVeiculo(textBoxPesquisar.Text);
-                NpgsqlDataReader marcaPeca = cMarca.pesquisaMarcaPeca(textBoxPesquisar.Text);
+                NpgsqlDataReader marcaVeiculo = cMarca.pesquisaMarca(textBoxPesquisar.Text);
+                NpgsqlDataReader marcaPeca = cMarca.pesquisaMarca(textBoxPesquisar.Text);
 
                 //Apaga as colunas da DataGridView
                 dataGridViewPesquisar.Columns.Clear();

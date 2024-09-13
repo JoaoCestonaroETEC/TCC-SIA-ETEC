@@ -14,7 +14,7 @@ namespace TCC_SIA.Controller
     {
         #region Cadastrar cliente
         //Criação do método de cadastrar cliente
-        public string cadastroClienteF(ClienteF mClienteF)
+        public string cadastroCliente(Cliente mClienteF)
         {
             //String SQL de inserção
             string sqlVef = "SELECT COUNT(1) FROM CLIENTE_F WHERE CPFCLIENTE_F = @CPFCLIENTE_F;";
@@ -163,7 +163,7 @@ namespace TCC_SIA.Controller
         }
         #endregion
 
-        public string atualizaClienteF(ClienteF mClienteF)
+        public string atualizaCliente(Cliente mClienteF)
         {
             string sql = "update cliente_f set nomecliente_f = @nomecliente_f, " +
                 "emailcliente_f = @emailcliente_f, datanasc_cliente_f = @datanasc_cliente_f, " +
@@ -180,7 +180,7 @@ namespace TCC_SIA.Controller
 
             try
             {
-                comm.Parameters.AddWithValue("@IDCLIENTE_F", mClienteF.getIDCliente());
+                comm.Parameters.AddWithValue("@IDCLIENTE_F", mClienteF.getIdCliente());
                 comm.Parameters.AddWithValue("@CPFCLIENTE_F", mClienteF.getCpfCliente());
                 comm.Parameters.AddWithValue("@NOMECLIENTE_F", mClienteF.getNomeCliente());
                 comm.Parameters.AddWithValue("@EMAILCLIENTE_F", mClienteF.getEmailCliente());

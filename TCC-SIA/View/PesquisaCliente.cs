@@ -204,13 +204,13 @@ namespace TCC_SIA.View
         {
             controleCliente cCliente = new controleCliente();
 
-            ClienteF mCliente = new ClienteF();
+            Cliente mCliente = new Cliente();
 
             //Definindo os valores nos atributos
 
             //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
 
-            mCliente.setIDCliente(Convert.ToInt32(maskedID.Text));
+            mCliente.setIdCliente(Convert.ToInt32(maskedID.Text));
             mCliente.setCpfCliente(maskedCPF.Text);
             mCliente.setNomeCliente(txbNome.Text);
             mCliente.setEmailCliente(txbEmail.Text);

@@ -89,7 +89,7 @@ namespace TCC_SIA.View
             }
 
             //Criação do objeto Cliente e controleCliente
-            ClienteF mCliente = new ClienteF();
+            Cliente mCliente = new Cliente();
             controleCliente cCliente = new controleCliente();
 
             //Definindo os valores nos atributos
@@ -103,7 +103,7 @@ namespace TCC_SIA.View
             mCliente.setData(Convert.ToDateTime(dateTimePickerDataF.Text));
             mCliente.setSexo(comboBoxSexoF.Text);
             mCliente.setTelefone(maskedTextBoxTelefoneF.Text);
-            mCliente.setObs(richTextBoxObsF.Text);
+            mCliente.setObsF(richTextBoxObsF.Text);
 
             //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
             long numero;
@@ -165,7 +165,7 @@ namespace TCC_SIA.View
                 mCliente.setNomeCliente(textBoxNomeF.Text);
                 mCliente.setEmailCliente(maskedTextBoxEmailF.Text);
                 mCliente.setTelefone(maskedTextBoxTelefoneF.Text);
-                mCliente.setObs(richTextBoxRazao.Text);
+                mCliente.setObsF(richTextBoxRazao.Text);
                 mCliente.setData(Convert.ToDateTime(dateTimePickerDataJ.Text));
 
                 //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro

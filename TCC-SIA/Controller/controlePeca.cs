@@ -16,8 +16,8 @@ namespace TCC_SIA.Controller
         public string cadastroPeca(Peca mPeca)
         {
             //String sql de inserção
-            string sql = "INSERT INTO PECA(IDMARCAPECA, NOMEPECA, TIPOPECA, DESCPECA, VALORPECA, QUANTPECA, GARANTIAPECA) " +
-                "VALUES(@IDMARCA, @NOMEPECA, @TIPOPECA, @DESCPECA, @VALORPECA, @QUANTPECA, @GARANTIAPECA);";
+            string sql = "INSERT INTO PECA(IDMARCAPECA, NOMEPECA, TIPOPECA, DESCPECA, VALORPECA, UNIDADE, QUANTPECA, GARANTIAPECA, FORNECEDOR, DATA_AQUISICAO) " +
+                "VALUES(@IDMARCA, @NOMEPECA, @TIPOPECA, @DESCPECA, @VALORPECA, @UNIDADE, @QUANTPECA, @GARANTIAPECA, @FORNECEDORPECA, @DATAAQUIS);";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
@@ -33,8 +33,11 @@ namespace TCC_SIA.Controller
                 comm.Parameters.AddWithValue("@TIPOPECA", mPeca.getTipoPeca());
                 comm.Parameters.AddWithValue("@DESCPECA", mPeca.getDescPeca());
                 comm.Parameters.AddWithValue("@VALORPECA", mPeca.getValorPeca());
+                comm.Parameters.AddWithValue("@UNIDADE", mPeca.getUnidade());
                 comm.Parameters.AddWithValue("@QUANTPECA", mPeca.getQuantPeca());
                 comm.Parameters.AddWithValue("@GARANTIAPECA", mPeca.getGarantiaPeca());
+                comm.Parameters.AddWithValue("@FORNECEDORPECA", mPeca.getFornecedor());
+                comm.Parameters.AddWithValue("@DATAAQUIS", mPeca.getDataAquisicao());
 
                 //Executando o Query
                 comm.ExecuteNonQuery();

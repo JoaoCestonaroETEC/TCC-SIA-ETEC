@@ -17,8 +17,8 @@ namespace TCC_SIA.Controller
         public string cadastroVeiculo(Veiculo mVeiculo)
         {
             //String sql de inserção
-            string sql = "INSERT INTO VEICULO(IDCLIENTE, IDMARCAVEICULO, NOMEVEICULO, TIPOVEICULO, CORVEICULO, PLACAVEICULO, MODELOVEICULO) " +
-                "VALUES(@IDCLIENTE, @IDMARCA, @NOMEVEICULO, @TIPOVEICULO, @CORVEICULO, @PLACAVEICULO, @MODELOVEICULO);";
+            string sql = "INSERT INTO VEICULO(IDCLIENTE, IDMARCAVEICULO, NOMEVEICULO, TIPOVEICULO, CORVEICULO, PLACAVEICULO, MODELOVEICULO, CHASSI, ANOFAB, QUILOMETRAGEM, MOTOR, COMBUSTIVEL, DATA, SEGURO) " +
+                "VALUES(@IDCLIENTE, @IDMARCA, @NOMEVEICULO, @TIPOVEICULO, @CORVEICULO, @PLACAVEICULO, @MODELOVEICULO, @CHASSI, @ANOFAB, @QUILOMETRAGEM, @MOTOR, @COMBUSTIVEL, @DATA, @SEGURO);";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
@@ -36,6 +36,13 @@ namespace TCC_SIA.Controller
                 comm.Parameters.AddWithValue("@CORVEICULO", mVeiculo.getCorVeiculo());
                 comm.Parameters.AddWithValue("@PLACAVEICULO", mVeiculo.getPlacaVeiculo());
                 comm.Parameters.AddWithValue("@MODELOVEICULO", mVeiculo.getModeloVeiculo());
+                comm.Parameters.AddWithValue("@CHASSI", mVeiculo.getChassi());
+                comm.Parameters.AddWithValue("@ANOFAB", mVeiculo.getAnoFabricacao());
+                comm.Parameters.AddWithValue("@QUILOMETRAGEM", mVeiculo.getQuilometragem());
+                comm.Parameters.AddWithValue("@MOTOR", mVeiculo.getMotor());
+                comm.Parameters.AddWithValue("@COMBUSTIVEL", mVeiculo.getCombustivel());
+                comm.Parameters.AddWithValue("@DATA", mVeiculo.getData());
+                comm.Parameters.AddWithValue("@SEGURO", mVeiculo.getSeguro());
 
                 //Executando o Query
                 comm.ExecuteNonQuery();
