@@ -15,7 +15,7 @@ namespace TCC_SIA.Controller
         public string cadastroMarcaVeiculo(Marca mMarca)
         {
             //String sql de inserção
-            string sql = "INSERT INTO MARCA(NOMEMARCA, DESMARCA, TIPOMARCA) " +
+            string sql = "INSERT INTO MARCA(NOMEMARCA, DESCMARCA, TIPOMARCA) " +
                 "VALUES(@NOMEMARCA, @DESCMARCA, @TIPOMARCA);";
 
             //Abrindo conexão com o banco de dados

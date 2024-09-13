@@ -86,10 +86,10 @@ namespace TCC_SIA.View
             comboBoxMarca.DataSource = dtMarca;
 
             //Define qual coluna do DataTable que será exibida (nome da coluna)
-            comboBoxMarca.DisplayMember = "NOMEMARCAPECA";
+            comboBoxMarca.DisplayMember = "NOMEMARCA";
 
             //Define qual o valor da linha será utilizado ao selecionar um valor
-            comboBoxMarca.ValueMember = "IDMARCAPECA";
+            comboBoxMarca.ValueMember = "IDMARCA";
         }
         #endregion
 

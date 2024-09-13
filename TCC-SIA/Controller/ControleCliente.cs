@@ -14,18 +14,18 @@ namespace TCC_SIA.Controller
     {
         #region Cadastrar cliente
         //Criação do método de cadastrar cliente
-        public string cadastroCliente(Cliente mClienteF)
+        public string cadastroCliente(Cliente mCliente)
         {
             //String SQL de inserção
-            string sqlVef = "SELECT COUNT(1) FROM CLIENTE_F WHERE CPFCLIENTE_F = @CPFCLIENTE_F;";
+            string sqlVef = "SELECT COUNT(1) FROM CLIENTE WHERE CPFCLIENTE = @CPFCLIENTE;";
 
             //Strings de SQL de inserções
-            string sql = "INSERT INTO CLIENTE_F(CPFCLIENTE_F, NOMECLIENTE_F, EMAILCLIENTE_F, DATANASC_CLIENTE_F, SEXO) " +
-                "VALUES(@CPFCLIENTE_F, @NOMECLIENTE_f, @EMAILCLIENTE_F, @DATANASC_CLIENTE_F, @SEXO) RETURNING IDCLIENTE_F;";
-            string sql2 = "INSERT INTO CLIENTE_ENDERECO_F(IDCLIENTE_F, NUMERO, RUA, CIDADE, CEP, BAIRRO, ESTADO) " +
-                "VALUES(@IDCLIENTE_F, @NUMERO, @RUA, @CIDADE, @CEP, @BAIRRO, @ESTADO);";
-            string sql3 = "INSERT INTO CLIENTE_TELEFONE_F(IDCLIENTE_F, TELEFONE) " +
-                "VALUES(@IDCLIENTE_F, @TELEFONE);";
+            string sql = "INSERT INTO CLIENTE(CPFCLIENTE, CNPJCLIENTE, NOMECLIENTE, EMAILCLIENTE, DATANASC_CLIENTE, SEXO, OBS, RAZAO) " +
+                "VALUES(@CPFCLIENTE, @CNPJCLIENTE, @NOMECLIENTE, @EMAILCLIENTE, @DATANASC_CLIENTE, @SEXO, @OBS, @RAZAO) RETURNING IDCLIENTE;";
+            string sql2 = "INSERT INTO CLIENTE_ENDERECO(IDCLIENTE, NUMERO, RUA, CIDADE, CEP, BAIRRO, ESTADO) " +
+                "VALUES(@IDCLIENTE, @NUMERO, @RUA, @CIDADE, @CEP, @BAIRRO, @ESTADO);";
+            string sql3 = "INSERT INTO CLIENTE_TELEFONE(IDCLIENTE, TELEFONE) " +
+                "VALUES(@IDCLIENTE, @TELEFONE);";
 
             // Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
@@ -38,7 +38,7 @@ namespace TCC_SIA.Controller
             try
             {
                 //Faz a verificação de o CPF já existe no Banco
-                commVef.Parameters.AddWithValue("@CPFCLIENTE_F", mClienteF.getCpfCliente());
+                commVef.Parameters.AddWithValue("@CPFCLIENTE", mCliente.getCpfCliente());
                 int cpfExists = Convert.ToInt32(commVef.ExecuteScalar());
 
                 if (cpfExists > 0)
@@ -48,29 +48,32 @@ namespace TCC_SIA.Controller
 
                 commVef.ExecuteNonQuery();
                 // Definindo os valores a serem postos nos campos
-                comm.Parameters.AddWithValue("@CPFCLIENTE_F", mClienteF.getCpfCliente());
-                comm.Parameters.AddWithValue("@NOMECLIENTE_F", mClienteF.getNomeCliente());
-                comm.Parameters.AddWithValue("@EMAILCLIENTE_F", mClienteF.getEmailCliente());
-                comm.Parameters.AddWithValue("@DATANASC_CLIENTE_F", mClienteF.getDataNascCliente());
-                comm.Parameters.AddWithValue("@SEXO", mClienteF.getSexo());
+                comm.Parameters.AddWithValue("@CPFCLIENTE", mCliente.getCpfCliente());
+                comm.Parameters.AddWithValue("@CNPJCLIENTE", mCliente.getCNPJCliente());
+                comm.Parameters.AddWithValue("@NOMECLIENTE", mCliente.getNomeCliente());
+                comm.Parameters.AddWithValue("@EMAILCLIENTE", mCliente.getEmailCliente());
+                comm.Parameters.AddWithValue("@DATANASC_CLIENTE", mCliente.getDataNascCliente());
+                comm.Parameters.AddWithValue("@SEXO", mCliente.getSexo());
+                comm.Parameters.AddWithValue("@OBS", mCliente.getObs());
+                comm.Parameters.AddWithValue("@RAZAO", mCliente.getObs());
 
                 // Executa a query e retorna o ID do cliente
                 var idCliente = (int)comm.ExecuteScalar();
 
                 // Definindo os valores a serem postos nos campos
-                comm2.Parameters.AddWithValue("@IDCLIENTE_F", idCliente);
-                comm2.Parameters.AddWithValue("@NUMERO", mClienteF.getNumero());
-                comm2.Parameters.AddWithValue("@RUA", mClienteF.getRua());
-                comm2.Parameters.AddWithValue("@CIDADE", mClienteF.getCidade());
-                comm2.Parameters.AddWithValue("@CEP", mClienteF.getCep());
-                comm2.Parameters.AddWithValue("@BAIRRO", mClienteF.getBairro());
-                comm2.Parameters.AddWithValue("@ESTADO", mClienteF.getUf());
+                comm2.Parameters.AddWithValue("@IDCLIENTE", idCliente);
+                comm2.Parameters.AddWithValue("@NUMERO", mCliente.getNumero());
+                comm2.Parameters.AddWithValue("@RUA", mCliente.getRua());
+                comm2.Parameters.AddWithValue("@CIDADE", mCliente.getCidade());
+                comm2.Parameters.AddWithValue("@CEP", mCliente.getCep());
+                comm2.Parameters.AddWithValue("@BAIRRO", mCliente.getBairro());
+                comm2.Parameters.AddWithValue("@ESTADO", mCliente.getUf());
 
                 comm2.ExecuteNonQuery();
 
                 // Definindo os valores a serem postos nos campos
-                comm3.Parameters.AddWithValue("@IDCLIENTE_F", idCliente);
-                comm3.Parameters.AddWithValue("@TELEFONE", mClienteF.getTelefone());
+                comm3.Parameters.AddWithValue("@IDCLIENTE", idCliente);
+                comm3.Parameters.AddWithValue("@TELEFONE", mCliente.getTelefone());
 
                 comm3.ExecuteNonQuery();
 

@@ -192,7 +192,7 @@ namespace TCC_SIA.Model
             return this.obs;
         }
 
-        public void setObsF(string obs)
+        public void setObs(string obs)
         {
             this.obs = obs;
         }

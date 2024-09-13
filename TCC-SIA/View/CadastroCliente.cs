@@ -95,6 +95,9 @@ namespace TCC_SIA.View
             //Definindo os valores nos atributos
 
             //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
+            string CNPJ = "00000000000000";
+            string Razao = "Indefinida";
+
 
             mCliente.setCpfCliente(maskedTextBoxCPFF.Text);
             mCliente.setNomeCliente(textBoxNomeF.Text);
@@ -103,7 +106,7 @@ namespace TCC_SIA.View
             mCliente.setData(Convert.ToDateTime(dateTimePickerDataF.Text));
             mCliente.setSexo(comboBoxSexoF.Text);
             mCliente.setTelefone(maskedTextBoxTelefoneF.Text);
-            mCliente.setObsF(richTextBoxObsF.Text);
+            mCliente.setObs(richTextBoxObsF.Text);
 
             //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
             long numero;
@@ -153,6 +156,7 @@ namespace TCC_SIA.View
                 MessageBox.Show("Preencha todos os campos!");
                 return;
 
+
                 //Criação do objeto Cliente e controleCliente
                 Cliente mCliente = new Cliente();
                 controleCliente cCliente = new controleCliente();
@@ -165,7 +169,7 @@ namespace TCC_SIA.View
                 mCliente.setNomeCliente(textBoxNomeF.Text);
                 mCliente.setEmailCliente(maskedTextBoxEmailF.Text);
                 mCliente.setTelefone(maskedTextBoxTelefoneF.Text);
-                mCliente.setObsF(richTextBoxRazao.Text);
+                mCliente.setObs(richTextBoxRazao.Text);
                 mCliente.setData(Convert.ToDateTime(dateTimePickerDataJ.Text));
 
                 //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
