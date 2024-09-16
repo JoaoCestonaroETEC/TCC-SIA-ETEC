@@ -22,7 +22,7 @@ namespace TCC_SIA.View
 
             #region Campos dos estados
             //Adiciona campos de estados do Brasil
-            comboBoxUfF.Items.AddRange(new string[]
+            comboBoxUf.Items.AddRange(new string[]
             {
                 "AC",
                 "AL",
@@ -56,7 +56,7 @@ namespace TCC_SIA.View
 
             #region Campos de gêneros
             //Adiciona gêneros
-            comboBoxSexoF.Items.AddRange(new string[]
+            comboBoxSexo.Items.AddRange(new string[]
             {
                 "Masculino",
                 "Feminino",
@@ -66,22 +66,22 @@ namespace TCC_SIA.View
         }
         #endregion
 
-        #region Cadastrar cliente físico
-        //Evento de cadastrar cliente físico
-        private void buttonCadastrarF_Click(object sender, EventArgs e)
+        #region Cadastrar cliente
+        //Evento de cadastrar cliente
+        private void buttonCadastrar_Click(object sender, EventArgs e)
         {
             // Verifica se os campos obrigatórios foram preenchidos
-            if (string.IsNullOrWhiteSpace(maskedTextBoxCPFF.Text) &&
-                string.IsNullOrWhiteSpace(textBoxNomeF.Text) &&
-                string.IsNullOrWhiteSpace(maskedTextBoxNumeroF.Text) &&
-                string.IsNullOrWhiteSpace(maskedTextBoxCepF.Text) &&
-                string.IsNullOrWhiteSpace(textBoxBairroF.Text) &&
-                string.IsNullOrWhiteSpace(textBoxCidadeF.Text) &&
-                string.IsNullOrWhiteSpace(textBoxRuaF.Text) &&
-                string.IsNullOrWhiteSpace(comboBoxUfF.Text) &&
-                string.IsNullOrWhiteSpace(comboBoxSexoF.Text) &&
-                string.IsNullOrWhiteSpace(maskedTextBoxTelefoneF.Text) &&
-                string.IsNullOrWhiteSpace(dateTimePickerNascF.Text)
+            if (string.IsNullOrWhiteSpace(maskedTextBoxCPF.Text) &&
+                string.IsNullOrWhiteSpace(textBoxNome.Text) &&
+                string.IsNullOrWhiteSpace(maskedTextBoxNumero.Text) &&
+                string.IsNullOrWhiteSpace(maskedTextBoxCep.Text) &&
+                string.IsNullOrWhiteSpace(textBoxBairro.Text) &&
+                string.IsNullOrWhiteSpace(textBoxCidade.Text) &&
+                string.IsNullOrWhiteSpace(textBoxRua.Text) &&
+                string.IsNullOrWhiteSpace(comboBoxUf.Text) &&
+                string.IsNullOrWhiteSpace(comboBoxSexo.Text) &&
+                string.IsNullOrWhiteSpace(maskedTextBoxTelefone.Text) &&
+                string.IsNullOrWhiteSpace(dateTimePickerNasc.Text)
                 )
             {
                 MessageBox.Show("Preencha todos os campos!");
@@ -89,41 +89,46 @@ namespace TCC_SIA.View
             }
 
             //Criação do objeto Cliente e controleCliente
-            ClienteF mCliente = new ClienteF();
+            Cliente mCliente = new Cliente();
             controleCliente cCliente = new controleCliente();
 
             //Definindo os valores nos atributos
 
             //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
+            string CNPJ = "00000000000";
+            string Razao = "Indefinido";
 
-            mCliente.setCpfCliente(maskedTextBoxCPFF.Text);
-            mCliente.setNomeCliente(textBoxNomeF.Text);
-            mCliente.setEmailCliente(maskedTextBoxEmailF.Text);
-            mCliente.setDataNascCliente(Convert.ToDateTime(dateTimePickerNascF.Text));
-            mCliente.setData(Convert.ToDateTime(dateTimePickerDataF.Text));
-            mCliente.setSexo(comboBoxSexoF.Text);
-            mCliente.setTelefone(maskedTextBoxTelefoneF.Text);
-            mCliente.setObs(richTextBoxObsF.Text);
+            mCliente.setCNPJCLiente(CNPJ);
+            mCliente.setRazao(Razao);
+
+            mCliente.setCpfCliente(maskedTextBoxCPF.Text);
+            mCliente.setNomeCliente(textBoxNome.Text);
+            mCliente.setEmailCliente(maskedTextBoxEmail.Text);
+            mCliente.setDataNascCliente(Convert.ToDateTime(dateTimePickerNasc.Text));
+            mCliente.setData(Convert.ToDateTime(dateTimePickerData.Text));
+            mCliente.setSexo(comboBoxSexo.Text);
+            mCliente.setTelefone(maskedTextBoxTelefone.Text);
+            mCliente.setObs(richTextBoxObs.Text);
 
             //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
             long numero;
-            if (long.TryParse(maskedTextBoxNumeroF.Text, out numero))
+            if (long.TryParse(maskedTextBoxNumero.Text, out numero))
             {
                 mCliente.setNumero(numero);
             }
 
-            mCliente.setRua(textBoxRuaF.Text);
-            mCliente.setCidade(textBoxCidadeF.Text);
+            mCliente.setRua(textBoxRua.Text);
+            mCliente.setCidade(textBoxCidade.Text);
 
             //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
             long cep;
-            if (long.TryParse(maskedTextBoxCepF.Text, out cep))
+            if (long.TryParse(maskedTextBoxCep.Text, out cep))
             {
                 mCliente.setCep(cep);
             }
 
-            mCliente.setBairro(textBoxBairroF.Text);
-            mCliente.setUf(comboBoxUfF.Text);
+            mCliente.setBairro(textBoxBairro.Text);
+            mCliente.setUf(comboBoxUf.Text);
 
             //Chamada ao método de cadastro no ControleCliente
             string res = cCliente.cadastroCliente(mCliente);
@@ -146,50 +151,61 @@ namespace TCC_SIA.View
                 string.IsNullOrWhiteSpace(textBoxCidadeJ.Text) &&
                 string.IsNullOrWhiteSpace(textBoxRuaJ.Text) &&
                 string.IsNullOrWhiteSpace(comboBoxUfJ.Text) &&
-                string.IsNullOrWhiteSpace(maskedTextBoxTelefoneF.Text) &&
-                string.IsNullOrWhiteSpace(dateTimePickerNascF.Text)
+                string.IsNullOrWhiteSpace(maskedTextBoxTelefone.Text) &&
+                string.IsNullOrWhiteSpace(dateTimePickerNasc.Text)
                 )
             {
                 MessageBox.Show("Preencha todos os campos!");
                 return;
+            }
 
-                //Criação do objeto Cliente e controleCliente
-                Cliente mCliente = new Cliente();
-                controleCliente cCliente = new controleCliente();
+            //Criação do objeto Cliente e controleCliente
+            Cliente mClienteJ = new Cliente();
+            controleCliente cClienteJ = new controleCliente();
 
-                //Definindo os valores nos atributos
+            //Definindo os valores nos atributos
 
-                //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
+            //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
+            string CPF = "00000000000000";
+            string DataNasc = "01/01/0001";
+            string Sexo = "Indefinido";
+            string Razao = "Indefinido";
 
-                mCliente.setCNPJCLiente(maskedTextBoxCPFF.Text);
-                mCliente.setNomeCliente(textBoxNomeF.Text);
-                mCliente.setEmailCliente(maskedTextBoxEmailF.Text);
-                mCliente.setTelefone(maskedTextBoxTelefoneF.Text);
-                mCliente.setObs(richTextBoxRazao.Text);
-                mCliente.setData(Convert.ToDateTime(dateTimePickerDataJ.Text));
+            mClienteJ.setCpfCliente(CPF);
+            mClienteJ.setDataNascCliente(Convert.ToDateTime(DataNasc));
+            mClienteJ.setSexo(Sexo);
+            mClienteJ.setRazao(Razao);
 
-                //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
-                long numero;
-                if (long.TryParse(maskedTextBoxNumeroJ.Text, out numero))
+            mClienteJ.setCNPJCLiente(maskedTextBoxCPF.Text);
+            mClienteJ.setNomeCliente(textBoxNome.Text);
+            mClienteJ.setEmailCliente(maskedTextBoxEmail.Text);
+            mClienteJ.setTelefone(maskedTextBoxTelefone.Text);
+            mClienteJ.setObs(richTextBoxRazao.Text);
+            mClienteJ.setData(Convert.ToDateTime(dateTimePickerDataJ.Text));
+
+            //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
+            long numero;
+            if (long.TryParse(maskedTextBoxNumeroJ.Text, out numero))
+            {
                 {
-                    mCliente.setNumero(numero);
+                    mClienteJ.setNumero(numero);
                 }
 
-                mCliente.setRua(textBoxRuaJ.Text);
-                mCliente.setCidade(textBoxCidadeJ.Text);
+                mClienteJ.setRua(textBoxRuaJ.Text);
+                mClienteJ.setCidade(textBoxCidadeJ.Text);
 
                 //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
                 long cep;
                 if (long.TryParse(maskedTextBoxCepJ.Text, out cep))
                 {
-                    mCliente.setCep(cep);
+                    mClienteJ.setCep(cep);
                 }
 
-                mCliente.setBairro(textBoxBairroJ.Text);
-                mCliente.setUf(comboBoxUfJ.Text);
+                mClienteJ.setBairro(textBoxBairroJ.Text);
+                mClienteJ.setUf(comboBoxUfJ.Text);
 
                 //Chamada ao método de cadastro no ControleCliente
-                string res = cCliente.cadastroCliente(mCliente);
+                string res = cClienteJ.cadastroClienteJ(mClienteJ);
 
                 //Mostra o resultado
                 MessageBox.Show(res);
@@ -201,7 +217,7 @@ namespace TCC_SIA.View
         private void CadastroCliente_Load(object sender, EventArgs e)
         {
             //Definir eventos para validar a entrada
-            maskedTextBoxNumeroF.KeyPress += new KeyPressEventHandler(maskedTextBoxNumero_KeyPress);
+            maskedTextBoxNumero.KeyPress += new KeyPressEventHandler(maskedTextBoxNumero_KeyPress);
         }
         #endregion
 

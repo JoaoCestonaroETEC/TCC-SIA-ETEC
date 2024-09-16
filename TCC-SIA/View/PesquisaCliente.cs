@@ -204,7 +204,7 @@ namespace TCC_SIA.View
         {
             controleCliente cCliente = new controleCliente();
 
-            ClienteF mCliente = new ClienteF();
+            Cliente mCliente = new Cliente();
 
             //Definindo os valores nos atributos
 

@@ -32,8 +32,8 @@
             label1 = new Label();
             textBoxPesquisar = new TextBox();
             dataGridViewPesquisar = new DataGridView();
-            checkBoxVeiculo = new CheckBox();
-            checkBoxPeca = new CheckBox();
+            comboBoxTipo = new ComboBox();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridViewPesquisar).BeginInit();
             SuspendLayout();
             // 
@@ -75,35 +75,32 @@
             dataGridViewPesquisar.Size = new Size(587, 393);
             dataGridViewPesquisar.TabIndex = 12;
             // 
-            // checkBoxVeiculo
+            // comboBoxTipo
             // 
-            checkBoxVeiculo.AutoSize = true;
-            checkBoxVeiculo.Location = new Point(387, 495);
-            checkBoxVeiculo.Margin = new Padding(3, 4, 3, 4);
-            checkBoxVeiculo.Name = "checkBoxVeiculo";
-            checkBoxVeiculo.Size = new Size(79, 24);
-            checkBoxVeiculo.TabIndex = 16;
-            checkBoxVeiculo.Text = "Veículo";
-            checkBoxVeiculo.UseVisualStyleBackColor = true;
+            comboBoxTipo.FormattingEnabled = true;
+            comboBoxTipo.Items.AddRange(new object[] { "Peças Automotívas", "Óleos lubrificantes", "Pneus", "Ferramentas e Equipamentos para oficinas", "Veiculos", "Outro" });
+            comboBoxTipo.Location = new Point(462, 493);
+            comboBoxTipo.Margin = new Padding(3, 4, 3, 4);
+            comboBoxTipo.Name = "comboBoxTipo";
+            comboBoxTipo.Size = new Size(138, 28);
+            comboBoxTipo.TabIndex = 24;
             // 
-            // checkBoxPeca
+            // label3
             // 
-            checkBoxPeca.AutoSize = true;
-            checkBoxPeca.Location = new Point(467, 495);
-            checkBoxPeca.Margin = new Padding(3, 4, 3, 4);
-            checkBoxPeca.Name = "checkBoxPeca";
-            checkBoxPeca.Size = new Size(61, 24);
-            checkBoxPeca.TabIndex = 17;
-            checkBoxPeca.Text = "Peça";
-            checkBoxPeca.UseVisualStyleBackColor = true;
+            label3.AutoSize = true;
+            label3.Location = new Point(417, 497);
+            label3.Name = "label3";
+            label3.Size = new Size(42, 20);
+            label3.TabIndex = 23;
+            label3.Text = "Tipo:";
             // 
             // PesquisaMarca
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(632, 561);
-            Controls.Add(checkBoxPeca);
-            Controls.Add(checkBoxVeiculo);
+            Controls.Add(comboBoxTipo);
+            Controls.Add(label3);
             Controls.Add(buttonPesquisar);
             Controls.Add(label1);
             Controls.Add(textBoxPesquisar);
@@ -123,7 +120,7 @@
         private Label label1;
         private TextBox textBoxPesquisar;
         private DataGridView dataGridViewPesquisar;
-        private CheckBox checkBoxVeiculo;
-        private CheckBox checkBoxPeca;
+        private ComboBox comboBoxTipo;
+        private Label label3;
     }
 }

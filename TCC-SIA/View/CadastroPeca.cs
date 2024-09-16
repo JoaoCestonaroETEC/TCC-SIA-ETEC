@@ -76,7 +76,7 @@ namespace TCC_SIA.View
         {
             controleMarca cMarca = new controleMarca();
             //Recebe os dados da consulta e salva no dataReader (Tipo)
-            NpgsqlDataReader marca = cMarca.listarMarcaPeca();
+            NpgsqlDataReader marca = cMarca.listarMarca();
 
             //Converter o dataReader em DataTable
             DataTable dtMarca = new DataTable();

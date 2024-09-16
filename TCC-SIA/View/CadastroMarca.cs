@@ -30,7 +30,7 @@ namespace TCC_SIA.View
                string.IsNullOrWhiteSpace(comboBoxTipo.Text)
                 )
             {
-                MessageBox.Show("Insira pelo menos o nome e qual o tipo de marca!");
+                MessageBox.Show("Insira pelo menos o nome!");
                 return;
             }
 
@@ -45,8 +45,8 @@ namespace TCC_SIA.View
             mMarca.setDescMarca(richTextBoxDesc.Text);
             mMarca.setTipoMarca(comboBoxTipo.Text);
 
-            //Chamada ao método de cadastro no ControleMarcaVeiculo
-            string res = cMarca.cadastroMarcaVeiculo(mMarca);
+            //Chamada ao método de cadastro no ControleMarca
+            string res = cMarca.cadastroMarca(mMarca);
             MessageBox.Show(res);
         }
         #endregion
