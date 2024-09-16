@@ -139,8 +139,8 @@ namespace TCC_SIA.Controller
                         comm.Parameters.AddWithValue("@NOMESERVICO", peca.getNomeServico());
                         comm.Parameters.AddWithValue("@DESCSERVICO", peca.getDescServico());
                         comm.Parameters.AddWithValue("@VALORSERVICO", peca.getValorServico());
-                        comm.Parameters.AddWithValue("@DESCONTOPORC", peca.getDescontoPorc());
-                        comm.Parameters.AddWithValue("@DESCONTOREAIS", peca.getDescontoReais());
+                        comm.Parameters.AddWithValue("@DESCONTOPORC", mPedido.getDescontoPorCento());
+                        comm.Parameters.AddWithValue("@DESCONTOREAIS", mPedido.getDescontoReais());
                         comm.Parameters.AddWithValue("@GARANTIASERVICO", peca.getGarantiaServico());
                         // Executando o Query
                         comm.ExecuteNonQuery();

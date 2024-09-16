@@ -127,7 +127,7 @@ namespace TCC_SIA.Controller
         public NpgsqlDataReader pesquisaMarca(string marca, string tipo)
         {
             //String sql de pesquisar
-            string sql = "SELECT * FROM MARCA WHERE NOMEMARCA LIKE '" + marca + "%' AND '" + tipo + "%';";
+            string sql = "SELECT * FROM MARCA WHERE NOMEMARCA LIKE '" + marca + "%' AND TIPOMARCA LIKE '" + tipo + "%';";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();

@@ -52,10 +52,11 @@ namespace TCC_SIA.View
             controleCliente cCliente = new controleCliente();
 
             string CNPJ = "00000000000000";
-            string Razao = "Indefinida";
+            string Razao = "Indefinido";
 
             mCliente.setCNPJCLiente(CNPJ);
             mCliente.setRazao(Razao);
+
             mCliente.setCpfCliente(maskedTextBoxCPFF.Text);
             mCliente.setNomeCliente(textBoxNomeF.Text);
             mCliente.setEmailCliente(maskedTextBoxEmailF.Text);
@@ -120,7 +121,7 @@ namespace TCC_SIA.View
             mCliente.setEmailCliente(maskedTextBoxEmailJ.Text);
             mCliente.setTelefone(maskedTextBoxTelefoneJ.Text);
             mCliente.setRazao(richTextBoxRazao.Text);
-            mCliente.setData(Convert.ToDateTime(dateTimePickerDataF.Value));
+            mCliente.setData(Convert.ToDateTime(dateTimePickerDataJ.Value));
 
             if (long.TryParse(maskedTextBoxNumeroJ.Text, out long numero))
             {

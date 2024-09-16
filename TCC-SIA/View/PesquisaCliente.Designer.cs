@@ -54,11 +54,10 @@
             // 
             tabControlPesquisarClientes.Controls.Add(tabPagePesquisarClienteF);
             tabControlPesquisarClientes.Controls.Add(tabControlPesquisarClienteJ);
-            tabControlPesquisarClientes.Location = new Point(10, 9);
-            tabControlPesquisarClientes.Margin = new Padding(3, 2, 3, 2);
+            tabControlPesquisarClientes.Location = new Point(11, 12);
             tabControlPesquisarClientes.Name = "tabControlPesquisarClientes";
             tabControlPesquisarClientes.SelectedIndex = 0;
-            tabControlPesquisarClientes.Size = new Size(747, 425);
+            tabControlPesquisarClientes.Size = new Size(854, 567);
             tabControlPesquisarClientes.TabIndex = 0;
             // 
             // tabPagePesquisarClienteF
@@ -69,21 +68,19 @@
             tabPagePesquisarClienteF.Controls.Add(label1);
             tabPagePesquisarClienteF.Controls.Add(textBoxPesquisarF);
             tabPagePesquisarClienteF.Controls.Add(dataGridViewPesquisarF);
-            tabPagePesquisarClienteF.Location = new Point(4, 24);
-            tabPagePesquisarClienteF.Margin = new Padding(3, 2, 3, 2);
+            tabPagePesquisarClienteF.Location = new Point(4, 29);
             tabPagePesquisarClienteF.Name = "tabPagePesquisarClienteF";
-            tabPagePesquisarClienteF.Padding = new Padding(3, 2, 3, 2);
-            tabPagePesquisarClienteF.Size = new Size(739, 397);
+            tabPagePesquisarClienteF.Padding = new Padding(3, 3, 3, 3);
+            tabPagePesquisarClienteF.Size = new Size(846, 534);
             tabPagePesquisarClienteF.TabIndex = 0;
             tabPagePesquisarClienteF.Text = "Pesquisar Cliente Físico";
             tabPagePesquisarClienteF.UseVisualStyleBackColor = true;
             // 
             // btnDeletarF
             // 
-            btnDeletarF.Location = new Point(620, 331);
-            btnDeletarF.Margin = new Padding(3, 2, 3, 2);
+            btnDeletarF.Location = new Point(709, 441);
             btnDeletarF.Name = "btnDeletarF";
-            btnDeletarF.Size = new Size(115, 48);
+            btnDeletarF.Size = new Size(131, 64);
             btnDeletarF.TabIndex = 9;
             btnDeletarF.Text = "Deletar";
             btnDeletarF.UseVisualStyleBackColor = true;
@@ -91,10 +88,9 @@
             // 
             // btnAtualizarF
             // 
-            btnAtualizarF.Location = new Point(492, 331);
-            btnAtualizarF.Margin = new Padding(3, 2, 3, 2);
+            btnAtualizarF.Location = new Point(562, 441);
             btnAtualizarF.Name = "btnAtualizarF";
-            btnAtualizarF.Size = new Size(115, 48);
+            btnAtualizarF.Size = new Size(131, 64);
             btnAtualizarF.TabIndex = 8;
             btnAtualizarF.Text = "Editar";
             btnAtualizarF.UseVisualStyleBackColor = true;
@@ -102,9 +98,10 @@
             // 
             // buttonPesquisarF
             // 
-            buttonPesquisarF.Location = new Point(5, 331);
+            buttonPesquisarF.Location = new Point(6, 441);
+            buttonPesquisarF.Margin = new Padding(3, 4, 3, 4);
             buttonPesquisarF.Name = "buttonPesquisarF";
-            buttonPesquisarF.Size = new Size(115, 48);
+            buttonPesquisarF.Size = new Size(131, 64);
             buttonPesquisarF.TabIndex = 7;
             buttonPesquisarF.Text = "Pesquisar";
             buttonPesquisarF.UseVisualStyleBackColor = true;
@@ -113,26 +110,28 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(5, 9);
+            label1.Location = new Point(6, 12);
             label1.Name = "label1";
-            label1.Size = new Size(60, 15);
+            label1.Size = new Size(73, 20);
             label1.TabIndex = 6;
             label1.Text = "Pesquisar:";
             // 
             // textBoxPesquisarF
             // 
-            textBoxPesquisarF.Location = new Point(81, 7);
+            textBoxPesquisarF.Location = new Point(93, 9);
+            textBoxPesquisarF.Margin = new Padding(3, 4, 3, 4);
             textBoxPesquisarF.Name = "textBoxPesquisarF";
-            textBoxPesquisarF.Size = new Size(654, 23);
+            textBoxPesquisarF.Size = new Size(747, 27);
             textBoxPesquisarF.TabIndex = 5;
             // 
             // dataGridViewPesquisarF
             // 
             dataGridViewPesquisarF.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewPesquisarF.Location = new Point(5, 33);
+            dataGridViewPesquisarF.Location = new Point(6, 44);
+            dataGridViewPesquisarF.Margin = new Padding(3, 4, 3, 4);
             dataGridViewPesquisarF.Name = "dataGridViewPesquisarF";
             dataGridViewPesquisarF.RowHeadersWidth = 51;
-            dataGridViewPesquisarF.Size = new Size(730, 287);
+            dataGridViewPesquisarF.Size = new Size(834, 383);
             dataGridViewPesquisarF.TabIndex = 4;
             // 
             // tabControlPesquisarClienteJ
@@ -143,75 +142,77 @@
             tabControlPesquisarClienteJ.Controls.Add(label2);
             tabControlPesquisarClienteJ.Controls.Add(textBoxPesquisarJ);
             tabControlPesquisarClienteJ.Controls.Add(dataGridViewPesquisarJ);
-            tabControlPesquisarClienteJ.Location = new Point(4, 24);
-            tabControlPesquisarClienteJ.Margin = new Padding(3, 2, 3, 2);
+            tabControlPesquisarClienteJ.Location = new Point(4, 29);
             tabControlPesquisarClienteJ.Name = "tabControlPesquisarClienteJ";
-            tabControlPesquisarClienteJ.Padding = new Padding(3, 2, 3, 2);
-            tabControlPesquisarClienteJ.Size = new Size(739, 397);
+            tabControlPesquisarClienteJ.Padding = new Padding(3, 3, 3, 3);
+            tabControlPesquisarClienteJ.Size = new Size(846, 534);
             tabControlPesquisarClienteJ.TabIndex = 1;
             tabControlPesquisarClienteJ.Text = "Pesquisar Cliente Júridico";
             tabControlPesquisarClienteJ.UseVisualStyleBackColor = true;
             // 
             // btnDeletarJ
             // 
-            btnDeletarJ.Location = new Point(619, 336);
-            btnDeletarJ.Margin = new Padding(3, 2, 3, 2);
+            btnDeletarJ.Location = new Point(707, 448);
             btnDeletarJ.Name = "btnDeletarJ";
-            btnDeletarJ.Size = new Size(115, 48);
+            btnDeletarJ.Size = new Size(131, 64);
             btnDeletarJ.TabIndex = 15;
             btnDeletarJ.Text = "Deletar";
             btnDeletarJ.UseVisualStyleBackColor = true;
             // 
             // btnAtualizarJ
             // 
-            btnAtualizarJ.Location = new Point(491, 336);
-            btnAtualizarJ.Margin = new Padding(3, 2, 3, 2);
+            btnAtualizarJ.Location = new Point(561, 448);
             btnAtualizarJ.Name = "btnAtualizarJ";
-            btnAtualizarJ.Size = new Size(115, 48);
+            btnAtualizarJ.Size = new Size(131, 64);
             btnAtualizarJ.TabIndex = 14;
             btnAtualizarJ.Text = "Editar";
             btnAtualizarJ.UseVisualStyleBackColor = true;
             // 
             // buttonPesquisarJ
             // 
-            buttonPesquisarJ.Location = new Point(4, 336);
+            buttonPesquisarJ.Location = new Point(5, 448);
+            buttonPesquisarJ.Margin = new Padding(3, 4, 3, 4);
             buttonPesquisarJ.Name = "buttonPesquisarJ";
-            buttonPesquisarJ.Size = new Size(115, 48);
+            buttonPesquisarJ.Size = new Size(131, 64);
             buttonPesquisarJ.TabIndex = 13;
             buttonPesquisarJ.Text = "Pesquisar";
             buttonPesquisarJ.UseVisualStyleBackColor = true;
+            buttonPesquisarJ.Click += buttonPesquisarJ_Click;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(4, 7);
+            label2.Location = new Point(5, 9);
             label2.Name = "label2";
-            label2.Size = new Size(60, 15);
+            label2.Size = new Size(73, 20);
             label2.TabIndex = 12;
             label2.Text = "Pesquisar:";
             // 
             // textBoxPesquisarJ
             // 
-            textBoxPesquisarJ.Location = new Point(80, 5);
+            textBoxPesquisarJ.Location = new Point(91, 7);
+            textBoxPesquisarJ.Margin = new Padding(3, 4, 3, 4);
             textBoxPesquisarJ.Name = "textBoxPesquisarJ";
-            textBoxPesquisarJ.Size = new Size(654, 23);
+            textBoxPesquisarJ.Size = new Size(747, 27);
             textBoxPesquisarJ.TabIndex = 11;
             // 
             // dataGridViewPesquisarJ
             // 
             dataGridViewPesquisarJ.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewPesquisarJ.Location = new Point(4, 31);
+            dataGridViewPesquisarJ.Location = new Point(5, 41);
+            dataGridViewPesquisarJ.Margin = new Padding(3, 4, 3, 4);
             dataGridViewPesquisarJ.Name = "dataGridViewPesquisarJ";
             dataGridViewPesquisarJ.RowHeadersWidth = 51;
-            dataGridViewPesquisarJ.Size = new Size(730, 287);
+            dataGridViewPesquisarJ.Size = new Size(834, 383);
             dataGridViewPesquisarJ.TabIndex = 10;
             // 
             // PesquisaCliente
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(768, 445);
+            ClientSize = new Size(878, 593);
             Controls.Add(tabControlPesquisarClientes);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "PesquisaCliente";
             Text = "PesquisarCliente";
             tabControlPesquisarClientes.ResumeLayout(false);

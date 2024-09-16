@@ -138,11 +138,12 @@ namespace TCC_SIA.Controller
         public NpgsqlDataReader pesquisarClienteF(string cliente)
         {
             //String sql de pesquisar
-            string sql = "SELECT C.IDCLIENTE, C.CPFCLIENTE, C.NOMECLIENTE, C.EMAILCLIENTE, C.DATANASC_CLIENTE, C.SEXO, C.OBS, C.STATUS, C.DATA," +
-            "E.NUMERO, E.RUA, E.CIDADE, E.CEP, E.BAIRRO, E.ESTADO, T.TELEFONE" +
-            "FROM CLIENTE C INNER JOIN CLIENTE_ENDERECO E ON C.IDCLIENTE = E.IDCLIENTE" +
-            "INNER JOIN CLIENTE_TELEFONE T ON C.IDCLIENTE = T.IDCLIENTE" +
-            "WHERE C.NOMECLIENTE LIKE 'cliente%'; '" + cliente + "%';";
+            string sql = "SELECT C.IDCLIENTE, C.CPFCLIENTE, C.NOMECLIENTE, C.EMAILCLIENTE, C.DATANASC_CLIENTE, C.SEXO, C.OBS, C.STATUS, C.DATA, " +
+                "E.NUMERO, E.RUA, E.CIDADE, E.CEP, E.BAIRRO, E.ESTADO, T.TELEFONE " +
+                "FROM CLIENTE C INNER JOIN CLIENTE_ENDERECO E ON C.IDCLIENTE = E.IDCLIENTE " +
+                "INNER JOIN CLIENTE_TELEFONE T ON C.IDCLIENTE = T.IDCLIENTE " +
+                "WHERE C.NOMECLIENTE LIKE '" + cliente + "%' AND CPFCLIENTE != '00000000000';";
+
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
@@ -176,12 +177,12 @@ namespace TCC_SIA.Controller
         public NpgsqlDataReader pesquisarClienteJ(string cliente)
         {
             //String sql de pesquisar
-            string sql = "SELECT C.IDCLIENTE, C.CNPJCLIENTE, C.NOMECLIENTE, C.EMAILCLIENTE, C.RAZAO, C.STATUS, C.DATA" +
-             "E.NUMERO, E.RUA, E.CIDADE, E.CEP, E.BAIRRO, E.ESTADO, T.TELEFONE " +
-             "FROM CLIENTE C " +
-             "INNER JOIN CLIENTE_ENDERECO E ON C.IDCLIENTE = E.IDCLIENTE " +
-             "INNER JOIN CLENTE_TELEFONE T ON C.IDCLIENTE = T.IDCLIENTE" +
-             "WHERE C.NOMECLIENTE LIKE '" + cliente + "%';";
+            string sql = "SELECT C.IDCLIENTE, C.CNPJCLIENTE, C.NOMECLIENTE, C.EMAILCLIENTE, C.RAZAO, C.STATUS, C.DATA, " +
+                "E.NUMERO, E.RUA, E.CIDADE, E.CEP, E.BAIRRO, E.ESTADO, T.TELEFONE " +
+                "FROM CLIENTE C " +
+                "INNER JOIN CLIENTE_ENDERECO E ON C.IDCLIENTE = E.IDCLIENTE " +
+                "INNER JOIN CLIENTE_TELEFONE T ON C.IDCLIENTE = T.IDCLIENTE " +
+                "WHERE C.NOMECLIENTE LIKE '" + cliente + "%' AND CNPJCLIENTE != '00000000000000';" ;
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
