@@ -16,6 +16,8 @@ namespace TCC_SIA.Model
         private decimal valorServico;
         private DateTime garantiaServico;
         private string status;
+        private decimal desconto_reais;
+        private int desconto_porcento;
         #endregion
 
         #region Encapsulamento
@@ -75,6 +77,24 @@ namespace TCC_SIA.Model
         public void setStatus(string status)
         {
             this.status = status;
+        }
+        public decimal getDescontoReais()
+        {
+            return desconto_reais;
+        }
+
+        public void setDescontoReais(decimal descontoReais)
+        {
+            this.desconto_reais = descontoReais;
+        }
+        public int getDescontoPorc()
+        {
+            return desconto_porcento;
+        }
+
+        public void setDescontoPorc(int descontoPorc)
+        {
+            this.desconto_porcento = descontoPorc;
         }
         #endregion
     }

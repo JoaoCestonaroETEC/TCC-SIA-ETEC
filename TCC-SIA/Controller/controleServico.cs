@@ -15,8 +15,8 @@ namespace TCC_SIA.Controller
         public string cadastroServico(Servico mServico)
         {
             //String sql de inserção
-            string sql = "INSERT INTO SERVICO(NOMESERVICO, DESCSERVICO, VALORSERVICO, GARANTIASERVICO) " +
-                "VALUES(@NOMESERVICO, @DESCSERVICO, @VALORSERVICO, @GARANTIASERVICO);";
+            string sql = "INSERT INTO SERVICO(NOMESERVICO, DESCSERVICO, VALORSERVICO, GARANTIASERVICO, STATUS_SERVICO) " +
+                "VALUES(@NOMESERVICO, @DESCSERVICO, @VALORSERVICO, @GARANTIASERVICO, @STATUS);";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
@@ -31,6 +31,7 @@ namespace TCC_SIA.Controller
                 comm.Parameters.AddWithValue("@DESCSERVICO", mServico.getDescServico());
                 comm.Parameters.AddWithValue("@VALORSERVICO", mServico.getValorServico());
                 comm.Parameters.AddWithValue("@GARANTIASERVICO", mServico.getGarantiaServico());
+                comm.Parameters.AddWithValue("@STATUS", mServico.getStatus());
 
 
                 //Executando o Query

@@ -78,7 +78,7 @@ namespace TCC_SIA.View
             //Adicionando as descrições de peças
             while (peca.Read())
             {
-                string idMarca = peca["IDMARCAPECA"].ToString();
+                string idMarca = peca["IDMARCA"].ToString();
                 string nomePeca = peca["NOMEPECA"].ToString();
                 string tipoPeca = peca["TIPOPECA"].ToString();
                 string valorPeca = peca["VALORPECA"].ToString();
@@ -396,7 +396,7 @@ namespace TCC_SIA.View
                 //Adicionando as descrições de peças
                 while (peca.Read())
                 {
-                    string idMarca = peca["IDMARCAPECA"].ToString();
+                    string idMarca = peca["IDMARCA"].ToString();
                     string nomePeca = peca["NOMEPECA"].ToString();
                     string tipoPeca = peca["TIPOPECA"].ToString();
                     string valorPeca = peca["VALORPECA"].ToString();
@@ -434,7 +434,7 @@ namespace TCC_SIA.View
                 //Adicionando as descrições de peças
                 while (peca.Read())
                 {
-                    string idMarca = peca["IDMARCAPECA"].ToString();
+                    string idMarca = peca["IDMARCA"].ToString();
                     string nomePeca = peca["NOMEPECA"].ToString();
                     string tipoPeca = peca["TIPOPECA"].ToString();
                     string valorPeca = peca["VALORPECA"].ToString();

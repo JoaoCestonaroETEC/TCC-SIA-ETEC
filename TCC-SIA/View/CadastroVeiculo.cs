@@ -19,32 +19,13 @@ namespace TCC_SIA.View
         #region Inicializa o formulário
         public CadastroVeiculo()
         {
-            #region Campos de cores
-            //Adiciona campos de cores de veículos mais comuns
             InitializeComponent();
-            comboBoxCor.Items.Add("Branco");
-            comboBoxCor.Items.Add("Preto");
-            comboBoxCor.Items.Add("Prata");
-            comboBoxCor.Items.Add("Cinza");
-            comboBoxCor.Items.Add("Azul");
-            comboBoxCor.Items.Add("Vermelho");
-            comboBoxCor.Items.Add("Amarelo");
-            comboBoxCor.Items.Add("Verde");
-            comboBoxCor.Items.Add("Roxo");
-            #endregion
-
-            #region Campos dos tipos de veículos
-            //Adiciona campos de tipos de veículos mais comuns
-            comboBoxTipo.Items.Add("Carro");
-            comboBoxTipo.Items.Add("Moto");
-            comboBoxTipo.Items.Add("Bicileta");
-            comboBoxTipo.Items.Add("Moto-cicleta");
-            comboBoxTipo.Items.Add("Caminhão");
-            #endregion
 
             #region Carrega os dados nas comboBoxs
             listarMarca();
             listarCliente();
+            listarTipo();
+            listarCor();
             #endregion
         }
         #endregion
@@ -113,12 +94,129 @@ namespace TCC_SIA.View
         }
         #endregion
 
+        #region Listar tipo
+        public void listarTipo()
+        {
+            controleVeiculo cVeiculo = new controleVeiculo();
+            // Recebe os dados da consulta e salva no dataReader (Tipo)
+            NpgsqlDataReader veiculo = cVeiculo.listaTipo();
+
+            // Criar e configurar o DataTable
+            DataTable dtTipo = new DataTable();
+
+            // Definir as colunas do DataTable
+            dtTipo.Columns.Add("ID", typeof(int));  // Supondo que o ID seja um int
+            dtTipo.Columns.Add("TIPOVEICULO", typeof(string)); // Supondo que o tipo seja uma string
+
+            // Adicionar itens pré-configurados
+            dtTipo.Rows.Add(-1, "Sedan");
+            dtTipo.Rows.Add(-2, "Hatchback");
+            dtTipo.Rows.Add(-3, "SUV (Sport Utility Vehicle)");
+            dtTipo.Rows.Add(-4, "Crossover");
+            dtTipo.Rows.Add(-5, "Conversível");
+            dtTipo.Rows.Add(-6, "Coupe");
+            dtTipo.Rows.Add(-7, "Escape");
+            dtTipo.Rows.Add(-8, "Caminhão");
+            dtTipo.Rows.Add(-9, "Van");
+            dtTipo.Rows.Add(-10, "Furgão");
+            dtTipo.Rows.Add(-11, "Motocicleta");
+            dtTipo.Rows.Add(-12, "Scooter");
+            dtTipo.Rows.Add(-13, "Micro-ônibus");
+            dtTipo.Rows.Add(-14, "ATV (All-Terrain Vehicle)");
+            dtTipo.Rows.Add(-15, "Quadriciclo");
+            dtTipo.Rows.Add(-16, "Carro Elétrico");
+            dtTipo.Rows.Add(-17, "Carro Híbrido");
+            dtTipo.Rows.Add(-18, "Caminhão Tanque");
+            dtTipo.Rows.Add(-19, "Reboque");
+            dtTipo.Rows.Add(-20, "Outro");
+
+            // Carregar os dados do NpgsqlDataReader
+            dtTipo.Load(veiculo);
+
+            // Preencher a ComboBox com os dados do DataTable
+            comboBoxTipo.DataSource = dtTipo;
+
+            // Define qual coluna do DataTable que será exibida (nome da coluna)
+            comboBoxTipo.DisplayMember = "TIPOVEICULO";
+        }
+        #endregion
+        #region Listar cor
+        public void listarCor()
+        {
+            controleVeiculo cVeiculo = new controleVeiculo();
+            // Recebe os dados da consulta e salva no dataReader (Tipo)
+            NpgsqlDataReader veiculo = cVeiculo.listaCor();
+
+            // Criar e configurar o DataTable
+            DataTable dtTipo = new DataTable();
+
+            // Definir as colunas do DataTable
+            dtTipo.Columns.Add("ID", typeof(int));  // Supondo que o ID seja um int
+            dtTipo.Columns.Add("CORVEICULO", typeof(string)); // Supondo que o tipo seja uma string
+
+            // Adicionar itens pré-configurados
+            dtTipo.Rows.Add(-1, "Branco");
+            dtTipo.Rows.Add(-2, "Preto");
+            dtTipo.Rows.Add(-3, "Prata");
+            dtTipo.Rows.Add(-4, "Cinza");
+            dtTipo.Rows.Add(-5, "Azul");
+            dtTipo.Rows.Add(-6, "Vermelho");
+            dtTipo.Rows.Add(-7, "Amarelo");
+            dtTipo.Rows.Add(-8, "Verde");
+            dtTipo.Rows.Add(-9, "Roxo");
+
+            // Carregar os dados do NpgsqlDataReader
+            dtTipo.Load(veiculo);
+
+            // Preencher a ComboBox com os dados do DataTable
+            comboBoxCor.DataSource = dtTipo;
+
+            // Define qual coluna do DataTable que será exibida (nome da coluna)
+            comboBoxCor.DisplayMember = "CORVEICULO";
+        }
+        #endregion
+
+        #region Listar combustível
+        public void listarCombustivel()
+        {
+            controleVeiculo cVeiculo = new controleVeiculo();
+            // Recebe os dados da consulta e salva no dataReader (Tipo)
+            NpgsqlDataReader veiculo = cVeiculo.listaCombustivel();
+
+            // Criar e configurar o DataTable
+            DataTable dtTipo = new DataTable();
+
+            // Definir as colunas do DataTable
+            dtTipo.Columns.Add("ID", typeof(int));  // Supondo que o ID seja um int
+            dtTipo.Columns.Add("COMBUSTIVEL", typeof(string)); // Supondo que o tipo seja uma string
+
+            // Adicionar itens pré-configurados
+            dtTipo.Rows.Add(-1, "Gasolina");
+            dtTipo.Rows.Add(-2, "Diesel");
+            dtTipo.Rows.Add(-3, "Álcool Etílico (Ethanol)");
+            dtTipo.Rows.Add(-4, "Gás Natural");
+            dtTipo.Rows.Add(-5, "Gás Liquefeito de Petróleo (GLP)");
+            dtTipo.Rows.Add(-6, "Óleo Diesel Biodiesel");
+            dtTipo.Rows.Add(-7, "Óleo de Cocina");
+            dtTipo.Rows.Add(-8, "Biogás");
+
+            // Carregar os dados do NpgsqlDataReader
+            dtTipo.Load(veiculo);
+
+            // Preencher a ComboBox com os dados do DataTable
+            comboBoxCombustivel.DataSource = dtTipo;
+
+            // Define qual coluna do DataTable que será exibida (nome da coluna)
+            comboBoxCombustivel.DisplayMember = "COMBUSTIVEL";
+        }
+        #endregion
+
         #region Listar marca
         public void listarMarca()
         {
             controleMarca cMarca = new controleMarca();
             //Recebe os dados da consulta e salva no dataReader (Tipo)
-            NpgsqlDataReader marca = cMarca.listarMarcaVeiculo();
+            NpgsqlDataReader marca = cMarca.listarMarcaVeiculos();
 
             //Converter o dataReader em DataTable
             DataTable dtMarca = new DataTable();
@@ -128,10 +226,32 @@ namespace TCC_SIA.View
             comboBoxMarca.DataSource = dtMarca;
 
             //Define qual coluna do DataTable que será exibida (nome da coluna)
-            comboBoxMarca.DisplayMember = "NOMEMARCAVEICULO";
+            comboBoxMarca.DisplayMember = "NOMEMARCA";
 
             //Define qual o valor da linha será utilizado ao selecionar um valor
-            comboBoxMarca.ValueMember = "IDMARCAVEICULO";
+            comboBoxMarca.ValueMember = "IDMARCA";
+        }
+        #endregion
+
+        #region Listar seguro
+        public void listarSeguro()
+        {
+            controleVeiculo cVeiculo = new controleVeiculo();
+            //Recebe os dados da consulta e salva no dataReader (Tipo)
+            NpgsqlDataReader veiculo = cVeiculo.listaVeiculo();
+
+            //Converter o dataReader em DataTable
+            DataTable dtVeiculo = new DataTable();
+            dtVeiculo.Load(veiculo);
+
+            //Preencher a combobox com os dados do DataTable
+            comboBoxSeguro.DataSource = dtVeiculo;
+
+            //Define qual coluna do DataTable que será exibida (nome da coluna)
+            comboBoxSeguro.DisplayMember = "SEGURO";
+
+            //Define qual o valor da linha será utilizado ao selecionar um valor
+            comboBoxSeguro.ValueMember = "SEGURO";
         }
         #endregion
 
@@ -140,6 +260,10 @@ namespace TCC_SIA.View
         {
             listarMarca();
             listarCliente();
+            listarTipo();
+            listarCor();
+            listarCombustivel();
+            listarSeguro();
         }
         #endregion
     }

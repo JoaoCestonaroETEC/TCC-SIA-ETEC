@@ -23,6 +23,7 @@ namespace TCC_SIA.View
 
             #region Campos dos estados
             //Adiciona campos de estados do Brasil
+            /*
             cbEstado.Items.AddRange(new string[]
             {
                 "AC",
@@ -53,41 +54,45 @@ namespace TCC_SIA.View
                 "SE",
                 "TO"
             });
+            */
             #endregion
 
-            cbSexo.Items.AddRange(new string[]
+           /* cbSexo.Items.AddRange(new string[]
            {
                "Masculino",
                "Feminino",
                "Outro"
            });
+           */
 
             #region Carrega as informações gerais dos clientes
             // Criação do objeto NpgsqlDataReader cliente e ControleVeiculo
             controleCliente cCliente = new controleCliente();
-            NpgsqlDataReader cliente = cCliente.pesquisarCliente(textBoxPesquisar.Text);
+            NpgsqlDataReader cliente = cCliente.pesquisarClienteF(textBoxPesquisarF.Text);
 
             //Apaga as colunas da datagridview
-            dataGridViewPesquisar.Columns.Clear();
+            dataGridViewPesquisarF.Columns.Clear();
 
             //Definindo a quant. de colunas que a grid terá
-            dataGridViewPesquisar.ColumnCount = cliente.FieldCount;
+            dataGridViewPesquisarF.ColumnCount = cliente.FieldCount;
 
             //Definindo doze colunas na DataGridView para exibir as caracteristícas dos clientes
-            dataGridViewPesquisar.ColumnCount = 13;
-            dataGridViewPesquisar.Columns[0].Name = "Id";
-            dataGridViewPesquisar.Columns[1].Name = "Cpf";
-            dataGridViewPesquisar.Columns[2].Name = "Nome";
-            dataGridViewPesquisar.Columns[3].Name = "Email";
-            dataGridViewPesquisar.Columns[4].Name = "DataNasc";
-            dataGridViewPesquisar.Columns[5].Name = "Sexo";
-            dataGridViewPesquisar.Columns[6].Name = "Telefone";
-            dataGridViewPesquisar.Columns[7].Name = "NumeroCasa";
-            dataGridViewPesquisar.Columns[8].Name = "Rua";
-            dataGridViewPesquisar.Columns[9].Name = "Cidade";
-            dataGridViewPesquisar.Columns[10].Name = "Cep";
-            dataGridViewPesquisar.Columns[11].Name = "Bairro";
-            dataGridViewPesquisar.Columns[12].Name = "Estado";
+            dataGridViewPesquisarF.ColumnCount = 15;
+            dataGridViewPesquisarF.Columns[0].Name = "Id";
+            dataGridViewPesquisarF.Columns[1].Name = "Cpf";
+            dataGridViewPesquisarF.Columns[2].Name = "Nome";
+            dataGridViewPesquisarF.Columns[3].Name = "Email";
+            dataGridViewPesquisarF.Columns[4].Name = "Data de Nascimento";
+            dataGridViewPesquisarF.Columns[5].Name = "Sexo";
+            dataGridViewPesquisarF.Columns[6].Name = "Telefone";
+            dataGridViewPesquisarF.Columns[7].Name = "Número";
+            dataGridViewPesquisarF.Columns[8].Name = "Rua";
+            dataGridViewPesquisarF.Columns[9].Name = "Cidade";
+            dataGridViewPesquisarF.Columns[10].Name = "Cep";
+            dataGridViewPesquisarF.Columns[11].Name = "Bairro";
+            dataGridViewPesquisarF.Columns[12].Name = "Estado";
+            dataGridViewPesquisarF.Columns[13].Name = "Status";
+            dataGridViewPesquisarF.Columns[14].Name = "Data";
 
             //Aqui criamos um vetor para representar uma linha da consulta(registro)
             string[] linha = new string[cliente.FieldCount];
@@ -108,8 +113,10 @@ namespace TCC_SIA.View
                 string cep = cliente["CEP"].ToString();
                 string bairro = cliente["BAIRRO"].ToString();
                 string estado = cliente["ESTADO"].ToString();
+                string status = cliente["STATUS"].ToString();
+                string data = cliente["DATA"].ToString();
 
-                dataGridViewPesquisar.Rows.Add(idCliente, cpfCliente, nomeCliente, emailCliente, dataNasc, sexo, telefone, numCasa, rua, cidade, cep, bairro, estado);
+                dataGridViewPesquisarF.Rows.Add(idCliente, cpfCliente, nomeCliente, emailCliente, dataNasc, sexo, telefone, numCasa, rua, cidade, cep, bairro, estado, status, data);
             }
             #endregion
         }
@@ -122,29 +129,31 @@ namespace TCC_SIA.View
             #region Pesquisar clientes
             // Criação do objeto NpgsqlDataReader cliente e ControleVeiculo
             controleCliente cCliente = new controleCliente();
-            NpgsqlDataReader cliente = cCliente.pesquisarCliente(textBoxPesquisar.Text);
+            NpgsqlDataReader cliente = cCliente.pesquisarClienteF(textBoxPesquisarF.Text);
 
             //Apaga as colunas da datagridview
-            dataGridViewPesquisar.Columns.Clear();
+            dataGridViewPesquisarF.Columns.Clear();
 
             //Definindo a quant. de colunas que a grid terá
-            dataGridViewPesquisar.ColumnCount = cliente.FieldCount;
+            dataGridViewPesquisarF.ColumnCount = cliente.FieldCount;
 
             //Definindo doze colunas na DataGridView para exibir as caracteristícas dos clientes
-            dataGridViewPesquisar.ColumnCount = 13;
-            dataGridViewPesquisar.Columns[0].Name = "Id";
-            dataGridViewPesquisar.Columns[1].Name = "Cpf";
-            dataGridViewPesquisar.Columns[2].Name = "Nome";
-            dataGridViewPesquisar.Columns[3].Name = "Email";
-            dataGridViewPesquisar.Columns[4].Name = "DataNasc";
-            dataGridViewPesquisar.Columns[5].Name = "Sexo";
-            dataGridViewPesquisar.Columns[6].Name = "Telefone";
-            dataGridViewPesquisar.Columns[7].Name = "NumeroCasa";
-            dataGridViewPesquisar.Columns[8].Name = "Rua";
-            dataGridViewPesquisar.Columns[9].Name = "Cidade";
-            dataGridViewPesquisar.Columns[10].Name = "Cep";
-            dataGridViewPesquisar.Columns[11].Name = "Bairro";
-            dataGridViewPesquisar.Columns[12].Name = "Estado";
+            dataGridViewPesquisarF.ColumnCount = 15;
+            dataGridViewPesquisarF.Columns[0].Name = "Id";
+            dataGridViewPesquisarF.Columns[1].Name = "Cpf";
+            dataGridViewPesquisarF.Columns[2].Name = "Nome";
+            dataGridViewPesquisarF.Columns[3].Name = "Email";
+            dataGridViewPesquisarF.Columns[4].Name = "Data de Nascimento";
+            dataGridViewPesquisarF.Columns[5].Name = "Sexo";
+            dataGridViewPesquisarF.Columns[6].Name = "Telefone";
+            dataGridViewPesquisarF.Columns[7].Name = "Número";
+            dataGridViewPesquisarF.Columns[8].Name = "Rua";
+            dataGridViewPesquisarF.Columns[9].Name = "Cidade";
+            dataGridViewPesquisarF.Columns[10].Name = "Cep";
+            dataGridViewPesquisarF.Columns[11].Name = "Bairro";
+            dataGridViewPesquisarF.Columns[12].Name = "Estado";
+            dataGridViewPesquisarF.Columns[13].Name = "Status";
+            dataGridViewPesquisarF.Columns[14].Name = "Data";
 
             //Aqui criamos um vetor para representar uma linha da consulta(registro)
             string[] linha = new string[cliente.FieldCount];
@@ -165,8 +174,10 @@ namespace TCC_SIA.View
                 string cep = cliente["CEP"].ToString();
                 string bairro = cliente["BAIRRO"].ToString();
                 string estado = cliente["ESTADO"].ToString();
+                string status = cliente["STATUS"].ToString();
+                string data = cliente["DATA"].ToString();
 
-                dataGridViewPesquisar.Rows.Add(idCliente, cpfCliente, nomeCliente, emailCliente, dataNasc, sexo, telefone, numCasa, rua, cidade, cep, bairro, estado);
+                dataGridViewPesquisarF.Rows.Add(idCliente, cpfCliente, nomeCliente, emailCliente, dataNasc, sexo, telefone, numCasa, rua, cidade, cep, bairro, estado, status, data);
             }
             #endregion
         }
@@ -174,43 +185,43 @@ namespace TCC_SIA.View
 
         private void AtualizarCliente(object sender, EventArgs e)
         {
-            if (dataGridViewPesquisar.SelectedRows.Count > 0)
+            /*if (dataGridViewPesquisarF.SelectedRows.Count > 0)
             {
                 DialogResult res = MessageBox.Show("Deseja atualizar este registro?", "Atualização de registro",
                     MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
                 if (res == DialogResult.OK)
                 {
-                    maskedID.Text = dataGridViewPesquisar.CurrentRow.Cells[0].Value.ToString();
-                    maskedCPF.Text = dataGridViewPesquisar.CurrentRow.Cells[1].Value.ToString();
-                    txbNome.Text = dataGridViewPesquisar.CurrentRow.Cells[2].Value.ToString();
-                    txbEmail.Text = dataGridViewPesquisar.CurrentRow.Cells[3].Value.ToString();
-                    dtpNasc.Value = Convert.ToDateTime(dataGridViewPesquisar.CurrentRow.Cells[4].Value.ToString());
-                    cbSexo.SelectedIndex = cbSexo.FindString(dataGridViewPesquisar.CurrentRow.Cells[5].Value.ToString());
-                    maskTelefone.Text = dataGridViewPesquisar.CurrentRow.Cells[6].Value.ToString();
-                    maskNumero.Text = dataGridViewPesquisar.CurrentRow.Cells[7].Value.ToString();
-                    txbRua.Text = dataGridViewPesquisar.CurrentRow.Cells[8].Value.ToString();
-                    txbCidade.Text = dataGridViewPesquisar.CurrentRow.Cells[9].Value.ToString();
-                    maskCep.Text = dataGridViewPesquisar.CurrentRow.Cells[10].Value.ToString();
-                    txbBairro.Text = dataGridViewPesquisar.CurrentRow.Cells[11].Value.ToString();
-                    cbEstado.SelectedIndex = cbEstado.FindStringExact(dataGridViewPesquisar.CurrentRow.Cells[12].Value.ToString());
-                    tabControl1.SelectedTab = tabPage2;
+                    maskedID.Text = dataGridViewPesquisarF.CurrentRow.Cells[0].Value.ToString();
+                    maskedCPF.Text = dataGridViewPesquisarF.CurrentRow.Cells[1].Value.ToString();
+                    txbNome.Text = dataGridViewPesquisarF.CurrentRow.Cells[2].Value.ToString();
+                    txbEmail.Text = dataGridViewPesquisarF.CurrentRow.Cells[3].Value.ToString();
+                    dtpNasc.Value = Convert.ToDateTime(dataGridViewPesquisarF.CurrentRow.Cells[4].Value.ToString());
+                    cbSexo.SelectedIndex = cbSexo.FindString(dataGridViewPesquisarF.CurrentRow.Cells[5].Value.ToString());
+                    maskTelefone.Text = dataGridViewPesquisarF.CurrentRow.Cells[6].Value.ToString();
+                    maskNumero.Text = dataGridViewPesquisarF.CurrentRow.Cells[7].Value.ToString();
+                    txbRua.Text = dataGridViewPesquisarF.CurrentRow.Cells[8].Value.ToString();
+                    txbCidade.Text = dataGridViewPesquisarF.CurrentRow.Cells[9].Value.ToString();
+                    maskCep.Text = dataGridViewPesquisarF.CurrentRow.Cells[10].Value.ToString();
+                    txbBairro.Text = dataGridViewPesquisarF.CurrentRow.Cells[11].Value.ToString();
+                    cbEstado.SelectedIndex = cbEstado.FindStringExact(dataGridViewPesquisarF.CurrentRow.Cells[12].Value.ToString());
+                    tabControlPesquisarClientes.SelectedTab = tabControlPesquisarClienteJ;
 
                 }
-            }
+            }*/
         }
 
         private void btnSalvarA_Click(object sender, EventArgs e)
         {
-            controleCliente cCliente = new controleCliente();
+            /*controleCliente cCliente = new controleCliente();
 
-            ClienteF mCliente = new ClienteF();
+            Cliente mCliente = new Cliente();
 
             //Definindo os valores nos atributos
 
             //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
 
-            mCliente.setIDCliente(Convert.ToInt32(maskedID.Text));
+            mCliente.setIdCliente(Convert.ToInt32(maskedID.Text));
             mCliente.setCpfCliente(maskedCPF.Text);
             mCliente.setNomeCliente(txbNome.Text);
             mCliente.setEmailCliente(txbEmail.Text);
@@ -245,6 +256,7 @@ namespace TCC_SIA.View
 
             //Mostra o resultado
             MessageBox.Show(res);
+            */
         }
 
 

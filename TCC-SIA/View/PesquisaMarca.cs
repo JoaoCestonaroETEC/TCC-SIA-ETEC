@@ -20,39 +20,6 @@ namespace TCC_SIA.View
         {
             InitializeComponent();
 
-            #region Carrega as informações gerais das marcas
-            //Criação do objeto NpgsqlDataReader marcaVeiculo, marcaPeca e controleMarca
-            controleMarca cMarca = new controleMarca();
-            NpgsqlDataReader marcaVeiculo = cMarca.pesquisaMarcaVeiculo(textBoxPesquisar.Text);
-            NpgsqlDataReader marcaPeca = cMarca.pesquisaMarcaPeca(textBoxPesquisar.Text);
-
-            //Apaga as colunas da DataGridView
-            dataGridViewPesquisar.Columns.Clear();
-
-            //Definindo três colunas na DataGridView para exibir as marcas e descrições
-            dataGridViewPesquisar.ColumnCount = 3;
-            dataGridViewPesquisar.Columns[0].Name = "Id";
-            dataGridViewPesquisar.Columns[1].Name = "Marca";
-            dataGridViewPesquisar.Columns[2].Name = "Descrição";
-
-            //Adicionando as marcas e descrições de veículos
-            while (marcaVeiculo.Read())
-            {
-                string idMarcaVeiculo = marcaVeiculo["IDMARCAVEICULO"].ToString();
-                string nomeMarcaVeiculo = marcaVeiculo["NOMEMARCAVEICULO"].ToString();
-                string descMarcaVeiculo = marcaVeiculo["DESCMARCAVEICULO"].ToString();
-                dataGridViewPesquisar.Rows.Add(idMarcaVeiculo, nomeMarcaVeiculo, descMarcaVeiculo);
-            }
-
-            //Adicionando as marcas e descrições de peças
-            while (marcaPeca.Read())
-            {
-                string idMarcaPeca = marcaPeca["IDMARCAPECA"].ToString();
-                string nomeMarcaPeca = marcaPeca["NOMEMARCAPECA"].ToString();
-                string descMarcaPeca = marcaPeca["DESCMARCAPECA"].ToString();
-                dataGridViewPesquisar.Rows.Add(idMarcaPeca, nomeMarcaPeca, descMarcaPeca);
-            }
-            #endregion
         }
         #endregion
 
@@ -61,13 +28,10 @@ namespace TCC_SIA.View
         //Evento de pesquisar marcas
         private void buttonPesquisar_Click(object sender, EventArgs e)
         {
-            //Faz a verificação das checkBoxs
-            if (checkBoxVeiculo.Checked &&
-                !checkBoxPeca.Checked)
             {
                 //Criação do objeto NpgsqlDataReader marcaVeiculo e controleMarca
                 controleMarca cMarca = new controleMarca();
-                NpgsqlDataReader marcaVeiculo = cMarca.listarMarcaVeiculo();
+                NpgsqlDataReader marcaVeiculo = cMarca.listarMarca();
 
                 //Apaga as colunas da datagridview
                 dataGridViewPesquisar.Columns.Clear();
@@ -84,74 +48,10 @@ namespace TCC_SIA.View
                 //Adicionando as marcas e descrições de peças
                 while (marcaVeiculo.Read())
                 {
-                    string idMarcaVeiculo = marcaVeiculo["IDMARCAVEICULO"].ToString();
-                    string nomeMarcaPeca = marcaVeiculo["NOMEMARCAVEICULO"].ToString();
-                    string descMarcaPeca = marcaVeiculo["DESCMARCAVEICULO"].ToString();
+                    string idMarcaVeiculo = marcaVeiculo["IDMARCA"].ToString();
+                    string nomeMarcaPeca = marcaVeiculo["NOMEMARCA"].ToString();
+                    string descMarcaPeca = marcaVeiculo["DESCMARCA"].ToString();
                     dataGridViewPesquisar.Rows.Add(idMarcaVeiculo, nomeMarcaPeca, descMarcaPeca);
-                }
-            }
-
-            //Faz a verificação das checkBoxs
-            if (checkBoxPeca.Checked &&
-                !checkBoxVeiculo.Checked)
-            {
-                //Criação do objeto NpgsqlDataReader marcaVeiculo e controleMarca
-                controleMarca cMarca = new controleMarca();
-                NpgsqlDataReader marcaPeca = cMarca.listarMarcaPeca();
-
-                //Apaga as colunas da DataGridView
-                dataGridViewPesquisar.Columns.Clear();
-
-                //Definindo três colunas na DataGridView para exibir as marcas e descrições
-                dataGridViewPesquisar.ColumnCount = 3;
-                dataGridViewPesquisar.Columns[0].Name = "Id";
-                dataGridViewPesquisar.Columns[1].Name = "Marca";
-                dataGridViewPesquisar.Columns[2].Name = "Descrição";
-
-                //Adicionando as marcas e descrições de peças
-                while (marcaPeca.Read())
-                {
-                    string idMarcaPeca = marcaPeca["IDMARCAPECA"].ToString();
-                    string nomeMarcaPeca = marcaPeca["NOMEMARCAPECA"].ToString();
-                    string descMarcaPeca = marcaPeca["DESCMARCAPECA"].ToString();
-                    dataGridViewPesquisar.Rows.Add(idMarcaPeca, nomeMarcaPeca, descMarcaPeca);
-                }
-            }
-
-            //Faz a verificação das checkBoxs
-            if (checkBoxVeiculo.Checked && checkBoxPeca.Checked ||
-                !checkBoxVeiculo.Checked && !checkBoxPeca.Checked)
-            {
-                //Criação do objeto NpgsqlDataReader marcaVeiculo, marcaPeca e controleMarca
-                controleMarca cMarca = new controleMarca();
-                NpgsqlDataReader marcaVeiculo = cMarca.pesquisaMarcaVeiculo(textBoxPesquisar.Text);
-                NpgsqlDataReader marcaPeca = cMarca.pesquisaMarcaPeca(textBoxPesquisar.Text);
-
-                //Apaga as colunas da DataGridView
-                dataGridViewPesquisar.Columns.Clear();
-
-                //Definindo três colunas na DataGridView para exibir as marcas e descrições
-                dataGridViewPesquisar.ColumnCount = 3;
-                dataGridViewPesquisar.Columns[0].Name = "Id";
-                dataGridViewPesquisar.Columns[1].Name = "Marca";
-                dataGridViewPesquisar.Columns[2].Name = "Descrição";
-
-                //Adicionando as marcas e descrições de veículos
-                while (marcaVeiculo.Read())
-                {
-                    string idMarcaVeiculo = marcaVeiculo["IDMARCAVEICULO"].ToString();
-                    string nomeMarcaVeiculo = marcaVeiculo["NOMEMARCAVEICULO"].ToString();
-                    string descMarcaVeiculo = marcaVeiculo["DESCMARCAVEICULO"].ToString();
-                    dataGridViewPesquisar.Rows.Add(idMarcaVeiculo, nomeMarcaVeiculo, descMarcaVeiculo);
-                }
-
-                //Adicionando as marcas e descrições de peças
-                while (marcaPeca.Read())
-                {
-                    string idMarcaPeca = marcaPeca["IDMARCAPECA"].ToString();
-                    string nomeMarcaPeca = marcaPeca["NOMEMARCAPECA"].ToString();
-                    string descMarcaPeca = marcaPeca["DESCMARCAPECA"].ToString();
-                    dataGridViewPesquisar.Rows.Add(idMarcaPeca, nomeMarcaPeca, descMarcaPeca);
                 }
             }
         }

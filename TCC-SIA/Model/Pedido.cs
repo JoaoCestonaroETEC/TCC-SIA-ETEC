@@ -18,9 +18,8 @@ namespace TCC_SIA.Model
         private string observacao;
         private DateTime dataInicio;
         private DateTime dataFim;
-        private long iddesconto;
         private int desconto_porcento;
-        private int desconto_reais;
+        private decimal desconto_reais;
 
         #endregion
 
@@ -113,17 +112,6 @@ namespace TCC_SIA.Model
         {
             this.dataFim = dataFim;
         }
-
-        public long getIdDesconto()
-        {
-            return iddesconto;
-        }
-
-        public void setIdDesconto(long idDesconto)
-        {
-            this.iddesconto = idDesconto;
-        }
-
         public int getDescontoPorCento()
         {
             return desconto_porcento;
@@ -134,12 +122,12 @@ namespace TCC_SIA.Model
             this.desconto_porcento = descontoPorCento;
         }
 
-        public int getDescontoReais()
+        public decimal getDescontoReais()
         {
             return desconto_reais;
         }
 
-        public void setDescontoReais(int descontoReais)
+        public void setDescontoReais(decimal descontoReais)
         {
             this.desconto_reais = descontoReais;
         }
