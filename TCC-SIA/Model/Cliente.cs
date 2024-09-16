@@ -28,6 +28,7 @@ namespace TCC_SIA.Model
         private string status;
         private DateTime data;
         private string obs;
+        private string razao;
         #endregion
 
         #region Encapsulamento
@@ -195,6 +196,15 @@ namespace TCC_SIA.Model
         public void setObs(string obs)
         {
             this.obs = obs;
+        }
+        public string getRazao()
+        {
+            return this.razao;
+        }
+
+        public void setRazao(string Razao)
+        {
+            this.razao = Razao;
         }
         #endregion
     }

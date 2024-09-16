@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Npgsql;
 using TCC_SIA.Model;
 using System.Text.RegularExpressions;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
+using System.Reflection;
 
 namespace TCC_SIA.Controller
 {
@@ -17,11 +19,11 @@ namespace TCC_SIA.Controller
         public string cadastroCliente(Cliente mCliente)
         {
             //String SQL de inserção
-            string sqlVef = "SELECT COUNT(1) FROM CLIENTE WHERE CPFCLIENTE = @CPFCLIENTE;";
+            string sqlVef = "SELECT COUNT(1) FROM CLIENTE WHERE CPFCLIENTE = @CPFCLIENTE AND CPFCLIENTE != '00000000000' OR CNPJCLIENTE = @CNPJCLIENTE AND CNPJCLIENTE != '00000000000000' OR NOMECLIENTE = @NOMECLIENTE;";
 
             //Strings de SQL de inserções
-            string sql = "INSERT INTO CLIENTE(CPFCLIENTE, CNPJCLIENTE, NOMECLIENTE, EMAILCLIENTE, DATANASC_CLIENTE, SEXO, OBS, RAZAO) " +
-                "VALUES(@CPFCLIENTE, @CNPJCLIENTE, @NOMECLIENTE, @EMAILCLIENTE, @DATANASC_CLIENTE, @SEXO, @OBS, @RAZAO) RETURNING IDCLIENTE;";
+            string sql = "INSERT INTO CLIENTE(CPFCLIENTE, CNPJCLIENTE, NOMECLIENTE, EMAILCLIENTE, DATANASC_CLIENTE, SEXO, OBS, RAZAO, DATA, STATUS) " +
+                "VALUES(@CPFCLIENTE, @CNPJCLIENTE, @NOMECLIENTE, @EMAILCLIENTE, @DATANASC_CLIENTE, @SEXO, @OBS, @RAZAO, @DATA, @STATUS) RETURNING IDCLIENTE;";
             string sql2 = "INSERT INTO CLIENTE_ENDERECO(IDCLIENTE, NUMERO, RUA, CIDADE, CEP, BAIRRO, ESTADO) " +
                 "VALUES(@IDCLIENTE, @NUMERO, @RUA, @CIDADE, @CEP, @BAIRRO, @ESTADO);";
             string sql3 = "INSERT INTO CLIENTE_TELEFONE(IDCLIENTE, TELEFONE) " +
@@ -39,11 +41,13 @@ namespace TCC_SIA.Controller
             {
                 //Faz a verificação de o CPF já existe no Banco
                 commVef.Parameters.AddWithValue("@CPFCLIENTE", mCliente.getCpfCliente());
+                commVef.Parameters.AddWithValue("@CNPJCLIENTE", mCliente.getCNPJCliente());
+                commVef.Parameters.AddWithValue("@NOMECLIENTE", mCliente.getNomeCliente());
                 int cpfExists = Convert.ToInt32(commVef.ExecuteScalar());
 
                 if (cpfExists > 0)
                 {
-                    return "CPF já cadastrado no sistema.";
+                    return "Cliente já cadastrado no sistema.";
                 }
 
                 commVef.ExecuteNonQuery();
@@ -56,6 +60,8 @@ namespace TCC_SIA.Controller
                 comm.Parameters.AddWithValue("@SEXO", mCliente.getSexo());
                 comm.Parameters.AddWithValue("@OBS", mCliente.getObs());
                 comm.Parameters.AddWithValue("@RAZAO", mCliente.getObs());
+                comm.Parameters.AddWithValue("@DATA", mCliente.getData());
+                comm.Parameters.AddWithValue("@STATUS", mCliente.getStatus());
 
                 // Executa a query e retorna o ID do cliente
                 var idCliente = (int)comm.ExecuteScalar();
@@ -98,7 +104,7 @@ namespace TCC_SIA.Controller
         public NpgsqlDataReader listarCliente()
         {
             //String sql de listar
-            string sql = "SELECT * FROM CLIENTE_F;";
+            string sql = "SELECT * FROM CLIENTE;";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
@@ -129,15 +135,53 @@ namespace TCC_SIA.Controller
 
         #region Pesquisar cliente
         //Criação do método de pesquisar cliente
-        public NpgsqlDataReader pesquisarCliente(string cliente)
+        public NpgsqlDataReader pesquisarClienteF(string cliente)
         {
             //String sql de pesquisar
-            string sql = "SELECT C.IDCLIENTE_F, C.CPFCLIENTE_F, C.NOMECLIENTE_F, C.EMAILCLIENTE_F, C.DATANASC_CLIENTE_F, C.SEXO, " +
+            string sql = "SELECT C.IDCLIENTE, C.CPFCLIENTE, C.NOMECLIENTE, C.EMAILCLIENTE, C.DATANASC_CLIENTE, C.SEXO, C.OBS, C.STATUS, C.DATA," +
+            "E.NUMERO, E.RUA, E.CIDADE, E.CEP, E.BAIRRO, E.ESTADO, T.TELEFONE" +
+            "FROM CLIENTE C INNER JOIN CLIENTE_ENDERECO E ON C.IDCLIENTE = E.IDCLIENTE" +
+            "INNER JOIN CLIENTE_TELEFONE T ON C.IDCLIENTE = T.IDCLIENTE" +
+            "WHERE C.NOMECLIENTE LIKE 'cliente%'; '" + cliente + "%';";
+
+            //Abrindo conexão com o banco de dados
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            //Fazendo o try
+            try
+            {
+                //Retornando os valores
+                return comm.ExecuteReader();
+            }
+            //Fazendo o catch
+            catch (NpgsqlException ex)
+            {
+                //Retornando como nulo
+                return null;
+            }
+            //Encerrando a conexão
+            finally
+            {
+                //Método de desconectar
+                con.desconectar();
+            }
+
+        }
+        #endregion
+
+        #region Pesquisar cliente
+        //Criação do método de pesquisar cliente
+        public NpgsqlDataReader pesquisarClienteJ(string cliente)
+        {
+            //String sql de pesquisar
+            string sql = "SELECT C.IDCLIENTE, C.CNPJCLIENTE, C.NOMECLIENTE, C.EMAILCLIENTE, C.RAZAO, C.STATUS, C.DATA" +
              "E.NUMERO, E.RUA, E.CIDADE, E.CEP, E.BAIRRO, E.ESTADO, T.TELEFONE " +
-             "FROM CLIENTE_F C " +
-             "INNER JOIN CLIENTE_ENDERECO_F E ON C.IDCLIENTE_F = E.IDCLIENTE_F " +
-             "INNER JOIN CLIENTE_TELEFONE_F T ON C.IDCLIENTE_F = T.IDCLIENTE_F " +
-             "WHERE C.NOMECLIENTE_F LIKE '" + cliente + "%';";
+             "FROM CLIENTE C " +
+             "INNER JOIN CLIENTE_ENDERECO E ON C.IDCLIENTE = E.IDCLIENTE " +
+             "INNER JOIN CLENTE_TELEFONE T ON C.IDCLIENTE = T.IDCLIENTE" +
+             "WHERE C.NOMECLIENTE LIKE '" + cliente + "%';";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();

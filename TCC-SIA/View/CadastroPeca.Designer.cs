@@ -108,6 +108,7 @@
             // comboBoxTIpo
             // 
             comboBoxTIpo.FormattingEnabled = true;
+            comboBoxTIpo.Items.AddRange(new object[] { "Motor", "Suspensão e Direção", "Freio", "Transmissão", "Elétrica", "Arrefecimento", "Escape", "Estética e Acabamento", "Combustível", "Pneumáticos", "Outro" });
             comboBoxTIpo.Location = new Point(120, 52);
             comboBoxTIpo.Name = "comboBoxTIpo";
             comboBoxTIpo.Size = new Size(209, 23);

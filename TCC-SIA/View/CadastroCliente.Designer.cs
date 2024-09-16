@@ -202,6 +202,7 @@
             comboBoxStatusF.Name = "comboBoxStatusF";
             comboBoxStatusF.Size = new Size(133, 23);
             comboBoxStatusF.TabIndex = 61;
+            comboBoxStatusF.Text = "Ativo";
             // 
             // maskedTextBoxEmailF
             // 
@@ -520,6 +521,7 @@
             comboBoxStatusJ.Name = "comboBoxStatusJ";
             comboBoxStatusJ.Size = new Size(133, 23);
             comboBoxStatusJ.TabIndex = 90;
+            comboBoxStatusJ.Text = "Ativo";
             // 
             // maskedTextBoxEmailJ
             // 

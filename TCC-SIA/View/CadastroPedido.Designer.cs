@@ -42,7 +42,6 @@
             label1 = new Label();
             tabPagePecasUsadas = new TabPage();
             buttonPesquisarPeca = new Button();
-            dataGridViewPeca = new DataGridView();
             comboBoxPeca = new ComboBox();
             tabPageServiçosUtilizados = new TabPage();
             buttonPesquisarServico = new Button();
@@ -56,17 +55,27 @@
             label6 = new Label();
             label7 = new Label();
             label9 = new Label();
-            comboBox1 = new ComboBox();
             label10 = new Label();
             maskedTextBox1 = new MaskedTextBox();
             label11 = new Label();
             maskedTextBox2 = new MaskedTextBox();
+            label12 = new Label();
+            maskedTextBox3 = new MaskedTextBox();
+            label13 = new Label();
+            maskedTextBox4 = new MaskedTextBox();
+            label14 = new Label();
+            maskedTextBox5 = new MaskedTextBox();
+            label15 = new Label();
+            maskedTextBox6 = new MaskedTextBox();
+            label16 = new Label();
+            label17 = new Label();
+            dataGridViewPeca = new DataGridView();
             tabControlPedido.SuspendLayout();
             tabPagePedido.SuspendLayout();
             tabPagePecasUsadas.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewPeca).BeginInit();
             tabPageServiçosUtilizados.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewServico).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewPeca).BeginInit();
             SuspendLayout();
             // 
             // tabControlPedido
@@ -189,8 +198,13 @@
             // 
             // tabPagePecasUsadas
             // 
-            tabPagePecasUsadas.Controls.Add(buttonPesquisarPeca);
             tabPagePecasUsadas.Controls.Add(dataGridViewPeca);
+            tabPagePecasUsadas.Controls.Add(maskedTextBox4);
+            tabPagePecasUsadas.Controls.Add(label14);
+            tabPagePecasUsadas.Controls.Add(maskedTextBox3);
+            tabPagePecasUsadas.Controls.Add(label13);
+            tabPagePecasUsadas.Controls.Add(label12);
+            tabPagePecasUsadas.Controls.Add(buttonPesquisarPeca);
             tabPagePecasUsadas.Controls.Add(comboBoxPeca);
             tabPagePecasUsadas.Location = new Point(4, 24);
             tabPagePecasUsadas.Name = "tabPagePecasUsadas";
@@ -210,17 +224,6 @@
             buttonPesquisarPeca.UseVisualStyleBackColor = true;
             buttonPesquisarPeca.Click += buttonPesquisarPeca_Click;
             // 
-            // dataGridViewPeca
-            // 
-            dataGridViewPeca.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewPeca.Location = new Point(6, 35);
-            dataGridViewPeca.Name = "dataGridViewPeca";
-            dataGridViewPeca.RowHeadersWidth = 51;
-            dataGridViewPeca.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewPeca.Size = new Size(673, 281);
-            dataGridViewPeca.TabIndex = 1;
-            dataGridViewPeca.CellClick += dataGridViewPeca_CellClick;
-            // 
             // comboBoxPeca
             // 
             comboBoxPeca.FormattingEnabled = true;
@@ -232,6 +235,11 @@
             // 
             // tabPageServiçosUtilizados
             // 
+            tabPageServiçosUtilizados.Controls.Add(maskedTextBox5);
+            tabPageServiçosUtilizados.Controls.Add(label15);
+            tabPageServiçosUtilizados.Controls.Add(maskedTextBox6);
+            tabPageServiçosUtilizados.Controls.Add(label16);
+            tabPageServiçosUtilizados.Controls.Add(label17);
             tabPageServiçosUtilizados.Controls.Add(buttonPesquisarServico);
             tabPageServiçosUtilizados.Controls.Add(dataGridViewServico);
             tabPageServiçosUtilizados.Controls.Add(comboBoxServico);
@@ -338,18 +346,10 @@
             label9.TabIndex = 8;
             label9.Text = "Desconto:";
             // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(554, 409);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(106, 23);
-            comboBox1.TabIndex = 9;
-            // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(582, 443);
+            label10.Location = new Point(558, 412);
             label10.Name = "label10";
             label10.Size = new Size(17, 15);
             label10.TabIndex = 10;
@@ -357,7 +357,7 @@
             // 
             // maskedTextBox1
             // 
-            maskedTextBox1.Location = new Point(605, 440);
+            maskedTextBox1.Location = new Point(581, 409);
             maskedTextBox1.Name = "maskedTextBox1";
             maskedTextBox1.Size = new Size(55, 23);
             maskedTextBox1.TabIndex = 11;
@@ -365,7 +365,7 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(579, 473);
+            label11.Location = new Point(555, 442);
             label11.Name = "label11";
             label11.Size = new Size(20, 15);
             label11.TabIndex = 12;
@@ -373,10 +373,101 @@
             // 
             // maskedTextBox2
             // 
-            maskedTextBox2.Location = new Point(605, 470);
+            maskedTextBox2.Location = new Point(581, 439);
             maskedTextBox2.Name = "maskedTextBox2";
             maskedTextBox2.Size = new Size(55, 23);
             maskedTextBox2.TabIndex = 13;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(169, 330);
+            label12.Name = "label12";
+            label12.Size = new Size(60, 15);
+            label12.TabIndex = 9;
+            label12.Text = "Desconto:";
+            // 
+            // maskedTextBox3
+            // 
+            maskedTextBox3.Location = new Point(258, 327);
+            maskedTextBox3.Name = "maskedTextBox3";
+            maskedTextBox3.Size = new Size(55, 23);
+            maskedTextBox3.TabIndex = 13;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(235, 330);
+            label13.Name = "label13";
+            label13.Size = new Size(17, 15);
+            label13.TabIndex = 12;
+            label13.Text = "%";
+            // 
+            // maskedTextBox4
+            // 
+            maskedTextBox4.Location = new Point(342, 327);
+            maskedTextBox4.Name = "maskedTextBox4";
+            maskedTextBox4.Size = new Size(55, 23);
+            maskedTextBox4.TabIndex = 15;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(316, 330);
+            label14.Name = "label14";
+            label14.Size = new Size(20, 15);
+            label14.TabIndex = 14;
+            label14.Text = "R$";
+            // 
+            // maskedTextBox5
+            // 
+            maskedTextBox5.Location = new Point(342, 327);
+            maskedTextBox5.Name = "maskedTextBox5";
+            maskedTextBox5.Size = new Size(55, 23);
+            maskedTextBox5.TabIndex = 20;
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Location = new Point(316, 330);
+            label15.Name = "label15";
+            label15.Size = new Size(20, 15);
+            label15.TabIndex = 19;
+            label15.Text = "R$";
+            // 
+            // maskedTextBox6
+            // 
+            maskedTextBox6.Location = new Point(258, 327);
+            maskedTextBox6.Name = "maskedTextBox6";
+            maskedTextBox6.Size = new Size(55, 23);
+            maskedTextBox6.TabIndex = 18;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Location = new Point(235, 330);
+            label16.Name = "label16";
+            label16.Size = new Size(17, 15);
+            label16.TabIndex = 17;
+            label16.Text = "%";
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Location = new Point(169, 330);
+            label17.Name = "label17";
+            label17.Size = new Size(60, 15);
+            label17.TabIndex = 16;
+            label17.Text = "Desconto:";
+            // 
+            // dataGridViewPeca
+            // 
+            dataGridViewPeca.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewPeca.Location = new Point(6, 39);
+            dataGridViewPeca.Name = "dataGridViewPeca";
+            dataGridViewPeca.RowHeadersWidth = 51;
+            dataGridViewPeca.Size = new Size(673, 281);
+            dataGridViewPeca.TabIndex = 16;
             // 
             // CadastroPedido
             // 
@@ -387,7 +478,6 @@
             Controls.Add(label11);
             Controls.Add(maskedTextBox1);
             Controls.Add(label10);
-            Controls.Add(comboBox1);
             Controls.Add(label9);
             Controls.Add(label7);
             Controls.Add(label6);
@@ -404,9 +494,11 @@
             tabPagePedido.ResumeLayout(false);
             tabPagePedido.PerformLayout();
             tabPagePecasUsadas.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridViewPeca).EndInit();
+            tabPagePecasUsadas.PerformLayout();
             tabPageServiçosUtilizados.ResumeLayout(false);
+            tabPageServiçosUtilizados.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewServico).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewPeca).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -435,16 +527,25 @@
         private Label label6;
         private Label label7;
         private Button buttonPesquisarPeca;
-        private DataGridView dataGridViewPeca;
         private ComboBox comboBoxPeca;
         private Button buttonPesquisarServico;
         private DataGridView dataGridViewServico;
         private ComboBox comboBoxServico;
         private Label label9;
-        private ComboBox comboBox1;
         private Label label10;
         private MaskedTextBox maskedTextBox1;
         private Label label11;
         private MaskedTextBox maskedTextBox2;
+        private MaskedTextBox maskedTextBox4;
+        private Label label14;
+        private MaskedTextBox maskedTextBox3;
+        private Label label13;
+        private Label label12;
+        private DataGridView dataGridViewPeca;
+        private MaskedTextBox maskedTextBox5;
+        private Label label15;
+        private MaskedTextBox maskedTextBox6;
+        private Label label16;
+        private Label label17;
     }
 }

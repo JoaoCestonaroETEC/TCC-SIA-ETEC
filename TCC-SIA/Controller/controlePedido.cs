@@ -119,8 +119,8 @@ namespace TCC_SIA.Controller
         public string cadastroPedidoServicos(List<Servico> mServico, Pedido mPedido)
         {
             //String sql de inserção
-            string sql = "INSERT INTO PEDIDO_SERVICO(IDPEDIDO, NOMESERVICO, DESCSERVICO, VALORSERVICO, DESCONTOPORC, DESCONTOREAIS) " +
-                    "VALUES(@IDPEDIDO, @NOMESERVICO, @DESCSERVICO, @VALORSERVICO);";
+            string sql = "INSERT INTO PEDIDO_SERVICO(IDPEDIDO, NOMESERVICO, DESCSERVICO, VALORSERVICO, DESCONTOPORC, DESCONTOREAIS, GARANTIASERVICO) " +
+                    "VALUES(@IDPEDIDO, @NOMESERVICO, @DESCSERVICO, @VALORSERVICO, @DESCONTOPORC, @DESCONTOREAIS, @GARANTIASERVICO);";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
@@ -141,6 +141,7 @@ namespace TCC_SIA.Controller
                         comm.Parameters.AddWithValue("@VALORSERVICO", peca.getValorServico());
                         comm.Parameters.AddWithValue("@DESCONTOPORC", peca.getDescontoPorc());
                         comm.Parameters.AddWithValue("@DESCONTOREAIS", peca.getDescontoReais());
+                        comm.Parameters.AddWithValue("@GARANTIASERVICO", peca.getGarantiaServico());
                         // Executando o Query
                         comm.ExecuteNonQuery();
                     }

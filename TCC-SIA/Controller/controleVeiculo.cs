@@ -17,7 +17,7 @@ namespace TCC_SIA.Controller
         public string cadastroVeiculo(Veiculo mVeiculo)
         {
             //String sql de inserção
-            string sql = "INSERT INTO VEICULO(IDCLIENTE, IDMARCAVEICULO, NOMEVEICULO, TIPOVEICULO, CORVEICULO, PLACAVEICULO, MODELOVEICULO, CHASSI, ANOFAB, QUILOMETRAGEM, MOTOR, COMBUSTIVEL, DATA, SEGURO) " +
+            string sql = "INSERT INTO VEICULO(IDCLIENTE, IDMARCA, NOMEVEICULO, TIPOVEICULO, CORVEICULO, PLACAVEICULO, MODELOVEICULO, CHASSI, ANOFAB, QUILOMETRAGEM, MOTOR, COMBUSTIVEL, DATA, SEGURO) " +
                 "VALUES(@IDCLIENTE, @IDMARCA, @NOMEVEICULO, @TIPOVEICULO, @CORVEICULO, @PLACAVEICULO, @MODELOVEICULO, @CHASSI, @ANOFAB, @QUILOMETRAGEM, @MOTOR, @COMBUSTIVEL, @DATA, @SEGURO);";
 
             //Abrindo conexão com o banco de dados
@@ -97,6 +97,138 @@ namespace TCC_SIA.Controller
 
         }
         #endregion
+
+        #region Listar tipo de veiculo
+        public NpgsqlDataReader listaTipo()
+        {
+            //String sql de listar
+            string sql = "SELECT DISTINCT TIPOVEICULO FROM VEICULO WHERE TIPOVEICULO NOT IN ('Motocicleta', 'Scooter', 'Sedan', 'Hatchback', 'SUV', 'Crossover', 'Conversível', 'Coupe', 'Caminhão', 'Van', 'Furgão', 'Micro-ônibus', 'Ônibus', 'ATV', 'Quadriciclo', 'Carro Elétrico', 'Carro Híbrido', 'Caminhão Tanque', 'Reboque')";
+
+            //Abrindo conexão com o banco de dados
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            //Fazendo o try
+            try
+            {
+                //Retornando os valores
+                return comm.ExecuteReader();
+            }
+            //Fazendo o catch
+            catch (NpgsqlException ex)
+            {
+                //Retornando como nulo
+                return null;
+            }
+            //Encerrando a conexão
+            finally
+            {
+                //Método de desconectar
+                con.desconectar();
+            }
+
+        }
+        #endregion
+
+        #region Listar cor 
+        public NpgsqlDataReader listaCor()
+        {
+            //String sql de listar
+            string sql = "SELECT DISTINCT CORVEICULO FROM VEICULO WHERE CORVEICULO NOT IN ('Branco', 'Preto', 'Prata', 'Cinza', 'Azul', 'Vermelho', 'Amarelo', 'Verde', 'Roxo')";
+
+            //Abrindo conexão com o banco de dados
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            //Fazendo o try
+            try
+            {
+                //Retornando os valores
+                return comm.ExecuteReader();
+            }
+            //Fazendo o catch
+            catch (NpgsqlException ex)
+            {
+                //Retornando como nulo
+                return null;
+            }
+            //Encerrando a conexão
+            finally
+            {
+                //Método de desconectar
+                con.desconectar();
+            }
+
+        }
+        #endregion
+
+        #region Listar combustivel 
+        public NpgsqlDataReader listaCombustivel()
+        {
+            //String sql de listar
+            string sql = "SELECT DISTINCT COMBUSTIVEL FROM VEICULO WHERE COMBUSTIVEL NOT IN ('Gasolina', 'Diesel', 'Álcool Etílico (Ethanol)', 'Gás Natural', 'Gás Liquefeito de Petróleo (GLP)', 'Óleo Diesel Biodiesel', 'Óleo de Cocina', 'Biogás')";
+
+            //Abrindo conexão com o banco de dados
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            //Fazendo o try
+            try
+            {
+                //Retornando os valores
+                return comm.ExecuteReader();
+            }
+            //Fazendo o catch
+            catch (NpgsqlException ex)
+            {
+                //Retornando como nulo
+                return null;
+            }
+            //Encerrando a conexão
+            finally
+            {
+                //Método de desconectar
+                con.desconectar();
+            }
+
+        }
+        #endregion
+
+        #region Listar seguro
+        public NpgsqlDataReader listaSeguro()
+        {
+            //String sql de listar
+            string sql = "SELECT DISTINCT SEGURO FROM VEICULO";
+
+            //Abrindo conexão com o banco de dados
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            //Fazendo o try
+            try
+            {
+                //Retornando os valores
+                return comm.ExecuteReader();
+            }
+            //Fazendo o catch
+            catch (NpgsqlException ex)
+            {
+                //Retornando como nulo
+                return null;
+            }
+            //Encerrando a conexão
+            finally
+            {
+                //Método de desconectar
+                con.desconectar();
+            }
+
+        }
+#endregion
 
         #region Listar veículo por cliente
         //Criação do método de listar veículo por cliente

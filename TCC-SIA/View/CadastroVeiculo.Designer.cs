@@ -316,6 +316,7 @@
             // 
             maskedTextBoxChassi.Location = new Point(405, 10);
             maskedTextBoxChassi.Margin = new Padding(2);
+            maskedTextBoxChassi.Mask = "0LLAAAAAA00000000";
             maskedTextBoxChassi.Name = "maskedTextBoxChassi";
             maskedTextBoxChassi.Size = new Size(236, 23);
             maskedTextBoxChassi.TabIndex = 56;

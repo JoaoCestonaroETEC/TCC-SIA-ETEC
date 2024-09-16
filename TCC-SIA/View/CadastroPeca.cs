@@ -90,6 +90,66 @@ namespace TCC_SIA.View
 
             //Define qual o valor da linha será utilizado ao selecionar um valor
             comboBoxMarca.ValueMember = "IDMARCA";
+
+        }
+        #endregion
+        #region Listar Tipo
+        public void listarTipo()
+        {
+            controlePeca cPeca = new controlePeca();
+            // Recebe os dados da consulta e salva no dataReader (Tipo)
+            NpgsqlDataReader peca = cPeca.listaTipo();
+
+            // Criar e configurar o DataTable
+            DataTable dtTipo = new DataTable();
+
+            // Definir as colunas do DataTable
+            dtTipo.Columns.Add("ID", typeof(int));  // Supondo que o ID seja um int
+            dtTipo.Columns.Add("TIPOPECA", typeof(string)); // Supondo que o tipo seja uma string
+
+            // Adicionar itens pré-configurados
+            dtTipo.Rows.Add(-1, "Motor");
+            dtTipo.Rows.Add(-2, "Suspensão e Direção");
+            dtTipo.Rows.Add(-3, "Freio");
+            dtTipo.Rows.Add(-4, "Transmissão");
+            dtTipo.Rows.Add(-5, "Elétrica");
+            dtTipo.Rows.Add(-6, "Arrefecimento");
+            dtTipo.Rows.Add(-7, "Escape");
+            dtTipo.Rows.Add(-8, "Estética e Acabamento");
+            dtTipo.Rows.Add(-9, "Combustível");
+            dtTipo.Rows.Add(-10, "Pneumáticos");
+            dtTipo.Rows.Add(-11, "Outro");
+
+            // Carregar os dados do NpgsqlDataReader
+            dtTipo.Load(peca);
+
+            // Preencher a ComboBox com os dados do DataTable
+            comboBoxTIpo.DataSource = dtTipo;
+
+            // Define qual coluna do DataTable que será exibida (nome da coluna)
+            comboBoxTIpo.DisplayMember = "TIPOPECA";
+        }
+        #endregion
+
+        #region Listar Fornecedor
+        public void listarFornecedor()
+        {
+            controlePeca cPeca = new controlePeca();
+            //Recebe os dados da consulta e salva no dataReader (Tipo)
+            NpgsqlDataReader peca = cPeca.listaFornecedor();
+
+            //Converter o dataReader em DataTable
+            DataTable dtFornecedor = new DataTable();
+            dtFornecedor.Load(peca);
+
+            //Preencher a combobox com os dados do DataTable
+            comboBoxFornecedor.DataSource = dtFornecedor;
+
+            //Define qual coluna do DataTable que será exibida (nome da coluna)
+            comboBoxFornecedor.DisplayMember = "FORNECEDOR";
+
+            //Define qual o valor da linha será utilizado ao selecionar um valor
+            comboBoxFornecedor.ValueMember = "FORNECEDOR";
         }
         #endregion
 
@@ -110,6 +170,8 @@ namespace TCC_SIA.View
             //Definir eventos para validar a entrada
             maskedTextBoxValor.KeyPress += new KeyPressEventHandler(maskedTextBoxValor_KeyPress);
             listarMarca();
+            listarTipo();
+            listarFornecedor();
         }
 
         #endregion

@@ -32,7 +32,7 @@ namespace TCC_SIA.View
             dataGridViewPesquisar.ColumnCount = peca.FieldCount;
 
             //Definindo seis colunas na DataGridView para exibir as descrições
-            dataGridViewPesquisar.ColumnCount = 7;
+            dataGridViewPesquisar.ColumnCount = 10;
             dataGridViewPesquisar.Columns[0].Name = "Id";
             dataGridViewPesquisar.Columns[1].Name = "Marca";
             dataGridViewPesquisar.Columns[2].Name = "Nome";
@@ -40,24 +40,30 @@ namespace TCC_SIA.View
             dataGridViewPesquisar.Columns[4].Name = "Valor";
             dataGridViewPesquisar.Columns[5].Name = "Quantidade";
             dataGridViewPesquisar.Columns[6].Name = "Garantia";
-            
+            dataGridViewPesquisar.Columns[7].Name = "Unidade";
+            dataGridViewPesquisar.Columns[8].Name = "Data de Aquisição";
+            dataGridViewPesquisar.Columns[9].Name = "Fornecedor";
+
 
             //Adicionando as descrições de peças
             while (peca.Read())
             {
                 string idPeca = peca["IDPECA"].ToString();
-                string idMarca = peca["IDMARCAPECA"].ToString();
+                string idMarca = peca["IDMARCA"].ToString();
                 string nomePeca = peca["NOMEPECA"].ToString();
                 string tipoPeca = peca["TIPOPECA"].ToString();
                 string valorPeca = peca["VALORPECA"].ToString();
                 string quantPeca = peca["QUANTPECA"].ToString();
                 string garantiaPeca = peca["GARANTIAPECA"].ToString();
+                string unidade = peca["UNIDADE"].ToString();
+                string dataAquis = peca["DATA_AQUISICAO"].ToString();
+                string fornecedor = peca["FORNECEDOR"].ToString();
 
 
                 //Consulta o nome da marca pelo id
                 string marca = cPeca.pesquisaMarcaPecaPorId(idMarca);
 
-                dataGridViewPesquisar.Rows.Add(idPeca, marca, nomePeca, tipoPeca, valorPeca, quantPeca, garantiaPeca);
+                dataGridViewPesquisar.Rows.Add(idPeca, marca, nomePeca, tipoPeca, valorPeca, quantPeca, garantiaPeca, unidade, dataAquis, fornecedor);
             }
             #endregion
         }
@@ -87,21 +93,26 @@ namespace TCC_SIA.View
             dataGridViewPesquisar.Columns[5].Name = "Quantidade";
             dataGridViewPesquisar.Columns[6].Name = "Garantia";
 
+
             //Adicionando as descrições de peças
             while (peca.Read())
             {
                 string idPeca = peca["IDPECA"].ToString();
-                string idMarca = peca["IDMARCAPECA"].ToString();
+                string idMarca = peca["IDMARCA"].ToString();
                 string nomePeca = peca["NOMEPECA"].ToString();
                 string tipoPeca = peca["TIPOPECA"].ToString();
                 string valorPeca = peca["VALORPECA"].ToString();
                 string quantPeca = peca["QUANTPECA"].ToString();
                 string garantiaPeca = peca["GARANTIAPECA"].ToString();
+                string unidade = peca["UNIDADE"].ToString();
+                string dataAquis = peca["DATA_AQUISICAO"].ToString();
+                string fornecedor = peca["FORNECEDOR"].ToString();
+
 
                 //Consulta o nome da marca pelo id
                 string marca = cPeca.pesquisaMarcaPecaPorId(idMarca);
 
-                dataGridViewPesquisar.Rows.Add(idPeca, marca, nomePeca, tipoPeca, valorPeca, quantPeca, garantiaPeca);
+                dataGridViewPesquisar.Rows.Add(idPeca, marca, nomePeca, tipoPeca, valorPeca, quantPeca, garantiaPeca, unidade, dataAquis, fornecedor);
             }
         }
         #endregion
