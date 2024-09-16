@@ -23,8 +23,8 @@ namespace TCC_SIA.View
             #region Carrega as informações gerais das marcas
             //Criação do objeto NpgsqlDataReader marcaVeiculo, marcaPeca e controleMarca
             controleMarca cMarca = new controleMarca();
-            NpgsqlDataReader marcaVeiculo = cMarca.pesquisaMarca(textBoxPesquisar.Text);
-            NpgsqlDataReader marcaPeca = cMarca.pesquisaMarca(textBoxPesquisar.Text);
+            NpgsqlDataReader marcaVeiculo = cMarca.pesquisaMarcaVeiculo(textBoxPesquisar.Text);
+            NpgsqlDataReader marcaPeca = cMarca.pesquisaMarcaPeca(textBoxPesquisar.Text);
 
             //Apaga as colunas da DataGridView
             dataGridViewPesquisar.Columns.Clear();
@@ -62,10 +62,12 @@ namespace TCC_SIA.View
         private void buttonPesquisar_Click(object sender, EventArgs e)
         {
             //Faz a verificação das checkBoxs
+            if (checkBoxVeiculo.Checked &&
+                !checkBoxPeca.Checked)
             {
                 //Criação do objeto NpgsqlDataReader marcaVeiculo e controleMarca
                 controleMarca cMarca = new controleMarca();
-                NpgsqlDataReader marcaVeiculo = cMarca.listarMarca();
+                NpgsqlDataReader marcaVeiculo = cMarca.listarMarcaVeiculo();
 
                 //Apaga as colunas da datagridview
                 dataGridViewPesquisar.Columns.Clear();
@@ -90,10 +92,12 @@ namespace TCC_SIA.View
             }
 
             //Faz a verificação das checkBoxs
+            if (checkBoxPeca.Checked &&
+                !checkBoxVeiculo.Checked)
             {
                 //Criação do objeto NpgsqlDataReader marcaVeiculo e controleMarca
                 controleMarca cMarca = new controleMarca();
-                NpgsqlDataReader marcaPeca = cMarca.listarMarca();
+                NpgsqlDataReader marcaPeca = cMarca.listarMarcaPeca();
 
                 //Apaga as colunas da DataGridView
                 dataGridViewPesquisar.Columns.Clear();
@@ -115,11 +119,13 @@ namespace TCC_SIA.View
             }
 
             //Faz a verificação das checkBoxs
+            if (checkBoxVeiculo.Checked && checkBoxPeca.Checked ||
+                !checkBoxVeiculo.Checked && !checkBoxPeca.Checked)
             {
                 //Criação do objeto NpgsqlDataReader marcaVeiculo, marcaPeca e controleMarca
                 controleMarca cMarca = new controleMarca();
-                NpgsqlDataReader marcaVeiculo = cMarca.pesquisaMarca(textBoxPesquisar.Text);
-                NpgsqlDataReader marcaPeca = cMarca.pesquisaMarca(textBoxPesquisar.Text);
+                NpgsqlDataReader marcaVeiculo = cMarca.pesquisaMarcaVeiculo(textBoxPesquisar.Text);
+                NpgsqlDataReader marcaPeca = cMarca.pesquisaMarcaPeca(textBoxPesquisar.Text);
 
                 //Apaga as colunas da DataGridView
                 dataGridViewPesquisar.Columns.Clear();
