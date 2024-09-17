@@ -154,12 +154,24 @@ namespace TCC_SIA.View
         #endregion
 
         #region Método de aceitar apenas números
-        private void maskedTextBoxValor_KeyPress(object sender, KeyPressEventArgs e)
+        private void maskedTextBoxDinheiro_Leave(object sender, EventArgs e)
         {
-            //Verifica se a tecla pressionada é um dígito ou uma tecla de controle (como Backspace)
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            if (!string.IsNullOrEmpty(maskedTextBoxValor.Text))
             {
-                e.Handled = true; //Impede a entrada de caracteres não numéricos
+                // Remove qualquer ponto ou vírgula adicional, se houver
+                string textoLimpo = maskedTextBoxValor.Text.Replace(",", "").Replace(".", "").Trim();
+
+                // Verifica se o valor pode ser convertido em um número
+                if (decimal.TryParse(textoLimpo, out decimal valor))
+                {
+                    // Divide por 100 para ajustar o valor para centavos e formata com duas casas decimais
+                    maskedTextBoxValor.Text = (valor / 100).ToString("N2");
+                }
+                else
+                {
+                    // Se a entrada for inválida, pode limpar o campo ou tomar outra ação
+                    maskedTextBoxValor.Text = "0,00"; // Opcional: Define como 0 se o valor for inválido
+                }
             }
         }
         #endregion
@@ -168,12 +180,45 @@ namespace TCC_SIA.View
         private void CadastroPeça_Load(object sender, EventArgs e)
         {
             //Definir eventos para validar a entrada
-            maskedTextBoxValor.KeyPress += new KeyPressEventHandler(maskedTextBoxValor_KeyPress);
+            maskedTextBoxValor.Leave += maskedTextBoxDinheiro_Leave;
             listarMarca();
             listarTipo();
             listarFornecedor();
         }
 
         #endregion
+
+        private void maskedTextBoxValor_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void maskedTextBoxValor_TextChanged(object sender, EventArgs e)
+        {
+            MaskedTextBox maskedTextBox = sender as MaskedTextBox;
+
+            // Remove qualquer formatação anterior e deixa apenas os números
+            string textoAtual = maskedTextBox.Text.Replace(",", "").Replace(".", "").TrimStart('0');
+
+            if (textoAtual.Length == 0)
+            {
+                textoAtual = "0";
+            }
+
+            // Converte o texto para decimal
+            if (decimal.TryParse(textoAtual, out decimal valorDecimal))
+            {
+                maskedTextBox.TextChanged -= maskedTextBoxValor_TextChanged; // Remove o evento para evitar loop
+
+                // Formata o valor como moeda (duas casas decimais e separador de milhares)
+                maskedTextBox.Text = string.Format("{0:N2}", valorDecimal / 100);
+
+                // Coloca o cursor no final
+                maskedTextBox.SelectionStart = maskedTextBox.Text.Length;
+
+                maskedTextBox.TextChanged += maskedTextBoxValor_TextChanged; // Reinscreve o evento
+            }
+        }
+
     }
 }

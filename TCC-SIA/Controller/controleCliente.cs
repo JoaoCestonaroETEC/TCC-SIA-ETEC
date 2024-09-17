@@ -59,7 +59,7 @@ namespace TCC_SIA.Controller
                 comm.Parameters.AddWithValue("@DATANASC_CLIENTE", mCliente.getDataNascCliente());
                 comm.Parameters.AddWithValue("@SEXO", mCliente.getSexo());
                 comm.Parameters.AddWithValue("@OBS", mCliente.getObs());
-                comm.Parameters.AddWithValue("@RAZAO", mCliente.getObs());
+                comm.Parameters.AddWithValue("@RAZAO", mCliente.getRazao());
                 comm.Parameters.AddWithValue("@DATA", mCliente.getData());
                 comm.Parameters.AddWithValue("@STATUS", mCliente.getStatus());
 

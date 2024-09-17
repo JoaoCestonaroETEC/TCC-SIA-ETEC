@@ -59,16 +59,13 @@ namespace TCC_SIA.View
             controlePeca cPeca = new controlePeca();
             NpgsqlDataReader peca = cPeca.listaPeca();
 
-            //Apaga as colunas da datagridview
-            dataGridViewPeca.Columns.Clear();
-
             //Definindo a quant. de colunas que a grid terá
             dataGridViewPeca.ColumnCount = peca.FieldCount;
 
             //Definindo sete colunas na DataGridView para exibir as descrições
             dataGridViewPeca.ColumnCount = 7;
-            dataGridViewPeca.Columns[0].Name = "Marca";
-            dataGridViewPeca.Columns[1].Name = "Nome";
+            dataGridViewPeca.Columns[0].Name = "Nome";
+            dataGridViewPeca.Columns[1].Name = "Marca";
             dataGridViewPeca.Columns[2].Name = "Tipo";
             dataGridViewPeca.Columns[3].Name = "Valor";
             dataGridViewPeca.Columns[4].Name = "Quantidade";
@@ -78,8 +75,8 @@ namespace TCC_SIA.View
             //Adicionando as descrições de peças
             while (peca.Read())
             {
-                string idMarca = peca["IDMARCA"].ToString();
                 string nomePeca = peca["NOMEPECA"].ToString();
+                string idMarca = peca["IDMARCA"].ToString();
                 string tipoPeca = peca["TIPOPECA"].ToString();
                 string valorPeca = peca["VALORPECA"].ToString();
                 string quantPeca = peca["QUANTPECA"].ToString();
@@ -89,8 +86,10 @@ namespace TCC_SIA.View
                 //Consulta o nome da marca pelo id
                 string marca = cPeca.pesquisaMarcaPecaPorId(idMarca);
 
-                dataGridViewPeca.Rows.Add(marca, nomePeca, tipoPeca, valorPeca, quantPeca, garantiaPeca, descPeca);
+                dataGridViewPeca.Rows.Add(nomePeca, marca, tipoPeca, valorPeca, quantPeca, garantiaPeca, descPeca);
             }
+
+
             #endregion
 
             #region Puxa o maior id de pedido
@@ -370,85 +369,70 @@ namespace TCC_SIA.View
         //Evento de pesquisar peça
         private void buttonPesquisarPeca_Click(object sender, EventArgs e)
         {
-            //Caso ele queria pesquisar alguma coisa sem ter selecionado nada
-            if (dataGridViewPeca.SelectedRows.Count == 0)
+            // Verificar se há linhas selecionadas
+            List<DataGridViewRow> selectedRows = new List<DataGridViewRow>();
+            if (dataGridViewPeca.SelectedRows.Count > 0)
             {
-                //Criação do objeto NpgsqlDataReader peca e controlePeca
-                controlePeca cPeca = new controlePeca();
-                NpgsqlDataReader peca = cPeca.pesquisaPeca(comboBoxPeca.Text);
-
-                //Apaga as colunas da datagridview
-                dataGridViewPeca.Columns.Clear();
-
-                //Definindo a quant. de colunas que a grid terá
-                dataGridViewPeca.ColumnCount = peca.FieldCount;
-
-                //Definindo sete colunas na DataGridView para exibir as descrições
-                dataGridViewPeca.ColumnCount = 7;
-                dataGridViewPeca.Columns[0].Name = "Marca";
-                dataGridViewPeca.Columns[1].Name = "Nome";
-                dataGridViewPeca.Columns[2].Name = "Tipo";
-                dataGridViewPeca.Columns[3].Name = "Valor";
-                dataGridViewPeca.Columns[4].Name = "Quantidade";
-                dataGridViewPeca.Columns[5].Name = "Garantia";
-                dataGridViewPeca.Columns[6].Name = "Descrição";
-
-                //Adicionando as descrições de peças
-                while (peca.Read())
+                // Armazena as linhas selecionadas
+                foreach (DataGridViewRow row in dataGridViewPeca.SelectedRows)
                 {
-                    string idMarca = peca["IDMARCA"].ToString();
-                    string nomePeca = peca["NOMEPECA"].ToString();
-                    string tipoPeca = peca["TIPOPECA"].ToString();
-                    string valorPeca = peca["VALORPECA"].ToString();
-                    string quantPeca = peca["QUANTPECA"].ToString();
-                    string garantiaPeca = peca["GARANTIAPECA"].ToString();
-                    string descPeca = peca["DESCPECA"].ToString();
-
-                    //Consulta o nome da marca pelo id
-                    string marca = cPeca.pesquisaMarcaPecaPorId(idMarca);
-
-                    dataGridViewPeca.Rows.Add(marca, nomePeca, tipoPeca, valorPeca, quantPeca, garantiaPeca, descPeca);
+                    selectedRows.Add(row);
                 }
             }
 
-            //Caso ele queria pesquisar alguma coisa e tenha selecionado alguma linha
-            if (dataGridViewPeca.SelectedRows.Count != 0)
+            // Limpar as linhas da DataGridView, exceto as selecionadas
+            for (int i = dataGridViewPeca.Rows.Count - 1; i >= 0; i--)
             {
-                //Criação do objeto NpgsqlDataReader peca e controlePeca
-                controlePeca cPeca = new controlePeca();
-                NpgsqlDataReader peca = cPeca.pesquisaPeca(comboBoxPeca.Text);
-
-                //Definindo a quant. de colunas que a grid terá
-                dataGridViewPeca.ColumnCount = peca.FieldCount;
-
-                //Definindo sete colunas na DataGridView para exibir as descrições
-                dataGridViewPeca.ColumnCount = 7;
-                dataGridViewPeca.Columns[0].Name = "Marca";
-                dataGridViewPeca.Columns[1].Name = "Nome";
-                dataGridViewPeca.Columns[2].Name = "Tipo";
-                dataGridViewPeca.Columns[3].Name = "Valor";
-                dataGridViewPeca.Columns[4].Name = "Quantidade";
-                dataGridViewPeca.Columns[5].Name = "Garantia";
-                dataGridViewPeca.Columns[6].Name = "Descrição";
-
-                //Adicionando as descrições de peças
-                while (peca.Read())
+                // Verifica se a linha não é uma nova linha (linha vazia)
+                if (!dataGridViewPeca.Rows[i].IsNewRow && !dataGridViewPeca.Rows[i].Selected)
                 {
-                    string idMarca = peca["IDMARCA"].ToString();
-                    string nomePeca = peca["NOMEPECA"].ToString();
-                    string tipoPeca = peca["TIPOPECA"].ToString();
-                    string valorPeca = peca["VALORPECA"].ToString();
-                    string quantPeca = peca["QUANTPECA"].ToString();
-                    string garantiaPeca = peca["GARANTIAPECA"].ToString();
-                    string descPeca = peca["DESCPECA"].ToString();
+                    dataGridViewPeca.Rows.RemoveAt(i);
+                }
+            }
 
-                    //Consulta o nome da marca pelo id
-                    string marca = cPeca.pesquisaMarcaPecaPorId(idMarca);
+            // Criação do objeto NpgsqlDataReader peca e controlePeca
+            controlePeca cPeca = new controlePeca();
+            NpgsqlDataReader peca = cPeca.pesquisaPeca(comboBoxPeca.Text);
 
-                    dataGridViewPeca.Rows.Add(marca, nomePeca, tipoPeca, valorPeca, quantPeca, garantiaPeca, descPeca);
+            // Definindo a quantidade de colunas que a grid terá
+            dataGridViewPeca.ColumnCount = 7;
+            dataGridViewPeca.Columns[0].Name = "Nome";
+            dataGridViewPeca.Columns[1].Name = "Marca";
+            dataGridViewPeca.Columns[2].Name = "Tipo";
+            dataGridViewPeca.Columns[3].Name = "Valor";
+            dataGridViewPeca.Columns[4].Name = "Quantidade";
+            dataGridViewPeca.Columns[5].Name = "Garantia";
+            dataGridViewPeca.Columns[6].Name = "Descrição";
+
+            // Adicionando as descrições de peças
+            while (peca.Read())
+            {
+                string nomePeca = peca["NOMEPECA"].ToString();
+                string idMarca = peca["IDMARCA"].ToString();
+                string tipoPeca = peca["TIPOPECA"].ToString();
+                string valorPeca = peca["VALORPECA"].ToString();
+                string quantPeca = peca["QUANTPECA"].ToString();
+                string garantiaPeca = peca["GARANTIAPECA"].ToString();
+                string descPeca = peca["DESCPECA"].ToString();
+
+                // Consulta o nome da marca pelo id
+                string marca = cPeca.pesquisaMarcaPecaPorId(idMarca);
+
+                // Adiciona uma nova linha à DataGridView
+                dataGridViewPeca.Rows.Add(nomePeca, marca, tipoPeca, valorPeca, quantPeca, garantiaPeca, descPeca);
+            }
+
+            // Re-adiciona as linhas selecionadas após a nova pesquisa
+            foreach (var row in selectedRows)
+            {
+                int rowIndex = dataGridViewPeca.Rows.Add(row.Clone() as DataGridViewRow);
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    dataGridViewPeca.Rows[rowIndex].Cells[cell.ColumnIndex].Value = cell.Value;
                 }
             }
         }
+
         #endregion
 
         #region Pesquisar serviço
