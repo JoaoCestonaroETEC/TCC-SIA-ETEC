@@ -14,6 +14,8 @@ namespace TCC_SIA.Controller
         //Criação do método de cadastrar marca
         public string cadastroMarcaVeiculo(Marca mMarca)
         {
+            //String SQL de inserção
+            string sqlVef = "SELECT COUNT(1) FROM MARCA WHERE NOMEMARCA = @NOMEMARCA AND TIPOMARCA = @TIPOMARCA";
             //String sql de inserção
             string sql = "INSERT INTO MARCA(NOMEMARCA, DESCMARCA, TIPOMARCA) " +
                 "VALUES(@NOMEMARCA, @DESCMARCA, @TIPOMARCA);";
@@ -22,10 +24,21 @@ namespace TCC_SIA.Controller
             conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();
             NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+            NpgsqlCommand commVef = new NpgsqlCommand(sqlVef, conn);
 
             //Fazendo o try
             try
             {
+                //Faz a verificação de o CPF já existe no Banco
+                commVef.Parameters.AddWithValue("@NOMEMARCA", mMarca.getNomeMarca());
+                commVef.Parameters.AddWithValue("@TIPOMARCA", mMarca.getTipoMarca());
+                int marcaExists = Convert.ToInt32(commVef.ExecuteScalar());
+
+                if (marcaExists > 0)
+                {
+                    return "Marca já cadastrada no sistema.";
+                }
+
                 //Definindo os valores a serem postos nos campos
                 comm.Parameters.AddWithValue("@NOMEMARCA", mMarca.getNomeMarca());
                 comm.Parameters.AddWithValue("@DESCMARCA", mMarca.getDescMarca());

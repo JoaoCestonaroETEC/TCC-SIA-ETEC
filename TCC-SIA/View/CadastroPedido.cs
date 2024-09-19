@@ -22,10 +22,8 @@ namespace TCC_SIA.View
 
             #region Carrega os dados nas comboBoxs
             listarCliente();
-            listarPeca();
-            listarServico();
             listarVeiculo();
-            #endregion 
+            #endregion
 
             #region Carrega os dados de pesquisa de serviços
             //Criação do objeto NpgsqlDataReader servico e controleServico
@@ -120,8 +118,97 @@ namespace TCC_SIA.View
             //Soma mais um para impedir a restrição por chave primária no banco
             idPedido = idPedido + 1;
             #endregion
+
+            ConfigurarDataGridView(dataGridViewServico);
+            ConfigurarDataGridView(dataGridViewPeca);
+
         }
         #endregion
+
+        private void ConfigurarDataGridView(DataGridView dataGridView)
+        {
+            // Configuração para selecionar a linha inteira ao clicar em qualquer célula
+            dataGridView.RowHeadersVisible = false;
+            dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView.MultiSelect = true; // Permitir seleção múltipla
+            dataGridView.AllowUserToAddRows = false;
+            dataGridView.AllowUserToResizeColumns = false;
+            dataGridView.AllowUserToResizeRows = false;
+
+            // Adiciona a nova coluna "Quantidade de Vezes"
+            DataGridViewTextBoxColumn colunaQuantidade = new DataGridViewTextBoxColumn();
+            colunaQuantidade.Name = "Quantidade de Vezes";
+            colunaQuantidade.HeaderText = "Quantidade de Vezes";
+            colunaQuantidade.ReadOnly = false; // Tornar esta coluna editável
+            dataGridView.Columns.Add(colunaQuantidade);
+
+            // Torna as outras colunas não editáveis
+            foreach (DataGridViewColumn column in dataGridView.Columns)
+            {
+                if (column.Name != "Quantidade de Vezes")
+                {
+                    column.ReadOnly = true; // Todas as outras colunas não podem ser editadas
+                }
+            }
+
+            // Adiciona o evento CellMouseClick
+            dataGridView.CellMouseClick += DataGridView_CellMouseClick;
+        }
+
+        // Evento CellMouseClick para gerenciar a seleção/deseleção de linhas
+        private void DataGridView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridView dataGridView = sender as DataGridView;
+
+            // Verifica se o clique foi em uma célula válida (não no cabeçalho)
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                DataGridViewRow clickedRow = dataGridView.Rows[e.RowIndex];
+
+                // Se a tecla Ctrl estiver pressionada, alternar a seleção da linha clicada
+                if (Control.ModifierKeys == Keys.Control)
+                {
+                    if (clickedRow.Selected)
+                    {
+                        clickedRow.Selected = false;
+                    }
+                    else
+                    {
+                        clickedRow.Selected = true;
+                    }
+                }
+                else
+                {
+                    // Se não estiver pressionada a tecla Ctrl, selecione apenas a linha clicada
+                    dataGridView.ClearSelection(); // Limpa a seleção atual
+                    clickedRow.Selected = true; // Marca a linha clicada
+                }
+            }
+        }
+
+        // Se a célula clicada não é da coluna "Quantidade de V
+        private void AtualizarValoresTotais()
+        {
+            decimal valorTotalPecas = 0;
+            decimal valorTotalServicos = 0;
+            decimal descontoPecas = 0;
+            decimal descontoServicos = 0;
+
+            // Parse os valores das MaskedTextBoxes, com verificações de erro
+            decimal.TryParse(maskedTextBoxValorTotalPecas.Text, out valorTotalPecas);
+            decimal.TryParse(maskedTextBoxValorTotalServicos.Text, out valorTotalServicos);
+            decimal.TryParse(maskedTextBoxDescontoRPeca.Text, out descontoPecas);
+            decimal.TryParse(maskedTextBoxDescontoRServico.Text, out descontoServicos);
+
+            // Calcule os valores totais aplicando os descontos
+            decimal valorFinalPecas = valorTotalPecas - descontoPecas;
+            decimal valorFinalServicos = valorTotalServicos - descontoServicos;
+            decimal valorTotalPedido = valorFinalPecas + valorFinalServicos;
+
+            // Atualize os valores nas MaskedTextBoxes
+            maskedTextBoxValorTotal.Text = valorTotalPedido.ToString("0.00");
+        }
+
 
         #region Cadastrar pedido
         //Evento de cadastrar pedido
@@ -329,15 +416,6 @@ namespace TCC_SIA.View
             //Converter o dataReader em DataTable
             DataTable dtPeca = new DataTable();
             dtPeca.Load(peca);
-
-            //Preencher a combobox com os dados do DataTable
-            comboBoxPeca.DataSource = dtPeca;
-
-            //Define qual coluna do DataTable que será exibida (nome da coluna)
-            comboBoxPeca.DisplayMember = "NOMEPECA";
-
-            //Define qual o valor da linha será utilizado ao selecionar um valor
-            comboBoxPeca.ValueMember = "IDPECA";
         }
         #endregion
 
@@ -353,38 +431,25 @@ namespace TCC_SIA.View
             //Converter o dataReader em DataTable
             DataTable dtServico = new DataTable();
             dtServico.Load(servico);
-
-            //Preencher a combobox com os dados do DataTable
-            comboBoxServico.DataSource = dtServico;
-
-            //Define qual coluna do DataTable que será exibida (nome da coluna)
-            comboBoxServico.DisplayMember = "NOMESERVICO";
-
-            //Define qual o valor da linha será utilizado ao selecionar um valor
-            comboBoxServico.ValueMember = "IDSERVICO";
         }
         #endregion
 
         #region Pesquisar peça
-        //Evento de pesquisar peça
+        // Evento de pesquisar peça
         private void buttonPesquisarPeca_Click(object sender, EventArgs e)
         {
-            // Verificar se há linhas selecionadas
-            List<DataGridViewRow> selectedRows = new List<DataGridViewRow>();
-            if (dataGridViewPeca.SelectedRows.Count > 0)
+            // Armazena os índices das linhas selecionadas
+            List<int> selectedRowIndices = new List<int>();
+            foreach (DataGridViewRow row in dataGridViewPeca.SelectedRows)
             {
-                // Armazena as linhas selecionadas
-                foreach (DataGridViewRow row in dataGridViewPeca.SelectedRows)
-                {
-                    selectedRows.Add(row);
-                }
+                selectedRowIndices.Add(row.Index);
             }
 
             // Limpar as linhas da DataGridView, exceto as selecionadas
             for (int i = dataGridViewPeca.Rows.Count - 1; i >= 0; i--)
             {
-                // Verifica se a linha não é uma nova linha (linha vazia)
-                if (!dataGridViewPeca.Rows[i].IsNewRow && !dataGridViewPeca.Rows[i].Selected)
+                // Verifica se a linha não é uma nova linha (linha vazia) e não está selecionada
+                if (!dataGridViewPeca.Rows[i].IsNewRow && !selectedRowIndices.Contains(i))
                 {
                     dataGridViewPeca.Rows.RemoveAt(i);
                 }
@@ -392,9 +457,9 @@ namespace TCC_SIA.View
 
             // Criação do objeto NpgsqlDataReader peca e controlePeca
             controlePeca cPeca = new controlePeca();
-            NpgsqlDataReader peca = cPeca.pesquisaPeca(comboBoxPeca.Text);
+            NpgsqlDataReader peca = cPeca.pesquisaPeca(textBoxPesquisarP.Text);
 
-            // Definindo a quantidade de colunas que a grid terá
+            // Definindo a quantidade de colunas que a grid terá (se necessário, para garantir que seja atualizado)
             dataGridViewPeca.ColumnCount = 7;
             dataGridViewPeca.Columns[0].Name = "Nome";
             dataGridViewPeca.Columns[1].Name = "Marca";
@@ -404,7 +469,7 @@ namespace TCC_SIA.View
             dataGridViewPeca.Columns[5].Name = "Garantia";
             dataGridViewPeca.Columns[6].Name = "Descrição";
 
-            // Adicionando as descrições de peças
+            // Adicionando as descrições de peças sem duplicação
             while (peca.Read())
             {
                 string nomePeca = peca["NOMEPECA"].ToString();
@@ -418,21 +483,34 @@ namespace TCC_SIA.View
                 // Consulta o nome da marca pelo id
                 string marca = cPeca.pesquisaMarcaPecaPorId(idMarca);
 
-                // Adiciona uma nova linha à DataGridView
-                dataGridViewPeca.Rows.Add(nomePeca, marca, tipoPeca, valorPeca, quantPeca, garantiaPeca, descPeca);
+                // Verifica se a peça já está presente para evitar duplicatas
+                bool exists = false;
+                foreach (DataGridViewRow row in dataGridViewPeca.Rows)
+                {
+                    if (row.Cells["Nome"].Value?.ToString() == nomePeca &&
+                        row.Cells["Marca"].Value?.ToString() == marca)
+                    {
+                        exists = true;
+                        break;
+                    }
+                }
+
+                // Adiciona a nova linha à DataGridView se não existir
+                if (!exists)
+                {
+                    dataGridViewPeca.Rows.Add(nomePeca, marca, tipoPeca, valorPeca, quantPeca, garantiaPeca, descPeca);
+                }
             }
 
-            // Re-adiciona as linhas selecionadas após a nova pesquisa
-            foreach (var row in selectedRows)
+            // Re-seleciona as linhas previamente selecionadas (se necessário)
+            foreach (int index in selectedRowIndices)
             {
-                int rowIndex = dataGridViewPeca.Rows.Add(row.Clone() as DataGridViewRow);
-                foreach (DataGridViewCell cell in row.Cells)
+                if (index < dataGridViewPeca.Rows.Count)
                 {
-                    dataGridViewPeca.Rows[rowIndex].Cells[cell.ColumnIndex].Value = cell.Value;
+                    dataGridViewPeca.Rows[index].Selected = true;
                 }
             }
         }
-
         #endregion
 
         #region Pesquisar serviço
@@ -441,7 +519,7 @@ namespace TCC_SIA.View
         {
             //Criação do objeto NpgsqlDataReader servico e controleServico
             controleServico cServico = new controleServico();
-            NpgsqlDataReader servico = cServico.pesquisaServico(comboBoxServico.Text);
+            NpgsqlDataReader servico = cServico.pesquisaServico(textBoxPesquisarS.Text);
 
             //Apaga as colunas da datagridview
             dataGridViewServico.Columns.Clear();
@@ -584,21 +662,6 @@ namespace TCC_SIA.View
         }
         #endregion
 
-        #region Carregar novos dados
-        private void comboBoxPeca_Click(object sender, EventArgs e)
-        {
-            listarPeca();
-        }
-
-        #endregion
-
-        #region Carregar novos dados
-        private void comboBoxServico_Click(object sender, EventArgs e)
-        {
-            listarServico();
-        }
-        #endregion
-
         private void dataGridViewPeca_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             dataGridViewPeca.Rows[e.RowIndex].Selected = true;
@@ -618,5 +681,291 @@ namespace TCC_SIA.View
         {
 
         }
+
+        #region Métodos para combo box de valores e descontos
+        private void maskedTextBoxValorTotal_TextChanged(object sender, EventArgs e)
+        {
+            MaskedTextBox maskedTextBox = sender as MaskedTextBox;
+
+            // Remove qualquer formatação anterior e deixa apenas os números
+            string textoAtual = maskedTextBox.Text.Replace(",", "").Replace(".", "").TrimStart('0');
+
+            if (textoAtual.Length == 0)
+            {
+                textoAtual = "0";
+            }
+
+            // Converte o texto para decimal
+            if (decimal.TryParse(textoAtual, out decimal valorDecimal))
+            {
+                maskedTextBox.TextChanged -= maskedTextBoxValorTotal_TextChanged; // Remove o evento para evitar loop
+
+                // Formata o valor com ponto como separador de centavos e sem separadores de milhar
+                maskedTextBox.Text = string.Format("{0:0.00}", valorDecimal / 100);
+
+                // Coloca o cursor no final
+                maskedTextBox.SelectionStart = maskedTextBox.Text.Length;
+
+                maskedTextBox.TextChanged += maskedTextBoxValorTotal_TextChanged; // Reinscreve o evento
+            }
+            AtualizarValoresTotais();
+        }
+
+        private void maskedTextBoxValorTotalServicos_TextChanged(object sender, EventArgs e)
+        {
+
+            MaskedTextBox maskedTextBox = sender as MaskedTextBox;
+
+            // Remove qualquer formatação anterior e deixa apenas os números
+            string textoAtual = maskedTextBox.Text.Replace(",", "").Replace(".", "").TrimStart('0');
+
+            if (textoAtual.Length == 0)
+            {
+                textoAtual = "0";
+            }
+
+            // Converte o texto para decimal
+            if (decimal.TryParse(textoAtual, out decimal valorDecimal))
+            {
+                maskedTextBox.TextChanged -= maskedTextBoxValorTotalServicos_TextChanged; // Remove o evento para evitar loop
+
+                // Formata o valor com ponto como separador de centavos e sem separadores de milhar
+                maskedTextBox.Text = string.Format("{0:0.00}", valorDecimal / 100);
+
+                // Coloca o cursor no final
+                maskedTextBox.SelectionStart = maskedTextBox.Text.Length;
+
+                maskedTextBox.TextChanged += maskedTextBoxValorTotalServicos_TextChanged; // Reinscreve o evento
+            }
+            AtualizarValoresTotais();
+        }
+
+        private void maskedTextBoxValorTotalPecas_TextChanged(object sender, EventArgs e)
+        {
+
+            MaskedTextBox maskedTextBox = sender as MaskedTextBox;
+
+            // Remove qualquer formatação anterior e deixa apenas os números
+            string textoAtual = maskedTextBox.Text.Replace(",", "").Replace(".", "").TrimStart('0');
+
+            if (textoAtual.Length == 0)
+            {
+                textoAtual = "0";
+            }
+
+            // Converte o texto para decimal
+            if (decimal.TryParse(textoAtual, out decimal valorDecimal))
+            {
+                maskedTextBox.TextChanged -= maskedTextBoxValorTotalPecas_TextChanged; // Remove o evento para evitar loop
+
+                // Formata o valor com ponto como separador de centavos e sem separadores de milhar
+                maskedTextBox.Text = string.Format("{0:0.00}", valorDecimal / 100);
+
+                // Coloca o cursor no final
+                maskedTextBox.SelectionStart = maskedTextBox.Text.Length;
+
+                maskedTextBox.TextChanged += maskedTextBoxValorTotalPecas_TextChanged; // Reinscreve o evento
+            }
+            AtualizarValoresTotais();
+        }
+
+        private void maskedTextBoxDescontoReais_TextChanged(object sender, EventArgs e)
+        {
+            MaskedTextBox textBox = sender as MaskedTextBox;
+
+            // Remover tudo que não seja número
+            string digitsOnly = new string(textBox.Text.Where(char.IsDigit).ToArray());
+
+            // Remover zeros à esquerda
+            digitsOnly = digitsOnly.TrimStart('0');
+
+            // Garantir que pelo menos 1 zero seja mantido caso o campo fique vazio após remover zeros
+            if (string.IsNullOrEmpty(digitsOnly))
+            {
+                digitsOnly = "0";
+            }
+
+            // Limitar a 3 dígitos
+            if (digitsOnly.Length > 3)
+            {
+                digitsOnly = digitsOnly.Substring(0, 3);
+            }
+
+            // Verificar se o valor numérico não excede 100
+            if (int.TryParse(digitsOnly, out int number))
+            {
+                if (number > 100)
+                {
+                    digitsOnly = "100";  // Definir o valor máximo como 100
+                }
+            }
+
+            // Atualizar o texto da MaskedTextBox com os 3 dígitos válidos
+            textBox.Text = digitsOnly;
+
+            // Colocar o cursor no final
+            textBox.SelectionStart = textBox.Text.Length;
+        }
+
+        private void maskedTextBoxDescontoPorc_TextChanged(object sender, EventArgs e)
+        {
+
+            MaskedTextBox maskedTextBox = sender as MaskedTextBox;
+
+            // Remove qualquer formatação anterior e deixa apenas os números
+            string textoAtual = maskedTextBox.Text.Replace(",", "").Replace(".", "").TrimStart('0');
+
+            if (textoAtual.Length == 0)
+            {
+                textoAtual = "0";
+            }
+
+            // Converte o texto para decimal
+            if (decimal.TryParse(textoAtual, out decimal valorDecimal))
+            {
+                maskedTextBox.TextChanged -= maskedTextBoxDescontoPorc_TextChanged; // Remove o evento para evitar loop
+
+                // Formata o valor com ponto como separador de centavos e sem separadores de milhar
+                maskedTextBox.Text = string.Format("{0:0.00}", valorDecimal / 100);
+
+                // Coloca o cursor no final
+                maskedTextBox.SelectionStart = maskedTextBox.Text.Length;
+
+                maskedTextBox.TextChanged += maskedTextBoxDescontoPorc_TextChanged; // Reinscreve o evento
+            }
+        }
+
+        private void maskedTextBoxDescontoRPeca_TextChanged(object sender, EventArgs e)
+        {
+            MaskedTextBox textBox = sender as MaskedTextBox;
+
+            // Remover tudo que não seja número
+            string digitsOnly = new string(textBox.Text.Where(char.IsDigit).ToArray());
+
+            // Remover zeros à esquerda
+            digitsOnly = digitsOnly.TrimStart('0');
+
+            // Garantir que pelo menos 1 zero seja mantido caso o campo fique vazio após remover zeros
+            if (string.IsNullOrEmpty(digitsOnly))
+            {
+                digitsOnly = "0";
+            }
+
+            // Limitar a 3 dígitos
+            if (digitsOnly.Length > 3)
+            {
+                digitsOnly = digitsOnly.Substring(0, 3);
+            }
+
+            // Verificar se o valor numérico não excede 100
+            if (int.TryParse(digitsOnly, out int number))
+            {
+                if (number > 100)
+                {
+                    digitsOnly = "100";  // Definir o valor máximo como 100
+                }
+            }
+
+            // Atualizar o texto da MaskedTextBox com os 3 dígitos válidos
+            textBox.Text = digitsOnly;
+
+            // Colocar o cursor no final
+            textBox.SelectionStart = textBox.Text.Length;
+        }
+
+        private void maskedTextBoxDescontoPPeca_TextChanged(object sender, EventArgs e)
+        {
+            MaskedTextBox maskedTextBox = sender as MaskedTextBox;
+
+            // Remove qualquer formatação anterior e deixa apenas os números
+            string textoAtual = maskedTextBox.Text.Replace(",", "").Replace(".", "").TrimStart('0');
+
+            if (textoAtual.Length == 0)
+            {
+                textoAtual = "0";
+            }
+
+            // Converte o texto para decimal
+            if (decimal.TryParse(textoAtual, out decimal valorDecimal))
+            {
+                maskedTextBox.TextChanged -= maskedTextBoxDescontoPPeca_TextChanged; // Remove o evento para evitar loop
+
+                // Formata o valor com ponto como separador de centavos e sem separadores de milhar
+                maskedTextBox.Text = string.Format("{0:0.00}", valorDecimal / 100);
+
+                // Coloca o cursor no final
+                maskedTextBox.SelectionStart = maskedTextBox.Text.Length;
+
+                maskedTextBox.TextChanged += maskedTextBoxDescontoPPeca_TextChanged; // Reinscreve o evento
+            }
+            AtualizarValoresTotais();
+        }
+
+        private void maskedTextBoxDescontoRServico_TextChanged(object sender, EventArgs e)
+        {
+            MaskedTextBox textBox = sender as MaskedTextBox;
+
+            // Remover tudo que não seja número
+            string digitsOnly = new string(textBox.Text.Where(char.IsDigit).ToArray());
+
+            // Remover zeros à esquerda
+            digitsOnly = digitsOnly.TrimStart('0');
+
+            // Garantir que pelo menos 1 zero seja mantido caso o campo fique vazio após remover zeros
+            if (string.IsNullOrEmpty(digitsOnly))
+            {
+                digitsOnly = "0";
+            }
+
+            // Limitar a 3 dígitos
+            if (digitsOnly.Length > 3)
+            {
+                digitsOnly = digitsOnly.Substring(0, 3);
+            }
+
+            // Verificar se o valor numérico não excede 100
+            if (int.TryParse(digitsOnly, out int number))
+            {
+                if (number > 100)
+                {
+                    digitsOnly = "100";  // Definir o valor máximo como 100
+                }
+            }
+
+            // Atualizar o texto da MaskedTextBox com os 3 dígitos válidos
+            textBox.Text = digitsOnly;
+
+            // Colocar o cursor no final
+            textBox.SelectionStart = textBox.Text.Length;
+        }
+
+        private void maskedTextBoxDescontoPServico_TextChanged(object sender, EventArgs e)
+        {
+            MaskedTextBox maskedTextBox = sender as MaskedTextBox;
+
+            // Remove qualquer formatação anterior e deixa apenas os números
+            string textoAtual = maskedTextBox.Text.Replace(",", "").Replace(".", "").TrimStart('0');
+
+            if (textoAtual.Length == 0)
+            {
+                textoAtual = "0";
+            }
+
+            // Converte o texto para decimal
+            if (decimal.TryParse(textoAtual, out decimal valorDecimal))
+            {
+                maskedTextBox.TextChanged -= maskedTextBoxDescontoPServico_TextChanged; // Remove o evento para evitar loop
+
+                // Formata o valor com ponto como separador de centavos e sem separadores de milhar
+                maskedTextBox.Text = string.Format("{0:0.00}", valorDecimal / 100);
+
+                // Coloca o cursor no final
+                maskedTextBox.SelectionStart = maskedTextBox.Text.Length;
+
+                maskedTextBox.TextChanged += maskedTextBoxDescontoPServico_TextChanged; // Reinscreve o evento
+            }
+            AtualizarValoresTotais();
+        }
+        #endregion
     }
 }

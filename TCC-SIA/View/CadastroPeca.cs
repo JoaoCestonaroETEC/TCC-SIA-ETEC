@@ -210,8 +210,8 @@ namespace TCC_SIA.View
             {
                 maskedTextBox.TextChanged -= maskedTextBoxValor_TextChanged; // Remove o evento para evitar loop
 
-                // Formata o valor como moeda (duas casas decimais e separador de milhares)
-                maskedTextBox.Text = string.Format("{0:N2}", valorDecimal / 100);
+                // Formata o valor com ponto como separador de centavos e sem separadores de milhar
+                maskedTextBox.Text = string.Format("{0:0.00}", valorDecimal / 100);
 
                 // Coloca o cursor no final
                 maskedTextBox.SelectionStart = maskedTextBox.Text.Length;
