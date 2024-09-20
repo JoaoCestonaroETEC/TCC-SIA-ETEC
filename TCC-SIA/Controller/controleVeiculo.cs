@@ -303,7 +303,7 @@ namespace TCC_SIA.Controller
         public string pesquisaMarcaVeiculoPorId(string idMarca)
         {
             //String sql de pesquisar
-            string sql = "SELECT NOMEMARCAVEICULO FROM MARCA_VEICULO WHERE IDMARCAVEICULO = '" + idMarca + "';";
+            string sql = "SELECT NOMEMARCA FROM MARCA WHERE IDMARCA = '" + idMarca + "';";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
@@ -317,6 +317,40 @@ namespace TCC_SIA.Controller
                 //Execute a consulta e retorne o resultado como string
                 object result = comm.ExecuteScalar();
                 return result != null ? result.ToString() : "Marca não encontrada";
+            }
+            //Fazendo o catch
+            catch (NpgsqlException ex)
+            {
+                //Retornando como nulo
+                return null;
+            }
+            //Encerrando a conexão
+            finally
+            {
+                //Método de desconectar
+                con.desconectar();
+            }
+        }
+        #endregion
+        #region Pesquisar cliente de veiculo por id
+        //Criação do método de pesquisar marca de veículo por id
+        public string pesquisaClienteVeiculoPorId(string idCliente)
+        {
+            //String sql de pesquisar
+            string sql = "SELECT NOMECLIENTE FROM CLIENTE WHERE IDCLIENTE = '" + idCliente + "';";
+
+            //Abrindo conexão com o banco de dados
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            //Fazendo o try
+            try
+            {
+
+                //Execute a consulta e retorne o resultado como string
+                object result = comm.ExecuteScalar();
+                return result != null ? result.ToString() : "Cliente não encontrado!";
             }
             //Fazendo o catch
             catch (NpgsqlException ex)

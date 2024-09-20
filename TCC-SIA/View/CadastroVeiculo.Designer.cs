@@ -119,7 +119,7 @@
             // labelModelo
             // 
             labelModelo.AutoSize = true;
-            labelModelo.Location = new Point(34, 210);
+            labelModelo.Location = new Point(453, 78);
             labelModelo.Name = "labelModelo";
             labelModelo.Size = new Size(51, 15);
             labelModelo.TabIndex = 21;
@@ -127,10 +127,10 @@
             // 
             // textBoxModelo
             // 
-            textBoxModelo.Location = new Point(85, 204);
+            textBoxModelo.Location = new Point(510, 75);
             textBoxModelo.Margin = new Padding(3, 4, 3, 4);
             textBoxModelo.Name = "textBoxModelo";
-            textBoxModelo.Size = new Size(257, 23);
+            textBoxModelo.Size = new Size(152, 23);
             textBoxModelo.TabIndex = 30;
             // 
             // comboBoxCor
@@ -141,6 +141,7 @@
             comboBoxCor.Name = "comboBoxCor";
             comboBoxCor.Size = new Size(253, 23);
             comboBoxCor.TabIndex = 33;
+            comboBoxCor.Validating += comboBoxCor_Validating;
             // 
             // comboBoxTipo
             // 
@@ -150,6 +151,7 @@
             comboBoxTipo.Name = "comboBoxTipo";
             comboBoxTipo.Size = new Size(257, 23);
             comboBoxTipo.TabIndex = 34;
+            comboBoxTipo.Validating += comboBoxTipo_Validating;
             // 
             // comboBoxMarca
             // 
@@ -159,6 +161,7 @@
             comboBoxMarca.Name = "comboBoxMarca";
             comboBoxMarca.Size = new Size(253, 23);
             comboBoxMarca.TabIndex = 35;
+            comboBoxMarca.Validating += comboBoxMarca_Validating;
             // 
             // maskedTextBoxPlaca
             // 
@@ -195,11 +198,12 @@
             comboBoxIdCliente.Name = "comboBoxIdCliente";
             comboBoxIdCliente.Size = new Size(257, 23);
             comboBoxIdCliente.TabIndex = 39;
+            comboBoxIdCliente.Validating += comboBoxIdCliente_Validating;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(357, 13);
+            label2.Location = new Point(378, 18);
             label2.Name = "label2";
             label2.Size = new Size(44, 15);
             label2.TabIndex = 40;
@@ -208,7 +212,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(394, 46);
+            label3.Location = new Point(415, 47);
             label3.Name = "label3";
             label3.Size = new Size(108, 15);
             label3.TabIndex = 42;
@@ -217,7 +221,7 @@
             // dateTimePickerFab
             // 
             dateTimePickerFab.Format = DateTimePickerFormat.Short;
-            dateTimePickerFab.Location = new Point(508, 43);
+            dateTimePickerFab.Location = new Point(529, 44);
             dateTimePickerFab.Margin = new Padding(3, 4, 3, 4);
             dateTimePickerFab.Name = "dateTimePickerFab";
             dateTimePickerFab.Size = new Size(133, 23);
@@ -225,16 +229,18 @@
             // 
             // maskedTextBoxQuilo
             // 
-            maskedTextBoxQuilo.Location = new Point(489, 76);
+            maskedTextBoxQuilo.Location = new Point(190, 204);
             maskedTextBoxQuilo.Margin = new Padding(3, 4, 3, 4);
             maskedTextBoxQuilo.Name = "maskedTextBoxQuilo";
             maskedTextBoxQuilo.Size = new Size(152, 23);
             maskedTextBoxQuilo.TabIndex = 44;
+            maskedTextBoxQuilo.Text = "1";
+            maskedTextBoxQuilo.TextChanged += maskedTextBoxQuilo_TextChanged;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(389, 81);
+            label4.Location = new Point(90, 209);
             label4.Name = "label4";
             label4.Size = new Size(94, 15);
             label4.TabIndex = 45;
@@ -242,7 +248,7 @@
             // 
             // maskedTextBoxMotor
             // 
-            maskedTextBoxMotor.Location = new Point(489, 109);
+            maskedTextBoxMotor.Location = new Point(510, 106);
             maskedTextBoxMotor.Margin = new Padding(3, 4, 3, 4);
             maskedTextBoxMotor.Name = "maskedTextBoxMotor";
             maskedTextBoxMotor.Size = new Size(152, 23);
@@ -251,7 +257,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(440, 112);
+            label5.Location = new Point(461, 109);
             label5.Name = "label5";
             label5.Size = new Size(43, 15);
             label5.TabIndex = 47;
@@ -260,16 +266,17 @@
             // comboBoxCombustivel
             // 
             comboBoxCombustivel.FormattingEnabled = true;
-            comboBoxCombustivel.Location = new Point(483, 141);
+            comboBoxCombustivel.Location = new Point(504, 137);
             comboBoxCombustivel.Margin = new Padding(3, 4, 3, 4);
             comboBoxCombustivel.Name = "comboBoxCombustivel";
             comboBoxCombustivel.Size = new Size(158, 23);
             comboBoxCombustivel.TabIndex = 48;
+            comboBoxCombustivel.Validating += comboBoxCombustivel_Validating;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(384, 145);
+            label6.Location = new Point(421, 140);
             label6.Name = "label6";
             label6.Size = new Size(77, 15);
             label6.TabIndex = 49;
@@ -279,7 +286,7 @@
             // 
             dateTimePickerData.Enabled = false;
             dateTimePickerData.Format = DateTimePickerFormat.Short;
-            dateTimePickerData.Location = new Point(508, 176);
+            dateTimePickerData.Location = new Point(529, 168);
             dateTimePickerData.Margin = new Padding(3, 4, 3, 4);
             dateTimePickerData.Name = "dateTimePickerData";
             dateTimePickerData.Size = new Size(133, 23);
@@ -288,7 +295,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(456, 181);
+            label7.Location = new Point(489, 174);
             label7.Name = "label7";
             label7.Size = new Size(34, 15);
             label7.TabIndex = 51;
@@ -297,16 +304,17 @@
             // comboBoxSeguro
             // 
             comboBoxSeguro.FormattingEnabled = true;
-            comboBoxSeguro.Location = new Point(483, 209);
+            comboBoxSeguro.Location = new Point(504, 199);
             comboBoxSeguro.Margin = new Padding(3, 4, 3, 4);
             comboBoxSeguro.Name = "comboBoxSeguro";
             comboBoxSeguro.Size = new Size(158, 23);
             comboBoxSeguro.TabIndex = 52;
+            comboBoxSeguro.Validating += comboBoxSeguro_Validating;
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(424, 212);
+            label8.Location = new Point(451, 202);
             label8.Name = "label8";
             label8.Size = new Size(47, 15);
             label8.TabIndex = 53;
@@ -314,7 +322,7 @@
             // 
             // maskedTextBoxChassi
             // 
-            maskedTextBoxChassi.Location = new Point(405, 10);
+            maskedTextBoxChassi.Location = new Point(426, 15);
             maskedTextBoxChassi.Margin = new Padding(2);
             maskedTextBoxChassi.Mask = "0LLAAAAAA00000000";
             maskedTextBoxChassi.Name = "maskedTextBoxChassi";
@@ -324,7 +332,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(647, 81);
+            label9.Location = new Point(348, 209);
             label9.Name = "label9";
             label9.Size = new Size(25, 15);
             label9.TabIndex = 57;

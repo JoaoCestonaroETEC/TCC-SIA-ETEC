@@ -151,7 +151,8 @@
             comboBoxVeiculo.Name = "comboBoxVeiculo";
             comboBoxVeiculo.Size = new Size(135, 23);
             comboBoxVeiculo.TabIndex = 5;
-            comboBoxVeiculo.Click += comboBoxVeiculo_Click;
+            comboBoxVeiculo.DropDown += comboBoxVeiculo_DropDown;
+            comboBoxVeiculo.Validating += comboBoxVeiculo_Validating;
             // 
             // comboBoxCliente
             // 
@@ -160,7 +161,8 @@
             comboBoxCliente.Name = "comboBoxCliente";
             comboBoxCliente.Size = new Size(135, 23);
             comboBoxCliente.TabIndex = 4;
-            comboBoxCliente.Click += comboBoxCliente_Click;
+            comboBoxCliente.DropDown += comboBoxCliente_DropDown;
+            comboBoxCliente.Validating += comboBoxCliente_Validating;
             // 
             // label4
             // 
@@ -231,6 +233,7 @@
             dataGridViewPeca.RowHeadersWidth = 51;
             dataGridViewPeca.Size = new Size(673, 281);
             dataGridViewPeca.TabIndex = 16;
+            dataGridViewPeca.CellClick += dataGridViewPeca_CellClick;
             // 
             // maskedTextBoxDescontoPPeca
             // 
@@ -240,6 +243,7 @@
             maskedTextBoxDescontoPPeca.TabIndex = 15;
             maskedTextBoxDescontoPPeca.Text = "0.00";
             maskedTextBoxDescontoPPeca.TextChanged += maskedTextBoxDescontoPPeca_TextChanged;
+            maskedTextBoxDescontoPPeca.KeyPress += maskedTextBoxDescontoPPeca_KeyPress;
             // 
             // label14
             // 
@@ -319,6 +323,7 @@
             maskedTextBoxDescontoPServico.Size = new Size(55, 23);
             maskedTextBoxDescontoPServico.TabIndex = 20;
             maskedTextBoxDescontoPServico.Text = "0.00";
+            maskedTextBoxDescontoPServico.KeyPress += maskedTextBoxDescontoPServico_KeyPress;
             // 
             // label15
             // 
@@ -396,6 +401,7 @@
             maskedTextBoxValorTotal.Text = "0.00";
             maskedTextBoxValorTotal.TextMaskFormat = MaskFormat.IncludePrompt;
             maskedTextBoxValorTotal.TextChanged += maskedTextBoxValorTotal_TextChanged;
+            maskedTextBoxValorTotal.KeyPress += maskedTextBoxValorTotal_KeyPress;
             // 
             // maskedTextBoxValorTotalPecas
             // 
@@ -405,6 +411,7 @@
             maskedTextBoxValorTotalPecas.TabIndex = 3;
             maskedTextBoxValorTotalPecas.Text = "0.00";
             maskedTextBoxValorTotalPecas.TextChanged += maskedTextBoxValorTotalPecas_TextChanged;
+            maskedTextBoxValorTotalPecas.KeyPress += maskedTextBoxValorTotalPecas_KeyPress;
             // 
             // maskedTextBoxValorTotalServicos
             // 
@@ -414,6 +421,7 @@
             maskedTextBoxValorTotalServicos.TabIndex = 4;
             maskedTextBoxValorTotalServicos.Text = "0.00";
             maskedTextBoxValorTotalServicos.TextChanged += maskedTextBoxValorTotalServicos_TextChanged;
+            maskedTextBoxValorTotalServicos.KeyPress += maskedTextBoxValorTotalServicos_KeyPress;
             // 
             // label5
             // 
@@ -486,6 +494,7 @@
             maskedTextBoxDescontoPorc.TabIndex = 13;
             maskedTextBoxDescontoPorc.Text = "0,00";
             maskedTextBoxDescontoPorc.TextChanged += maskedTextBoxDescontoPorc_TextChanged;
+            maskedTextBoxDescontoPorc.KeyPress += maskedTextBoxDescontoPorc_KeyPress;
             // 
             // contextMenuStrip1
             // 

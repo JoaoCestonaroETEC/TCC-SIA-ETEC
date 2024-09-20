@@ -49,6 +49,7 @@
             label3 = new Label();
             textBoxNome = new TextBox();
             label2 = new Label();
+            label11 = new Label();
             ((System.ComponentModel.ISupportInitialize)numericUpDownUnid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownQuant).BeginInit();
             SuspendLayout();
@@ -65,9 +66,13 @@
             // numericUpDownUnid
             // 
             numericUpDownUnid.Location = new Point(119, 136);
+            numericUpDownUnid.Maximum = new decimal(new int[] { 1215752192, 23, 0, 0 });
             numericUpDownUnid.Name = "numericUpDownUnid";
             numericUpDownUnid.Size = new Size(209, 23);
             numericUpDownUnid.TabIndex = 83;
+            numericUpDownUnid.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            numericUpDownUnid.ValueChanged += numericUpDownUnid_ValueChanged;
+            numericUpDownUnid.Validating += numericUpDownUnid_Validating;
             // 
             // dateTimePickerAquis
             // 
@@ -95,6 +100,8 @@
             comboBoxFornecedor.Name = "comboBoxFornecedor";
             comboBoxFornecedor.Size = new Size(188, 23);
             comboBoxFornecedor.TabIndex = 80;
+            comboBoxFornecedor.DropDown += comboBoxFornecedor_DropDown;
+            comboBoxFornecedor.Validating += comboBoxFornecedor_Validating;
             // 
             // label8
             // 
@@ -113,6 +120,8 @@
             comboBoxTIpo.Name = "comboBoxTIpo";
             comboBoxTIpo.Size = new Size(209, 23);
             comboBoxTIpo.TabIndex = 78;
+            comboBoxTIpo.DropDown += comboBoxTIpo_DropDown;
+            comboBoxTIpo.Validating += comboBoxTIpo_Validating;
             // 
             // label7
             // 
@@ -130,6 +139,8 @@
             comboBoxMarca.Name = "comboBoxMarca";
             comboBoxMarca.Size = new Size(209, 23);
             comboBoxMarca.TabIndex = 76;
+            comboBoxMarca.DropDown += comboBoxMarca_DropDown;
+            comboBoxMarca.Validating += comboBoxMarca_Validating;
             // 
             // label1
             // 
@@ -170,9 +181,13 @@
             // numericUpDownQuant
             // 
             numericUpDownQuant.Location = new Point(120, 163);
+            numericUpDownQuant.Maximum = new decimal(new int[] { 1215752192, 23, 0, 0 });
             numericUpDownQuant.Name = "numericUpDownQuant";
             numericUpDownQuant.Size = new Size(209, 23);
             numericUpDownQuant.TabIndex = 71;
+            numericUpDownQuant.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            numericUpDownQuant.ValueChanged += numericUpDownQuant_ValueChanged;
+            numericUpDownQuant.Validating += numericUpDownQuant_Validating;
             // 
             // label5
             // 
@@ -201,6 +216,7 @@
             maskedTextBoxValor.Text = "0.00";
             maskedTextBoxValor.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             maskedTextBoxValor.TextChanged += maskedTextBoxValor_TextChanged;
+            maskedTextBoxValor.KeyPress += maskedTextBoxValor_KeyPress;
             // 
             // richTextBoxDesc
             // 
@@ -235,11 +251,21 @@
             label2.TabIndex = 64;
             label2.Text = "Nome:";
             // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(335, 113);
+            label11.Name = "label11";
+            label11.Size = new Size(20, 15);
+            label11.TabIndex = 85;
+            label11.Text = "R$";
+            // 
             // CadastroPeca
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(718, 364);
+            Controls.Add(label11);
             Controls.Add(label10);
             Controls.Add(numericUpDownUnid);
             Controls.Add(dateTimePickerAquis);
@@ -293,5 +319,6 @@
         private Label label3;
         private TextBox textBoxNome;
         private Label label2;
+        private Label label11;
     }
 }

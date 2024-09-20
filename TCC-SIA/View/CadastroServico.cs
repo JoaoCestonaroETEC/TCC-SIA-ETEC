@@ -65,19 +65,44 @@ namespace TCC_SIA.View
         private void CadastroServico_Load(object sender, EventArgs e)
         {
             //Definir eventos para validar a entrada
-            maskedTextBoxValor.KeyPress += new KeyPressEventHandler(maskedTextBoxValor_KeyPress);
+            maskedTextBoxValor.KeyPress += new KeyPressEventHandler(maskedTextBoxValor_TextChanged);
         }
         #endregion
 
-        #region Método de aceitar apenas números
-        private void maskedTextBoxValor_KeyPress(object sender, KeyPressEventArgs e)
+        private void maskedTextBoxValor_TextChanged(object sender, EventArgs e)
         {
-            //Verifica se a tecla pressionada é um dígito ou uma tecla de controle (como Backspace)
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            MaskedTextBox maskedTextBox = sender as MaskedTextBox;
+
+            // Remove qualquer formatação anterior e deixa apenas os números
+            string textoAtual = maskedTextBox.Text.Replace(",", "").Replace(".", "").TrimStart('0');
+
+            if (textoAtual.Length == 0)
             {
-                e.Handled = true; //Impede a entrada de caracteres não numéricos
+                textoAtual = "0";
+            }
+
+            // Converte o texto para decimal
+            if (decimal.TryParse(textoAtual, out decimal valorDecimal))
+            {
+                maskedTextBox.TextChanged -= maskedTextBoxValor_TextChanged; // Remove o evento para evitar loop
+
+                // Formata o valor com ponto como separador de centavos e sem separadores de milhar
+                maskedTextBox.Text = string.Format("{0:0.00}", valorDecimal / 100);
+
+                // Coloca o cursor no final
+                maskedTextBox.SelectionStart = maskedTextBox.Text.Length;
+
+                maskedTextBox.TextChanged += maskedTextBoxValor_TextChanged; // Reinscreve o evento
             }
         }
-        #endregion
+
+        private void maskedTextBoxValor_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir apenas números e a tecla Backspace
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true; // Bloqueia a entrada
+            }
+        }
     }
 }

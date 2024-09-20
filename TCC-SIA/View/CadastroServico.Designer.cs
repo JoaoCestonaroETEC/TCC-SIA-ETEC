@@ -39,6 +39,7 @@
             label1 = new Label();
             label5 = new Label();
             comboBoxStatus = new ComboBox();
+            label11 = new Label();
             SuspendLayout();
             // 
             // buttonCadastrar
@@ -75,6 +76,9 @@
             maskedTextBoxValor.Name = "maskedTextBoxValor";
             maskedTextBoxValor.Size = new Size(236, 23);
             maskedTextBoxValor.TabIndex = 16;
+            maskedTextBoxValor.Text = "0.00";
+            maskedTextBoxValor.TextChanged += maskedTextBoxValor_TextChanged;
+            maskedTextBoxValor.KeyPress += maskedTextBoxValor_KeyPress;
             // 
             // richTextBoxDesc
             // 
@@ -129,17 +133,29 @@
             // 
             // comboBoxStatus
             // 
+            comboBoxStatus.Enabled = false;
             comboBoxStatus.FormattingEnabled = true;
             comboBoxStatus.Location = new Point(81, 103);
             comboBoxStatus.Name = "comboBoxStatus";
             comboBoxStatus.Size = new Size(121, 23);
             comboBoxStatus.TabIndex = 20;
+            comboBoxStatus.Text = "Ativo";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(323, 49);
+            label11.Name = "label11";
+            label11.Size = new Size(20, 15);
+            label11.TabIndex = 86;
+            label11.Text = "R$";
             // 
             // CadastroServico
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(706, 227);
+            Controls.Add(label11);
             Controls.Add(comboBoxStatus);
             Controls.Add(label5);
             Controls.Add(dateTimePickerGarantia);
@@ -170,5 +186,6 @@
         private Label label1;
         private Label label5;
         private ComboBox comboBoxStatus;
+        private Label label11;
     }
 }

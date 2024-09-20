@@ -82,7 +82,7 @@ namespace TCC_SIA.Controller
                     {
                         //Definindo os valores a serem postos nos campos
                         comm.Parameters.AddWithValue("@IDPEDIDO", mPedido.getIdPedido());
-                        comm.Parameters.AddWithValue("@IDMARCAPECA", peca.getIdMarca());
+                        comm.Parameters.AddWithValue("@IDMARCA", peca.getIdMarca());
                         comm.Parameters.AddWithValue("@NOMEPECA", peca.getNomePeca());
                         comm.Parameters.AddWithValue("@TIPOPECA", peca.getTipoPeca());
                         comm.Parameters.AddWithValue("@DESCPECA", peca.getDescPeca());

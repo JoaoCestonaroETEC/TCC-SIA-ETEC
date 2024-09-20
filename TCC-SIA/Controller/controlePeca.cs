@@ -15,6 +15,9 @@ namespace TCC_SIA.Controller
         //Criação do método de cadastrar peça
         public string cadastroPeca(Peca mPeca)
         {
+            //String SQL de inserção
+            string sqlVef = "SELECT COUNT(1) FROM PECA WHERE NOMEPECA = @NOMEPECA AND IDMARCA = @IDMARCA AND FORNECEDOR = @FORNECEDOR AND TIPOPECA = @TIPOPECA";
+
             //String sql de inserção
             string sql = "INSERT INTO PECA(IDMARCA, NOMEPECA, TIPOPECA, DESCPECA, VALORPECA, UNIDADE, QUANTPECA, GARANTIAPECA, FORNECEDOR, DATA_AQUISICAO) " +
                 "VALUES(@IDMARCA, @NOMEPECA, @TIPOPECA, @DESCPECA, @VALORPECA, @UNIDADE, @QUANTPECA, @GARANTIAPECA, @FORNECEDORPECA, @DATAAQUIS);";
@@ -23,10 +26,23 @@ namespace TCC_SIA.Controller
             conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();
             NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+            NpgsqlCommand commVef = new NpgsqlCommand(sqlVef, conn);
 
             //Fazendo o try
             try
             {
+                //Faz a verificação de o CPF já existe no Banco
+                commVef.Parameters.AddWithValue("@NOMEPECA", mPeca.getNomePeca());
+                commVef.Parameters.AddWithValue("@IDMARCA", mPeca.getIdMarca());
+                commVef.Parameters.AddWithValue("@FORNECEDOR", mPeca.getFornecedor());
+                commVef.Parameters.AddWithValue("@TIPOPECA", mPeca.getTipoPeca());
+                int pecaExists = Convert.ToInt32(commVef.ExecuteScalar());
+
+                if (pecaExists > 0)
+                {
+                    return "Peça já cadastrada no sistema.";
+                }
+
                 //Definindo os valores a serem postos nos campos
                 comm.Parameters.AddWithValue("@IDMARCA", mPeca.getIdMarca());
                 comm.Parameters.AddWithValue("@NOMEPECA", mPeca.getNomePeca());

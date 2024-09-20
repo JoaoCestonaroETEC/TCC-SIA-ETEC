@@ -80,6 +80,8 @@
             comboBoxTipo.Name = "comboBoxTipo";
             comboBoxTipo.Size = new Size(121, 23);
             comboBoxTipo.TabIndex = 24;
+            comboBoxTipo.Click += comboBoxTipo_Click;
+            comboBoxTipo.Validating += comboBoxTipo_Validating;
             // 
             // label3
             // 
@@ -103,7 +105,6 @@
             Controls.Add(dataGridViewPesquisar);
             Name = "PesquisaMarca";
             Text = "PesquisarMarca";
-            ControlRemoved += buttonPesquisar_Click;
             ((System.ComponentModel.ISupportInitialize)dataGridViewPesquisar).EndInit();
             ResumeLayout(false);
             PerformLayout();

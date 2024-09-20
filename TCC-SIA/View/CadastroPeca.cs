@@ -220,5 +220,164 @@ namespace TCC_SIA.View
             }
         }
 
+        private void comboBoxFornecedor_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            System.Windows.Forms.ComboBox comboBox = sender as System.Windows.Forms.ComboBox;
+            string fornecedorDigitado = comboBox.Text;
+
+            // Verifica se o valor digitado já existe na lista de itens da ComboBox
+            bool fornecedorExiste = comboBox.Items.Cast<System.Data.DataRowView>()
+                                       .Any(item => item["FORNECEDOR"].ToString()
+                                       .Equals(fornecedorDigitado, StringComparison.OrdinalIgnoreCase));
+
+            if (!fornecedorExiste && !string.IsNullOrEmpty(fornecedorDigitado))
+            {
+                // Exibe a mensagem com o aviso
+                DialogResult result = MessageBox.Show("Aviso! Fornecedor não registrado, deseja adicionar um novo?",
+                                                      "Novo Fornecedor",
+                                                      MessageBoxButtons.YesNo,
+                                                      MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    // Ação para adicionar um novo fornecedor (sem adicionar o valor na ComboBox diretamente)
+                    MessageBox.Show("Mantenha o valor digitado para cadastrar um novo fornecedor",
+                                    "Ação Necessária",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
+                }
+                else
+                {
+                    // Limpa o texto da ComboBox
+                    comboBox.Text = string.Empty;
+                }
+            }
+        }
+
+        private void comboBoxFornecedor_Click(object sender, EventArgs e)
+        {
+            listarFornecedor();
+        }
+
+        private void comboBoxTIpo_Validating(object sender, CancelEventArgs e)
+        {
+            System.Windows.Forms.ComboBox comboBox = sender as System.Windows.Forms.ComboBox;
+            string fornecedorDigitado = comboBox.Text;
+
+            // Verifica se o valor digitado já existe na lista de itens da ComboBox
+            bool fornecedorExiste = comboBox.Items.Cast<System.Data.DataRowView>()
+                                       .Any(item => item["TIPOPECA"].ToString()
+                                       .Equals(fornecedorDigitado, StringComparison.OrdinalIgnoreCase));
+
+            if (!fornecedorExiste && !string.IsNullOrEmpty(fornecedorDigitado))
+            {
+                // Exibe a mensagem com o aviso
+                DialogResult result = MessageBox.Show("Aviso! Tipo não registrado, deseja adicionar um novo?",
+                                                      "Aviso!",
+                                                      MessageBoxButtons.YesNo,
+                                                      MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    // Ação para adicionar um novo fornecedor (sem adicionar o valor na ComboBox diretamente)
+                    MessageBox.Show("Mantenha o valor digitado para cadastrar um novo tipo de peça",
+                                    "Ação Necessária",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
+                }
+                else
+                {
+                    // Limpa o texto da ComboBox
+                    comboBox.Text = string.Empty;
+                }
+            }
+        }
+
+        private void comboBoxTIpo_DropDown(object sender, EventArgs e)
+        {
+            listarTipo();
+        }
+
+        private void comboBoxFornecedor_DropDown(object sender, EventArgs e)
+        {
+            listarFornecedor();
+        }
+
+        private void numericUpDownUnid_Validating(object sender, CancelEventArgs e)
+        {
+            if (numericUpDownUnid.Value <= 0)
+            {
+                numericUpDownUnid.Value = 1;
+            }
+        }
+
+        private void numericUpDownQuant_Validating(object sender, CancelEventArgs e)
+        {
+            if (numericUpDownQuant.Value <= 0)
+            {
+                numericUpDownQuant.Value = 1;
+            }
+        }
+
+        private void numericUpDownUnid_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericUpDownUnid.Value <= 0)
+            {
+                numericUpDownUnid.Value = 1;
+            }
+        }
+
+        private void numericUpDownQuant_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericUpDownQuant.Value <= 0)
+            {
+                numericUpDownQuant.Value = 1;
+            }
+        }
+
+        private void comboBoxMarca_Validating(object sender, CancelEventArgs e)
+        {
+            System.Windows.Forms.ComboBox comboBox = sender as System.Windows.Forms.ComboBox;
+            string fornecedorDigitado = comboBox.Text;
+
+            // Verifica se o valor digitado já existe na lista de itens da ComboBox
+            bool fornecedorExiste = comboBox.Items.Cast<System.Data.DataRowView>()
+                                       .Any(item => item["NOMEMARCA"].ToString()
+                                       .Equals(fornecedorDigitado, StringComparison.OrdinalIgnoreCase));
+
+            if (!fornecedorExiste && !string.IsNullOrEmpty(fornecedorDigitado))
+            {
+                // Exibe a mensagem com o aviso
+                DialogResult result = MessageBox.Show("Aviso! Marca não registrada! Deseja registrar uma nova?",
+                                                      "Aviso!",
+                                                      MessageBoxButtons.YesNo,
+                                                      MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    CadastroMarca formMarca = new CadastroMarca();
+                    formMarca.Show();
+                }
+                else
+                {
+                    // Limpa o texto da ComboBox
+                    comboBox.Text = string.Empty;
+                }
+            }
+        }
+
+        private void comboBoxMarca_DropDown(object sender, EventArgs e)
+        {
+            listarMarca();
+        }
+
+        private void maskedTextBoxValor_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir apenas números e a tecla Backspace
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true; // Bloqueia a entrada
+            }
+        }
     }
 }

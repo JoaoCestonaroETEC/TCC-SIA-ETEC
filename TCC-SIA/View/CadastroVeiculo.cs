@@ -53,7 +53,7 @@ namespace TCC_SIA.View
             mVeiculo.setIdMarca(Convert.ToInt64(comboBoxMarca.SelectedValue));
             mVeiculo.setNomeVeiculo(textBoxNome.Text);
             mVeiculo.setTipoVeiculo(comboBoxTipo.Text);
-            mVeiculo.setCorVeiculo(comboBoxTipo.Text);
+            mVeiculo.setCorVeiculo(comboBoxCor.Text);
             mVeiculo.setPlacaVeiculo(maskedTextBoxPlaca.Text);
             mVeiculo.setModeloVeiculo(textBoxModelo.Text);
             mVeiculo.setChassi(maskedTextBoxChassi.Text);
@@ -128,7 +128,6 @@ namespace TCC_SIA.View
             dtTipo.Rows.Add(-17, "Carro Híbrido");
             dtTipo.Rows.Add(-18, "Caminhão Tanque");
             dtTipo.Rows.Add(-19, "Reboque");
-            dtTipo.Rows.Add(-20, "Outro");
 
             // Carregar os dados do NpgsqlDataReader
             dtTipo.Load(veiculo);
@@ -138,6 +137,9 @@ namespace TCC_SIA.View
 
             // Define qual coluna do DataTable que será exibida (nome da coluna)
             comboBoxTipo.DisplayMember = "TIPOVEICULO";
+
+            // Define qual coluna do DataTable que será exibida (nome da coluna)
+            comboBoxTipo.ValueMember = "TIPOVEICULO";
         }
         #endregion
         #region Listar cor
@@ -173,6 +175,9 @@ namespace TCC_SIA.View
 
             // Define qual coluna do DataTable que será exibida (nome da coluna)
             comboBoxCor.DisplayMember = "CORVEICULO";
+
+            comboBoxCor.ValueMember = "CORVEICULO";
+
         }
         #endregion
 
@@ -208,6 +213,9 @@ namespace TCC_SIA.View
 
             // Define qual coluna do DataTable que será exibida (nome da coluna)
             comboBoxCombustivel.DisplayMember = "COMBUSTIVEL";
+
+            //Define qual o valor da linha será utilizado ao selecionar um valor
+            comboBoxCombustivel.ValueMember = "COMBUSTIVEL";
         }
         #endregion
 
@@ -238,7 +246,7 @@ namespace TCC_SIA.View
         {
             controleVeiculo cVeiculo = new controleVeiculo();
             //Recebe os dados da consulta e salva no dataReader (Tipo)
-            NpgsqlDataReader veiculo = cVeiculo.listaVeiculo();
+            NpgsqlDataReader veiculo = cVeiculo.listaSeguro();
 
             //Converter o dataReader em DataTable
             DataTable dtVeiculo = new DataTable();
@@ -266,5 +274,245 @@ namespace TCC_SIA.View
             listarSeguro();
         }
         #endregion
+
+        private void comboBoxTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            listarTipo();
+        }
+
+        private void comboBoxCor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            listarCor();
+        }
+
+        private void comboBoxCombustivel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            listarCombustivel();
+        }
+
+        private void comboBoxSeguro_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            listarSeguro();
+        }
+
+        private void comboBoxTipo_Validating(object sender, CancelEventArgs e)
+        {
+            System.Windows.Forms.ComboBox comboBox = sender as System.Windows.Forms.ComboBox;
+            string fornecedorDigitado = comboBox.Text;
+
+            // Verifica se o valor digitado já existe na lista de itens da ComboBox
+            bool fornecedorExiste = comboBox.Items.Cast<System.Data.DataRowView>()
+                                       .Any(item => item["TIPOVEICULO"].ToString()
+                                       .Equals(fornecedorDigitado, StringComparison.OrdinalIgnoreCase));
+
+            if (!fornecedorExiste && !string.IsNullOrEmpty(fornecedorDigitado))
+            {
+                // Exibe a mensagem com o aviso
+                DialogResult result = MessageBox.Show("Aviso! Tipo não registrado, deseja adicionar um novo?",
+                                                      "Aviso!",
+                                                      MessageBoxButtons.YesNo,
+                                                      MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    // Ação para adicionar um novo fornecedor (sem adicionar o valor na ComboBox diretamente)
+                    MessageBox.Show("Mantenha o valor digitado para cadastrar um novo tipo de peça",
+                                    "Ação Necessária",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
+                }
+                else
+                {
+                    // Limpa o texto da ComboBox
+                    comboBox.Text = string.Empty;
+                }
+            }
+        }
+
+        private void comboBoxCor_Validating(object sender, CancelEventArgs e)
+        {
+            System.Windows.Forms.ComboBox comboBox = sender as System.Windows.Forms.ComboBox;
+            string fornecedorDigitado = comboBox.Text;
+
+            // Verifica se o valor digitado já existe na lista de itens da ComboBox
+            bool fornecedorExiste = comboBox.Items.Cast<System.Data.DataRowView>()
+                                       .Any(item => item["CORVEICULO"].ToString()
+                                       .Equals(fornecedorDigitado, StringComparison.OrdinalIgnoreCase));
+
+            if (!fornecedorExiste && !string.IsNullOrEmpty(fornecedorDigitado))
+            {
+                // Exibe a mensagem com o aviso
+                DialogResult result = MessageBox.Show("Aviso! Cor não registrada, deseja adicionar um nova?",
+                                                      "Aviso!",
+                                                      MessageBoxButtons.YesNo,
+                                                      MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    // Ação para adicionar um novo fornecedor (sem adicionar o valor na ComboBox diretamente)
+                    MessageBox.Show("Mantenha o valor digitado para cadastrar um novo tipo de cor",
+                                    "Ação Necessária",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
+                }
+                else
+                {
+                    // Limpa o texto da ComboBox
+                    comboBox.Text = string.Empty;
+                }
+            }
+        }
+
+        private void comboBoxCombustivel_Validating(object sender, CancelEventArgs e)
+        {
+            System.Windows.Forms.ComboBox comboBox = sender as System.Windows.Forms.ComboBox;
+            string fornecedorDigitado = comboBox.Text;
+
+            // Verifica se o valor digitado já existe na lista de itens da ComboBox
+            bool fornecedorExiste = comboBox.Items.Cast<System.Data.DataRowView>()
+                                       .Any(item => item["COMBUSTIVEL"].ToString()
+                                       .Equals(fornecedorDigitado, StringComparison.OrdinalIgnoreCase));
+
+            if (!fornecedorExiste && !string.IsNullOrEmpty(fornecedorDigitado))
+            {
+                // Exibe a mensagem com o aviso
+                DialogResult result = MessageBox.Show("Aviso! Combustível não registrado, deseja adicionar um novo?",
+                                                      "Aviso!",
+                                                      MessageBoxButtons.YesNo,
+                                                      MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    // Ação para adicionar um novo fornecedor (sem adicionar o valor na ComboBox diretamente)
+                    MessageBox.Show("Mantenha o valor digitado para cadastrar um novo tipo de combustível",
+                                    "Ação Necessária",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
+                }
+                else
+                {
+                    // Limpa o texto da ComboBox
+                    comboBox.Text = string.Empty;
+                }
+            }
+        }
+
+        private void comboBoxSeguro_Validating(object sender, CancelEventArgs e)
+        {
+            System.Windows.Forms.ComboBox comboBox = sender as System.Windows.Forms.ComboBox;
+            string fornecedorDigitado = comboBox.Text;
+
+            // Verifica se o valor digitado já existe na lista de itens da ComboBox
+            bool fornecedorExiste = comboBox.Items.Cast<System.Data.DataRowView>()
+                                       .Any(item => item["SEGURO"].ToString()
+                                       .Equals(fornecedorDigitado, StringComparison.OrdinalIgnoreCase));
+
+            if (!fornecedorExiste && !string.IsNullOrEmpty(fornecedorDigitado))
+            {
+                // Exibe a mensagem com o aviso
+                DialogResult result = MessageBox.Show("Aviso! Seguro não registrado, deseja adicionar um novo?",
+                                                      "Aviso!",
+                                                      MessageBoxButtons.YesNo,
+                                                      MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    // Ação para adicionar um novo fornecedor (sem adicionar o valor na ComboBox diretamente)
+                    MessageBox.Show("Mantenha o valor digitado para cadastrar um novo seguro",
+                                    "Ação Necessária",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
+                }
+                else
+                {
+                    // Limpa o texto da ComboBox
+                    comboBox.Text = string.Empty;
+                }
+            }
+        }
+
+        private void comboBoxIdCliente_Validating(object sender, CancelEventArgs e)
+        {
+            System.Windows.Forms.ComboBox comboBox = sender as System.Windows.Forms.ComboBox;
+            string fornecedorDigitado = comboBox.Text;
+
+            // Verifica se o valor digitado já existe na lista de itens da ComboBox
+            bool fornecedorExiste = comboBox.Items.Cast<System.Data.DataRowView>()
+                                       .Any(item => item["NOMECLIENTE"].ToString()
+                                       .Equals(fornecedorDigitado, StringComparison.OrdinalIgnoreCase));
+
+            if (!fornecedorExiste && !string.IsNullOrEmpty(fornecedorDigitado))
+            {
+                // Exibe a mensagem com o aviso
+                DialogResult result = MessageBox.Show("Aviso! Cliente não registrado! Deseja Registrar um novo?",
+                                                      "Aviso!",
+                                                      MessageBoxButtons.YesNo,
+                                                      MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    // Ação para adicionar um novo fornecedor (sem adicionar o valor na ComboBox diretamente)
+                    CadastroCliente formCliente = new CadastroCliente();
+                    Show(formCliente);
+                }
+                else
+                {
+                    // Limpa o texto da ComboBox
+                    comboBox.Text = string.Empty;
+                }
+            }
+        }
+
+        private void comboBoxMarca_Validating(object sender, CancelEventArgs e)
+        {
+            System.Windows.Forms.ComboBox comboBox = sender as System.Windows.Forms.ComboBox;
+            string fornecedorDigitado = comboBox.Text;
+
+            // Verifica se o valor digitado já existe na lista de itens da ComboBox
+            bool fornecedorExiste = comboBox.Items.Cast<System.Data.DataRowView>()
+                                       .Any(item => item["NOMEMARCA"].ToString()
+                                       .Equals(fornecedorDigitado, StringComparison.OrdinalIgnoreCase));
+
+            if (!fornecedorExiste && !string.IsNullOrEmpty(fornecedorDigitado))
+            {
+                // Exibe a mensagem com o aviso
+                DialogResult result = MessageBox.Show("Aviso! Marca não registrada! Deseja registrar uma nova?",
+                                                      "Aviso!",
+                                                      MessageBoxButtons.YesNo,
+                                                      MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    // Ação para adicionar um novo fornecedor (sem adicionar o valor na ComboBox diretamente)
+                    CadastroMarca cadastroMarca = new CadastroMarca();
+                    Show(cadastroMarca);
+                }
+                else
+                {
+                    // Limpa o texto da ComboBox
+                    comboBox.Text = string.Empty;
+                }
+            }
+        }
+
+        private void maskedTextBoxQuilo_TextChanged(object sender, EventArgs e)
+        {
+            if (maskedTextBoxQuilo == null || string.IsNullOrEmpty(maskedTextBoxQuilo.Text))
+            {
+                maskedTextBoxQuilo.Text = "1";
+            }
+            // Armazena o texto atual do TextBox
+            string textoAtual = maskedTextBoxQuilo.Text;
+
+            // Remove caracteres especiais e letras
+            string textoFiltrado = new string(textoAtual.Where(char.IsDigit).ToArray());
+
+            // Atualiza o TextBox com o texto filtrado
+            if (textoAtual != textoFiltrado)
+            {
+                maskedTextBoxQuilo.Text = textoFiltrado;
+                maskedTextBoxQuilo.SelectionStart = textoFiltrado.Length; // Mantém o cursor no final
+            }
+        }
     }
 }

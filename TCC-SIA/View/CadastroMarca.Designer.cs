@@ -94,11 +94,12 @@
             // comboBoxTipo
             // 
             comboBoxTipo.FormattingEnabled = true;
-            comboBoxTipo.Items.AddRange(new object[] { "Peças Automotívas", "Óleos lubrificantes", "Pneus", "Ferramentas e Equipamentos para oficinas", "Veiculos", "Outro" });
             comboBoxTipo.Location = new Point(413, 21);
             comboBoxTipo.Name = "comboBoxTipo";
             comboBoxTipo.Size = new Size(121, 23);
             comboBoxTipo.TabIndex = 22;
+            comboBoxTipo.DropDown += comboBoxTipo_DropDown;
+            comboBoxTipo.Validating += comboBoxTipo_Validating;
             // 
             // CadastroMarca
             // 

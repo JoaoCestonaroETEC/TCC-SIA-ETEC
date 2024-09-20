@@ -65,6 +65,39 @@ namespace TCC_SIA.Controller
         }
         #endregion
 
+        #region Listar novas marca
+        //Criação do método de listar marca
+        public NpgsqlDataReader listarNovasMarca()
+        {
+            //String sql de listar
+            string sql = "SELECT * FROM MARCA WHERE TIPOMARCA NOT IN ('Peças Automotívas', 'Óleos lubrificantes', 'Pneus', 'Ferramentas e Equipamento para oficinas', 'Veiculos');";
+
+            //Abrindo conexão com o banco de dados
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            //Fazendo o try
+            try
+            {
+                //Retornando os valores
+                return comm.ExecuteReader();
+            }
+            //Fazendo o catch
+            catch (NpgsqlException ex)
+            {
+                //Retornando como nulo
+                return null;
+            }
+            //Encerrando a conexão
+            finally
+            {
+                //Método de desconectar
+                con.desconectar();
+            }
+
+        }
+        #endregion
 
         #region Listar marca
         //Criação do método de listar marca
