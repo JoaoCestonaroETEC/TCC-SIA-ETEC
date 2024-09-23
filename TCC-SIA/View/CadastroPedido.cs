@@ -303,29 +303,111 @@ namespace TCC_SIA.View
         #endregion
 
 
-
-        // Se a célula clicada não é da coluna "Quantidade de V
         private void AtualizarValoresTotais()
         {
             decimal valorTotalPecas = 0;
             decimal valorTotalServicos = 0;
-            decimal descontoPecas = 0;
-            decimal descontoServicos = 0;
 
-            // Parse os valores das MaskedTextBoxes, com verificações de erro
-            decimal.TryParse(maskedTextBoxValorTotalPecas.Text, out valorTotalPecas);
-            decimal.TryParse(maskedTextBoxValorTotalServicos.Text, out valorTotalServicos);
-            decimal.TryParse(maskedTextBoxDescontoRPeca.Text, out descontoPecas);
-            decimal.TryParse(maskedTextBoxDescontoRServico.Text, out descontoServicos);
+            // Calcular o valor total de peças e serviços
+            foreach (DataGridViewRow row in dataGridViewPeca.Rows)
+            {
+                if (Convert.ToBoolean(row.Cells["Selecionar"].Value))
+                {
+                    int quantidadeVezes = Convert.ToInt32(row.Cells["Quant. Vezes"].Value);
+                    decimal valor = Convert.ToDecimal(row.Cells["Valor"].Value);
+                    valorTotalPecas += quantidadeVezes * valor;
+                }
+            }
 
-            // Calcule os valores totais aplicando os descontos
-            decimal valorFinalPecas = valorTotalPecas - descontoPecas;
-            decimal valorFinalServicos = valorTotalServicos - descontoServicos;
+            foreach (DataGridViewRow row in dataGridViewServico.Rows)
+            {
+                if (Convert.ToBoolean(row.Cells["Selecionar"].Value))
+                {
+                    int quantidadeVezes = Convert.ToInt32(row.Cells["Quant. Vezes"].Value);
+                    decimal valor = Convert.ToDecimal(row.Cells["Valor"].Value);
+                    valorTotalServicos += quantidadeVezes * valor;
+                }
+            }
+
+            // Atualiza as MaskedTextBoxes de valores totais
+            maskedTextBoxValorTotalPecas.Text = valorTotalPecas.ToString("0.00");
+            maskedTextBoxValorTotalServicos.Text = valorTotalServicos.ToString("0.00");
+
+            // Aplicar descontos e calcular o valor total do pedido
+            decimal descontoReais = decimal.TryParse(maskedTextBoxDescontoRPeca.Text, out decimal dr) ? dr : 0;
+            decimal descontoPorcentagemPecas = decimal.TryParse(maskedTextBoxDescontoPPecaDesconto.Text, out decimal dpp) ? dpp / 100 : 0;
+            decimal descontoPorcentagemServicos = decimal.TryParse(maskedTextBoxDescontoPServico.Text, out decimal dps) ? dps / 100 : 0;
+
+            decimal valorFinalPecas = valorTotalPecas - descontoReais - (valorTotalPecas * descontoPorcentagemPecas);
+            decimal valorFinalServicos = valorTotalServicos - (valorTotalServicos * descontoPorcentagemServicos);
+
+            // Atualize o valor total do pedido
             decimal valorTotalPedido = valorFinalPecas + valorFinalServicos;
-
-            // Atualize os valores nas MaskedTextBoxes
             maskedTextBoxValorTotal.Text = valorTotalPedido.ToString("0.00");
         }
+
+        private void dataGridViewPeca_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Verifica se a célula clicada é a checkbox "Selecionar"
+            if (e.ColumnIndex == dataGridViewPeca.Columns["Selecionar"].Index)
+            {
+                // Alterna o valor da checkbox
+                DataGridViewCheckBoxCell checkBox = (DataGridViewCheckBoxCell)dataGridViewPeca.Rows[e.RowIndex].Cells["Selecionar"];
+                checkBox.Value = !(Convert.ToBoolean(checkBox.Value));
+
+                // Atualiza os valores totais
+                AtualizarValoresTotais();
+            }
+        }
+
+        private void dataGridViewServico_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Verifica se a célula clicada é a checkbox "Selecionar"
+            if (e.ColumnIndex == dataGridViewServico.Columns["Selecionar"].Index)
+            {
+                // Alterna o valor da checkbox
+                DataGridViewCheckBoxCell checkBox = (DataGridViewCheckBoxCell)dataGridViewServico.Rows[e.RowIndex].Cells["Selecionar"];
+                checkBox.Value = !(Convert.ToBoolean(checkBox.Value));
+
+                // Atualiza os valores totais
+                AtualizarValoresTotais();
+            }
+        }
+
+
+
+
+        private void AplicarDescontos(decimal valorTotalPecas, decimal valorTotalServicos)
+        {
+            decimal descontoTotalPecasReal = 0;
+            decimal descontoTotalPecasPorcentagem = 0;
+            decimal.TryParse(maskedTextBoxDescontoRPeca.Text, out descontoTotalPecasReal);
+            decimal.TryParse(maskedTextBoxDescontoPPecaDesconto.Text, out descontoTotalPecasPorcentagem);
+
+            decimal descontoTotalServicosReal = 0;
+            decimal descontoTotalServicosPorcentagem = 0;
+            decimal.TryParse(maskedTextBoxDescontoRServico.Text, out descontoTotalServicosReal);
+            decimal.TryParse(maskedTextBoxDescontoPServico.Text, out descontoTotalServicosPorcentagem);
+
+            decimal descontoTotalPedidoReal = 0;
+            decimal descontoTotalPedidoPorcentagem = 0;
+            decimal.TryParse(maskedTextBoxDescontoTotalReais.Text, out descontoTotalPedidoReal);
+            decimal.TryParse(maskedTextBoxDescontoTotalPorc.Text, out descontoTotalPedidoPorcentagem);
+
+            // Aplicando descontos em porcentagem
+            decimal descontoPecasPorcentagem = valorTotalPecas * (descontoTotalPecasPorcentagem / 100);
+            decimal descontoServicosPorcentagem = valorTotalServicos * (descontoTotalServicosPorcentagem / 100);
+            decimal descontoTotalPedidoPorcentagemTotal = (valorTotalPecas + valorTotalServicos) * (descontoTotalPedidoPorcentagem / 100);
+
+            // Calcule os valores finais aplicando os descontos
+            decimal valorFinalPecas = valorTotalPecas - descontoTotalPecasReal - descontoPecasPorcentagem;
+            decimal valorFinalServicos = valorTotalServicos - descontoTotalServicosReal - descontoServicosPorcentagem;
+            decimal valorTotalPedidoFinal = valorFinalPecas + valorFinalServicos - descontoTotalPedidoReal - descontoTotalPedidoPorcentagemTotal;
+
+            // Atualize o valor total do pedido
+            maskedTextBoxValorTotal.Text = valorTotalPedidoFinal.ToString("0.00");
+        }
+
 
 
         #region Cadastrar pedido
@@ -630,7 +712,7 @@ namespace TCC_SIA.View
                 foreach (DataGridViewRow existingRow in dataGridViewPeca.Rows)
                 {
                     if (!existingRow.IsNewRow &&
-                        existingRow.Cells["Id"].Value.ToString() == idPeca &&
+                        existingRow.Cells["Id Peça"].Value.ToString() == idPeca &&
                         existingRow.Cells["Nome"].Value.ToString() == nomePeca &&
                         existingRow.Cells["Marca"].Value.ToString() == marca)
                     {
@@ -702,10 +784,6 @@ namespace TCC_SIA.View
         // Evento de pesquisar serviço
         private void buttonPesquisarServico_Click(object sender, EventArgs e)
         {
-            // Criação do objeto NpgsqlDataReader servico e controleServico
-            controleServico cServico = new controleServico();
-            NpgsqlDataReader servico = cServico.pesquisaServico(textBoxPesquisarS.Text);
-
             // Armazena os estados das checkboxes e os valores de "Quantidade de Vezes" antes de limpar
             List<bool> checkboxStates = new List<bool>();
             List<int> quantidadeVezesValues = new List<int>();
@@ -715,37 +793,45 @@ namespace TCC_SIA.View
                 if (!dataGridViewServico.Rows[i].IsNewRow)
                 {
                     checkboxStates.Add(dataGridViewServico.Rows[i].Cells["Selecionar"].Value is bool isChecked && isChecked);
-                    quantidadeVezesValues.Add(Convert.ToInt32(dataGridViewServico.Rows[i].Cells["Quant. Vezes)"].Value));
+                    quantidadeVezesValues.Add(Convert.ToInt32(dataGridViewServico.Rows[i].Cells["Quant. Vezes"].Value));
                 }
             }
 
-            // Apaga as colunas da datagridview
-            dataGridViewServico.Columns.Clear();
+            // Limpar as linhas da DataGridView, exceto as que têm o checkbox "Selecionar" marcado
+            for (int i = dataGridViewServico.Rows.Count - 1; i >= 0; i--)
+            {
+                if (!dataGridViewServico.Rows[i].IsNewRow &&
+                    !(dataGridViewServico.Rows[i].Cells["Selecionar"].Value is bool isChecked && isChecked))
+                {
+                    dataGridViewServico.Rows.RemoveAt(i);
+                }
+            }
 
-            // Desabilitar a adição automática de novas linhas
-            dataGridViewServico.AllowUserToAddRows = false;
+            // Criação do objeto NpgsqlDataReader servico e controleServico
+            controleServico cServico = new controleServico();
+            NpgsqlDataReader servico = cServico.pesquisaServico(textBoxPesquisarS.Text);
 
             // Definindo a quantidade de colunas que a grid terá
             dataGridViewServico.ColumnCount = 6;
 
             // Definindo as colunas na DataGridView para exibir as descrições
             dataGridViewServico.Columns[0].Name = "Id Serviço";
-            dataGridViewServico.Columns[0].ReadOnly = true; // Definindo como somente leitura
+            dataGridViewServico.Columns[0].ReadOnly = true;
 
             dataGridViewServico.Columns[1].Name = "Nome";
-            dataGridViewServico.Columns[1].ReadOnly = true; // Definindo como somente leitura
+            dataGridViewServico.Columns[1].ReadOnly = true;
 
             dataGridViewServico.Columns[2].Name = "Valor";
-            dataGridViewServico.Columns[2].ReadOnly = true; // Definindo como somente leitura
+            dataGridViewServico.Columns[2].ReadOnly = true;
 
             dataGridViewServico.Columns[3].Name = "Descrição";
-            dataGridViewServico.Columns[3].ReadOnly = true; // Definindo como somente leitura
+            dataGridViewServico.Columns[3].ReadOnly = true;
 
             dataGridViewServico.Columns[4].Name = "Garantia";
-            dataGridViewServico.Columns[4].ReadOnly = true; // Definindo como somente leitura
+            dataGridViewServico.Columns[4].ReadOnly = true;
 
             dataGridViewServico.Columns[5].Name = "Funcionário";
-            dataGridViewServico.Columns[5].ReadOnly = true; // Definindo como somente leitura
+            dataGridViewServico.Columns[5].ReadOnly = true;
 
             // Criando a coluna "Quantidade de Vezes" (apenas números, editável)
             DataGridViewTextBoxColumn quantidadeVezesColumn = new DataGridViewTextBoxColumn();
@@ -775,7 +861,7 @@ namespace TCC_SIA.View
                 foreach (DataGridViewRow existingRow in dataGridViewServico.Rows)
                 {
                     if (!existingRow.IsNewRow &&
-                        existingRow.Cells["Id"].Value.ToString() == idServico &&
+                        existingRow.Cells["Id Serviço"].Value.ToString() == idServico &&
                         existingRow.Cells["Nome"].Value.ToString() == nomeServico)
                     {
                         exists = true;
@@ -839,6 +925,7 @@ namespace TCC_SIA.View
             }
         }
         #endregion
+
 
 
         public List<Pedido_Peca> ExtrairPecasDataGridView(DataGridView dataGridViewPeca)
@@ -1333,26 +1420,32 @@ namespace TCC_SIA.View
             }
         }
 
-        private void dataGridViewPeca_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void maskedTextBoxDescontoRServico_TextChanged_1(object sender, EventArgs e)
         {
-            DataGridView dataGridView = sender as DataGridView;
+            MaskedTextBox maskedTextBox = sender as MaskedTextBox;
 
-            // Verifica se o clique foi em uma célula válida
-            if (e.RowIndex >= 0)
+            // Remove qualquer formatação anterior e deixa apenas os números
+            string textoAtual = maskedTextBox.Text.Replace(",", "").Replace(".", "").TrimStart('0');
+
+            if (textoAtual.Length == 0)
             {
-                // Verifica se a tecla Ctrl está pressionada
-                if (Control.ModifierKeys == Keys.Control)
-                {
-                    // Alterna a seleção da linha
-                    dataGridView.Rows[e.RowIndex].Selected = !dataGridView.Rows[e.RowIndex].Selected;
-                }
-                else
-                {
-                    // Se Ctrl não está pressionado, selecione apenas a linha clicada
-                    dataGridView.ClearSelection(); // Limpa a seleção atual
-                    dataGridView.Rows[e.RowIndex].Selected = true; // Seleciona a linha clicada
-                }
+                textoAtual = "0";
             }
+
+            // Converte o texto para decimal
+            if (decimal.TryParse(textoAtual, out decimal valorDecimal))
+            {
+                maskedTextBox.TextChanged -= maskedTextBoxDescontoRServico_TextChanged_1; // Remove o evento para evitar loop
+
+                // Formata o valor com ponto como separador de centavos e sem separadores de milhar
+                maskedTextBox.Text = string.Format("{0:0.00}", valorDecimal / 100);
+
+                // Coloca o cursor no final
+                maskedTextBox.SelectionStart = maskedTextBox.Text.Length;
+
+                maskedTextBox.TextChanged += maskedTextBoxDescontoRServico_TextChanged_1; // Reinscreve o evento
+            }
+            AtualizarValoresTotais();
         }
     }
 }

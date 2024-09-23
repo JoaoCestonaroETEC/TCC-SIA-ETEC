@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace TCC_SIA.View
         public TelaInicial()
         {
             InitializeComponent();
+
         }
         #endregion
 
@@ -108,5 +110,29 @@ namespace TCC_SIA.View
             formMarca.Show();
         }
         #endregion
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DrawRoundedBorder(Graphics g, Panel panel, int radius)
+        {
+            using (GraphicsPath path = new GraphicsPath())
+            {
+                path.StartFigure();
+                path.AddArc(0, 0, radius, radius, 180, 90); // Canto superior esquerdo
+                path.AddArc(panel.Width - radius, 0, radius, radius, 270, 90); // Canto superior direito
+                path.AddArc(panel.Width - radius, panel.Height - radius, radius, radius, 0, 90); // Canto inferior direito
+                path.AddArc(0, panel.Height - radius, radius, radius, 90, 90); // Canto inferior esquerdo
+                path.CloseFigure();
+
+                using (Pen pen = new Pen(Color.Black, 2)) // Defina a cor e a largura da borda
+                {
+                    g.DrawPath(pen, path);
+                }
+            }
+        }
+
     }
 }

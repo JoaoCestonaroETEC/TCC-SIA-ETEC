@@ -70,6 +70,9 @@ namespace TCC_SIA.Controller
         // Criação do método de cadastrar pedido de peças
         public string cadastroPedidoPecas(List<Pedido_Peca> mPedidoPeca, Pedido mPedido)
         {
+            // String SQL para verificar a quantidade disponível no estoque
+            string sqlVef = "SELECT quantpeca FROM peca WHERE idpeca = @IDPECA";
+
             // String SQL de inserção
             string sql = "INSERT INTO PEDIDO_PECA(IDPEDIDO, IDPECA, QUANTVEZES) " +
                          "VALUES(@IDPEDIDO, @IDPECA, @QUANTVEZES);";
@@ -77,7 +80,8 @@ namespace TCC_SIA.Controller
             // Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();
-            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+            NpgsqlCommand commVef = new NpgsqlCommand(sqlVef, conn);
+            NpgsqlCommand commInsert = new NpgsqlCommand(sql, conn);
 
             // Fazendo o try
             try
@@ -86,15 +90,26 @@ namespace TCC_SIA.Controller
                 foreach (var peca in mPedidoPeca)
                 {
                     // Limpa os parâmetros anteriores
-                    comm.Parameters.Clear();
+                    commVef.Parameters.Clear();
 
-                    // Definindo os valores a serem postos nos campos
-                    comm.Parameters.AddWithValue("@IDPEDIDO", mPedido.getIdPedido());
-                    comm.Parameters.AddWithValue("@IDPECA", peca.getIdPeca());
-                    comm.Parameters.AddWithValue("@QUANTVEZES", peca.getQuantVezes());
+                    // Verificando a quantidade disponível no estoque
+                    commVef.Parameters.AddWithValue("@IDPECA", peca.getIdPeca());
+                    int quantEstoque = Convert.ToInt32(commVef.ExecuteScalar());
 
-                    // Executando a query
-                    comm.ExecuteNonQuery();
+                    // Se a quantidade solicitada for maior que a disponível, retorna um erro
+                    if (peca.getQuantVezes() > quantEstoque)
+                    {
+                        return $"Erro: A quantidade da peça {peca.getIdPeca()} excede o estoque disponível.";
+                    }
+
+                    // Se a quantidade está disponível, insere o pedido
+                    commInsert.Parameters.Clear();
+                    commInsert.Parameters.AddWithValue("@IDPEDIDO", mPedido.getIdPedido());
+                    commInsert.Parameters.AddWithValue("@IDPECA", peca.getIdPeca());
+                    commInsert.Parameters.AddWithValue("@QUANTVEZES", peca.getQuantVezes());
+
+                    // Executando a query de inserção
+                    commInsert.ExecuteNonQuery();
                 }
 
                 // Retornando sucesso
@@ -113,6 +128,7 @@ namespace TCC_SIA.Controller
             }
         }
         #endregion
+
 
 
         #region Cadastrar serviços
