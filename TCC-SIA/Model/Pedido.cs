@@ -20,6 +20,10 @@ namespace TCC_SIA.Model
         private DateTime dataFim;
         private int desconto_porcento;
         private decimal desconto_reais;
+        private int descontoPeca_porcento;
+        private decimal descontoPeca_reais;
+        private int descontoServ_porcento;
+        private decimal descontoServ_reais;
 
         #endregion
 
@@ -130,6 +134,43 @@ namespace TCC_SIA.Model
         public void setDescontoReais(decimal descontoReais)
         {
             this.desconto_reais = descontoReais;
+        }
+        public decimal getDescontoPecaReais()
+        {
+            return descontoPeca_reais;
+        }
+
+        public void setDescontoPecaReais(decimal descontoReais)
+        {
+            this.descontoPeca_reais = descontoReais;
+        }
+        public int getDescontoPecaPorc()
+        {
+            return descontoPeca_porcento;
+        }
+
+        public void setDescontoPecaPorc(int descontoPorc)
+        {
+            this.descontoPeca_porcento = descontoPorc;
+        }
+        public int getDescontoServPorCento()
+        {
+            return descontoServ_porcento;
+        }
+
+        public void setDescontoServPorCento(int descontoPorCento)
+        {
+            this.descontoServ_porcento = descontoPorCento;
+        }
+
+        public decimal getDescontoServReais()
+        {
+            return descontoServ_reais;
+        }
+
+        public void setDescontoServReais(decimal descontoReais)
+        {
+            this.descontoServ_reais = descontoReais;
         }
         #endregion
     }

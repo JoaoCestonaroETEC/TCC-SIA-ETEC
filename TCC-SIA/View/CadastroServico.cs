@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,6 +19,7 @@ namespace TCC_SIA.View
         public CadastroServico()
         {
             InitializeComponent();
+            listarFuncionario();
         }
         #endregion
 
@@ -51,13 +53,33 @@ namespace TCC_SIA.View
             }
 
             mServico.setDescServico(richTextBoxDesc.Text);
-            mServico.setStatus(comboBoxStatus.Text);
+
+            mServico.setFuncionario(comboBoxFunc.Text);
 
             //Chamada ao método de cadastro no ControleServico
             string res = cServico.cadastroServico(mServico);
 
             //Mostra o resultado
             MessageBox.Show(res);
+        }
+        #endregion
+
+        #region Listar tipos
+        public void listarFuncionario()
+        {
+            controleServico cVeiculo = new controleServico();
+            //Recebe os dados da consulta e salva no dataReader (Tipo)
+            NpgsqlDataReader veiculo = cVeiculo.listaFuncionario();
+
+            //Converter o dataReader em DataTable
+            DataTable dtVeiculo = new DataTable();
+            dtVeiculo.Load(veiculo);
+
+            //Preencher a combobox com os dados do DataTable
+            comboBoxFunc.DataSource = dtVeiculo;
+
+            //Define qual coluna do DataTable que será exibida (nome da coluna)
+            comboBoxFunc.DisplayMember = "FUNCIONARIO";
         }
         #endregion
 
@@ -103,6 +125,45 @@ namespace TCC_SIA.View
             {
                 e.Handled = true; // Bloqueia a entrada
             }
+        }
+
+        private void comboBox1_Validating(object sender, CancelEventArgs e)
+        {
+            System.Windows.Forms.ComboBox comboBox = sender as System.Windows.Forms.ComboBox;
+            string fornecedorDigitado = comboBox.Text;
+
+            // Verifica se o valor digitado já existe na lista de itens da ComboBox
+            bool fornecedorExiste = comboBox.Items.Cast<System.Data.DataRowView>()
+                                       .Any(item => item["FUNCIONARIO"].ToString()
+                                       .Equals(fornecedorDigitado, StringComparison.OrdinalIgnoreCase));
+
+            if (!fornecedorExiste && !string.IsNullOrEmpty(fornecedorDigitado))
+            {
+                // Exibe a mensagem com o aviso
+                DialogResult result = MessageBox.Show("Aviso! Funcionário não registrado, deseja adicionar um novo?",
+                                                      "Aviso!",
+                                                      MessageBoxButtons.YesNo,
+                                                      MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    // Ação para adicionar um novo fornecedor (sem adicionar o valor na ComboBox diretamente)
+                    MessageBox.Show("Mantenha o valor digitado para cadastrar um novo funcionário",
+                                    "Ação Necessária",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
+                }
+                else
+                {
+                    // Limpa o texto da ComboBox
+                    comboBox.Text = string.Empty;
+                }
+            }
+        }
+
+        private void comboBoxFunc_DropDown(object sender, EventArgs e)
+        {
+            listarFuncionario();
         }
     }
 }

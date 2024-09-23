@@ -15,8 +15,8 @@ namespace TCC_SIA.Controller
         public string cadastroPedido(Pedido mPedido)
         {
             //String sql de inserção
-            string sql = "INSERT INTO PEDIDO(IDPEDIDO, IDVEICULO, IDCLIENTE, VALORTOTALPEDIDO, VALORTOTALPECA, VALORTOTALSERVICO, DESCONTOPORC, DESCONTOREAIS, OBSERVACAO, DATAINICIO, DATAFIM) " +
-                    "VALUES(@IDPEDIDO, @IDVEICULO, @IDCLIENTE, @VALORTOTALPEDIDO, @VALORTOTALPECA, @VALORTOTALSERVICO, @DESCONTOPORC, @DESCONTOREAIS, @OBSERVACAO, @DATAINICIO, @DATAFIM);";
+            string sql = "INSERT INTO PEDIDO(IDPEDIDO, IDVEICULO, IDCLIENTE, VALORTOTALPEDIDO, VALORTOTALPECA, VALORTOTALSERVICO, DESCONTOTOTALPORC, DESCONTOTOTALREAIS, DESCONTOSERVICOREAIS, DESCONTOSERVICOPORC, DESCONTOPECAREAIS, DESCONTOPECAPORC, OBSERVACAO, DATAINICIO, DATAFIM) " +
+                    "VALUES(@IDPEDIDO, @IDVEICULO, @IDCLIENTE, @VALORTOTALPEDIDO, @VALORTOTALPECA, @VALORTOTALSERVICO, @DESCONTOTOTALPORC, @DESCONTOTOTALREAIS, @DESCONTOSERVICOREAIS, @DESCONTOSERVICOPORC, @DESCONTOPECAREAIS, @DESCONTOPECAPORC, @OBSERVACAO, @DATAINICIO, @DATAFIM);";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
@@ -33,6 +33,12 @@ namespace TCC_SIA.Controller
                 comm.Parameters.AddWithValue("@VALORTOTALPEDIDO", mPedido.getValorTotalPeca());
                 comm.Parameters.AddWithValue("@VALORTOTALPECA", mPedido.getValorTotalPeca());
                 comm.Parameters.AddWithValue("@VALORTOTALSERVICO", mPedido.getValorTotalServico());
+                comm.Parameters.AddWithValue("@DESCONTOTOTALREAIS", mPedido.getDescontoReais());
+                comm.Parameters.AddWithValue("@DESCONTOTOTALPORC", mPedido.getDescontoPorCento());
+                comm.Parameters.AddWithValue("@DESCONTOSERVICOREAIS", mPedido.getDescontoServReais());
+                comm.Parameters.AddWithValue("@DESCONTOSERVICOPORC", mPedido.getDescontoServPorCento());
+                comm.Parameters.AddWithValue("@DESCONTOPECAREAIS", mPedido.getDescontoPecaReais());
+                comm.Parameters.AddWithValue("@DESCONTOPECAPORC", mPedido.getDescontoPecaPorc());
                 comm.Parameters.AddWithValue("@DESCONTOPORC", mPedido.getDescontoPorCento());
                 comm.Parameters.AddWithValue("@DESCONTOREAIS", mPedido.getDescontoReais());
                 comm.Parameters.AddWithValue("@OBSERVACAO", mPedido.getObservacao());
@@ -61,66 +67,61 @@ namespace TCC_SIA.Controller
         #endregion
 
         #region Cadastrar peças
-        //Criação do método de cadastrar pedido de peças
+        // Criação do método de cadastrar pedido de peças
         public string cadastroPedidoPecas(List<Pedido_Peca> mPedidoPeca, Pedido mPedido)
         {
-            //String sql de inserção
-            string sql = "INSERT INTO PEDIDO_PECA(IDPEDIDO, IDMARCAPECA, NOMEPECA, TIPOPECA, DESCPECA, VALORPECA, DESCONTOPORC, DESCONTOREAIS, QUANTPECA, GARANTIAPECA) " +
-                    "VALUES(@IDPEDIDO, @IDMARCAPECA, @NOMEPECA, @TIPOPECA, @DESCPECA, @VALORPECA, @DESCONTOPORC, @DESCONTOREAIS, @QUANTPECA, @GARANTIAPECA);";
+            // String SQL de inserção
+            string sql = "INSERT INTO PEDIDO_PECA(IDPEDIDO, IDPECA, QUANTVEZES) " +
+                         "VALUES(@IDPEDIDO, @IDPECA, @QUANTVEZES);";
 
-            //Abrindo conexão com o banco de dados
+            // Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();
             NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
 
-            //Fazendo o try
+            // Fazendo o try
             try
             {
-                //Criando o loop de repetição para cada linha selecionada
+                // Loop de repetição para cada peça selecionada
                 foreach (var peca in mPedidoPeca)
                 {
-                    {
-                        //Definindo os valores a serem postos nos campos
-                        comm.Parameters.AddWithValue("@IDPEDIDO", mPedido.getIdPedido());
-                        comm.Parameters.AddWithValue("@IDMARCA", peca.getIdMarca());
-                        comm.Parameters.AddWithValue("@NOMEPECA", peca.getNomePeca());
-                        comm.Parameters.AddWithValue("@TIPOPECA", peca.getTipoPeca());
-                        comm.Parameters.AddWithValue("@DESCPECA", peca.getDescPeca());
-                        comm.Parameters.AddWithValue("@VALORPECA", peca.getValorPeca());
-                        comm.Parameters.AddWithValue("@DESCONTOPORC", peca.getDescontoPorc());
-                        comm.Parameters.AddWithValue("@DESCONTOREAIS", peca.getDescontoReais());
-                        comm.Parameters.AddWithValue("@QUANTPECA", peca.getQuantPeca());
-                        comm.Parameters.AddWithValue("@GARANTIAPECA", peca.getGarantiaPeca());
+                    // Limpa os parâmetros anteriores
+                    comm.Parameters.Clear();
 
-                        // Executando o Query
-                        comm.ExecuteNonQuery();
-                    }
+                    // Definindo os valores a serem postos nos campos
+                    comm.Parameters.AddWithValue("@IDPEDIDO", mPedido.getIdPedido());
+                    comm.Parameters.AddWithValue("@IDPECA", peca.getIdPeca());
+                    comm.Parameters.AddWithValue("@QUANTVEZES", peca.getQuantVezes());
+
+                    // Executando a query
+                    comm.ExecuteNonQuery();
                 }
 
-                //Retornando um valor
-                return "Todos as peças cadastradas com sucesso!";
+                // Retornando sucesso
+                return "Todas as peças cadastradas com sucesso!";
             }
-            //Fazendo o catch
+            // Fazendo o catch para capturar exceções do Npgsql
             catch (NpgsqlException ex)
             {
-                //Retornando o erro
+                // Retornando o erro
                 return ex.ToString();
             }
             finally
             {
-                //Método de desconectar
+                // Desconectando do banco de dados
                 con.desconectar();
             }
         }
         #endregion
+
 
         #region Cadastrar serviços
         //Criação do método de cadastrar serviços
         public string cadastroPedidoServicos(List<Servico> mServico, Pedido mPedido)
         {
             //String sql de inserção
-            string sql = "INSERT INTO PEDIDO_SERVICO(IDPEDIDO, NOMESERVICO, DESCSERVICO, VALORSERVICO, DESCONTOPORC, DESCONTOREAIS, GARANTIASERVICO) " +
-                    "VALUES(@IDPEDIDO, @NOMESERVICO, @DESCSERVICO, @VALORSERVICO, @DESCONTOPORC, @DESCONTOREAIS, @GARANTIASERVICO);";
+            string sql = "INSERT INTO PEDIDO_SERVICO(IDPEDIDO, IDSERVICO, QUANTVEZES) " +
+                    "VALUES(@IDPEDIDO, @IDSERVICO, @QUANTVEZES);";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
@@ -136,12 +137,8 @@ namespace TCC_SIA.Controller
                     {
                         //Definindo os valores a serem postos nos campos
                         comm.Parameters.AddWithValue("@IDPEDIDO", mPedido.getIdPedido());
-                        comm.Parameters.AddWithValue("@NOMESERVICO", peca.getNomeServico());
-                        comm.Parameters.AddWithValue("@DESCSERVICO", peca.getDescServico());
-                        comm.Parameters.AddWithValue("@VALORSERVICO", peca.getValorServico());
-                        comm.Parameters.AddWithValue("@DESCONTOPORC", mPedido.getDescontoPorCento());
-                        comm.Parameters.AddWithValue("@DESCONTOREAIS", mPedido.getDescontoReais());
-                        comm.Parameters.AddWithValue("@GARANTIASERVICO", peca.getGarantiaServico());
+                        comm.Parameters.AddWithValue("@IDSERVICO", peca.getIDServico());
+                        comm.Parameters.AddWithValue("@QUANTVEZES", peca.getQuantVezes());
                         // Executando o Query
                         comm.ExecuteNonQuery();
                     }

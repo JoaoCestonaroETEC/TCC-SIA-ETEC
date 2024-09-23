@@ -40,36 +40,34 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(42, 24);
+            label1.Location = new Point(48, 32);
             label1.Name = "label1";
-            label1.Size = new Size(43, 15);
+            label1.Size = new Size(53, 20);
             label1.TabIndex = 0;
             label1.Text = "Nome:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(21, 51);
+            label2.Location = new Point(24, 68);
             label2.Name = "label2";
-            label2.Size = new Size(61, 15);
+            label2.Size = new Size(77, 20);
             label2.TabIndex = 1;
             label2.Text = "Descrição:";
             // 
             // richTextBoxDesc
             // 
-            richTextBoxDesc.Location = new Point(94, 51);
-            richTextBoxDesc.Margin = new Padding(3, 2, 3, 2);
+            richTextBoxDesc.Location = new Point(107, 68);
             richTextBoxDesc.Name = "richTextBoxDesc";
-            richTextBoxDesc.Size = new Size(274, 168);
+            richTextBoxDesc.Size = new Size(313, 223);
             richTextBoxDesc.TabIndex = 3;
             richTextBoxDesc.Text = "";
             // 
             // buttonCadastrar
             // 
-            buttonCadastrar.Location = new Point(12, 223);
-            buttonCadastrar.Margin = new Padding(3, 2, 3, 2);
+            buttonCadastrar.Location = new Point(14, 297);
             buttonCadastrar.Name = "buttonCadastrar";
-            buttonCadastrar.Size = new Size(150, 73);
+            buttonCadastrar.Size = new Size(171, 97);
             buttonCadastrar.TabIndex = 4;
             buttonCadastrar.Text = "Cadastrar";
             buttonCadastrar.UseVisualStyleBackColor = true;
@@ -77,35 +75,39 @@
             // 
             // textBoxNome
             // 
-            textBoxNome.Location = new Point(94, 21);
+            textBoxNome.Location = new Point(107, 28);
+            textBoxNome.Margin = new Padding(3, 4, 3, 4);
             textBoxNome.Name = "textBoxNome";
-            textBoxNome.Size = new Size(274, 23);
+            textBoxNome.Size = new Size(313, 27);
             textBoxNome.TabIndex = 20;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(374, 24);
+            label3.Location = new Point(427, 32);
             label3.Name = "label3";
-            label3.Size = new Size(33, 15);
+            label3.Size = new Size(42, 20);
             label3.TabIndex = 21;
             label3.Text = "Tipo:";
             // 
             // comboBoxTipo
             // 
+            comboBoxTipo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxTipo.AutoCompleteSource = AutoCompleteSource.ListItems;
             comboBoxTipo.FormattingEnabled = true;
-            comboBoxTipo.Location = new Point(413, 21);
+            comboBoxTipo.Location = new Point(472, 28);
+            comboBoxTipo.Margin = new Padding(3, 4, 3, 4);
             comboBoxTipo.Name = "comboBoxTipo";
-            comboBoxTipo.Size = new Size(121, 23);
+            comboBoxTipo.Size = new Size(138, 28);
             comboBoxTipo.TabIndex = 22;
             comboBoxTipo.DropDown += comboBoxTipo_DropDown;
             comboBoxTipo.Validating += comboBoxTipo_Validating;
             // 
             // CadastroMarca
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(564, 304);
+            ClientSize = new Size(645, 405);
             Controls.Add(comboBoxTipo);
             Controls.Add(label3);
             Controls.Add(textBoxNome);
@@ -113,7 +115,6 @@
             Controls.Add(richTextBoxDesc);
             Controls.Add(label2);
             Controls.Add(label1);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "CadastroMarca";
             Text = "CadastroMarca";
             ResumeLayout(false);

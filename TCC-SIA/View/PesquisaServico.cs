@@ -32,12 +32,13 @@ namespace TCC_SIA.View
             dataGridViewPesquisar.ColumnCount = servico.FieldCount;
 
             //Definindo três colunas na DataGridView para exibir as descrições
-            dataGridViewPesquisar.ColumnCount = 5;
+            dataGridViewPesquisar.ColumnCount = 6;
             dataGridViewPesquisar.Columns[0].Name = "Id";
             dataGridViewPesquisar.Columns[1].Name = "Nome";
             dataGridViewPesquisar.Columns[2].Name = "Descricao";
             dataGridViewPesquisar.Columns[3].Name = "Valor";
             dataGridViewPesquisar.Columns[4].Name = "Garantia";
+            dataGridViewPesquisar.Columns[5].Name = "Funcionário";
 
 
             //Adicionando as descrições dos serviços
@@ -48,8 +49,9 @@ namespace TCC_SIA.View
                 string descServico = servico["DESCSERVICO"].ToString();
                 string valorServico = servico["VALORSERVICO"].ToString();
                 string garantiaServico = servico["GARANTIASERVICO"].ToString();
+                string funcionarioServico = servico["FUNCIONARIO"].ToString();
 
-                dataGridViewPesquisar.Rows.Add(idServico, nomeServico, descServico, valorServico, garantiaServico);
+                dataGridViewPesquisar.Rows.Add(idServico, nomeServico, descServico, valorServico, garantiaServico, funcionarioServico);
             }
             #endregion
         }
@@ -70,12 +72,14 @@ namespace TCC_SIA.View
             dataGridViewPesquisar.ColumnCount = servico.FieldCount;
 
             //Definindo três colunas na DataGridView para exibir as descrições
-            dataGridViewPesquisar.ColumnCount = 5;
+            dataGridViewPesquisar.ColumnCount = 6;
             dataGridViewPesquisar.Columns[0].Name = "Id";
             dataGridViewPesquisar.Columns[1].Name = "Nome";
             dataGridViewPesquisar.Columns[2].Name = "Descricao";
             dataGridViewPesquisar.Columns[3].Name = "Valor";
             dataGridViewPesquisar.Columns[4].Name = "Garantia";
+            dataGridViewPesquisar.Columns[5].Name = "Funcionário";
+
 
             //Adicionando as descrições dos serviços
             while (servico.Read())
@@ -85,7 +89,9 @@ namespace TCC_SIA.View
                 string descServico = servico["DESCSERVICO"].ToString();
                 string valorServico = servico["VALORSERVICO"].ToString();
                 string garantiaServico = servico["GARANTIASERVICO"].ToString();
-                dataGridViewPesquisar.Rows.Add(idServico, nomeServico, descServico, valorServico, garantiaServico);
+                string funcionarioServico = servico["FUNCIONARIO"].ToString();
+
+                dataGridViewPesquisar.Rows.Add(idServico, nomeServico, descServico, valorServico, garantiaServico, funcionarioServico);
             }
         }
         #endregion

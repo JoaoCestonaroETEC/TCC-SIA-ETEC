@@ -68,16 +68,15 @@ namespace TCC_SIA.View
             #region Carrega as informações gerais dos clientes
             // Criação do objeto NpgsqlDataReader cliente e ControleVeiculo
             controleCliente cCliente = new controleCliente();
-            NpgsqlDataReader clienteF = cCliente.pesquisarClienteF(textBoxPesquisarF.Text);
+            NpgsqlDataReader clienteF = cCliente.pesquisarClienteF("");
 
-            //Apaga as colunas da datagridview
+            // Apaga as colunas da DataGridView
             dataGridViewPesquisarF.Columns.Clear();
 
-            //Definindo a quant. de colunas que a grid terá
-            dataGridViewPesquisarF.ColumnCount = clienteF.FieldCount;
-
-            //Definindo doze colunas na DataGridView para exibir as caracteristícas dos clientes
+            // Definindo a quantidade de colunas da grid
             dataGridViewPesquisarF.ColumnCount = 15;
+
+            // Definindo os nomes das colunas
             dataGridViewPesquisarF.Columns[0].Name = "Id";
             dataGridViewPesquisarF.Columns[1].Name = "Cpf";
             dataGridViewPesquisarF.Columns[2].Name = "Nome";
@@ -94,30 +93,33 @@ namespace TCC_SIA.View
             dataGridViewPesquisarF.Columns[13].Name = "Status";
             dataGridViewPesquisarF.Columns[14].Name = "Data";
 
-            //Aqui criamos um vetor para representar uma linha da consulta(registro)
-            string[] linhaF = new string[clienteF.FieldCount];
+            // Aqui criamos um vetor para representar uma linha da consulta (registro)
+            string[] linhaF = new string[15];
 
-            //Adicionando as descrições dos clientes
+            // Adicionando as descrições dos clientes
             while (clienteF.Read())
             {
-                string idCliente = clienteF["IDCLIENTE"].ToString();
-                string cpfCliente = clienteF["CPFCLIENTE"].ToString();
-                string nomeCliente = clienteF["NOMECLIENTE"].ToString();
-                string emailCliente = clienteF["EMAILCLIENTE"].ToString();
-                string dataNasc = clienteF["DATANASC_CLIENTE"].ToString();
-                string sexo = clienteF["SEXO"].ToString();
-                string telefone = clienteF["TELEFONE"].ToString();
-                string numCasa = clienteF["NUMERO"].ToString();
-                string rua = clienteF["RUA"].ToString();
-                string cidade = clienteF["CIDADE"].ToString();
-                string cep = clienteF["CEP"].ToString();
-                string bairro = clienteF["BAIRRO"].ToString();
-                string estado = clienteF["ESTADO"].ToString();
-                string status = clienteF["STATUS"].ToString();
-                string data = clienteF["DATA"].ToString();
+                string idCliente = clienteF.IsDBNull(clienteF.GetOrdinal("IDCLIENTE")) ? "" : clienteF["IDCLIENTE"].ToString();
+                string cpfCliente = clienteF.IsDBNull(clienteF.GetOrdinal("CPFCLIENTE")) ? "" : clienteF["CPFCLIENTE"].ToString();
+                string nomeCliente = clienteF.IsDBNull(clienteF.GetOrdinal("NOMECLIENTE")) ? "" : clienteF["NOMECLIENTE"].ToString();
+                string emailCliente = clienteF.IsDBNull(clienteF.GetOrdinal("EMAILCLIENTE")) ? "" : clienteF["EMAILCLIENTE"].ToString();
+                string dataNasc = clienteF.IsDBNull(clienteF.GetOrdinal("DATANASC_CLIENTE")) ? "" : clienteF["DATANASC_CLIENTE"].ToString();
+                string sexo = clienteF.IsDBNull(clienteF.GetOrdinal("SEXO")) ? "" : clienteF["SEXO"].ToString();
+                string telefone = clienteF.IsDBNull(clienteF.GetOrdinal("TELEFONE")) ? "" : clienteF["TELEFONE"].ToString();
+                string numCasa = clienteF.IsDBNull(clienteF.GetOrdinal("NUMERO")) ? "" : clienteF["NUMERO"].ToString();
+                string rua = clienteF.IsDBNull(clienteF.GetOrdinal("RUA")) ? "" : clienteF["RUA"].ToString();
+                string cidade = clienteF.IsDBNull(clienteF.GetOrdinal("CIDADE")) ? "" : clienteF["CIDADE"].ToString();
+                string cep = clienteF.IsDBNull(clienteF.GetOrdinal("CEP")) ? "" : clienteF["CEP"].ToString();
+                string bairro = clienteF.IsDBNull(clienteF.GetOrdinal("BAIRRO")) ? "" : clienteF["BAIRRO"].ToString();
+                string estado = clienteF.IsDBNull(clienteF.GetOrdinal("ESTADO")) ? "" : clienteF["ESTADO"].ToString();
+                string status = clienteF.IsDBNull(clienteF.GetOrdinal("STATUS")) ? "" : clienteF["STATUS"].ToString();
+                string data = clienteF.IsDBNull(clienteF.GetOrdinal("DATA")) ? "" : clienteF["DATA"].ToString();
 
+                // Adiciona a linha à DataGridView
                 dataGridViewPesquisarF.Rows.Add(idCliente, cpfCliente, nomeCliente, emailCliente, dataNasc, sexo, telefone, numCasa, rua, cidade, cep, bairro, estado, status, data);
             }
+            #endregion
+
 
             // Criação do objeto NpgsqlDataReader cliente e ControleVeiculo
             NpgsqlDataReader clienteJ = cCliente.pesquisarClienteJ(textBoxPesquisarJ.Text);
@@ -170,7 +172,7 @@ namespace TCC_SIA.View
             }
             #endregion
         }
-        #endregion
+
 
         #region Pesquisar cliente
         //Evento de pesquisar cliente

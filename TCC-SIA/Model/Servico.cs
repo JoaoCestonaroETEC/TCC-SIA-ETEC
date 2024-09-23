@@ -15,9 +15,8 @@ namespace TCC_SIA.Model
         private string descServico;
         private decimal valorServico;
         private DateTime garantiaServico;
-        private string status;
-        private decimal desconto_reais;
-        private int desconto_porcento;
+        private string funcionario;
+        private long quantVezes;
         #endregion
 
         #region Encapsulamento
@@ -69,33 +68,26 @@ namespace TCC_SIA.Model
         {
             this.garantiaServico = garantiaServico;
         }
-        public string getStatus()
+        public string getFuncionario()
         {
-            return status;
+            return funcionario;
         }
 
-        public void setStatus(string status)
+        public void setFuncionario(string funcionario)
         {
-            this.status = status;
-        }
-        public decimal getDescontoReais()
-        {
-            return desconto_reais;
+            this.funcionario = funcionario;
         }
 
-        public void setDescontoReais(decimal descontoReais)
+        public long getQuantVezes()
         {
-            this.desconto_reais = descontoReais;
-        }
-        public int getDescontoPorc()
-        {
-            return desconto_porcento;
+            return quantVezes;
         }
 
-        public void setDescontoPorc(int descontoPorc)
+        public void setQuantVezes(long quantVezes)
         {
-            this.desconto_porcento = descontoPorc;
+            this.quantVezes = quantVezes;
         }
+
         #endregion
     }
 }

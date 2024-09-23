@@ -14,19 +14,6 @@ namespace TCC_SIA.View
         public CadastroCliente()
         {
             InitializeComponent();
-
-            // Adiciona campos de estados do Brasil
-            comboBoxUfF.Items.AddRange(new string[]
-            {
-                "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA",
-                "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"
-            });
-
-            // Adiciona gêneros
-            comboBoxSexoF.Items.AddRange(new string[]
-            {
-                "Masculino", "Feminino", "Outro"
-            });
         }
 
         private void buttonCadastrarF_Click(object sender, EventArgs e)
@@ -50,12 +37,6 @@ namespace TCC_SIA.View
 
             Cliente mCliente = new Cliente();
             controleCliente cCliente = new controleCliente();
-
-            string CNPJ = "00000000000000";
-            string Razao = "Indefinido";
-
-            mCliente.setCNPJCLiente(CNPJ);
-            mCliente.setRazao(Razao);
 
             mCliente.setCpfCliente(maskedTextBoxCPFF.Text);
             mCliente.setNomeCliente(textBoxNomeF.Text);
@@ -83,7 +64,7 @@ namespace TCC_SIA.View
             mCliente.setUf(comboBoxUfF.Text);
             mCliente.setStatus(comboBoxStatusF.Text);
 
-            string res = cCliente.cadastroCliente(mCliente);
+            string res = cCliente.cadastroClienteF(mCliente);
             MessageBox.Show(res);
         }
 
@@ -105,16 +86,6 @@ namespace TCC_SIA.View
 
             Cliente mCliente = new Cliente();
             controleCliente cCliente = new controleCliente();
-
-            string Cpf = "00000000000";
-            string Sexo = "Indefinido";
-            DateTime DataNasc = Convert.ToDateTime("01/01/0001");
-            string Obs = "Indefinido";
-
-            mCliente.setCpfCliente(Cpf);
-            mCliente.setSexo(Sexo);
-            mCliente.setDataNascCliente(DataNasc);
-            mCliente.setObs(Obs);
 
             mCliente.setCNPJCLiente(maskedTextBoxCNPJ.Text);
             mCliente.setNomeCliente(textBoxNomeJ.Text);
@@ -140,7 +111,7 @@ namespace TCC_SIA.View
             mCliente.setUf(comboBoxUfJ.Text);
             mCliente.setStatus(comboBoxStatusJ.Text);
 
-            string res = cCliente.cadastroCliente(mCliente);
+            string res = cCliente.cadastroClienteJ(mCliente);
             MessageBox.Show(res);
         }
 
@@ -154,6 +125,40 @@ namespace TCC_SIA.View
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void comboBoxUfF_Validated(object sender, EventArgs e)
+        {
+            System.Windows.Forms.ComboBox comboBox = sender as System.Windows.Forms.ComboBox;
+            string fornecedorDigitado = comboBox.Text;
+
+            // Verifica se o valor digitado já existe na lista de itens da ComboBox
+            bool fornecedorExiste = comboBox.Items.Cast<System.Data.DataRowView>()
+                                       .Any(item => item.ToString()
+                                       .Equals(fornecedorDigitado, StringComparison.OrdinalIgnoreCase));
+
+            if (!fornecedorExiste && !string.IsNullOrEmpty(fornecedorDigitado))
+            {
+                // Exibe a mensagem com o aviso
+                DialogResult result = MessageBox.Show("Selecione um Estado!",
+                                                      "Aviso!",
+                                                      MessageBoxButtons.OK,
+                                                      MessageBoxIcon.Warning);
+
+                if (result == DialogResult.No)
+                {
+                    // Ação para adicionar um novo fornecedor (sem adicionar o valor na ComboBox diretamente)
+                    MessageBox.Show("Mantenha o valor digitado para cadastrar um novo tipo de peça",
+                                    "Ação Necessária",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
+                }
+                else
+                {
+                    // Limpa o texto da ComboBox
+                    comboBox.Text = string.Empty;
+                }
             }
         }
     }

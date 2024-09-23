@@ -453,7 +453,7 @@ namespace TCC_SIA.View
                 {
                     // Ação para adicionar um novo fornecedor (sem adicionar o valor na ComboBox diretamente)
                     CadastroCliente formCliente = new CadastroCliente();
-                    Show(formCliente);
+                    formCliente.Show();
                 }
                 else
                 {
@@ -485,7 +485,7 @@ namespace TCC_SIA.View
                 {
                     // Ação para adicionar um novo fornecedor (sem adicionar o valor na ComboBox diretamente)
                     CadastroMarca cadastroMarca = new CadastroMarca();
-                    Show(cadastroMarca);
+                    cadastroMarca.Show();
                 }
                 else
                 {
@@ -513,6 +513,31 @@ namespace TCC_SIA.View
                 maskedTextBoxQuilo.Text = textoFiltrado;
                 maskedTextBoxQuilo.SelectionStart = textoFiltrado.Length; // Mantém o cursor no final
             }
+        }
+
+        private void comboBoxMarca_DropDown(object sender, EventArgs e)
+        {
+            listarMarca();
+        }
+
+        private void comboBoxTipo_DropDown(object sender, EventArgs e)
+        {
+            listarTipo();
+        }
+
+        private void comboBoxCor_DropDown(object sender, EventArgs e)
+        {
+            listarCor();
+        }
+
+        private void comboBoxCombustivel_DropDown(object sender, EventArgs e)
+        {
+            listarCombustivel();
+        }
+
+        private void comboBoxSeguro_DropDown(object sender, EventArgs e)
+        {
+            listarSeguro();
         }
     }
 }

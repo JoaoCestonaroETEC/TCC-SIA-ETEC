@@ -139,7 +139,7 @@
             tabPageFIsica.Controls.Add(buttonCadastrarF);
             tabPageFIsica.Location = new Point(4, 29);
             tabPageFIsica.Name = "tabPageFIsica";
-            tabPageFIsica.Padding = new Padding(3, 3, 3, 3);
+            tabPageFIsica.Padding = new Padding(3);
             tabPageFIsica.Size = new Size(989, 363);
             tabPageFIsica.TabIndex = 0;
             tabPageFIsica.Text = "Pessoa Física";
@@ -209,6 +209,9 @@
             // 
             // comboBoxSexoF
             // 
+            comboBoxSexoF.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxSexoF.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBoxSexoF.Items.AddRange(new object[] { "Masculinho", "Feminino", "Outro" });
             comboBoxSexoF.Location = new Point(58, 171);
             comboBoxSexoF.Margin = new Padding(3, 4, 3, 4);
             comboBoxSexoF.Name = "comboBoxSexoF";
@@ -226,12 +229,16 @@
             // 
             // comboBoxUfF
             // 
+            comboBoxUfF.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxUfF.AutoCompleteSource = AutoCompleteSource.ListItems;
             comboBoxUfF.FormattingEnabled = true;
+            comboBoxUfF.Items.AddRange(new object[] { "AC", "AL", "AP", "AM", "BA", "CE ", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" });
             comboBoxUfF.Location = new Point(353, 189);
             comboBoxUfF.Margin = new Padding(3, 4, 3, 4);
             comboBoxUfF.Name = "comboBoxUfF";
             comboBoxUfF.Size = new Size(54, 28);
             comboBoxUfF.TabIndex = 57;
+            comboBoxUfF.Validated += comboBoxUfF_Validated;
             // 
             // textBoxRuaF
             // 
@@ -451,7 +458,7 @@
             tabPageJuridica.Controls.Add(buttonCadastrarJ);
             tabPageJuridica.Location = new Point(4, 29);
             tabPageJuridica.Name = "tabPageJuridica";
-            tabPageJuridica.Padding = new Padding(3, 3, 3, 3);
+            tabPageJuridica.Padding = new Padding(3);
             tabPageJuridica.Size = new Size(989, 363);
             tabPageJuridica.TabIndex = 1;
             tabPageJuridica.Text = "Pessoa Jurídica";
@@ -530,7 +537,10 @@
             // 
             // comboBoxUfJ
             // 
+            comboBoxUfJ.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxUfJ.AutoCompleteSource = AutoCompleteSource.ListItems;
             comboBoxUfJ.FormattingEnabled = true;
+            comboBoxUfJ.Items.AddRange(new object[] { "AC", "AL", "AP", "AM", "BA", "CE ", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" });
             comboBoxUfJ.Location = new Point(357, 191);
             comboBoxUfJ.Margin = new Padding(3, 4, 3, 4);
             comboBoxUfJ.Name = "comboBoxUfJ";

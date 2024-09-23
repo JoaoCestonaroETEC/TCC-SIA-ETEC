@@ -21,10 +21,26 @@ namespace TCC_SIA.View
         {
             InitializeComponent();
 
+            listarCliente();
+            listarVeiculo();
+
             #region Carrega os dados de pesquisa de serviços
             // Criação do objeto NpgsqlDataReader servico e controleServico
             controleServico cServico = new controleServico();
-            NpgsqlDataReader servico = cServico.listaServico();
+            NpgsqlDataReader servico = cServico.pesquisaServico(textBoxPesquisarS.Text);
+
+            // Armazena os estados das checkboxes e os valores de "Quantidade de Vezes" antes de limpar
+            List<bool> checkboxStates = new List<bool>();
+            List<int> quantidadeVezesValues = new List<int>();
+
+            for (int i = 0; i < dataGridViewServico.Rows.Count; i++)
+            {
+                if (!dataGridViewServico.Rows[i].IsNewRow)
+                {
+                    checkboxStates.Add(dataGridViewServico.Rows[i].Cells["Selecionar"].Value is bool isChecked && isChecked);
+                    quantidadeVezesValues.Add(Convert.ToInt32(dataGridViewServico.Rows[i].Cells["Quant. Vezes"].Value));
+                }
+            }
 
             // Apaga as colunas da datagridview
             dataGridViewServico.Columns.Clear();
@@ -33,24 +49,30 @@ namespace TCC_SIA.View
             dataGridViewServico.AllowUserToAddRows = false;
 
             // Definindo a quantidade de colunas que a grid terá
-            dataGridViewServico.ColumnCount = 4;
+            dataGridViewServico.ColumnCount = 6;
 
             // Definindo as colunas na DataGridView para exibir as descrições
-            dataGridViewServico.Columns[0].Name = "Nome";
+            dataGridViewServico.Columns[0].Name = "Id Serviço";
             dataGridViewServico.Columns[0].ReadOnly = true; // Definindo como somente leitura
 
-            dataGridViewServico.Columns[1].Name = "Valor";
+            dataGridViewServico.Columns[1].Name = "Nome";
             dataGridViewServico.Columns[1].ReadOnly = true; // Definindo como somente leitura
 
-            dataGridViewServico.Columns[2].Name = "Descrição";
+            dataGridViewServico.Columns[2].Name = "Valor";
             dataGridViewServico.Columns[2].ReadOnly = true; // Definindo como somente leitura
 
-            dataGridViewServico.Columns[3].Name = "Garantia";
+            dataGridViewServico.Columns[3].Name = "Descrição";
             dataGridViewServico.Columns[3].ReadOnly = true; // Definindo como somente leitura
+
+            dataGridViewServico.Columns[4].Name = "Garantia";
+            dataGridViewServico.Columns[4].ReadOnly = true; // Definindo como somente leitura
+
+            dataGridViewServico.Columns[5].Name = "Funcionário";
+            dataGridViewServico.Columns[5].ReadOnly = true; // Definindo como somente leitura
 
             // Criando a coluna "Quantidade de Vezes" (apenas números, editável)
             DataGridViewTextBoxColumn quantidadeVezesColumn = new DataGridViewTextBoxColumn();
-            quantidadeVezesColumn.Name = "Quantidade de Vezes";
+            quantidadeVezesColumn.Name = "Quant. Vezes";
             quantidadeVezesColumn.ValueType = typeof(int);
             quantidadeVezesColumn.ReadOnly = false; // Mantém editável
             dataGridViewServico.Columns.Add(quantidadeVezesColumn);
@@ -64,30 +86,61 @@ namespace TCC_SIA.View
             // Adicionando as descrições dos serviços
             while (servico.Read())
             {
+                string idServico = servico["IDSERVICO"].ToString();
                 string nomeServico = servico["NOMESERVICO"].ToString();
                 string valorServico = servico["VALORSERVICO"].ToString();
                 string descServico = servico["DESCSERVICO"].ToString();
                 string garantiaServico = servico["GARANTIASERVICO"].ToString();
+                string funcionarioServico = servico["FUNCIONARIO"].ToString();
 
-                // Criando a nova linha manualmente
-                DataGridViewRow row = new DataGridViewRow();
-                row.CreateCells(dataGridViewServico); // Define a grid para onde a linha vai
+                // Verifique se a linha já existe
+                bool exists = false;
+                foreach (DataGridViewRow existingRow in dataGridViewServico.Rows)
+                {
+                    if (!existingRow.IsNewRow &&
+                        existingRow.Cells["Id Serviço"].Value.ToString() == idServico &&
+                        existingRow.Cells["Nome"].Value.ToString() == nomeServico)
+                    {
+                        exists = true;
+                        break;
+                    }
+                }
 
-                // Preenchendo a linha com os valores
-                row.Cells[0].Value = nomeServico;
-                row.Cells[1].Value = valorServico;
-                row.Cells[2].Value = descServico;
-                row.Cells[3].Value = garantiaServico;
-                row.Cells[4].Value = 1; // Valor padrão para "Quantidade de Vezes"
-                row.Cells[5].Value = false; // Valor padrão para "Selecionar" (desmarcado)
+                // Adiciona a nova linha apenas se não existir
+                if (!exists)
+                {
+                    // Criando a nova linha manualmente
+                    DataGridViewRow row = new DataGridViewRow();
+                    row.CreateCells(dataGridViewServico); // Define a grid para onde a linha vai
 
-                dataGridViewServico.Rows.Add(row);
+                    // Preenchendo a linha com os valores
+                    row.Cells[0].Value = idServico;
+                    row.Cells[1].Value = nomeServico;
+                    row.Cells[2].Value = valorServico;
+                    row.Cells[3].Value = descServico;
+                    row.Cells[4].Value = garantiaServico;
+                    row.Cells[5].Value = funcionarioServico;
+                    row.Cells[6].Value = 1; // Valor padrão para "Quantidade de Vezes"
+                    row.Cells[7].Value = false; // Valor padrão para "Selecionar" (desmarcado)
+
+                    dataGridViewServico.Rows.Add(row);
+                }
+            }
+
+            // Após adicionar novas linhas, restaure os estados das checkboxes e os valores de "Quantidade de Vezes"
+            for (int i = 0; i < dataGridViewServico.Rows.Count; i++)
+            {
+                if (i < checkboxStates.Count)
+                {
+                    dataGridViewServico.Rows[i].Cells["Selecionar"].Value = checkboxStates[i];
+                    dataGridViewServico.Rows[i].Cells["Quant. Vezes)"].Value = quantidadeVezesValues[i];
+                }
             }
 
             // Validando a entrada da coluna "Quantidade de Vezes" para aceitar apenas números
             dataGridViewServico.EditingControlShowing += (s, e) =>
             {
-                if (dataGridViewServico.CurrentCell.ColumnIndex == dataGridViewServico.Columns["Quantidade de Vezes"].Index)
+                if (dataGridViewServico.CurrentCell.ColumnIndex == dataGridViewServico.Columns["Quant. Vezes"].Index)
                 {
                     TextBox tb = e.Control as TextBox;
                     if (tb != null)
@@ -114,6 +167,7 @@ namespace TCC_SIA.View
 
 
 
+
             #region Carrega os dados de pesquisa de peças
             // Criação do objeto NpgsqlDataReader peca e controlePeca
             controlePeca cPeca = new controlePeca();
@@ -126,10 +180,10 @@ namespace TCC_SIA.View
             dataGridViewPeca.AllowUserToAddRows = false;
 
             // Definindo a quantidade de colunas que a grid terá
-            dataGridViewPeca.ColumnCount = 7;
+            dataGridViewPeca.ColumnCount = 6;
 
             // Definindo as colunas na DataGridView para exibir as descrições das peças
-            dataGridViewPeca.Columns[0].Name = "Id";
+            dataGridViewPeca.Columns[0].Name = "Id Peça";
             dataGridViewPeca.Columns[0].ReadOnly = true; // Somente leitura
 
             dataGridViewPeca.Columns[1].Name = "Nome";
@@ -144,15 +198,12 @@ namespace TCC_SIA.View
             dataGridViewPeca.Columns[4].Name = "Valor";
             dataGridViewPeca.Columns[4].ReadOnly = true; // Somente leitura
 
-            dataGridViewPeca.Columns[5].Name = "Quantidade";
+            dataGridViewPeca.Columns[5].Name = "Fornecedor";
             dataGridViewPeca.Columns[5].ReadOnly = true; // Somente leitura
-
-            dataGridViewPeca.Columns[6].Name = "Fornecedor";
-            dataGridViewPeca.Columns[6].ReadOnly = true; // Somente leitura
 
             // Criando a coluna "Quantidade de Vezes" (apenas números, editável)
             DataGridViewTextBoxColumn quantidadeVezesColumn2 = new DataGridViewTextBoxColumn();
-            quantidadeVezesColumn2.Name = "Quantidade de Vezes";
+            quantidadeVezesColumn2.Name = "Quant. Vezes";
             quantidadeVezesColumn2.ValueType = typeof(int);
             quantidadeVezesColumn2.ReadOnly = false; // Mantém editável
             dataGridViewPeca.Columns.Add(quantidadeVezesColumn2);
@@ -171,7 +222,6 @@ namespace TCC_SIA.View
                 string idMarca = peca["IDMARCA"].ToString();
                 string tipoPeca = peca["TIPOPECA"].ToString();
                 string valorPeca = peca["VALORPECA"].ToString();
-                string quantPeca = peca["QUANTPECA"].ToString();
                 string fornecedor = peca["FORNECEDOR"].ToString();
 
                 // Consulta o nome da marca pelo id
@@ -187,10 +237,9 @@ namespace TCC_SIA.View
                 row.Cells[2].Value = marca;
                 row.Cells[3].Value = tipoPeca;
                 row.Cells[4].Value = valorPeca;
-                row.Cells[5].Value = quantPeca;
-                row.Cells[6].Value = fornecedor;
-                row.Cells[7].Value = 1; // Valor padrão para "Quantidade de Vezes"
-                row.Cells[8].Value = false; // Valor padrão para "Selecionar" (desmarcado)
+                row.Cells[5].Value = fornecedor;
+                row.Cells[6].Value = 1; // Valor padrão para "Quantidade de Vezes"
+                row.Cells[7].Value = false; // Valor padrão para "Selecionar" (desmarcado)
 
                 dataGridViewPeca.Rows.Add(row);
             }
@@ -198,13 +247,14 @@ namespace TCC_SIA.View
             // Validando a entrada da coluna "Quantidade de Vezes" para aceitar apenas números
             dataGridViewPeca.EditingControlShowing += (s, e) =>
             {
-                if (dataGridViewPeca.CurrentCell.ColumnIndex == dataGridViewPeca.Columns["Quantidade de Vezes"].Index)
+                if (dataGridViewPeca.CurrentCell.ColumnIndex == dataGridViewPeca.Columns["Quant. Vezes" +
+                    ""].Index)
                 {
                     TextBox tb = e.Control as TextBox;
                     if (tb != null)
                     {
-                        tb.KeyPress -= new KeyPressEventHandler(TextBox_KeyPress);
-                        tb.KeyPress += new KeyPressEventHandler(TextBox_KeyPress);
+                        tb.KeyPress -= new KeyPressEventHandler(TextBox_KeyPress2);
+                        tb.KeyPress += new KeyPressEventHandler(TextBox_KeyPress2);
                     }
                 }
             };
@@ -252,7 +302,7 @@ namespace TCC_SIA.View
         }
         #endregion
 
-  
+
 
         // Se a célula clicada não é da coluna "Quantidade de V
         private void AtualizarValoresTotais()
@@ -358,29 +408,6 @@ namespace TCC_SIA.View
 
             foreach (DataGridViewRow row in dataGridViewPeca.SelectedRows)
             {
-                if (row.Cells["Nome"].Value == null)
-                {
-                    MessageBox.Show("Preencha o nome do campo!)");
-                    return;
-                }
-
-                if (row.Cells["Valor"].Value == null)
-                {
-                    MessageBox.Show("Preencha o nome de valor!)");
-                    return;
-                }
-
-                if (row.Cells["Quantidade"].Value == null)
-                {
-                    MessageBox.Show("Preencha o nome de quantidade!)");
-                    return;
-                }
-
-                if (row.Cells["Garantia"].Value == null)
-                {
-                    MessageBox.Show("Coloque uma garantia!");
-                    return;
-                }
             }
 
             //Cria as listas para extrair os valores das datagridview
@@ -523,18 +550,24 @@ namespace TCC_SIA.View
         // Evento de pesquisar peça
         private void buttonPesquisarPeca_Click(object sender, EventArgs e)
         {
-            // Armazena os índices das linhas selecionadas
-            List<int> selectedRowIndices = new List<int>();
-            foreach (DataGridViewRow row in dataGridViewPeca.SelectedRows)
+            // Armazena os estados das checkboxes e os valores de "Quantidade de Vezes" antes de limpar
+            List<bool> checkboxStates = new List<bool>();
+            List<int> quantidadeVezesValues = new List<int>();
+
+            for (int i = 0; i < dataGridViewPeca.Rows.Count; i++)
             {
-                selectedRowIndices.Add(row.Index);
+                if (!dataGridViewPeca.Rows[i].IsNewRow)
+                {
+                    checkboxStates.Add(dataGridViewPeca.Rows[i].Cells["Selecionar"].Value is bool isChecked && isChecked);
+                    quantidadeVezesValues.Add(Convert.ToInt32(dataGridViewPeca.Rows[i].Cells["Quant. Vezes"].Value));
+                }
             }
 
-            // Limpar as linhas da DataGridView, exceto as selecionadas
+            // Limpar as linhas da DataGridView, exceto as que têm o checkbox "Selecionar" marcado
             for (int i = dataGridViewPeca.Rows.Count - 1; i >= 0; i--)
             {
-                // Verifica se a linha não é uma nova linha (linha vazia) e não está selecionada
-                if (!dataGridViewPeca.Rows[i].IsNewRow && !selectedRowIndices.Contains(i))
+                if (!dataGridViewPeca.Rows[i].IsNewRow &&
+                    !(dataGridViewPeca.Rows[i].Cells["Selecionar"].Value is bool isChecked && isChecked))
                 {
                     dataGridViewPeca.Rows.RemoveAt(i);
                 }
@@ -545,16 +578,41 @@ namespace TCC_SIA.View
             NpgsqlDataReader peca = cPeca.pesquisaPeca(textBoxPesquisarP.Text);
 
             // Definindo a quantidade de colunas que a grid terá
-            dataGridViewPeca.ColumnCount = 9;
-            dataGridViewPeca.Columns[0].Name = "Id";
-            dataGridViewPeca.Columns[1].Name = "Nome";
-            dataGridViewPeca.Columns[2].Name = "Marca";
-            dataGridViewPeca.Columns[3].Name = "Tipo";
-            dataGridViewPeca.Columns[4].Name = "Valor";
-            dataGridViewPeca.Columns[5].Name = "Quantidade";
-            dataGridViewPeca.Columns[8].Name = "Fornecedor";
+            dataGridViewPeca.ColumnCount = 6;
 
-            // Adicionando as descrições de peças sem duplicação
+            // Definindo as colunas na DataGridView para exibir as descrições das peças
+            dataGridViewPeca.Columns[0].Name = "Id Peça";
+            dataGridViewPeca.Columns[0].ReadOnly = true;
+
+            dataGridViewPeca.Columns[1].Name = "Nome";
+            dataGridViewPeca.Columns[1].ReadOnly = true;
+
+            dataGridViewPeca.Columns[2].Name = "Marca";
+            dataGridViewPeca.Columns[2].ReadOnly = true;
+
+            dataGridViewPeca.Columns[3].Name = "Tipo";
+            dataGridViewPeca.Columns[3].ReadOnly = true;
+
+            dataGridViewPeca.Columns[4].Name = "Valor";
+            dataGridViewPeca.Columns[4].ReadOnly = true;
+
+            dataGridViewPeca.Columns[5].Name = "Fornecedor";
+            dataGridViewPeca.Columns[5].ReadOnly = true;
+
+            // Criando a coluna "Quantidade de Vezes" (apenas números, editável)
+            DataGridViewTextBoxColumn quantidadeVezesColumn2 = new DataGridViewTextBoxColumn();
+            quantidadeVezesColumn2.Name = "Quant. Vezes";
+            quantidadeVezesColumn2.ValueType = typeof(int);
+            quantidadeVezesColumn2.ReadOnly = false; // Mantém editável
+            dataGridViewPeca.Columns.Add(quantidadeVezesColumn2);
+
+            // Criando a coluna de checkbox para marcação (editável)
+            DataGridViewCheckBoxColumn checkBoxColumn2 = new DataGridViewCheckBoxColumn();
+            checkBoxColumn2.Name = "Selecionar";
+            checkBoxColumn2.ReadOnly = false; // Deixando a checkbox editável
+            dataGridViewPeca.Columns.Add(checkBoxColumn2);
+
+            // Adicionando as descrições das peças
             while (peca.Read())
             {
                 string idPeca = peca["IDPECA"].ToString();
@@ -562,14 +620,82 @@ namespace TCC_SIA.View
                 string idMarca = peca["IDMARCA"].ToString();
                 string tipoPeca = peca["TIPOPECA"].ToString();
                 string valorPeca = peca["VALORPECA"].ToString();
-                string quantPeca = peca["QUANTPECA"].ToString();
                 string fornecedor = peca["FORNECEDOR"].ToString();
 
                 // Consulta o nome da marca pelo id
                 string marca = cPeca.pesquisaMarcaPecaPorId(idMarca);
-                dataGridViewPeca.Rows.Add(idPeca, nomePeca, marca, tipoPeca, valorPeca, quantPeca, fornecedor);
+
+                // Verifique se a linha já existe
+                bool exists = false;
+                foreach (DataGridViewRow existingRow in dataGridViewPeca.Rows)
+                {
+                    if (!existingRow.IsNewRow &&
+                        existingRow.Cells["Id"].Value.ToString() == idPeca &&
+                        existingRow.Cells["Nome"].Value.ToString() == nomePeca &&
+                        existingRow.Cells["Marca"].Value.ToString() == marca)
+                    {
+                        exists = true;
+                        break;
+                    }
+                }
+
+                // Adiciona a nova linha apenas se não existir
+                if (!exists)
+                {
+                    // Criando a nova linha manualmente
+                    DataGridViewRow row = new DataGridViewRow();
+                    row.CreateCells(dataGridViewPeca); // Define a grid para onde a linha vai
+
+                    // Preenchendo a linha com os valores
+                    row.Cells[0].Value = idPeca;
+                    row.Cells[1].Value = nomePeca;
+                    row.Cells[2].Value = marca;
+                    row.Cells[3].Value = tipoPeca;
+                    row.Cells[4].Value = valorPeca;
+                    row.Cells[5].Value = fornecedor;
+                    row.Cells[6].Value = 1; // Valor padrão para "Quantidade de Vezes"
+                    row.Cells[7].Value = false; // Valor padrão para "Selecionar" (desmarcado)
+
+                    dataGridViewPeca.Rows.Add(row);
+                }
+            }
+
+            // Após adicionar novas linhas, restaure os estados das checkboxes e os valores de "Quantidade de Vezes"
+            for (int i = 0; i < dataGridViewPeca.Rows.Count; i++)
+            {
+                if (i < checkboxStates.Count)
+                {
+                    dataGridViewPeca.Rows[i].Cells["Selecionar"].Value = checkboxStates[i];
+                    dataGridViewPeca.Rows[i].Cells["Quant. Vezes"].Value = quantidadeVezesValues[i];
+                }
+            }
+
+            // Validando a entrada da coluna "Quantidade de Vezes" para aceitar apenas números
+            dataGridViewPeca.EditingControlShowing += (s, e) =>
+            {
+                if (dataGridViewPeca.CurrentCell.ColumnIndex == dataGridViewPeca.Columns["Quant. Vezes"].Index)
+                {
+                    TextBox tb = e.Control as TextBox;
+                    if (tb != null)
+                    {
+                        tb.KeyPress -= new KeyPressEventHandler(TextBox_KeyPress2);
+                        tb.KeyPress += new KeyPressEventHandler(TextBox_KeyPress2);
+                    }
+                }
+            };
+
+            // Evento para permitir apenas números na coluna "Quantidade de Vezes"
+            void TextBox_KeyPress2(object sender, KeyPressEventArgs e)
+            {
+                // Permite apenas dígitos e tecla Backspace
+                if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
             }
         }
+
+
         #endregion
 
         #region Pesquisar serviço
@@ -579,136 +705,200 @@ namespace TCC_SIA.View
             // Criação do objeto NpgsqlDataReader servico e controleServico
             controleServico cServico = new controleServico();
             NpgsqlDataReader servico = cServico.pesquisaServico(textBoxPesquisarS.Text);
+
+            // Armazena os estados das checkboxes e os valores de "Quantidade de Vezes" antes de limpar
+            List<bool> checkboxStates = new List<bool>();
+            List<int> quantidadeVezesValues = new List<int>();
+
+            for (int i = 0; i < dataGridViewServico.Rows.Count; i++)
+            {
+                if (!dataGridViewServico.Rows[i].IsNewRow)
+                {
+                    checkboxStates.Add(dataGridViewServico.Rows[i].Cells["Selecionar"].Value is bool isChecked && isChecked);
+                    quantidadeVezesValues.Add(Convert.ToInt32(dataGridViewServico.Rows[i].Cells["Quant. Vezes)"].Value));
+                }
+            }
+
+            // Apaga as colunas da datagridview
             dataGridViewServico.Columns.Clear();
 
-            dataGridViewServico.ColumnCount = servico.FieldCount;
+            // Desabilitar a adição automática de novas linhas
+            dataGridViewServico.AllowUserToAddRows = false;
 
-            // Definindo a quant. de colunas que a grid terá
-            dataGridViewServico.ColumnCount = 4;
-            dataGridViewServico.Columns[0].Name = "Nome";
-            dataGridViewServico.Columns[1].Name = "Valor";
-            dataGridViewServico.Columns[2].Name = "Descrição";
-            dataGridViewServico.Columns[3].Name = "Garantia";
+            // Definindo a quantidade de colunas que a grid terá
+            dataGridViewServico.ColumnCount = 6;
+
+            // Definindo as colunas na DataGridView para exibir as descrições
+            dataGridViewServico.Columns[0].Name = "Id Serviço";
+            dataGridViewServico.Columns[0].ReadOnly = true; // Definindo como somente leitura
+
+            dataGridViewServico.Columns[1].Name = "Nome";
+            dataGridViewServico.Columns[1].ReadOnly = true; // Definindo como somente leitura
+
+            dataGridViewServico.Columns[2].Name = "Valor";
+            dataGridViewServico.Columns[2].ReadOnly = true; // Definindo como somente leitura
+
+            dataGridViewServico.Columns[3].Name = "Descrição";
+            dataGridViewServico.Columns[3].ReadOnly = true; // Definindo como somente leitura
+
+            dataGridViewServico.Columns[4].Name = "Garantia";
+            dataGridViewServico.Columns[4].ReadOnly = true; // Definindo como somente leitura
+
+            dataGridViewServico.Columns[5].Name = "Funcionário";
+            dataGridViewServico.Columns[5].ReadOnly = true; // Definindo como somente leitura
+
+            // Criando a coluna "Quantidade de Vezes" (apenas números, editável)
+            DataGridViewTextBoxColumn quantidadeVezesColumn = new DataGridViewTextBoxColumn();
+            quantidadeVezesColumn.Name = "Quant. Vezes";
+            quantidadeVezesColumn.ValueType = typeof(int);
+            quantidadeVezesColumn.ReadOnly = false; // Mantém editável
+            dataGridViewServico.Columns.Add(quantidadeVezesColumn);
+
+            // Criando a coluna de checkbox para marcação (editável)
+            DataGridViewCheckBoxColumn checkBoxColumn = new DataGridViewCheckBoxColumn();
+            checkBoxColumn.Name = "Selecionar";
+            checkBoxColumn.ReadOnly = false; // Deixando a checkbox editável
+            dataGridViewServico.Columns.Add(checkBoxColumn);
 
             // Adicionando as descrições dos serviços
             while (servico.Read())
             {
+                string idServico = servico["IDSERVICO"].ToString();
                 string nomeServico = servico["NOMESERVICO"].ToString();
                 string valorServico = servico["VALORSERVICO"].ToString();
                 string descServico = servico["DESCSERVICO"].ToString();
-                string garantia = servico["GARANTIASERVICO"].ToString();
+                string garantiaServico = servico["GARANTIASERVICO"].ToString();
+                string funcionarioServico = servico["FUNCIONARIO"].ToString();
 
-                dataGridViewServico.Rows.Add(nomeServico, valorServico, descServico, garantia);
+                // Verifique se a linha já existe
+                bool exists = false;
+                foreach (DataGridViewRow existingRow in dataGridViewServico.Rows)
+                {
+                    if (!existingRow.IsNewRow &&
+                        existingRow.Cells["Id"].Value.ToString() == idServico &&
+                        existingRow.Cells["Nome"].Value.ToString() == nomeServico)
+                    {
+                        exists = true;
+                        break;
+                    }
+                }
+
+                // Adiciona a nova linha apenas se não existir
+                if (!exists)
+                {
+                    // Criando a nova linha manualmente
+                    DataGridViewRow row = new DataGridViewRow();
+                    row.CreateCells(dataGridViewServico); // Define a grid para onde a linha vai
+
+                    // Preenchendo a linha com os valores
+                    row.Cells[0].Value = idServico;
+                    row.Cells[1].Value = nomeServico;
+                    row.Cells[2].Value = valorServico;
+                    row.Cells[3].Value = descServico;
+                    row.Cells[4].Value = garantiaServico;
+                    row.Cells[5].Value = funcionarioServico;
+                    row.Cells[6].Value = 1; // Valor padrão para "Quantidade de Vezes"
+                    row.Cells[7].Value = false; // Valor padrão para "Selecionar" (desmarcado)
+
+                    dataGridViewServico.Rows.Add(row);
+                }
+            }
+
+            // Após adicionar novas linhas, restaure os estados das checkboxes e os valores de "Quantidade de Vezes"
+            for (int i = 0; i < dataGridViewServico.Rows.Count; i++)
+            {
+                if (i < checkboxStates.Count)
+                {
+                    dataGridViewServico.Rows[i].Cells["Selecionar"].Value = checkboxStates[i];
+                    dataGridViewServico.Rows[i].Cells["Quant. Vezes"].Value = quantidadeVezesValues[i];
+                }
+            }
+
+            // Validando a entrada da coluna "Quantidade de Vezes" para aceitar apenas números
+            dataGridViewServico.EditingControlShowing += (s, e) =>
+            {
+                if (dataGridViewServico.CurrentCell.ColumnIndex == dataGridViewServico.Columns["Quant. Vezes"].Index)
+                {
+                    TextBox tb = e.Control as TextBox;
+                    if (tb != null)
+                    {
+                        tb.KeyPress -= new KeyPressEventHandler(TextBox_KeyPress);
+                        tb.KeyPress += new KeyPressEventHandler(TextBox_KeyPress);
+                    }
+                }
+            };
+
+            // Evento para permitir apenas números na coluna "Quantidade de Vezes"
+            void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+            {
+                // Permite apenas dígitos e tecla Backspace
+                if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
             }
         }
         #endregion
 
 
-        #region Extrai as peças
-        // Cria o método de extrair os serviços através de uma lista genérica da classe Pedido_Peca
-        public List<Pedido_Peca> ExtrairPecasDataGridView(DataGridView dataGridView)
+        public List<Pedido_Peca> ExtrairPecasDataGridView(DataGridView dataGridViewPeca)
         {
-            // Criação da lista e do objeto controlePeca
             List<Pedido_Peca> Pecas = new List<Pedido_Peca>();
-            controlePeca cPeca = new controlePeca();
 
-            // Loop de repetição para cada linha, adiciona um objeto Pedido_Peca na lista apenas se a checkbox estiver marcada
-            foreach (DataGridViewRow row in dataGridView.Rows)
+            foreach (DataGridViewRow row in dataGridViewPeca.Rows)
             {
-                // Verifica se a linha não é nova e se a checkbox "Selecionar" está marcada
                 if (!row.IsNewRow && Convert.ToBoolean(row.Cells["Selecionar"].Value))
                 {
-                    string nomePeca = row.Cells["Nome"].Value?.ToString();
+                    Pedido_Peca peca = new Pedido_Peca();
 
-                    // Lê o nome da marca de peça e traz o Id dessa peça
-                    NpgsqlDataReader peca = cPeca.pesquisaPecaParaOPedido(nomePeca);
-
-                    // Verificação da consulta do banco de dados
-                    if (peca != null)
+                    if (long.TryParse(row.Cells["Id Peça"].Value?.ToString(), out long idPeca))
                     {
-                        // Carrega os valores da consulta
-                        DataTable dtPecas = new DataTable();
-                        dtPecas.Load(peca);
-
-                        // Se traz o valor de id da marca, carrega a lista
-                        if (dtPecas.Rows.Count > 0)
-                        {
-                            Pedido_Peca pecas = new Pedido_Peca();
-
-
-                            // Definição aos atributos da classe
-
-                            if (long.TryParse(dtPecas.Rows[0]["IDMARCA"].ToString(), out long idNomeMarca))
-                            {
-                                pecas.setIdMarca(idNomeMarca);
-                            }
-
-                            string nomePecaVar = (row.Cells["Nome"].Value?.ToString());
-                            string tipoPecaVar = (row.Cells["Tipo"].Value?.ToString());
-
-                            if (int.TryParse(row.Cells["Quantidade de Vezes"].Value?.ToString(), out int quant))
-                            {
-                                pecas.setQuantPeca(quant);
-                            }
-
-                            string descPecaVar = (row.Cells["Descrição"].Value?.ToString());
-
-                            if (DateTime.TryParse(row.Cells["Garantia"].Value?.ToString(), out DateTime garantia))
-                            {
-                                pecas.setGarantiaPeca(garantia);
-                            }
-
-                            pecas.setNomePeca(nomePecaVar);
-                            pecas.setTipoPeca(tipoPecaVar);
-                            pecas.setDescPeca(descPecaVar);
-
-                            // Adiciona a classe Pedido_Peca na lista
-                            Pecas.Add(pecas);
-                        }
-
-                        // Fecha a consulta do banco de dados
-                        peca.Close();
+                        peca.setIdPeca(idPeca);
                     }
+
+                    if (int.TryParse(row.Cells["Quant. Vezes"].Value?.ToString(), out int quantVezes))
+                    {
+                        peca.setQuantVezes(quantVezes);
+                    }
+
+                    Pecas.Add(peca);
                 }
             }
 
-            // Retorna a lista
             return Pecas;
         }
-        #endregion
+
+
+
 
         #region Extrai os serviços
-        // Cria o método de extrair os serviços através de uma lista genérica da classe Servico
-        public List<Servico> ExtrairServicosDataGridView(DataGridView dataGridView)
+        public List<Servico> ExtrairServicosDataGridView(DataGridView dataGridViewServico)
         {
-            // Criação da lista
             List<Servico> Servicos = new List<Servico>();
 
-            // Loop de repetição para cada linha, adiciona um objeto Servico na lista apenas se a checkbox estiver marcada
-            foreach (DataGridViewRow row in dataGridView.Rows)
+            foreach (DataGridViewRow row in dataGridViewServico.Rows)
             {
-                // Verifica se a linha não é nova e se a checkbox "Selecionar" está marcada
                 if (!row.IsNewRow && Convert.ToBoolean(row.Cells["Selecionar"].Value))
                 {
-                    // Definição aos atributos da classe
-                    Servico servicos = new Servico();
-                    servicos.setNomeServico(row.Cells["Nome"].Value?.ToString());
+                    Servico servico = new Servico();
 
-                    if (long.TryParse(row.Cells["Valor"].Value?.ToString(), out long valor))
+                    if (long.TryParse(row.Cells["Id Serviço"].Value?.ToString(), out long idServico))
                     {
-                        servicos.setValorServico(valor);
+                        servico.setIDServico(idServico);
                     }
 
-                    servicos.setDescServico(row.Cells["Descrição"].Value?.ToString());
+                    if (int.TryParse(row.Cells["Quant. Vezes"].Value?.ToString(), out int quantVezes))
+                    {
+                        servico.setQuantVezes(quantVezes);
+                    }
 
-                    // Adiciona a classe Servico na lista
-                    Servicos.Add(servicos);
+                    Servicos.Add(servico);
                 }
             }
 
-            // Retorna a lista
             return Servicos;
         }
+
         #endregion
 
 
