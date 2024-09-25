@@ -28,71 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
-            label3 = new Label();
-            label4 = new Label();
-            textBoxNome = new TextBox();
-            richTextBoxDesc = new RichTextBox();
-            maskedTextBoxValor = new MaskedTextBox();
             buttonCadastrar = new Button();
+            dateTimePickerGarantia = new DateTimePicker();
+            label2 = new Label();
+            maskedTextBoxValor = new MaskedTextBox();
+            richTextBoxDesc = new RichTextBox();
+            textBoxNome = new TextBox();
+            label4 = new Label();
+            label3 = new Label();
+            label1 = new Label();
+            label11 = new Label();
+            comboBoxFunc = new ComboBox();
+            label6 = new Label();
             SuspendLayout();
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(26, 37);
-            label1.Name = "label1";
-            label1.Size = new Size(53, 20);
-            label1.TabIndex = 0;
-            label1.Text = "Nome:";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(34, 76);
-            label3.Name = "label3";
-            label3.Size = new Size(46, 20);
-            label3.TabIndex = 2;
-            label3.Text = "Valor:";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(358, 37);
-            label4.Name = "label4";
-            label4.Size = new Size(77, 20);
-            label4.TabIndex = 3;
-            label4.Text = "Descrição:";
-            // 
-            // textBoxNome
-            // 
-            textBoxNome.Location = new Point(82, 33);
-            textBoxNome.Margin = new Padding(3, 4, 3, 4);
-            textBoxNome.Name = "textBoxNome";
-            textBoxNome.Size = new Size(269, 27);
-            textBoxNome.TabIndex = 4;
-            // 
-            // richTextBoxDesc
-            // 
-            richTextBoxDesc.Location = new Point(434, 33);
-            richTextBoxDesc.Margin = new Padding(3, 4, 3, 4);
-            richTextBoxDesc.Name = "richTextBoxDesc";
-            richTextBoxDesc.Size = new Size(340, 185);
-            richTextBoxDesc.TabIndex = 6;
-            richTextBoxDesc.Text = "";
-            // 
-            // maskedTextBoxValor
-            // 
-            maskedTextBoxValor.Location = new Point(82, 72);
-            maskedTextBoxValor.Margin = new Padding(3, 4, 3, 4);
-            maskedTextBoxValor.Name = "maskedTextBoxValor";
-            maskedTextBoxValor.Size = new Size(269, 27);
-            maskedTextBoxValor.TabIndex = 7;
-            maskedTextBoxValor.KeyPress += maskedTextBoxValor_KeyPress;
             // 
             // buttonCadastrar
             // 
-            buttonCadastrar.Location = new Point(26, 114);
+            buttonCadastrar.Location = new Point(16, 171);
             buttonCadastrar.Margin = new Padding(3, 4, 3, 4);
             buttonCadastrar.Name = "buttonCadastrar";
             buttonCadastrar.Size = new Size(165, 104);
@@ -101,18 +53,125 @@
             buttonCadastrar.UseVisualStyleBackColor = true;
             buttonCadastrar.Click += buttonCadastrar_Click;
             // 
+            // dateTimePickerGarantia
+            // 
+            dateTimePickerGarantia.Format = DateTimePickerFormat.Short;
+            dateTimePickerGarantia.Location = new Point(110, 103);
+            dateTimePickerGarantia.Name = "dateTimePickerGarantia";
+            dateTimePickerGarantia.Size = new Size(122, 27);
+            dateTimePickerGarantia.TabIndex = 18;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(39, 103);
+            label2.Name = "label2";
+            label2.Size = new Size(68, 20);
+            label2.TabIndex = 17;
+            label2.Text = "Garantia:";
+            // 
+            // maskedTextBoxValor
+            // 
+            maskedTextBoxValor.Location = new Point(110, 69);
+            maskedTextBoxValor.Margin = new Padding(3, 4, 3, 4);
+            maskedTextBoxValor.Name = "maskedTextBoxValor";
+            maskedTextBoxValor.Size = new Size(269, 27);
+            maskedTextBoxValor.TabIndex = 16;
+            maskedTextBoxValor.Text = "0.00";
+            maskedTextBoxValor.TextChanged += maskedTextBoxValor_TextChanged;
+            maskedTextBoxValor.KeyPress += maskedTextBoxValor_KeyPress;
+            // 
+            // richTextBoxDesc
+            // 
+            richTextBoxDesc.Location = new Point(469, 29);
+            richTextBoxDesc.Margin = new Padding(3, 4, 3, 4);
+            richTextBoxDesc.Name = "richTextBoxDesc";
+            richTextBoxDesc.Size = new Size(340, 246);
+            richTextBoxDesc.TabIndex = 15;
+            richTextBoxDesc.Text = "";
+            // 
+            // textBoxNome
+            // 
+            textBoxNome.Location = new Point(111, 34);
+            textBoxNome.Margin = new Padding(3, 4, 3, 4);
+            textBoxNome.Name = "textBoxNome";
+            textBoxNome.Size = new Size(269, 27);
+            textBoxNome.TabIndex = 14;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(386, 29);
+            label4.Name = "label4";
+            label4.Size = new Size(77, 20);
+            label4.TabIndex = 13;
+            label4.Text = "Descrição:";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(62, 67);
+            label3.Name = "label3";
+            label3.Size = new Size(46, 20);
+            label3.TabIndex = 12;
+            label3.Text = "Valor:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(54, 29);
+            label1.Name = "label1";
+            label1.Size = new Size(53, 20);
+            label1.TabIndex = 11;
+            label1.Text = "Nome:";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(386, 67);
+            label11.Name = "label11";
+            label11.Size = new Size(26, 20);
+            label11.TabIndex = 86;
+            label11.Text = "R$";
+            // 
+            // comboBoxFunc
+            // 
+            comboBoxFunc.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxFunc.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBoxFunc.FormattingEnabled = true;
+            comboBoxFunc.Location = new Point(111, 136);
+            comboBoxFunc.Name = "comboBoxFunc";
+            comboBoxFunc.Size = new Size(269, 28);
+            comboBoxFunc.TabIndex = 87;
+            comboBoxFunc.DropDown += comboBoxFunc_DropDown;
+            comboBoxFunc.Validating += comboBox1_Validating;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(16, 139);
+            label6.Name = "label6";
+            label6.Size = new Size(89, 20);
+            label6.TabIndex = 90;
+            label6.Text = "Funcionário:";
+            // 
             // CadastroServico
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(807, 249);
-            Controls.Add(buttonCadastrar);
+            ClientSize = new Size(829, 295);
+            Controls.Add(label6);
+            Controls.Add(comboBoxFunc);
+            Controls.Add(label11);
+            Controls.Add(dateTimePickerGarantia);
+            Controls.Add(label2);
             Controls.Add(maskedTextBoxValor);
             Controls.Add(richTextBoxDesc);
             Controls.Add(textBoxNome);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label1);
+            Controls.Add(buttonCadastrar);
             Margin = new Padding(3, 4, 3, 4);
             Name = "CadastroServico";
             Text = "CadastroServico";
@@ -122,13 +181,17 @@
         }
 
         #endregion
-
-        private Label label1;
-        private Label label3;
-        private Label label4;
-        private TextBox textBoxNome;
-        private RichTextBox richTextBoxDesc;
-        private MaskedTextBox maskedTextBoxValor;
         private Button buttonCadastrar;
+        private DateTimePicker dateTimePickerGarantia;
+        private Label label2;
+        private MaskedTextBox maskedTextBoxValor;
+        private RichTextBox richTextBoxDesc;
+        private TextBox textBoxNome;
+        private Label label4;
+        private Label label3;
+        private Label label1;
+        private Label label11;
+        private ComboBox comboBoxFunc;
+        private Label label6;
     }
 }

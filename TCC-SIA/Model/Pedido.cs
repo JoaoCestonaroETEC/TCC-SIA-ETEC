@@ -10,7 +10,7 @@ namespace TCC_SIA.Model
     {
         #region Criação de atributo
         private long idPedido;
-        private long cpfCliente;
+        private long idcliente;
         private long idVeiculo;
         private decimal valorTotalPedido;
         private decimal valorTotalPeca;
@@ -18,6 +18,13 @@ namespace TCC_SIA.Model
         private string observacao;
         private DateTime dataInicio;
         private DateTime dataFim;
+        private int desconto_porcento;
+        private decimal desconto_reais;
+        private int descontoPeca_porcento;
+        private decimal descontoPeca_reais;
+        private int descontoServ_porcento;
+        private decimal descontoServ_reais;
+
         #endregion
 
         #region Encapsulamento
@@ -31,14 +38,14 @@ namespace TCC_SIA.Model
             this.idPedido = idPedido;
         }
 
-        public long getCpfCliente()
+        public long getIdCliente()
         {
-            return cpfCliente;
+            return idcliente;
         }
         
-        public void setCpfCliente(long cpfCliente)
+        public void setIdCliente(long idcliente)
         {
-            this.cpfCliente = cpfCliente;
+            this.idcliente = idcliente;
         }
         public long getIdVeiculo()
         {
@@ -108,6 +115,62 @@ namespace TCC_SIA.Model
         public void setDataFim(DateTime dataFim)
         {
             this.dataFim = dataFim;
+        }
+        public int getDescontoPorCento()
+        {
+            return desconto_porcento;
+        }
+
+        public void setDescontoPorCento(int descontoPorCento)
+        {
+            this.desconto_porcento = descontoPorCento;
+        }
+
+        public decimal getDescontoReais()
+        {
+            return desconto_reais;
+        }
+
+        public void setDescontoReais(decimal descontoReais)
+        {
+            this.desconto_reais = descontoReais;
+        }
+        public decimal getDescontoPecaReais()
+        {
+            return descontoPeca_reais;
+        }
+
+        public void setDescontoPecaReais(decimal descontoReais)
+        {
+            this.descontoPeca_reais = descontoReais;
+        }
+        public int getDescontoPecaPorc()
+        {
+            return descontoPeca_porcento;
+        }
+
+        public void setDescontoPecaPorc(int descontoPorc)
+        {
+            this.descontoPeca_porcento = descontoPorc;
+        }
+        public int getDescontoServPorCento()
+        {
+            return descontoServ_porcento;
+        }
+
+        public void setDescontoServPorCento(int descontoPorCento)
+        {
+            this.descontoServ_porcento = descontoPorCento;
+        }
+
+        public decimal getDescontoServReais()
+        {
+            return descontoServ_reais;
+        }
+
+        public void setDescontoServReais(decimal descontoReais)
+        {
+            this.descontoServ_reais = descontoReais;
         }
         #endregion
     }

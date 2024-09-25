@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,6 +19,7 @@ namespace TCC_SIA.View
         public CadastroServico()
         {
             InitializeComponent();
+            listarFuncionario();
         }
         #endregion
 
@@ -40,6 +42,8 @@ namespace TCC_SIA.View
 
             //Definindo os valores nos atributos
             mServico.setNomeServico(textBoxNome.Text);
+            mServico.setGarantiaServico(Convert.ToDateTime(dateTimePickerGarantia.Text));
+
 
             //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
             decimal valor;
@@ -50,6 +54,8 @@ namespace TCC_SIA.View
 
             mServico.setDescServico(richTextBoxDesc.Text);
 
+            mServico.setFuncionario(comboBoxFunc.Text);
+
             //Chamada ao método de cadastro no ControleServico
             string res = cServico.cadastroServico(mServico);
 
@@ -58,23 +64,106 @@ namespace TCC_SIA.View
         }
         #endregion
 
+        #region Listar tipos
+        public void listarFuncionario()
+        {
+            controleServico cVeiculo = new controleServico();
+            //Recebe os dados da consulta e salva no dataReader (Tipo)
+            NpgsqlDataReader veiculo = cVeiculo.listaFuncionario();
+
+            //Converter o dataReader em DataTable
+            DataTable dtVeiculo = new DataTable();
+            dtVeiculo.Load(veiculo);
+
+            //Preencher a combobox com os dados do DataTable
+            comboBoxFunc.DataSource = dtVeiculo;
+
+            //Define qual coluna do DataTable que será exibida (nome da coluna)
+            comboBoxFunc.DisplayMember = "FUNCIONARIO";
+        }
+        #endregion
+
         #region Carrega o formulário
         private void CadastroServico_Load(object sender, EventArgs e)
         {
             //Definir eventos para validar a entrada
-            maskedTextBoxValor.KeyPress += new KeyPressEventHandler(maskedTextBoxValor_KeyPress);
+            maskedTextBoxValor.KeyPress += new KeyPressEventHandler(maskedTextBoxValor_TextChanged);
         }
         #endregion
 
-        #region Método de aceitar apenas números
-        private void maskedTextBoxValor_KeyPress(object sender, KeyPressEventArgs e)
+        private void maskedTextBoxValor_TextChanged(object sender, EventArgs e)
         {
-            //Verifica se a tecla pressionada é um dígito ou uma tecla de controle (como Backspace)
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            MaskedTextBox maskedTextBox = sender as MaskedTextBox;
+
+            // Remove qualquer formatação anterior e deixa apenas os números
+            string textoAtual = maskedTextBox.Text.Replace(",", "").Replace(".", "").TrimStart('0');
+
+            if (textoAtual.Length == 0)
             {
-                e.Handled = true; //Impede a entrada de caracteres não numéricos
+                textoAtual = "0";
+            }
+
+            // Converte o texto para decimal
+            if (decimal.TryParse(textoAtual, out decimal valorDecimal))
+            {
+                maskedTextBox.TextChanged -= maskedTextBoxValor_TextChanged; // Remove o evento para evitar loop
+
+                // Formata o valor com ponto como separador de centavos e sem separadores de milhar
+                maskedTextBox.Text = string.Format("{0:0.00}", valorDecimal / 100);
+
+                // Coloca o cursor no final
+                maskedTextBox.SelectionStart = maskedTextBox.Text.Length;
+
+                maskedTextBox.TextChanged += maskedTextBoxValor_TextChanged; // Reinscreve o evento
             }
         }
-        #endregion
+
+        private void maskedTextBoxValor_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir apenas números e a tecla Backspace
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true; // Bloqueia a entrada
+            }
+        }
+
+        private void comboBox1_Validating(object sender, CancelEventArgs e)
+        {
+            System.Windows.Forms.ComboBox comboBox = sender as System.Windows.Forms.ComboBox;
+            string fornecedorDigitado = comboBox.Text;
+
+            // Verifica se o valor digitado já existe na lista de itens da ComboBox
+            bool fornecedorExiste = comboBox.Items.Cast<System.Data.DataRowView>()
+                                       .Any(item => item["FUNCIONARIO"].ToString()
+                                       .Equals(fornecedorDigitado, StringComparison.OrdinalIgnoreCase));
+
+            if (!fornecedorExiste && !string.IsNullOrEmpty(fornecedorDigitado))
+            {
+                // Exibe a mensagem com o aviso
+                DialogResult result = MessageBox.Show("Aviso! Funcionário não registrado, deseja adicionar um novo?",
+                                                      "Aviso!",
+                                                      MessageBoxButtons.YesNo,
+                                                      MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    // Ação para adicionar um novo fornecedor (sem adicionar o valor na ComboBox diretamente)
+                    MessageBox.Show("Mantenha o valor digitado para cadastrar um novo funcionário",
+                                    "Ação Necessária",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
+                }
+                else
+                {
+                    // Limpa o texto da ComboBox
+                    comboBox.Text = string.Empty;
+                }
+            }
+        }
+
+        private void comboBoxFunc_DropDown(object sender, EventArgs e)
+        {
+            listarFuncionario();
+        }
     }
 }

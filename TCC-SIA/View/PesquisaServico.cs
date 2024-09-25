@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TCC_SIA.Controller;
+using TCC_SIA.Model;
 
 namespace TCC_SIA.View
 {
@@ -31,18 +32,26 @@ namespace TCC_SIA.View
             dataGridViewPesquisar.ColumnCount = servico.FieldCount;
 
             //Definindo três colunas na DataGridView para exibir as descrições
-            dataGridViewPesquisar.ColumnCount = 3;
+            dataGridViewPesquisar.ColumnCount = 6;
             dataGridViewPesquisar.Columns[0].Name = "Id";
             dataGridViewPesquisar.Columns[1].Name = "Nome";
-            dataGridViewPesquisar.Columns[2].Name = "Valor";
+            dataGridViewPesquisar.Columns[2].Name = "Descricao";
+            dataGridViewPesquisar.Columns[3].Name = "Valor";
+            dataGridViewPesquisar.Columns[4].Name = "Garantia";
+            dataGridViewPesquisar.Columns[5].Name = "Funcionário";
+
 
             //Adicionando as descrições dos serviços
             while (servico.Read())
             {
                 string idServico = servico["IDSERVICO"].ToString();
                 string nomeServico = servico["NOMESERVICO"].ToString();
+                string descServico = servico["DESCSERVICO"].ToString();
                 string valorServico = servico["VALORSERVICO"].ToString();
-                dataGridViewPesquisar.Rows.Add(idServico, nomeServico, valorServico);
+                string garantiaServico = servico["GARANTIASERVICO"].ToString();
+                string funcionarioServico = servico["FUNCIONARIO"].ToString();
+
+                dataGridViewPesquisar.Rows.Add(idServico, nomeServico, descServico, valorServico, garantiaServico, funcionarioServico);
             }
             #endregion
         }
@@ -63,20 +72,72 @@ namespace TCC_SIA.View
             dataGridViewPesquisar.ColumnCount = servico.FieldCount;
 
             //Definindo três colunas na DataGridView para exibir as descrições
-            dataGridViewPesquisar.ColumnCount = 3;
+            dataGridViewPesquisar.ColumnCount = 6;
             dataGridViewPesquisar.Columns[0].Name = "Id";
             dataGridViewPesquisar.Columns[1].Name = "Nome";
-            dataGridViewPesquisar.Columns[2].Name = "Valor";
+            dataGridViewPesquisar.Columns[2].Name = "Descricao";
+            dataGridViewPesquisar.Columns[3].Name = "Valor";
+            dataGridViewPesquisar.Columns[4].Name = "Garantia";
+            dataGridViewPesquisar.Columns[5].Name = "Funcionário";
+
 
             //Adicionando as descrições dos serviços
             while (servico.Read())
             {
                 string idServico = servico["IDSERVICO"].ToString();
                 string nomeServico = servico["NOMESERVICO"].ToString();
+                string descServico = servico["DESCSERVICO"].ToString();
                 string valorServico = servico["VALORSERVICO"].ToString();
-                dataGridViewPesquisar.Rows.Add(idServico, nomeServico, valorServico);
+                string garantiaServico = servico["GARANTIASERVICO"].ToString();
+                string funcionarioServico = servico["FUNCIONARIO"].ToString();
+
+                dataGridViewPesquisar.Rows.Add(idServico, nomeServico, descServico, valorServico, garantiaServico, funcionarioServico);
             }
         }
         #endregion
+
+        private void btnSalvarAtulizar_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewPesquisar.SelectedRows.Count > 0)
+            {
+                DialogResult res = MessageBox.Show("Deseja atualizar este registro?", "Atualização de registro",
+                    MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+                if (res == DialogResult.OK)
+                {
+                    maskedTextBoxID.Text = dataGridViewPesquisar.CurrentRow.Cells[0].Value.ToString();
+                    textBoxNome.Text = dataGridViewPesquisar.CurrentRow.Cells[1].Value.ToString();
+                    richTextBoxDesc.Text = dataGridViewPesquisar.CurrentRow.Cells[2].Value.ToString();
+                    maskedTextBoxValor.Text = dataGridViewPesquisar.CurrentRow.Cells[3].Value.ToString();
+                    dateTimePickerGarantia.Value = Convert.ToDateTime(dataGridViewPesquisar.CurrentRow.Cells[4].Value.ToString());
+                    tabControl1.SelectedTab = tabPage2;
+                }
+            }
+        }
+
+        private void buttonSalvarA_Click(object sender, EventArgs e)
+        {
+            controleServico cServico = new controleServico();
+
+            Servico mServico = new Servico();
+
+            //Definindo os valores nos atributos
+
+            //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
+
+            mServico.setIDServico(Convert.ToInt32(maskedTextBoxID.Text));
+            mServico.setNomeServico(textBoxNome.Text);
+            mServico.setDescServico(richTextBoxDesc.Text);
+            mServico.setValorServico(Convert.ToInt32(maskedTextBoxValor.Text));
+            mServico.setGarantiaServico(Convert.ToDateTime(dateTimePickerGarantia.Text));
+
+            //Chamada ao método de cadastro no ControleServico
+            string res = cServico.atualizaServico(mServico);
+
+            //Mostra o resultado
+            MessageBox.Show(res);
+        }
+
+      
     }
 }

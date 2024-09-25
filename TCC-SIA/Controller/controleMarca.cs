@@ -10,31 +10,45 @@ namespace TCC_SIA.Controller
 {
     internal class controleMarca
     {
-        #region Cadastrar marca de veículo
-        //Criação do método de cadastrar marca de veículo
+        #region Cadastrar marca
+        //Criação do método de cadastrar marca
         public string cadastroMarcaVeiculo(Marca mMarca)
         {
+            //String SQL de inserção
+            string sqlVef = "SELECT COUNT(1) FROM MARCA WHERE NOMEMARCA = @NOMEMARCA AND TIPOMARCA = @TIPOMARCA";
             //String sql de inserção
-            string sql = "INSERT INTO MARCA_VEICULO(NOMEMARCAVEICULO, DESCMARCAVEICULO) " +
-                "VALUES(@NOMEMARCAVEICULO, @DESCMARCAVEICULO);";
+            string sql = "INSERT INTO MARCA(NOMEMARCA, DESCMARCA, TIPOMARCA) " +
+                "VALUES(@NOMEMARCA, @DESCMARCA, @TIPOMARCA);";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();
             NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+            NpgsqlCommand commVef = new NpgsqlCommand(sqlVef, conn);
 
             //Fazendo o try
             try
             {
+                //Faz a verificação de o CPF já existe no Banco
+                commVef.Parameters.AddWithValue("@NOMEMARCA", mMarca.getNomeMarca());
+                commVef.Parameters.AddWithValue("@TIPOMARCA", mMarca.getTipoMarca());
+                int marcaExists = Convert.ToInt32(commVef.ExecuteScalar());
+
+                if (marcaExists > 0)
+                {
+                    return "Marca já cadastrada no sistema.";
+                }
+
                 //Definindo os valores a serem postos nos campos
-                comm.Parameters.AddWithValue("@NOMEMARCAVEICULO", mMarca.getNomeMarca());
-                comm.Parameters.AddWithValue("@DESCMARCAVEICULO", mMarca.getDescMarca());
+                comm.Parameters.AddWithValue("@NOMEMARCA", mMarca.getNomeMarca());
+                comm.Parameters.AddWithValue("@DESCMARCA", mMarca.getDescMarca());
+                comm.Parameters.AddWithValue("@TIPOMARCA", mMarca.getTipoMarca());
 
                 //Executando o Query
                 comm.ExecuteNonQuery();
 
                 //Retornando um valor
-                return "Marca de veículo cadastrada com sucesso!";
+                return "Marca cadastrada com sucesso!";
             }
             //Fazendo o catch
             catch (NpgsqlException ex)
@@ -51,53 +65,12 @@ namespace TCC_SIA.Controller
         }
         #endregion
 
-        #region Cadastrar marca de peça
-        //Criação do método de cadastrar marca de peça
-        public string cadastroMarcaPeca(Marca mMarca)
-        {
-            //String sql de inserção
-            string sql = "INSERT INTO MARCA_PECA(NOMEMARCAPECA, DESCMARCAPECA) " +
-                "VALUES(@NOMEMARCAPECA, @DESCMARCAPECA);";
-
-            //Abrindo conexão com o banco de dados
-            conexaoBD con = new conexaoBD();
-            NpgsqlConnection conn = con.conectar();
-            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
-
-            //Fazendo o try
-            try
-            {
-                //Definindo os valores a serem postos nos campos
-                comm.Parameters.AddWithValue("@NOMEMARCAPECA", mMarca.getNomeMarca());
-                comm.Parameters.AddWithValue("@DESCMARCAPECA", mMarca.getDescMarca());
-
-                //Executando o Query
-                comm.ExecuteNonQuery();
-
-                //Retornando um valor
-                return "Marca de peça cadastrada com sucesso!";
-            }
-            //Fazendo o catch
-            catch (NpgsqlException ex)
-            {
-                //Retornando o erro
-                return ex.ToString();
-            }
-            //Encerrando a conexão
-            finally
-            {
-                //Método de desconectar
-                con.desconectar();
-            }
-        }
-        #endregion
-
-        #region Listar marca de veículo
-        //Criação do método de listar marca de veículo
-        public NpgsqlDataReader listarMarcaVeiculo()
+        #region Listar novas marca
+        //Criação do método de listar marca
+        public NpgsqlDataReader listarNovasMarca()
         {
             //String sql de listar
-            string sql = "SELECT * FROM MARCA_VEICULO;";
+            string sql = "SELECT * FROM MARCA WHERE TIPOMARCA NOT IN ('Peças Automotívas', 'Óleos lubrificantes', 'Pneus', 'Ferramentas e Equipamento para oficinas', 'Veiculos');";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
@@ -126,12 +99,12 @@ namespace TCC_SIA.Controller
         }
         #endregion
 
-        #region Listar marca de peça
-        //Criação do método de listar marca de peça
-        public NpgsqlDataReader listarMarcaPeca()
+        #region Listar marca
+        //Criação do método de listar marca
+        public NpgsqlDataReader listarMarca()
         {
             //String sql de listar
-            string sql = "SELECT * FROM MARCA_PECA;";
+            string sql = "SELECT * FROM MARCA;";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
@@ -160,12 +133,12 @@ namespace TCC_SIA.Controller
         }
         #endregion
 
-        #region Pesquisar marca de veículo
-        //Criação do método de pesquisar marca de veículo
-        public NpgsqlDataReader pesquisaMarcaVeiculo(string marca)
+        #region Listar marca só de veiculos
+        //Criação do método de listar marca
+        public NpgsqlDataReader listarMarcaVeiculos()
         {
-            //String sql de pesquisar
-            string sql = "SELECT * FROM MARCA_VEICULO WHERE NOMEMARCAVEICULO LIKE '" + marca + "%';";
+            //String sql de listar
+            string sql = "SELECT * FROM MARCA WHERE TIPOMARCA LIKE '%Veiculos';";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
@@ -194,12 +167,13 @@ namespace TCC_SIA.Controller
         }
         #endregion
 
-        #region Pesquisar marca de peça
-        //Criação do método de pesquisar marca de peça
-        public NpgsqlDataReader pesquisaMarcaPeca(string marca)
+
+        #region Pesquisar marca
+        //Criação do método de pesquisar marca
+        public NpgsqlDataReader pesquisaMarca(string marca, string tipo)
         {
             //String sql de pesquisar
-            string sql = "SELECT * FROM MARCA_PECA WHERE NOMEMARCAPECA LIKE '" + marca + "%';";
+            string sql = "SELECT * FROM MARCA WHERE NOMEMARCA LIKE '" + marca + "%' AND TIPOMARCA LIKE '" + tipo + "%';";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();

@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TCC_SIA.Controller;
@@ -20,78 +21,255 @@ namespace TCC_SIA.View
         {
             InitializeComponent();
 
-            #region Carrega os dados nas comboBoxs
             listarCliente();
-            listarPeca();
-            listarServico();
             listarVeiculo();
-            #endregion 
 
             #region Carrega os dados de pesquisa de serviços
-            //Criação do objeto NpgsqlDataReader servico e controleServico
+            // Criação do objeto NpgsqlDataReader servico e controleServico
             controleServico cServico = new controleServico();
-            NpgsqlDataReader servico = cServico.listaServico();
+            NpgsqlDataReader servico = cServico.pesquisaServico(textBoxPesquisarS.Text);
 
-            //Apaga as colunas da datagridview
+            // Armazena os estados das checkboxes e os valores de "Quantidade de Vezes" antes de limpar
+            List<bool> checkboxStates = new List<bool>();
+            List<int> quantidadeVezesValues = new List<int>();
+
+            for (int i = 0; i < dataGridViewServico.Rows.Count; i++)
+            {
+                if (!dataGridViewServico.Rows[i].IsNewRow)
+                {
+                    checkboxStates.Add(dataGridViewServico.Rows[i].Cells["Selecionar"].Value is bool isChecked && isChecked);
+                    quantidadeVezesValues.Add(Convert.ToInt32(dataGridViewServico.Rows[i].Cells["Quant. Vezes"].Value));
+                }
+            }
+
+            // Apaga as colunas da datagridview
             dataGridViewServico.Columns.Clear();
 
-            //Definindo a quant. de colunas que a grid terá
-            dataGridViewServico.ColumnCount = servico.FieldCount;
+            // Desabilitar a adição automática de novas linhas
+            dataGridViewServico.AllowUserToAddRows = false;
 
-            //Definindo três colunas na DataGridView para exibir as descrições
-            dataGridViewServico.ColumnCount = 3;
-            dataGridViewServico.Columns[0].Name = "Nome";
-            dataGridViewServico.Columns[1].Name = "Valor";
-            dataGridViewServico.Columns[2].Name = "Descrição";
+            // Definindo a quantidade de colunas que a grid terá
+            dataGridViewServico.ColumnCount = 6;
 
-            //Adicionando as descrições dos serviços
+            // Definindo as colunas na DataGridView para exibir as descrições
+            dataGridViewServico.Columns[0].Name = "Id Serviço";
+            dataGridViewServico.Columns[0].ReadOnly = true; // Definindo como somente leitura
+
+            dataGridViewServico.Columns[1].Name = "Nome";
+            dataGridViewServico.Columns[1].ReadOnly = true; // Definindo como somente leitura
+
+            dataGridViewServico.Columns[2].Name = "Valor";
+            dataGridViewServico.Columns[2].ReadOnly = true; // Definindo como somente leitura
+
+            dataGridViewServico.Columns[3].Name = "Descrição";
+            dataGridViewServico.Columns[3].ReadOnly = true; // Definindo como somente leitura
+
+            dataGridViewServico.Columns[4].Name = "Garantia";
+            dataGridViewServico.Columns[4].ReadOnly = true; // Definindo como somente leitura
+
+            dataGridViewServico.Columns[5].Name = "Funcionário";
+            dataGridViewServico.Columns[5].ReadOnly = true; // Definindo como somente leitura
+
+            // Criando a coluna "Quantidade de Vezes" (apenas números, editável)
+            DataGridViewTextBoxColumn quantidadeVezesColumn = new DataGridViewTextBoxColumn();
+            quantidadeVezesColumn.Name = "Quant. Vezes";
+            quantidadeVezesColumn.ValueType = typeof(int);
+            quantidadeVezesColumn.ReadOnly = false; // Mantém editável
+            dataGridViewServico.Columns.Add(quantidadeVezesColumn);
+
+            // Criando a coluna de checkbox para marcação (editável)
+            DataGridViewCheckBoxColumn checkBoxColumn = new DataGridViewCheckBoxColumn();
+            checkBoxColumn.Name = "Selecionar";
+            checkBoxColumn.ReadOnly = false; // Deixando a checkbox editável
+            dataGridViewServico.Columns.Add(checkBoxColumn);
+
+            // Adicionando as descrições dos serviços
             while (servico.Read())
             {
+                string idServico = servico["IDSERVICO"].ToString();
                 string nomeServico = servico["NOMESERVICO"].ToString();
                 string valorServico = servico["VALORSERVICO"].ToString();
                 string descServico = servico["DESCSERVICO"].ToString();
-                dataGridViewServico.Rows.Add(nomeServico, valorServico, descServico);
+                string garantiaServico = servico["GARANTIASERVICO"].ToString();
+                string funcionarioServico = servico["FUNCIONARIO"].ToString();
+
+                // Verifique se a linha já existe
+                bool exists = false;
+                foreach (DataGridViewRow existingRow in dataGridViewServico.Rows)
+                {
+                    if (!existingRow.IsNewRow &&
+                        existingRow.Cells["Id Serviço"].Value.ToString() == idServico &&
+                        existingRow.Cells["Nome"].Value.ToString() == nomeServico)
+                    {
+                        exists = true;
+                        break;
+                    }
+                }
+
+                // Adiciona a nova linha apenas se não existir
+                if (!exists)
+                {
+                    // Criando a nova linha manualmente
+                    DataGridViewRow row = new DataGridViewRow();
+                    row.CreateCells(dataGridViewServico); // Define a grid para onde a linha vai
+
+                    // Preenchendo a linha com os valores
+                    row.Cells[0].Value = idServico;
+                    row.Cells[1].Value = nomeServico;
+                    row.Cells[2].Value = valorServico;
+                    row.Cells[3].Value = descServico;
+                    row.Cells[4].Value = garantiaServico;
+                    row.Cells[5].Value = funcionarioServico;
+                    row.Cells[6].Value = 1; // Valor padrão para "Quantidade de Vezes"
+                    row.Cells[7].Value = false; // Valor padrão para "Selecionar" (desmarcado)
+
+                    dataGridViewServico.Rows.Add(row);
+                }
+            }
+
+            // Após adicionar novas linhas, restaure os estados das checkboxes e os valores de "Quantidade de Vezes"
+            for (int i = 0; i < dataGridViewServico.Rows.Count; i++)
+            {
+                if (i < checkboxStates.Count)
+                {
+                    dataGridViewServico.Rows[i].Cells["Selecionar"].Value = checkboxStates[i];
+                    dataGridViewServico.Rows[i].Cells["Quant. Vezes)"].Value = quantidadeVezesValues[i];
+                }
+            }
+
+            // Validando a entrada da coluna "Quantidade de Vezes" para aceitar apenas números
+            dataGridViewServico.EditingControlShowing += (s, e) =>
+            {
+                if (dataGridViewServico.CurrentCell.ColumnIndex == dataGridViewServico.Columns["Quant. Vezes"].Index)
+                {
+                    TextBox tb = e.Control as TextBox;
+                    if (tb != null)
+                    {
+                        tb.KeyPress -= new KeyPressEventHandler(TextBox_KeyPress);
+                        tb.KeyPress += new KeyPressEventHandler(TextBox_KeyPress);
+                    }
+                }
+            };
+
+            // Evento para permitir apenas números na coluna "Quantidade de Vezes"
+            void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+            {
+                // Permite apenas dígitos e tecla Backspace
+                if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
             }
             #endregion
 
+
+
+
+
+
+
             #region Carrega os dados de pesquisa de peças
-            //Criação do objeto NpgsqlDataReader peca e controlePeca
+            // Criação do objeto NpgsqlDataReader peca e controlePeca
             controlePeca cPeca = new controlePeca();
             NpgsqlDataReader peca = cPeca.listaPeca();
 
-            //Apaga as colunas da datagridview
+            // Apaga as colunas da datagridview
             dataGridViewPeca.Columns.Clear();
 
-            //Definindo a quant. de colunas que a grid terá
-            dataGridViewPeca.ColumnCount = peca.FieldCount;
+            // Desabilitar a adição automática de novas linhas
+            dataGridViewPeca.AllowUserToAddRows = false;
 
-            //Definindo sete colunas na DataGridView para exibir as descrições
-            dataGridViewPeca.ColumnCount = 7;
-            dataGridViewPeca.Columns[0].Name = "Marca";
+            // Definindo a quantidade de colunas que a grid terá
+            dataGridViewPeca.ColumnCount = 6;
+
+            // Definindo as colunas na DataGridView para exibir as descrições das peças
+            dataGridViewPeca.Columns[0].Name = "Id Peça";
+            dataGridViewPeca.Columns[0].ReadOnly = true; // Somente leitura
+
             dataGridViewPeca.Columns[1].Name = "Nome";
-            dataGridViewPeca.Columns[2].Name = "Tipo";
-            dataGridViewPeca.Columns[3].Name = "Valor";
-            dataGridViewPeca.Columns[4].Name = "Quantidade";
-            dataGridViewPeca.Columns[5].Name = "Garantia";
-            dataGridViewPeca.Columns[6].Name = "Descrição";
+            dataGridViewPeca.Columns[1].ReadOnly = true; // Somente leitura
 
-            //Adicionando as descrições de peças
+            dataGridViewPeca.Columns[2].Name = "Marca";
+            dataGridViewPeca.Columns[2].ReadOnly = true; // Somente leitura
+
+            dataGridViewPeca.Columns[3].Name = "Tipo";
+            dataGridViewPeca.Columns[3].ReadOnly = true; // Somente leitura
+
+            dataGridViewPeca.Columns[4].Name = "Valor";
+            dataGridViewPeca.Columns[4].ReadOnly = true; // Somente leitura
+
+            dataGridViewPeca.Columns[5].Name = "Fornecedor";
+            dataGridViewPeca.Columns[5].ReadOnly = true; // Somente leitura
+
+            // Criando a coluna "Quantidade de Vezes" (apenas números, editável)
+            DataGridViewTextBoxColumn quantidadeVezesColumn2 = new DataGridViewTextBoxColumn();
+            quantidadeVezesColumn2.Name = "Quant. Vezes";
+            quantidadeVezesColumn2.ValueType = typeof(int);
+            quantidadeVezesColumn2.ReadOnly = false; // Mantém editável
+            dataGridViewPeca.Columns.Add(quantidadeVezesColumn2);
+
+            // Criando a coluna de checkbox para marcação (editável)
+            DataGridViewCheckBoxColumn checkBoxColumn2 = new DataGridViewCheckBoxColumn();
+            checkBoxColumn2.Name = "Selecionar";
+            checkBoxColumn2.ReadOnly = false; // Deixando a checkbox editável
+            dataGridViewPeca.Columns.Add(checkBoxColumn2);
+
+            // Adicionando as descrições das peças
             while (peca.Read())
             {
-                string idMarca = peca["IDMARCAPECA"].ToString();
+                string idPeca = peca["IDPECA"].ToString();
                 string nomePeca = peca["NOMEPECA"].ToString();
+                string idMarca = peca["IDMARCA"].ToString();
                 string tipoPeca = peca["TIPOPECA"].ToString();
                 string valorPeca = peca["VALORPECA"].ToString();
-                string quantPeca = peca["QUANTPECA"].ToString();
-                string garantiaPeca = peca["GARANTIAPECA"].ToString();
-                string descPeca = peca["DESCPECA"].ToString();
+                string fornecedor = peca["FORNECEDOR"].ToString();
 
-                //Consulta o nome da marca pelo id
+                // Consulta o nome da marca pelo id
                 string marca = cPeca.pesquisaMarcaPecaPorId(idMarca);
 
-                dataGridViewPeca.Rows.Add(marca, nomePeca, tipoPeca, valorPeca, quantPeca, garantiaPeca, descPeca);
+                // Criando a nova linha manualmente
+                DataGridViewRow row = new DataGridViewRow();
+                row.CreateCells(dataGridViewPeca); // Define a grid para onde a linha vai
+
+                // Preenchendo a linha com os valores
+                row.Cells[0].Value = idPeca;
+                row.Cells[1].Value = nomePeca;
+                row.Cells[2].Value = marca;
+                row.Cells[3].Value = tipoPeca;
+                row.Cells[4].Value = valorPeca;
+                row.Cells[5].Value = fornecedor;
+                row.Cells[6].Value = 1; // Valor padrão para "Quantidade de Vezes"
+                row.Cells[7].Value = false; // Valor padrão para "Selecionar" (desmarcado)
+
+                dataGridViewPeca.Rows.Add(row);
+            }
+
+            // Validando a entrada da coluna "Quantidade de Vezes" para aceitar apenas números
+            dataGridViewPeca.EditingControlShowing += (s, e) =>
+            {
+                if (dataGridViewPeca.CurrentCell.ColumnIndex == dataGridViewPeca.Columns["Quant. Vezes" +
+                    ""].Index)
+                {
+                    TextBox tb = e.Control as TextBox;
+                    if (tb != null)
+                    {
+                        tb.KeyPress -= new KeyPressEventHandler(TextBox_KeyPress2);
+                        tb.KeyPress += new KeyPressEventHandler(TextBox_KeyPress2);
+                    }
+                }
+            };
+
+            // Evento para permitir apenas números na coluna "Quantidade de Vezes"
+            void TextBox_KeyPress2(object sender, KeyPressEventArgs e)
+            {
+                // Permite apenas dígitos e tecla Backspace
+                if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
             }
             #endregion
+
 
             #region Puxa o maior id de pedido
             //Criação do objeto NpgsqlDataReader idPedido, mPedido e controlePedido 
@@ -124,6 +302,114 @@ namespace TCC_SIA.View
         }
         #endregion
 
+
+        private void AtualizarValoresTotais()
+        {
+            decimal valorTotalPecas = 0;
+            decimal valorTotalServicos = 0;
+
+            // Calcular o valor total de peças e serviços
+            foreach (DataGridViewRow row in dataGridViewPeca.Rows)
+            {
+                if (Convert.ToBoolean(row.Cells["Selecionar"].Value))
+                {
+                    int quantidadeVezes = Convert.ToInt32(row.Cells["Quant. Vezes"].Value);
+                    decimal valor = Convert.ToDecimal(row.Cells["Valor"].Value);
+                    valorTotalPecas += quantidadeVezes * valor;
+                }
+            }
+
+            foreach (DataGridViewRow row in dataGridViewServico.Rows)
+            {
+                if (Convert.ToBoolean(row.Cells["Selecionar"].Value))
+                {
+                    int quantidadeVezes = Convert.ToInt32(row.Cells["Quant. Vezes"].Value);
+                    decimal valor = Convert.ToDecimal(row.Cells["Valor"].Value);
+                    valorTotalServicos += quantidadeVezes * valor;
+                }
+            }
+
+            // Atualiza as MaskedTextBoxes de valores totais
+            maskedTextBoxValorTotalPecas.Text = valorTotalPecas.ToString("0.00");
+            maskedTextBoxValorTotalServicos.Text = valorTotalServicos.ToString("0.00");
+
+            // Aplicar descontos e calcular o valor total do pedido
+            decimal descontoReais = decimal.TryParse(maskedTextBoxDescontoRPeca.Text, out decimal dr) ? dr : 0;
+            decimal descontoPorcentagemPecas = decimal.TryParse(maskedTextBoxDescontoPPecaDesconto.Text, out decimal dpp) ? dpp / 100 : 0;
+            decimal descontoPorcentagemServicos = decimal.TryParse(maskedTextBoxDescontoPServico.Text, out decimal dps) ? dps / 100 : 0;
+
+            decimal valorFinalPecas = valorTotalPecas - descontoReais - (valorTotalPecas * descontoPorcentagemPecas);
+            decimal valorFinalServicos = valorTotalServicos - (valorTotalServicos * descontoPorcentagemServicos);
+
+            // Atualize o valor total do pedido
+            decimal valorTotalPedido = valorFinalPecas + valorFinalServicos;
+            maskedTextBoxValorTotal.Text = valorTotalPedido.ToString("0.00");
+        }
+
+        private void dataGridViewPeca_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Verifica se a célula clicada é a checkbox "Selecionar"
+            if (e.ColumnIndex == dataGridViewPeca.Columns["Selecionar"].Index)
+            {
+                // Alterna o valor da checkbox
+                DataGridViewCheckBoxCell checkBox = (DataGridViewCheckBoxCell)dataGridViewPeca.Rows[e.RowIndex].Cells["Selecionar"];
+                checkBox.Value = !(Convert.ToBoolean(checkBox.Value));
+
+                // Atualiza os valores totais
+                AtualizarValoresTotais();
+            }
+        }
+
+        private void dataGridViewServico_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Verifica se a célula clicada é a checkbox "Selecionar"
+            if (e.ColumnIndex == dataGridViewServico.Columns["Selecionar"].Index)
+            {
+                // Alterna o valor da checkbox
+                DataGridViewCheckBoxCell checkBox = (DataGridViewCheckBoxCell)dataGridViewServico.Rows[e.RowIndex].Cells["Selecionar"];
+                checkBox.Value = !(Convert.ToBoolean(checkBox.Value));
+
+                // Atualiza os valores totais
+                AtualizarValoresTotais();
+            }
+        }
+
+
+
+
+        private void AplicarDescontos(decimal valorTotalPecas, decimal valorTotalServicos)
+        {
+            decimal descontoTotalPecasReal = 0;
+            decimal descontoTotalPecasPorcentagem = 0;
+            decimal.TryParse(maskedTextBoxDescontoRPeca.Text, out descontoTotalPecasReal);
+            decimal.TryParse(maskedTextBoxDescontoPPecaDesconto.Text, out descontoTotalPecasPorcentagem);
+
+            decimal descontoTotalServicosReal = 0;
+            decimal descontoTotalServicosPorcentagem = 0;
+            decimal.TryParse(maskedTextBoxDescontoRServico.Text, out descontoTotalServicosReal);
+            decimal.TryParse(maskedTextBoxDescontoPServico.Text, out descontoTotalServicosPorcentagem);
+
+            decimal descontoTotalPedidoReal = 0;
+            decimal descontoTotalPedidoPorcentagem = 0;
+            decimal.TryParse(maskedTextBoxDescontoTotalReais.Text, out descontoTotalPedidoReal);
+            decimal.TryParse(maskedTextBoxDescontoTotalPorc.Text, out descontoTotalPedidoPorcentagem);
+
+            // Aplicando descontos em porcentagem
+            decimal descontoPecasPorcentagem = valorTotalPecas * (descontoTotalPecasPorcentagem / 100);
+            decimal descontoServicosPorcentagem = valorTotalServicos * (descontoTotalServicosPorcentagem / 100);
+            decimal descontoTotalPedidoPorcentagemTotal = (valorTotalPecas + valorTotalServicos) * (descontoTotalPedidoPorcentagem / 100);
+
+            // Calcule os valores finais aplicando os descontos
+            decimal valorFinalPecas = valorTotalPecas - descontoTotalPecasReal - descontoPecasPorcentagem;
+            decimal valorFinalServicos = valorTotalServicos - descontoTotalServicosReal - descontoServicosPorcentagem;
+            decimal valorTotalPedidoFinal = valorFinalPecas + valorFinalServicos - descontoTotalPedidoReal - descontoTotalPedidoPorcentagemTotal;
+
+            // Atualize o valor total do pedido
+            maskedTextBoxValorTotal.Text = valorTotalPedidoFinal.ToString("0.00");
+        }
+
+
+
         #region Cadastrar pedido
         //Evento de cadastrar pedido
         private void buttonCadastrar_Click(object sender, EventArgs e)
@@ -146,7 +432,7 @@ namespace TCC_SIA.View
             controlePedido cPedido = new controlePedido();
 
             //Definindo os valores nos atributos
-            mPedido.setCpfCliente(Convert.ToInt64(comboBoxCliente.SelectedValue));
+            mPedido.setIdCliente(Convert.ToInt64(comboBoxCliente.SelectedValue));
             mPedido.setIdVeiculo(Convert.ToInt64(comboBoxVeiculo.SelectedValue));
             mPedido.setDataInicio(Convert.ToDateTime(dateTimePickerDataInicio.Text));
             mPedido.setDataFim(Convert.ToDateTime(dateTimePickerDataInicio.Text));
@@ -204,29 +490,6 @@ namespace TCC_SIA.View
 
             foreach (DataGridViewRow row in dataGridViewPeca.SelectedRows)
             {
-                if (row.Cells["Nome"].Value == null)
-                {
-                    MessageBox.Show("Preencha o nome do campo!)");
-                    return;
-                }
-
-                if (row.Cells["Valor"].Value == null)
-                {
-                    MessageBox.Show("Preencha o nome de valor!)");
-                    return;
-                }
-
-                if (row.Cells["Quantidade"].Value == null)
-                {
-                    MessageBox.Show("Preencha o nome de quantidade!)");
-                    return;
-                }
-
-                if (row.Cells["Garantia"].Value == null)
-                {
-                    MessageBox.Show("Coloque uma garantia!");
-                    return;
-                }
             }
 
             //Cria as listas para extrair os valores das datagridview
@@ -265,7 +528,7 @@ namespace TCC_SIA.View
             comboBoxCliente.DisplayMember = "NOMECLIENTE";
 
             //Define qual o valor da linha será utilizado ao selecionar um valor
-            comboBoxCliente.ValueMember = "CPFCLIENTE";
+            comboBoxCliente.ValueMember = "IDCLIENTE";
         }
         #endregion
 
@@ -299,6 +562,23 @@ namespace TCC_SIA.View
             //Criação do objeto NpgsqlDataReader veiculo e controleVeiculo
             controleVeiculo cVeiculo = new controleVeiculo();
 
+            if (comboBoxCliente.SelectedValue == null || string.IsNullOrEmpty(comboBoxCliente.SelectedValue.ToString()))
+            {
+                // Define o valor como o primeiro item da ComboBox
+                if (comboBoxCliente.Items.Count > 0)
+                {
+                    comboBoxCliente.SelectedIndex = 0; // Seleciona o primeiro item
+                }
+                else
+                {
+                    MessageBox.Show("A ComboBox está vazia.");
+                }
+            }
+            else
+            {
+                // O valor selecionado não é vazio, pode prosseguir
+            }
+
             //Recebe os dados da consulta e salva no dataReader (Veiculo)
             NpgsqlDataReader veiculo = cVeiculo.listaVeiculoPorCliente(Convert.ToString(comboBoxCliente.SelectedValue));
 
@@ -330,15 +610,6 @@ namespace TCC_SIA.View
             //Converter o dataReader em DataTable
             DataTable dtPeca = new DataTable();
             dtPeca.Load(peca);
-
-            //Preencher a combobox com os dados do DataTable
-            comboBoxPeca.DataSource = dtPeca;
-
-            //Define qual coluna do DataTable que será exibida (nome da coluna)
-            comboBoxPeca.DisplayMember = "NOMEPECA";
-
-            //Define qual o valor da linha será utilizado ao selecionar um valor
-            comboBoxPeca.ValueMember = "IDPECA";
         }
         #endregion
 
@@ -354,237 +625,369 @@ namespace TCC_SIA.View
             //Converter o dataReader em DataTable
             DataTable dtServico = new DataTable();
             dtServico.Load(servico);
-
-            //Preencher a combobox com os dados do DataTable
-            comboBoxServico.DataSource = dtServico;
-
-            //Define qual coluna do DataTable que será exibida (nome da coluna)
-            comboBoxServico.DisplayMember = "NOMESERVICO";
-
-            //Define qual o valor da linha será utilizado ao selecionar um valor
-            comboBoxServico.ValueMember = "IDSERVICO";
         }
         #endregion
 
         #region Pesquisar peça
-        //Evento de pesquisar peça
+        // Evento de pesquisar peça
         private void buttonPesquisarPeca_Click(object sender, EventArgs e)
         {
-            //Caso ele queria pesquisar alguma coisa sem ter selecionado nada
-            if (dataGridViewPeca.SelectedRows.Count == 0)
+            // Armazena os estados das checkboxes e os valores de "Quantidade de Vezes" antes de limpar
+            List<bool> checkboxStates = new List<bool>();
+            List<int> quantidadeVezesValues = new List<int>();
+
+            for (int i = 0; i < dataGridViewPeca.Rows.Count; i++)
             {
-                //Criação do objeto NpgsqlDataReader peca e controlePeca
-                controlePeca cPeca = new controlePeca();
-                NpgsqlDataReader peca = cPeca.pesquisaPeca(comboBoxPeca.Text);
-
-                //Apaga as colunas da datagridview
-                dataGridViewPeca.Columns.Clear();
-
-                //Definindo a quant. de colunas que a grid terá
-                dataGridViewPeca.ColumnCount = peca.FieldCount;
-
-                //Definindo sete colunas na DataGridView para exibir as descrições
-                dataGridViewPeca.ColumnCount = 7;
-                dataGridViewPeca.Columns[0].Name = "Marca";
-                dataGridViewPeca.Columns[1].Name = "Nome";
-                dataGridViewPeca.Columns[2].Name = "Tipo";
-                dataGridViewPeca.Columns[3].Name = "Valor";
-                dataGridViewPeca.Columns[4].Name = "Quantidade";
-                dataGridViewPeca.Columns[5].Name = "Garantia";
-                dataGridViewPeca.Columns[6].Name = "Descrição";
-
-                //Adicionando as descrições de peças
-                while (peca.Read())
+                if (!dataGridViewPeca.Rows[i].IsNewRow)
                 {
-                    string idMarca = peca["IDMARCAPECA"].ToString();
-                    string nomePeca = peca["NOMEPECA"].ToString();
-                    string tipoPeca = peca["TIPOPECA"].ToString();
-                    string valorPeca = peca["VALORPECA"].ToString();
-                    string quantPeca = peca["QUANTPECA"].ToString();
-                    string garantiaPeca = peca["GARANTIAPECA"].ToString();
-                    string descPeca = peca["DESCPECA"].ToString();
-
-                    //Consulta o nome da marca pelo id
-                    string marca = cPeca.pesquisaMarcaPecaPorId(idMarca);
-
-                    dataGridViewPeca.Rows.Add(marca, nomePeca, tipoPeca, valorPeca, quantPeca, garantiaPeca, descPeca);
+                    checkboxStates.Add(dataGridViewPeca.Rows[i].Cells["Selecionar"].Value is bool isChecked && isChecked);
+                    quantidadeVezesValues.Add(Convert.ToInt32(dataGridViewPeca.Rows[i].Cells["Quant. Vezes"].Value));
                 }
             }
 
-            //Caso ele queria pesquisar alguma coisa e tenha selecionado alguma linha
-            if (dataGridViewPeca.SelectedRows.Count != 0)
+            // Limpar as linhas da DataGridView, exceto as que têm o checkbox "Selecionar" marcado
+            for (int i = dataGridViewPeca.Rows.Count - 1; i >= 0; i--)
             {
-                //Criação do objeto NpgsqlDataReader peca e controlePeca
-                controlePeca cPeca = new controlePeca();
-                NpgsqlDataReader peca = cPeca.pesquisaPeca(comboBoxPeca.Text);
-
-                //Definindo a quant. de colunas que a grid terá
-                dataGridViewPeca.ColumnCount = peca.FieldCount;
-
-                //Definindo sete colunas na DataGridView para exibir as descrições
-                dataGridViewPeca.ColumnCount = 7;
-                dataGridViewPeca.Columns[0].Name = "Marca";
-                dataGridViewPeca.Columns[1].Name = "Nome";
-                dataGridViewPeca.Columns[2].Name = "Tipo";
-                dataGridViewPeca.Columns[3].Name = "Valor";
-                dataGridViewPeca.Columns[4].Name = "Quantidade";
-                dataGridViewPeca.Columns[5].Name = "Garantia";
-                dataGridViewPeca.Columns[6].Name = "Descrição";
-
-                //Adicionando as descrições de peças
-                while (peca.Read())
+                if (!dataGridViewPeca.Rows[i].IsNewRow &&
+                    !(dataGridViewPeca.Rows[i].Cells["Selecionar"].Value is bool isChecked && isChecked))
                 {
-                    string idMarca = peca["IDMARCAPECA"].ToString();
-                    string nomePeca = peca["NOMEPECA"].ToString();
-                    string tipoPeca = peca["TIPOPECA"].ToString();
-                    string valorPeca = peca["VALORPECA"].ToString();
-                    string quantPeca = peca["QUANTPECA"].ToString();
-                    string garantiaPeca = peca["GARANTIAPECA"].ToString();
-                    string descPeca = peca["DESCPECA"].ToString();
+                    dataGridViewPeca.Rows.RemoveAt(i);
+                }
+            }
 
-                    //Consulta o nome da marca pelo id
-                    string marca = cPeca.pesquisaMarcaPecaPorId(idMarca);
+            // Criação do objeto NpgsqlDataReader peca e controlePeca
+            controlePeca cPeca = new controlePeca();
+            NpgsqlDataReader peca = cPeca.pesquisaPeca(textBoxPesquisarP.Text);
 
-                    dataGridViewPeca.Rows.Add(marca, nomePeca, tipoPeca, valorPeca, quantPeca, garantiaPeca, descPeca);
+            // Definindo a quantidade de colunas que a grid terá
+            dataGridViewPeca.ColumnCount = 6;
+
+            // Definindo as colunas na DataGridView para exibir as descrições das peças
+            dataGridViewPeca.Columns[0].Name = "Id Peça";
+            dataGridViewPeca.Columns[0].ReadOnly = true;
+
+            dataGridViewPeca.Columns[1].Name = "Nome";
+            dataGridViewPeca.Columns[1].ReadOnly = true;
+
+            dataGridViewPeca.Columns[2].Name = "Marca";
+            dataGridViewPeca.Columns[2].ReadOnly = true;
+
+            dataGridViewPeca.Columns[3].Name = "Tipo";
+            dataGridViewPeca.Columns[3].ReadOnly = true;
+
+            dataGridViewPeca.Columns[4].Name = "Valor";
+            dataGridViewPeca.Columns[4].ReadOnly = true;
+
+            dataGridViewPeca.Columns[5].Name = "Fornecedor";
+            dataGridViewPeca.Columns[5].ReadOnly = true;
+
+            // Criando a coluna "Quantidade de Vezes" (apenas números, editável)
+            DataGridViewTextBoxColumn quantidadeVezesColumn2 = new DataGridViewTextBoxColumn();
+            quantidadeVezesColumn2.Name = "Quant. Vezes";
+            quantidadeVezesColumn2.ValueType = typeof(int);
+            quantidadeVezesColumn2.ReadOnly = false; // Mantém editável
+            dataGridViewPeca.Columns.Add(quantidadeVezesColumn2);
+
+            // Criando a coluna de checkbox para marcação (editável)
+            DataGridViewCheckBoxColumn checkBoxColumn2 = new DataGridViewCheckBoxColumn();
+            checkBoxColumn2.Name = "Selecionar";
+            checkBoxColumn2.ReadOnly = false; // Deixando a checkbox editável
+            dataGridViewPeca.Columns.Add(checkBoxColumn2);
+
+            // Adicionando as descrições das peças
+            while (peca.Read())
+            {
+                string idPeca = peca["IDPECA"].ToString();
+                string nomePeca = peca["NOMEPECA"].ToString();
+                string idMarca = peca["IDMARCA"].ToString();
+                string tipoPeca = peca["TIPOPECA"].ToString();
+                string valorPeca = peca["VALORPECA"].ToString();
+                string fornecedor = peca["FORNECEDOR"].ToString();
+
+                // Consulta o nome da marca pelo id
+                string marca = cPeca.pesquisaMarcaPecaPorId(idMarca);
+
+                // Verifique se a linha já existe
+                bool exists = false;
+                foreach (DataGridViewRow existingRow in dataGridViewPeca.Rows)
+                {
+                    if (!existingRow.IsNewRow &&
+                        existingRow.Cells["Id Peça"].Value.ToString() == idPeca &&
+                        existingRow.Cells["Nome"].Value.ToString() == nomePeca &&
+                        existingRow.Cells["Marca"].Value.ToString() == marca)
+                    {
+                        exists = true;
+                        break;
+                    }
+                }
+
+                // Adiciona a nova linha apenas se não existir
+                if (!exists)
+                {
+                    // Criando a nova linha manualmente
+                    DataGridViewRow row = new DataGridViewRow();
+                    row.CreateCells(dataGridViewPeca); // Define a grid para onde a linha vai
+
+                    // Preenchendo a linha com os valores
+                    row.Cells[0].Value = idPeca;
+                    row.Cells[1].Value = nomePeca;
+                    row.Cells[2].Value = marca;
+                    row.Cells[3].Value = tipoPeca;
+                    row.Cells[4].Value = valorPeca;
+                    row.Cells[5].Value = fornecedor;
+                    row.Cells[6].Value = 1; // Valor padrão para "Quantidade de Vezes"
+                    row.Cells[7].Value = false; // Valor padrão para "Selecionar" (desmarcado)
+
+                    dataGridViewPeca.Rows.Add(row);
+                }
+            }
+
+            // Após adicionar novas linhas, restaure os estados das checkboxes e os valores de "Quantidade de Vezes"
+            for (int i = 0; i < dataGridViewPeca.Rows.Count; i++)
+            {
+                if (i < checkboxStates.Count)
+                {
+                    dataGridViewPeca.Rows[i].Cells["Selecionar"].Value = checkboxStates[i];
+                    dataGridViewPeca.Rows[i].Cells["Quant. Vezes"].Value = quantidadeVezesValues[i];
+                }
+            }
+
+            // Validando a entrada da coluna "Quantidade de Vezes" para aceitar apenas números
+            dataGridViewPeca.EditingControlShowing += (s, e) =>
+            {
+                if (dataGridViewPeca.CurrentCell.ColumnIndex == dataGridViewPeca.Columns["Quant. Vezes"].Index)
+                {
+                    TextBox tb = e.Control as TextBox;
+                    if (tb != null)
+                    {
+                        tb.KeyPress -= new KeyPressEventHandler(TextBox_KeyPress2);
+                        tb.KeyPress += new KeyPressEventHandler(TextBox_KeyPress2);
+                    }
+                }
+            };
+
+            // Evento para permitir apenas números na coluna "Quantidade de Vezes"
+            void TextBox_KeyPress2(object sender, KeyPressEventArgs e)
+            {
+                // Permite apenas dígitos e tecla Backspace
+                if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+                {
+                    e.Handled = true;
                 }
             }
         }
+
+
         #endregion
 
         #region Pesquisar serviço
-        //Evento de pesquisar serviço
+        // Evento de pesquisar serviço
         private void buttonPesquisarServico_Click(object sender, EventArgs e)
         {
-            //Criação do objeto NpgsqlDataReader servico e controleServico
+            // Armazena os estados das checkboxes e os valores de "Quantidade de Vezes" antes de limpar
+            List<bool> checkboxStates = new List<bool>();
+            List<int> quantidadeVezesValues = new List<int>();
+
+            for (int i = 0; i < dataGridViewServico.Rows.Count; i++)
+            {
+                if (!dataGridViewServico.Rows[i].IsNewRow)
+                {
+                    checkboxStates.Add(dataGridViewServico.Rows[i].Cells["Selecionar"].Value is bool isChecked && isChecked);
+                    quantidadeVezesValues.Add(Convert.ToInt32(dataGridViewServico.Rows[i].Cells["Quant. Vezes"].Value));
+                }
+            }
+
+            // Limpar as linhas da DataGridView, exceto as que têm o checkbox "Selecionar" marcado
+            for (int i = dataGridViewServico.Rows.Count - 1; i >= 0; i--)
+            {
+                if (!dataGridViewServico.Rows[i].IsNewRow &&
+                    !(dataGridViewServico.Rows[i].Cells["Selecionar"].Value is bool isChecked && isChecked))
+                {
+                    dataGridViewServico.Rows.RemoveAt(i);
+                }
+            }
+
+            // Criação do objeto NpgsqlDataReader servico e controleServico
             controleServico cServico = new controleServico();
-            NpgsqlDataReader servico = cServico.pesquisaServico(comboBoxServico.Text);
+            NpgsqlDataReader servico = cServico.pesquisaServico(textBoxPesquisarS.Text);
 
-            //Apaga as colunas da datagridview
-            dataGridViewServico.Columns.Clear();
+            // Definindo a quantidade de colunas que a grid terá
+            dataGridViewServico.ColumnCount = 6;
 
-            //Definindo a quant. de colunas que a grid terá
-            dataGridViewServico.ColumnCount = servico.FieldCount;
+            // Definindo as colunas na DataGridView para exibir as descrições
+            dataGridViewServico.Columns[0].Name = "Id Serviço";
+            dataGridViewServico.Columns[0].ReadOnly = true;
 
-            //Definindo três colunas na DataGridView para exibir as descrições
-            dataGridViewServico.ColumnCount = 3;
-            dataGridViewServico.Columns[0].Name = "Nome";
-            dataGridViewServico.Columns[1].Name = "Valor";
-            dataGridViewServico.Columns[2].Name = "Descrição";
+            dataGridViewServico.Columns[1].Name = "Nome";
+            dataGridViewServico.Columns[1].ReadOnly = true;
 
-            //Adicionando as descrições dos serviços
+            dataGridViewServico.Columns[2].Name = "Valor";
+            dataGridViewServico.Columns[2].ReadOnly = true;
+
+            dataGridViewServico.Columns[3].Name = "Descrição";
+            dataGridViewServico.Columns[3].ReadOnly = true;
+
+            dataGridViewServico.Columns[4].Name = "Garantia";
+            dataGridViewServico.Columns[4].ReadOnly = true;
+
+            dataGridViewServico.Columns[5].Name = "Funcionário";
+            dataGridViewServico.Columns[5].ReadOnly = true;
+
+            // Criando a coluna "Quantidade de Vezes" (apenas números, editável)
+            DataGridViewTextBoxColumn quantidadeVezesColumn = new DataGridViewTextBoxColumn();
+            quantidadeVezesColumn.Name = "Quant. Vezes";
+            quantidadeVezesColumn.ValueType = typeof(int);
+            quantidadeVezesColumn.ReadOnly = false; // Mantém editável
+            dataGridViewServico.Columns.Add(quantidadeVezesColumn);
+
+            // Criando a coluna de checkbox para marcação (editável)
+            DataGridViewCheckBoxColumn checkBoxColumn = new DataGridViewCheckBoxColumn();
+            checkBoxColumn.Name = "Selecionar";
+            checkBoxColumn.ReadOnly = false; // Deixando a checkbox editável
+            dataGridViewServico.Columns.Add(checkBoxColumn);
+
+            // Adicionando as descrições dos serviços
             while (servico.Read())
             {
+                string idServico = servico["IDSERVICO"].ToString();
                 string nomeServico = servico["NOMESERVICO"].ToString();
                 string valorServico = servico["VALORSERVICO"].ToString();
                 string descServico = servico["DESCSERVICO"].ToString();
-                dataGridViewServico.Rows.Add(nomeServico, valorServico, descServico);
+                string garantiaServico = servico["GARANTIASERVICO"].ToString();
+                string funcionarioServico = servico["FUNCIONARIO"].ToString();
+
+                // Verifique se a linha já existe
+                bool exists = false;
+                foreach (DataGridViewRow existingRow in dataGridViewServico.Rows)
+                {
+                    if (!existingRow.IsNewRow &&
+                        existingRow.Cells["Id Serviço"].Value.ToString() == idServico &&
+                        existingRow.Cells["Nome"].Value.ToString() == nomeServico)
+                    {
+                        exists = true;
+                        break;
+                    }
+                }
+
+                // Adiciona a nova linha apenas se não existir
+                if (!exists)
+                {
+                    // Criando a nova linha manualmente
+                    DataGridViewRow row = new DataGridViewRow();
+                    row.CreateCells(dataGridViewServico); // Define a grid para onde a linha vai
+
+                    // Preenchendo a linha com os valores
+                    row.Cells[0].Value = idServico;
+                    row.Cells[1].Value = nomeServico;
+                    row.Cells[2].Value = valorServico;
+                    row.Cells[3].Value = descServico;
+                    row.Cells[4].Value = garantiaServico;
+                    row.Cells[5].Value = funcionarioServico;
+                    row.Cells[6].Value = 1; // Valor padrão para "Quantidade de Vezes"
+                    row.Cells[7].Value = false; // Valor padrão para "Selecionar" (desmarcado)
+
+                    dataGridViewServico.Rows.Add(row);
+                }
+            }
+
+            // Após adicionar novas linhas, restaure os estados das checkboxes e os valores de "Quantidade de Vezes"
+            for (int i = 0; i < dataGridViewServico.Rows.Count; i++)
+            {
+                if (i < checkboxStates.Count)
+                {
+                    dataGridViewServico.Rows[i].Cells["Selecionar"].Value = checkboxStates[i];
+                    dataGridViewServico.Rows[i].Cells["Quant. Vezes"].Value = quantidadeVezesValues[i];
+                }
+            }
+
+            // Validando a entrada da coluna "Quantidade de Vezes" para aceitar apenas números
+            dataGridViewServico.EditingControlShowing += (s, e) =>
+            {
+                if (dataGridViewServico.CurrentCell.ColumnIndex == dataGridViewServico.Columns["Quant. Vezes"].Index)
+                {
+                    TextBox tb = e.Control as TextBox;
+                    if (tb != null)
+                    {
+                        tb.KeyPress -= new KeyPressEventHandler(TextBox_KeyPress);
+                        tb.KeyPress += new KeyPressEventHandler(TextBox_KeyPress);
+                    }
+                }
+            };
+
+            // Evento para permitir apenas números na coluna "Quantidade de Vezes"
+            void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+            {
+                // Permite apenas dígitos e tecla Backspace
+                if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
             }
         }
         #endregion
 
-        #region Extrai as peças
-        //Cria o método de extrar os serviços através de uma lista genérica da classe Pedido_Peca
-        public List<Pedido_Peca> ExtrairPecasDataGridView(DataGridView dataGridView)
+
+
+        public List<Pedido_Peca> ExtrairPecasDataGridView(DataGridView dataGridViewPeca)
         {
-            //Criação da lista e do objeto controlePeca
             List<Pedido_Peca> Pecas = new List<Pedido_Peca>();
-            controlePeca cPeca = new controlePeca();
 
-            //Loop de repetição para cada linha selecionada, adiciona um objeto Pedido_Peca na lista
-            foreach (DataGridViewRow row in dataGridView.SelectedRows)
+            foreach (DataGridViewRow row in dataGridViewPeca.Rows)
             {
-                string nomePeca = row.Cells["Nome"].Value?.ToString();
-
-                //Lê o nome da marca de peça e trás o Id dessa peça
-                NpgsqlDataReader peca = cPeca.pesquisaPecaParaOPedido(nomePeca);
-
-                //Verificação da consulta do banco de dados
-                if (peca != null)
+                if (!row.IsNewRow && Convert.ToBoolean(row.Cells["Selecionar"].Value))
                 {
-                    //Carrega os valores da consulta
-                    DataTable dtPecas = new DataTable();
-                    dtPecas.Load(peca);
+                    Pedido_Peca peca = new Pedido_Peca();
 
-                    //Se trás o valor de id da marca, carrega a lista
-                    if (dtPecas.Rows.Count > 0)
+                    if (long.TryParse(row.Cells["Id Peça"].Value?.ToString(), out long idPeca))
                     {
-                        Pedido_Peca pecas = new Pedido_Peca();
-
-                        //Definição aos atributos da classe
-                        if (long.TryParse(dtPecas.Rows[0]["IDMARCAPECA"].ToString(), out long idNomeMarca))
-                        {
-                            pecas.setIdMarca(idNomeMarca);
-                        }
-
-                        string nomePecaVar = (row.Cells["Nome"].Value?.ToString());
-                        string tipoPecaVar = (row.Cells["Tipo"].Value?.ToString());
-
-
-
-                        if (int.TryParse(row.Cells["Quantidade"].Value?.ToString(), out int quant))
-                        {
-                            pecas.setQuantPeca(quant);
-                        }
-
-                        string descPecaVar = (row.Cells["Descrição"].Value?.ToString());
-
-                        if (DateTime.TryParse(row.Cells["Garantia"].Value?.ToString(), out DateTime garantia))
-                        {
-                            pecas.setGarantiaPeca(garantia);
-                        }
-
-                        pecas.setNomePeca(nomePecaVar);
-                        pecas.setTipoPeca(tipoPecaVar);
-                        pecas.setDescPeca(descPecaVar);
-
-                        //Adiciona a classe Pedido_Peca na lista
-                        Pecas.Add(pecas);
-
+                        peca.setIdPeca(idPeca);
                     }
 
-                    //Fecha a consulta do banco de dados
-                    peca.Close();
+                    if (int.TryParse(row.Cells["Quant. Vezes"].Value?.ToString(), out int quantVezes))
+                    {
+                        peca.setQuantVezes(quantVezes);
+                    }
+
+                    Pecas.Add(peca);
                 }
             }
 
-            //Retorna a lista
             return Pecas;
         }
-        #endregion
+
+
+
 
         #region Extrai os serviços
-        //Cria o método de extrar os serviços através de uma lista genérica da classe Servico
-        public List<Servico> ExtrairServicosDataGridView(DataGridView dataGridView)
+        public List<Servico> ExtrairServicosDataGridView(DataGridView dataGridViewServico)
         {
-            //Criação da lista
             List<Servico> Servicos = new List<Servico>();
 
-            //Loop de repetição para cada linha selecionada, adiciona um objeto Servico na lista
-            foreach (DataGridViewRow row in dataGridView.SelectedRows)
+            foreach (DataGridViewRow row in dataGridViewServico.Rows)
             {
-                //Verificação da consulta do banco de dados
-                if (!row.IsNewRow)
+                if (!row.IsNewRow && Convert.ToBoolean(row.Cells["Selecionar"].Value))
                 {
-                    //Definição aos atributos da classe
-                    Servico servicos = new Servico();
-                    servicos.setNomeServico(row.Cells["Nome"].Value?.ToString());
+                    Servico servico = new Servico();
 
-                    if (long.TryParse(row.Cells["Valor"].Value?.ToString(), out long valor))
+                    if (long.TryParse(row.Cells["Id Serviço"].Value?.ToString(), out long idServico))
                     {
-                        servicos.setValorServico(valor);
+                        servico.setIDServico(idServico);
                     }
 
-                    servicos.setDescServico(row.Cells["Descrição"].Value?.ToString());
+                    if (int.TryParse(row.Cells["Quant. Vezes"].Value?.ToString(), out int quantVezes))
+                    {
+                        servico.setQuantVezes(quantVezes);
+                    }
 
-                    //Adiciona a classe Servico na lista
-                    Servicos.Add(servicos);
+                    Servicos.Add(servico);
                 }
             }
 
-            //Retorna a lista
             return Servicos;
         }
+
         #endregion
+
 
         #region Carregar novos dados
         private void comboBoxCliente_Click(object sender, EventArgs e)
@@ -600,34 +1003,449 @@ namespace TCC_SIA.View
         }
         #endregion
 
-        #region Carregar novos dados
-        private void comboBoxPeca_Click(object sender, EventArgs e)
+        private void CadastroPedido_Load(object sender, EventArgs e)
         {
-            listarPeca();
+
         }
 
-        #endregion
-
-        #region Carregar novos dados
-        private void comboBoxServico_Click(object sender, EventArgs e)
+        #region Métodos para combo box de valores e descontos
+        private void maskedTextBoxValorTotal_TextChanged(object sender, EventArgs e)
         {
-            listarServico();
-        }
-        #endregion
+            MaskedTextBox maskedTextBox = sender as MaskedTextBox;
 
-        private void dataGridViewPeca_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            dataGridViewPeca.Rows[e.RowIndex].Selected = true;
+            // Remove qualquer formatação anterior e deixa apenas os números
+            string textoAtual = maskedTextBox.Text.Replace(",", "").Replace(".", "").TrimStart('0');
 
-            // Verifica se o índice da célula é válido e está dentro do range de linhas
-            if (e.RowIndex >= 0 && e.RowIndex < dataGridViewPeca.Rows.Count)
+            if (textoAtual.Length == 0)
             {
-                // Obtém a linha clicada
-                DataGridViewRow clickedRow = dataGridViewPeca.Rows[e.RowIndex];
-
-                // Alterna o estado de seleção da linha clicada
-                clickedRow.Selected = !clickedRow.Selected;
+                textoAtual = "0";
             }
+
+            // Converte o texto para decimal
+            if (decimal.TryParse(textoAtual, out decimal valorDecimal))
+            {
+                maskedTextBox.TextChanged -= maskedTextBoxValorTotal_TextChanged; // Remove o evento para evitar loop
+
+                // Formata o valor com ponto como separador de centavos e sem separadores de milhar
+                maskedTextBox.Text = string.Format("{0:0.00}", valorDecimal / 100);
+
+                // Coloca o cursor no final
+                maskedTextBox.SelectionStart = maskedTextBox.Text.Length;
+
+                maskedTextBox.TextChanged += maskedTextBoxValorTotal_TextChanged; // Reinscreve o evento
+            }
+            AtualizarValoresTotais();
+        }
+
+        private void maskedTextBoxValorTotalServicos_TextChanged(object sender, EventArgs e)
+        {
+
+            MaskedTextBox maskedTextBox = sender as MaskedTextBox;
+
+            // Remove qualquer formatação anterior e deixa apenas os números
+            string textoAtual = maskedTextBox.Text.Replace(",", "").Replace(".", "").TrimStart('0');
+
+            if (textoAtual.Length == 0)
+            {
+                textoAtual = "0";
+            }
+
+            // Converte o texto para decimal
+            if (decimal.TryParse(textoAtual, out decimal valorDecimal))
+            {
+                maskedTextBox.TextChanged -= maskedTextBoxValorTotalServicos_TextChanged; // Remove o evento para evitar loop
+
+                // Formata o valor com ponto como separador de centavos e sem separadores de milhar
+                maskedTextBox.Text = string.Format("{0:0.00}", valorDecimal / 100);
+
+                // Coloca o cursor no final
+                maskedTextBox.SelectionStart = maskedTextBox.Text.Length;
+
+                maskedTextBox.TextChanged += maskedTextBoxValorTotalServicos_TextChanged; // Reinscreve o evento
+            }
+            AtualizarValoresTotais();
+        }
+
+        private void maskedTextBoxValorTotalPecas_TextChanged(object sender, EventArgs e)
+        {
+
+            MaskedTextBox maskedTextBox = sender as MaskedTextBox;
+
+            // Remove qualquer formatação anterior e deixa apenas os números
+            string textoAtual = maskedTextBox.Text.Replace(",", "").Replace(".", "").TrimStart('0');
+
+            if (textoAtual.Length == 0)
+            {
+                textoAtual = "0";
+            }
+
+            // Converte o texto para decimal
+            if (decimal.TryParse(textoAtual, out decimal valorDecimal))
+            {
+                maskedTextBox.TextChanged -= maskedTextBoxValorTotalPecas_TextChanged; // Remove o evento para evitar loop
+
+                // Formata o valor com ponto como separador de centavos e sem separadores de milhar
+                maskedTextBox.Text = string.Format("{0:0.00}", valorDecimal / 100);
+
+                // Coloca o cursor no final
+                maskedTextBox.SelectionStart = maskedTextBox.Text.Length;
+
+                maskedTextBox.TextChanged += maskedTextBoxValorTotalPecas_TextChanged; // Reinscreve o evento
+            }
+            AtualizarValoresTotais();
+        }
+
+        private void maskedTextBoxDescontoReais_TextChanged(object sender, EventArgs e)
+        {
+            MaskedTextBox textBox = sender as MaskedTextBox;
+
+            // Remover tudo que não seja número
+            string digitsOnly = new string(textBox.Text.Where(char.IsDigit).ToArray());
+
+            // Remover zeros à esquerda
+            digitsOnly = digitsOnly.TrimStart('0');
+
+            // Garantir que pelo menos 1 zero seja mantido caso o campo fique vazio após remover zeros
+            if (string.IsNullOrEmpty(digitsOnly))
+            {
+                digitsOnly = "0";
+            }
+
+            // Limitar a 3 dígitos
+            if (digitsOnly.Length > 3)
+            {
+                digitsOnly = digitsOnly.Substring(0, 3);
+            }
+
+            // Verificar se o valor numérico não excede 100
+            if (int.TryParse(digitsOnly, out int number))
+            {
+                if (number > 100)
+                {
+                    digitsOnly = "100";  // Definir o valor máximo como 100
+                }
+            }
+
+            // Atualizar o texto da MaskedTextBox com os 3 dígitos válidos
+            textBox.Text = digitsOnly;
+
+            // Colocar o cursor no final
+            textBox.SelectionStart = textBox.Text.Length;
+        }
+
+        private void maskedTextBoxDescontoPorc_TextChanged(object sender, EventArgs e)
+        {
+
+            MaskedTextBox maskedTextBox = sender as MaskedTextBox;
+
+            // Remove qualquer formatação anterior e deixa apenas os números
+            string textoAtual = maskedTextBox.Text.Replace(",", "").Replace(".", "").TrimStart('0');
+
+            if (textoAtual.Length == 0)
+            {
+                textoAtual = "0";
+            }
+
+            // Converte o texto para decimal
+            if (decimal.TryParse(textoAtual, out decimal valorDecimal))
+            {
+                maskedTextBox.TextChanged -= maskedTextBoxDescontoPorc_TextChanged; // Remove o evento para evitar loop
+
+                // Formata o valor com ponto como separador de centavos e sem separadores de milhar
+                maskedTextBox.Text = string.Format("{0:0.00}", valorDecimal / 100);
+
+                // Coloca o cursor no final
+                maskedTextBox.SelectionStart = maskedTextBox.Text.Length;
+
+                maskedTextBox.TextChanged += maskedTextBoxDescontoPorc_TextChanged; // Reinscreve o evento
+            }
+        }
+
+        private void maskedTextBoxDescontoRPeca_TextChanged(object sender, EventArgs e)
+        {
+            MaskedTextBox textBox = sender as MaskedTextBox;
+
+            // Remover tudo que não seja número
+            string digitsOnly = new string(textBox.Text.Where(char.IsDigit).ToArray());
+
+            // Remover zeros à esquerda
+            digitsOnly = digitsOnly.TrimStart('0');
+
+            // Garantir que pelo menos 1 zero seja mantido caso o campo fique vazio após remover zeros
+            if (string.IsNullOrEmpty(digitsOnly))
+            {
+                digitsOnly = "0";
+            }
+
+            // Limitar a 3 dígitos
+            if (digitsOnly.Length > 3)
+            {
+                digitsOnly = digitsOnly.Substring(0, 3);
+            }
+
+            // Verificar se o valor numérico não excede 100
+            if (int.TryParse(digitsOnly, out int number))
+            {
+                if (number > 100)
+                {
+                    digitsOnly = "100";  // Definir o valor máximo como 100
+                }
+            }
+
+            // Atualizar o texto da MaskedTextBox com os 3 dígitos válidos
+            textBox.Text = digitsOnly;
+
+            // Colocar o cursor no final
+            textBox.SelectionStart = textBox.Text.Length;
+        }
+
+        private void maskedTextBoxDescontoPPeca_TextChanged(object sender, EventArgs e)
+        {
+            MaskedTextBox maskedTextBox = sender as MaskedTextBox;
+
+            // Remove qualquer formatação anterior e deixa apenas os números
+            string textoAtual = maskedTextBox.Text.Replace(",", "").Replace(".", "").TrimStart('0');
+
+            if (textoAtual.Length == 0)
+            {
+                textoAtual = "0";
+            }
+
+            // Converte o texto para decimal
+            if (decimal.TryParse(textoAtual, out decimal valorDecimal))
+            {
+                maskedTextBox.TextChanged -= maskedTextBoxDescontoPPeca_TextChanged; // Remove o evento para evitar loop
+
+                // Formata o valor com ponto como separador de centavos e sem separadores de milhar
+                maskedTextBox.Text = string.Format("{0:0.00}", valorDecimal / 100);
+
+                // Coloca o cursor no final
+                maskedTextBox.SelectionStart = maskedTextBox.Text.Length;
+
+                maskedTextBox.TextChanged += maskedTextBoxDescontoPPeca_TextChanged; // Reinscreve o evento
+            }
+            AtualizarValoresTotais();
+        }
+
+        private void maskedTextBoxDescontoRServico_TextChanged(object sender, EventArgs e)
+        {
+            MaskedTextBox textBox = sender as MaskedTextBox;
+
+            // Remover tudo que não seja número
+            string digitsOnly = new string(textBox.Text.Where(char.IsDigit).ToArray());
+
+            // Remover zeros à esquerda
+            digitsOnly = digitsOnly.TrimStart('0');
+
+            // Garantir que pelo menos 1 zero seja mantido caso o campo fique vazio após remover zeros
+            if (string.IsNullOrEmpty(digitsOnly))
+            {
+                digitsOnly = "0";
+            }
+
+            // Limitar a 3 dígitos
+            if (digitsOnly.Length > 3)
+            {
+                digitsOnly = digitsOnly.Substring(0, 3);
+            }
+
+            // Verificar se o valor numérico não excede 100
+            if (int.TryParse(digitsOnly, out int number))
+            {
+                if (number > 100)
+                {
+                    digitsOnly = "100";  // Definir o valor máximo como 100
+                }
+            }
+
+            // Atualizar o texto da MaskedTextBox com os 3 dígitos válidos
+            textBox.Text = digitsOnly;
+
+            // Colocar o cursor no final
+            textBox.SelectionStart = textBox.Text.Length;
+        }
+
+        private void maskedTextBoxDescontoPServico_TextChanged(object sender, EventArgs e)
+        {
+            MaskedTextBox maskedTextBox = sender as MaskedTextBox;
+
+            // Remove qualquer formatação anterior e deixa apenas os números
+            string textoAtual = maskedTextBox.Text.Replace(",", "").Replace(".", "").TrimStart('0');
+
+            if (textoAtual.Length == 0)
+            {
+                textoAtual = "0";
+            }
+
+            // Converte o texto para decimal
+            if (decimal.TryParse(textoAtual, out decimal valorDecimal))
+            {
+                maskedTextBox.TextChanged -= maskedTextBoxDescontoPServico_TextChanged; // Remove o evento para evitar loop
+
+                // Formata o valor com ponto como separador de centavos e sem separadores de milhar
+                maskedTextBox.Text = string.Format("{0:0.00}", valorDecimal / 100);
+
+                // Coloca o cursor no final
+                maskedTextBox.SelectionStart = maskedTextBox.Text.Length;
+
+                maskedTextBox.TextChanged += maskedTextBoxDescontoPServico_TextChanged; // Reinscreve o evento
+            }
+            AtualizarValoresTotais();
+        }
+        #endregion
+
+        private void comboBoxCliente_Validating(object sender, CancelEventArgs e)
+        {
+            System.Windows.Forms.ComboBox comboBox = sender as System.Windows.Forms.ComboBox;
+            string fornecedorDigitado = comboBox.Text;
+
+            // Verifica se o valor digitado já existe na lista de itens da ComboBox
+            bool fornecedorExiste = comboBox.Items.Cast<System.Data.DataRowView>()
+                                       .Any(item => item["NOMECLIENTE"].ToString()
+                                       .Equals(fornecedorDigitado, StringComparison.OrdinalIgnoreCase));
+
+            if (!fornecedorExiste && !string.IsNullOrEmpty(fornecedorDigitado))
+            {
+                // Exibe a mensagem com o aviso
+                DialogResult result = MessageBox.Show("Aviso! Cliente não registrado! Deseja registrar um novo?",
+                                                      "Aviso!",
+                                                      MessageBoxButtons.YesNo,
+                                                      MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    CadastroCliente formCliente = new CadastroCliente();
+                    formCliente.Show();
+                }
+                else
+                {
+                    // Limpa o texto da ComboBox
+                    comboBox.Text = string.Empty;
+                }
+            }
+        }
+
+        private void comboBoxVeiculo_Validating(object sender, CancelEventArgs e)
+        {
+            System.Windows.Forms.ComboBox comboBox = sender as System.Windows.Forms.ComboBox;
+            string fornecedorDigitado = comboBox.Text;
+
+            // Verifica se o valor digitado já existe na lista de itens da ComboBox
+            bool fornecedorExiste = comboBox.Items.Cast<System.Data.DataRowView>()
+                                       .Any(item => item["NOMEVEICULO"].ToString()
+                                       .Equals(fornecedorDigitado, StringComparison.OrdinalIgnoreCase));
+
+            if (!fornecedorExiste && !string.IsNullOrEmpty(fornecedorDigitado))
+            {
+                // Exibe a mensagem com o aviso
+                DialogResult result = MessageBox.Show("Aviso! Veiculo não registrado! Deseja registrar um novo?",
+                                                      "Aviso!",
+                                                      MessageBoxButtons.YesNo,
+                                                      MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    CadastroVeiculo formVeiculo = new CadastroVeiculo();
+                    formVeiculo.Show();
+                }
+                else
+                {
+                    // Limpa o texto da ComboBox
+                    comboBox.Text = string.Empty;
+                }
+            }
+        }
+
+        private void comboBoxCliente_DropDown(object sender, EventArgs e)
+        {
+            listarCliente();
+        }
+
+        private void comboBoxVeiculo_DropDown(object sender, EventArgs e)
+        {
+            listarVeiculoPorCliente();
+        }
+
+        private void maskedTextBoxValorTotal_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir apenas números e a tecla Backspace
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true; // Bloqueia a entrada
+            }
+        }
+
+        private void maskedTextBoxValorTotalServicos_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir apenas números e a tecla Backspace
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true; // Bloqueia a entrada
+            }
+        }
+
+        private void maskedTextBoxValorTotalPecas_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir apenas números e a tecla Backspace
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true; // Bloqueia a entrada
+            }
+        }
+
+        private void maskedTextBoxDescontoPorc_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir apenas números e a tecla Backspace
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true; // Bloqueia a entrada
+            }
+        }
+
+        private void maskedTextBoxDescontoPPeca_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir apenas números e a tecla Backspace
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true; // Bloqueia a entrada
+            }
+        }
+
+        private void maskedTextBoxDescontoPServico_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir apenas números e a tecla Backspace
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true; // Bloqueia a entrada
+            }
+        }
+
+        private void maskedTextBoxDescontoRServico_TextChanged_1(object sender, EventArgs e)
+        {
+            MaskedTextBox maskedTextBox = sender as MaskedTextBox;
+
+            // Remove qualquer formatação anterior e deixa apenas os números
+            string textoAtual = maskedTextBox.Text.Replace(",", "").Replace(".", "").TrimStart('0');
+
+            if (textoAtual.Length == 0)
+            {
+                textoAtual = "0";
+            }
+
+            // Converte o texto para decimal
+            if (decimal.TryParse(textoAtual, out decimal valorDecimal))
+            {
+                maskedTextBox.TextChanged -= maskedTextBoxDescontoRServico_TextChanged_1; // Remove o evento para evitar loop
+
+                // Formata o valor com ponto como separador de centavos e sem separadores de milhar
+                maskedTextBox.Text = string.Format("{0:0.00}", valorDecimal / 100);
+
+                // Coloca o cursor no final
+                maskedTextBox.SelectionStart = maskedTextBox.Text.Length;
+
+                maskedTextBox.TextChanged += maskedTextBoxDescontoRServico_TextChanged_1; // Reinscreve o evento
+            }
+            AtualizarValoresTotais();
         }
     }
 }
