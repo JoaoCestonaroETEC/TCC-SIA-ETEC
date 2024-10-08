@@ -42,7 +42,7 @@ namespace TCC_SIA.View
 
             //Definindo os valores nos atributos
             mServico.setNomeServico(textBoxNome.Text);
-            mServico.setGarantiaServico(Convert.ToDateTime(dateTimePickerGarantia.Text));
+            mServico.setGarantiaServico(Convert.ToDateTime(dateTimePickerGarantia.Text)); ;
 
 
             //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro

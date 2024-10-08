@@ -5,7 +5,7 @@
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        public System.ComponentModel.IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -26,7 +26,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        public void InitializeComponent()
         {
             tabControlPesquisarClientes = new TabControl();
             tabPagePesquisarClienteF = new TabPage();
@@ -227,20 +227,20 @@
 
         #endregion
 
-        private TabControl tabControlPesquisarClientes;
-        private TabPage tabPagePesquisarClienteF;
-        private Button buttonPesquisarF;
-        private Label label1;
-        private TextBox textBoxPesquisarF;
-        private DataGridView dataGridViewPesquisarF;
-        private TabPage tabControlPesquisarClienteJ;
-        private Button btnAtualizarF;
-        private Button btnDeletarF;
-        private Button btnDeletarJ;
-        private Button btnAtualizarJ;
-        private Button buttonPesquisarJ;
-        private Label label2;
-        private TextBox textBoxPesquisarJ;
-        private DataGridView dataGridViewPesquisarJ;
+        public TabControl tabControlPesquisarClientes;
+        public TabPage tabPagePesquisarClienteF;
+        public Button buttonPesquisarF;
+        public Label label1;
+        public TextBox textBoxPesquisarF;
+        public DataGridView dataGridViewPesquisarF;
+        public TabPage tabControlPesquisarClienteJ;
+        public Button btnAtualizarF;
+        public Button btnDeletarF;
+        public Button btnDeletarJ;
+        public Button btnAtualizarJ;
+        public Button buttonPesquisarJ;
+        public Label label2;
+        public TextBox textBoxPesquisarJ;
+        public DataGridView dataGridViewPesquisarJ;
     }
 }

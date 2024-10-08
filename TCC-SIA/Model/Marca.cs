@@ -9,12 +9,22 @@ namespace TCC_SIA.Model
     internal class Marca
     {
         #region Criação de atributo
+        private long idMarca;
         private string nomeMarca;
         private string descMarca;
         private string tipoMarca;
         #endregion
 
         #region Encapsulamento
+        public long getIdMarca()
+        {
+            return idMarca;
+        }
+        public void setIdMarca(long idMarca)
+        {
+            this.idMarca = idMarca;
+        }
+
         public string getNomeMarca() 
         {  
             return nomeMarca; 
@@ -42,5 +52,6 @@ namespace TCC_SIA.Model
             this.tipoMarca = tipomarca;
         }
         #endregion
+
     }
 }

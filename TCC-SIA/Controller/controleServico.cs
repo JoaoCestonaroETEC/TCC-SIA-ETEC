@@ -104,6 +104,7 @@ namespace TCC_SIA.Controller
 
         }
         #endregion
+
         #region Listar funcionário
         //Criação do método de listar funcionário
         public NpgsqlDataReader listaFuncionario()
@@ -175,11 +176,9 @@ namespace TCC_SIA.Controller
         #region Atualizar serviço
         public string atualizaServico(Servico mServico)
         {
-            string sql = "update servico set nomeservico = @nomeservico, " +
-                "descservico = @descservico, valorservico = @valorservico, " +
+            string sql = "update servico set nomeservico = @nomeservico," +
+                "descservico = @descservico, valorservico = @valorservico , funcionario = @funcionario," +
                 "garantiaservico = @garantiaservico where idservico = @idservico;";
-
-
 
             conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();
@@ -187,15 +186,15 @@ namespace TCC_SIA.Controller
 
             try
             {
-                comm.Parameters.AddWithValue("@IDSERVICO", mServico.getIDServico());
-                comm.Parameters.AddWithValue("@NOMESERVICO", mServico.getNomeServico());
-                comm.Parameters.AddWithValue("@DESCSERVICO", mServico.getDescServico());
-                comm.Parameters.AddWithValue("@VALORSERVICO", mServico.getValorServico());
-                comm.Parameters.AddWithValue("@GARANTIASERVICO", mServico.getGarantiaServico());
-                
+                comm.Parameters.AddWithValue("@idservico", mServico.getIDServico());
+                comm.Parameters.AddWithValue("@nomeservico", mServico.getNomeServico());
+                comm.Parameters.AddWithValue("@descservico", mServico.getDescServico());
+                comm.Parameters.AddWithValue("@valorservico", mServico.getValorServico());
+                comm.Parameters.AddWithValue("@funcionario", mServico.getFuncionario());
+                comm.Parameters.AddWithValue("@garantiaservico", mServico.getGarantiaServico());
 
                 comm.ExecuteNonQuery();
-                return "Cliente atualizado!";
+                return "Serviço atualizado!";
             }
             catch (NpgsqlException ex)
             {

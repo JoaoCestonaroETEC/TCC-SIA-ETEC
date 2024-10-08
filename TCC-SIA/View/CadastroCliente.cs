@@ -130,36 +130,7 @@ namespace TCC_SIA.View
 
         private void comboBoxUfF_Validated(object sender, EventArgs e)
         {
-            System.Windows.Forms.ComboBox comboBox = sender as System.Windows.Forms.ComboBox;
-            string fornecedorDigitado = comboBox.Text;
-
-            // Verifica se o valor digitado já existe na lista de itens da ComboBox
-            bool fornecedorExiste = comboBox.Items.Cast<System.Data.DataRowView>()
-                                       .Any(item => item.ToString()
-                                       .Equals(fornecedorDigitado, StringComparison.OrdinalIgnoreCase));
-
-            if (!fornecedorExiste && !string.IsNullOrEmpty(fornecedorDigitado))
-            {
-                // Exibe a mensagem com o aviso
-                DialogResult result = MessageBox.Show("Selecione um Estado!",
-                                                      "Aviso!",
-                                                      MessageBoxButtons.OK,
-                                                      MessageBoxIcon.Warning);
-
-                if (result == DialogResult.No)
-                {
-                    // Ação para adicionar um novo fornecedor (sem adicionar o valor na ComboBox diretamente)
-                    MessageBox.Show("Mantenha o valor digitado para cadastrar um novo tipo de peça",
-                                    "Ação Necessária",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Information);
-                }
-                else
-                {
-                    // Limpa o texto da ComboBox
-                    comboBox.Text = string.Empty;
-                }
-            }
+          
         }
     }
 }

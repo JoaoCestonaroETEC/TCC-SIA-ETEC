@@ -16,6 +16,14 @@ namespace TCC_SIA.View
 {
     public partial class PesquisaCliente : Form
     {
+        public PesquisaCliente(String p)
+        {
+            InitializeComponent();
+
+            dataGridViewPesquisarF.Text = p;
+
+        }
+
         #region Inicializa o formulário
         public PesquisaCliente()
         {

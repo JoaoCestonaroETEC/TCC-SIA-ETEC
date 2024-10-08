@@ -106,6 +106,7 @@
             // 
             // tabPageFIsica
             // 
+            tabPageFIsica.BackColor = Color.White;
             tabPageFIsica.Controls.Add(richTextBoxObsF);
             tabPageFIsica.Controls.Add(label29);
             tabPageFIsica.Controls.Add(label14);
@@ -143,7 +144,6 @@
             tabPageFIsica.Size = new Size(989, 363);
             tabPageFIsica.TabIndex = 0;
             tabPageFIsica.Text = "Pessoa Física";
-            tabPageFIsica.UseVisualStyleBackColor = true;
             // 
             // richTextBoxObsF
             // 
@@ -459,7 +459,7 @@
             tabPageJuridica.Location = new Point(4, 29);
             tabPageJuridica.Name = "tabPageJuridica";
             tabPageJuridica.Padding = new Padding(3);
-            tabPageJuridica.Size = new Size(989, 363);
+            tabPageJuridica.Size = new Size(1010, 363);
             tabPageJuridica.TabIndex = 1;
             tabPageJuridica.Text = "Pessoa Jurídica";
             tabPageJuridica.UseVisualStyleBackColor = true;

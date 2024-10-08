@@ -58,8 +58,9 @@
             dateTimePickerGarantia.Format = DateTimePickerFormat.Short;
             dateTimePickerGarantia.Location = new Point(110, 103);
             dateTimePickerGarantia.Name = "dateTimePickerGarantia";
-            dateTimePickerGarantia.Size = new Size(122, 27);
+            dateTimePickerGarantia.Size = new Size(107, 27);
             dateTimePickerGarantia.TabIndex = 18;
+            dateTimePickerGarantia.Value = new DateTime(2024, 10, 5, 0, 0, 0, 0);
             // 
             // label2
             // 
@@ -72,7 +73,7 @@
             // 
             // maskedTextBoxValor
             // 
-            maskedTextBoxValor.Location = new Point(110, 69);
+            maskedTextBoxValor.Location = new Point(114, 64);
             maskedTextBoxValor.Margin = new Padding(3, 4, 3, 4);
             maskedTextBoxValor.Name = "maskedTextBoxValor";
             maskedTextBoxValor.Size = new Size(269, 27);
@@ -92,7 +93,7 @@
             // 
             // textBoxNome
             // 
-            textBoxNome.Location = new Point(111, 34);
+            textBoxNome.Location = new Point(113, 26);
             textBoxNome.Margin = new Padding(3, 4, 3, 4);
             textBoxNome.Name = "textBoxNome";
             textBoxNome.Size = new Size(269, 27);
@@ -128,7 +129,7 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(386, 67);
+            label11.Location = new Point(389, 67);
             label11.Name = "label11";
             label11.Size = new Size(26, 20);
             label11.TabIndex = 86;

@@ -170,10 +170,10 @@ namespace TCC_SIA.Controller
 
         #region Pesquisar marca
         //Criação do método de pesquisar marca
-        public NpgsqlDataReader pesquisaMarca(string marca, string tipo)
+        public NpgsqlDataReader pesquisaMarca(string marca)
         {
             //String sql de pesquisar
-            string sql = "SELECT * FROM MARCA WHERE NOMEMARCA LIKE '" + marca + "%' AND TIPOMARCA LIKE '" + tipo + "%';";
+            string sql = "SELECT * FROM MARCA WHERE NOMEMARCA LIKE '" + marca + "%';";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
@@ -199,6 +199,34 @@ namespace TCC_SIA.Controller
                 con.desconectar();
             }
 
+        }
+        #endregion
+
+        #region Atualizar Marca
+        public string atualizaMarca(Marca mMarca)
+        {
+            string sql = "update marca set nomemarca = @nomemarca," +
+                "descmarca = @descmarca, tipomarca = @tipomarca where idmarca = @idmarca;";
+
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            try
+            {
+                comm.Parameters.AddWithValue("@idmarca", mMarca.getIdMarca());
+                comm.Parameters.AddWithValue("@nomemarca", mMarca.getNomeMarca());
+                comm.Parameters.AddWithValue("@descmarca", mMarca.getDescMarca());
+                comm.Parameters.AddWithValue("@tipomarca", mMarca.getTipoMarca());
+
+                comm.ExecuteNonQuery();
+                return "Serviço atualizado!";
+            }
+            catch (NpgsqlException ex)
+            {
+                return ex.ToString();
+                //return "Erro ao atualizar!";
+            }
         }
         #endregion
     }

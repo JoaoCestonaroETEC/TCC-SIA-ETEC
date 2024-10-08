@@ -122,7 +122,7 @@ namespace TCC_SIA.Controller
             string sql = "INSERT INTO CLIENTE(NOMECLIENTE, EMAILCLIENTE, DATA, STATUS) " +
                 "VALUES(@NOMECLIENTE, @EMAILCLIENTE, @DATA, @STATUS) RETURNING IDCLIENTE;";
 
-            // Inserir na tabela CLIENTE_F (Cliente Físico)
+            // Inserir na tabela CLIENTE_J (Cliente Físico)
             string sqlJuridico = "INSERT INTO CLIENTE_J(IDCLIENTE, CNPJCLIENTE, RAZAO) " +
                 "VALUES(@IDCLIENTE, @CNPJCLIENTE, @RAZAO);";
 
@@ -325,35 +325,47 @@ namespace TCC_SIA.Controller
         }
         #endregion
 
-        public string atualizaCliente(Cliente mClienteF)
+        public string atualizaClienteF(Cliente mClienteF)
         {
-            string sql = "update cliente_f set nomecliente_f = @nomecliente_f, " +
-                "emailcliente_f = @emailcliente_f, datanasc_cliente_f = @datanasc_cliente_f, " +
-                "sexo = @sexo, cpfcliente_f = @cpfcliente_f where idcliente_f = @idcliente_f;" +
-                "update cliente_endereco_f set numero = @numero, rua = @rua, cidade = @cidade, " +
-                "cep = @cep, bairro = @bairro, estado = @estado where idcliente_f = @idcliente_f;" +
-                "update cliente_telefone_f set telefone = @telefone where idcliente_f = @idcliente_f;";
+            string sql = "UPDATE CLIENTE SET NOMECLIENTE = @NOMECLIENTE, " +
+                "EMAILCLIENTE = @EMAILCLIENTE, DATA = @DATA, STATUS = @STATUS RETURNING IDCLIENTE;" +
+                "UPDATE CLIENTE_F SET IDCLIENTE = @IDCLIENTE, CPFCLIENTE, DATANASC_CLIENTE = @DATANAS_CLIENTE, " +
+                "SEXO = @SEXO, OBS = @OBS;" +
+                "UPDATE ENDERECO_CLIENTE SET NUMERO = @NUMERO, RUA = @ RUA, CIDADE = @CIDADE;" +
+                "CEP = @CEP, BAIRRO = @BAIRRO, ESTADO = @ESTADO WHERE IDCLIENTE = @IDCLIENTE;" +
+                "UPDATE TELEFONE_CLIENTE SERT TELEFONE = @TELEFONE WHERE IDCLIENTE = @IDCLIENTE";
 
 
 
             conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();
             NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+            
 
             try
             {
-                comm.Parameters.AddWithValue("@IDCLIENTE_F", mClienteF.getIdCliente());
-                comm.Parameters.AddWithValue("@CPFCLIENTE_F", mClienteF.getCpfCliente());
-                comm.Parameters.AddWithValue("@NOMECLIENTE_F", mClienteF.getNomeCliente());
-                comm.Parameters.AddWithValue("@EMAILCLIENTE_F", mClienteF.getEmailCliente());
-                comm.Parameters.AddWithValue("@DATANASC_CLIENTE_F", mClienteF.getDataNascCliente());
+                comm.Parameters.AddWithValue("@NOMECLIENTE", mClienteF.getNomeCliente());
+                comm.Parameters.AddWithValue("@EMAILCLIENTE", mClienteF.getEmailCliente());
+                comm.Parameters.AddWithValue("@DATA", mClienteF.getData());
+                comm.Parameters.AddWithValue("@STATUS", mClienteF.getStatus());
+
+                var idCliente = (int)comm.ExecuteScalar();
+
+                comm.Parameters.AddWithValue("@IDCLIENTE", mClienteF.getIdCliente());
+                comm.Parameters.AddWithValue("@CPFCLIENTE", mClienteF.getCpfCliente());
+                comm.Parameters.AddWithValue("@DATANASC_CLIENTE", mClienteF.getDataNascCliente());
                 comm.Parameters.AddWithValue("@SEXO", mClienteF.getSexo());
+                comm.Parameters.AddWithValue("@OBS", mClienteF.getObs());
+
+                comm.Parameters.AddWithValue("@IDCLIENTE", mClienteF.getIdCliente());
                 comm.Parameters.AddWithValue("@NUMERO", mClienteF.getNumero());
                 comm.Parameters.AddWithValue("@RUA", mClienteF.getRua());
                 comm.Parameters.AddWithValue("@CIDADE", mClienteF.getCidade());
                 comm.Parameters.AddWithValue("@CEP", mClienteF.getCep());
                 comm.Parameters.AddWithValue("@BAIRRO", mClienteF.getBairro());
                 comm.Parameters.AddWithValue("@ESTADO", mClienteF.getUf());
+
+                comm.Parameters.AddWithValue("@IDCLIENTE", mClienteF.getIdCliente());
                 comm.Parameters.AddWithValue("@TELEFONE", mClienteF.getTelefone());
 
                 comm.ExecuteNonQuery();
