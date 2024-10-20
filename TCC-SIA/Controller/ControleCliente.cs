@@ -325,58 +325,145 @@ namespace TCC_SIA.Controller
         }
         #endregion
 
-        public string atualizaClienteF(Cliente mClienteF)
+        public string atualizaClienteF(Cliente mClienteJ)
         {
-            string sql = "UPDATE CLIENTE SET NOMECLIENTE = @NOMECLIENTE, " +
-                "EMAILCLIENTE = @EMAILCLIENTE, DATA = @DATA, STATUS = @STATUS RETURNING IDCLIENTE;" +
-                "UPDATE CLIENTE_F SET IDCLIENTE = @IDCLIENTE, CPFCLIENTE, DATANASC_CLIENTE = @DATANAS_CLIENTE, " +
-                "SEXO = @SEXO, OBS = @OBS;" +
-                "UPDATE ENDERECO_CLIENTE SET NUMERO = @NUMERO, RUA = @ RUA, CIDADE = @CIDADE;" +
-                "CEP = @CEP, BAIRRO = @BAIRRO, ESTADO = @ESTADO WHERE IDCLIENTE = @IDCLIENTE;" +
-                "UPDATE TELEFONE_CLIENTE SERT TELEFONE = @TELEFONE WHERE IDCLIENTE = @IDCLIENTE";
+            // Primeira query com RETURNING para obter o IDCLIENTE
+            string sqlUpdateCliente = "UPDATE CLIENTE SET NOMECLIENTE = @NOMECLIENTE, " +
+                "EMAILCLIENTE = @EMAILCLIENTE, DATA = @DATA, STATUS = @STATUS " +
+                "WHERE IDCLIENTE = @IDCLIENTE RETURNING IDCLIENTE;";
 
+            // Outras queries separadas para as atualizações subsequentes
+            string sqlUpdateClienteF = "UPDATE CLIENTE_F SET CPFCLIENTE = @CPFCLIENTE, " +
+                "DATANASC_CLIENTE = @DATANASC_CLIENTE, SEXO = @SEXO, OBS = @OBS " +
+                "WHERE IDCLIENTE = @IDCLIENTE;";
 
+            string sqlUpdateEndereco = "UPDATE CLIENTE_ENDERECO SET NUMERO = @NUMERO, " +
+                "RUA = @RUA, CIDADE = @CIDADE, CEP = @CEP, BAIRRO = @BAIRRO, ESTADO = @ESTADO " +
+                "WHERE IDCLIENTE = @IDCLIENTE;";
+
+            string sqlUpdateTelefone = "UPDATE CLIENTE_TELEFONE SET TELEFONE = @TELEFONE " +
+                "WHERE IDCLIENTE = @IDCLIENTE;";
 
             conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();
-            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
-            
 
             try
             {
-                comm.Parameters.AddWithValue("@NOMECLIENTE", mClienteF.getNomeCliente());
-                comm.Parameters.AddWithValue("@EMAILCLIENTE", mClienteF.getEmailCliente());
-                comm.Parameters.AddWithValue("@DATA", mClienteF.getData());
-                comm.Parameters.AddWithValue("@STATUS", mClienteF.getStatus());
+                // Comando para atualizar CLIENTE e retornar o IDCLIENTE
+                NpgsqlCommand comm = new NpgsqlCommand(sqlUpdateCliente, conn);
+                comm.Parameters.AddWithValue("@NOMECLIENTE", mClienteJ.getNomeCliente());
+                comm.Parameters.AddWithValue("@EMAILCLIENTE", mClienteJ.getEmailCliente());
+                comm.Parameters.AddWithValue("@DATA", mClienteJ.getData());
+                comm.Parameters.AddWithValue("@STATUS", mClienteJ.getStatus());
+                comm.Parameters.AddWithValue("@IDCLIENTE", mClienteJ.getIdCliente());
 
+                // Executa e recupera o IDCLIENTE
                 var idCliente = (int)comm.ExecuteScalar();
 
-                comm.Parameters.AddWithValue("@IDCLIENTE", mClienteF.getIdCliente());
-                comm.Parameters.AddWithValue("@CPFCLIENTE", mClienteF.getCpfCliente());
-                comm.Parameters.AddWithValue("@DATANASC_CLIENTE", mClienteF.getDataNascCliente());
-                comm.Parameters.AddWithValue("@SEXO", mClienteF.getSexo());
-                comm.Parameters.AddWithValue("@OBS", mClienteF.getObs());
-
-                comm.Parameters.AddWithValue("@IDCLIENTE", mClienteF.getIdCliente());
-                comm.Parameters.AddWithValue("@NUMERO", mClienteF.getNumero());
-                comm.Parameters.AddWithValue("@RUA", mClienteF.getRua());
-                comm.Parameters.AddWithValue("@CIDADE", mClienteF.getCidade());
-                comm.Parameters.AddWithValue("@CEP", mClienteF.getCep());
-                comm.Parameters.AddWithValue("@BAIRRO", mClienteF.getBairro());
-                comm.Parameters.AddWithValue("@ESTADO", mClienteF.getUf());
-
-                comm.Parameters.AddWithValue("@IDCLIENTE", mClienteF.getIdCliente());
-                comm.Parameters.AddWithValue("@TELEFONE", mClienteF.getTelefone());
-
+                // Atualiza CLIENTE_F
+                comm.CommandText = sqlUpdateClienteF;
+                comm.Parameters.Clear();
+                comm.Parameters.AddWithValue("@IDCLIENTE", idCliente);
+                comm.Parameters.AddWithValue("@CPFCLIENTE", mClienteJ.getCpfCliente());
+                comm.Parameters.AddWithValue("@DATANASC_CLIENTE", mClienteJ.getDataNascCliente());
+                comm.Parameters.AddWithValue("@SEXO", mClienteJ.getSexo());
+                comm.Parameters.AddWithValue("@OBS", mClienteJ.getObs()); 
                 comm.ExecuteNonQuery();
+
+                // Atualiza ENDERECO_CLIENTE
+                comm.CommandText = sqlUpdateEndereco;
+                comm.Parameters.Clear();
+                comm.Parameters.AddWithValue("@IDCLIENTE", idCliente);
+                comm.Parameters.AddWithValue("@NUMERO", mClienteJ.getNumero());
+                comm.Parameters.AddWithValue("@RUA", mClienteJ.getRua());
+                comm.Parameters.AddWithValue("@CIDADE", mClienteJ.getCidade());
+                comm.Parameters.AddWithValue("@CEP", mClienteJ.getCep());
+                comm.Parameters.AddWithValue("@BAIRRO", mClienteJ.getBairro());
+                comm.Parameters.AddWithValue("@ESTADO", mClienteJ.getUf());
+                comm.ExecuteNonQuery();
+
+                // Atualiza TELEFONE_CLIENTE
+                comm.CommandText = sqlUpdateTelefone;
+                comm.Parameters.Clear();
+                comm.Parameters.AddWithValue("@IDCLIENTE", idCliente);
+                comm.Parameters.AddWithValue("@TELEFONE", mClienteJ.getTelefone());
+                comm.ExecuteNonQuery();
+
                 return "Cliente atualizado!";
             }
             catch (NpgsqlException ex)
             {
-                //return ex.ToString();
-                return "Erro ao atualizar!";
+                return ex.ToString(); // Para debug, talvez seja melhor logar isso em vez de retornar como string.
             }
         }
 
+        public string atualizaClienteJ(Cliente mClienteJ)
+        {
+            // Primeira query com RETURNING para obter o IDCLIENTE
+            string sqlUpdateCliente = "UPDATE CLIENTE SET NOMECLIENTE = @NOMECLIENTE, " +
+                "EMAILCLIENTE = @EMAILCLIENTE, DATA = @DATA, STATUS = @STATUS " +
+                "WHERE IDCLIENTE = @IDCLIENTE RETURNING IDCLIENTE;";
+
+            // Outras queries separadas para as atualizações subsequentes
+            string sqlUpdateClienteJ = "UPDATE CLIENTE_J SET CNPJCLIENTE = @CNPJCLIENTE, " +
+                "RAZAO = @RAZAO WHERE IDCLIENTE = @IDCLIENTE;";
+
+            string sqlUpdateEndereco = "UPDATE CLIENTE_ENDERECO SET NUMERO = @NUMERO, " +
+                "RUA = @RUA, CIDADE = @CIDADE, CEP = @CEP, BAIRRO = @BAIRRO, ESTADO = @ESTADO " +
+                "WHERE IDCLIENTE = @IDCLIENTE;";
+
+            string sqlUpdateTelefone = "UPDATE CLIENTE_TELEFONE SET TELEFONE = @TELEFONE " +
+                "WHERE IDCLIENTE = @IDCLIENTE;";
+
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+
+            try
+            {
+                // Comando para atualizar CLIENTE e retornar o IDCLIENTE
+                NpgsqlCommand comm = new NpgsqlCommand(sqlUpdateCliente, conn);
+                comm.Parameters.AddWithValue("@NOMECLIENTE", mClienteJ.getNomeCliente());
+                comm.Parameters.AddWithValue("@EMAILCLIENTE", mClienteJ.getEmailCliente());
+                comm.Parameters.AddWithValue("@DATA", mClienteJ.getData());
+                comm.Parameters.AddWithValue("@STATUS", mClienteJ.getStatus());
+                comm.Parameters.AddWithValue("@IDCLIENTE", mClienteJ.getIdCliente());
+
+                // Executa e recupera o IDCLIENTE
+                var idCliente = (int)comm.ExecuteScalar();
+
+                // Atualiza CLIENTE_F
+                comm.CommandText = sqlUpdateClienteJ;
+                comm.Parameters.Clear();
+                comm.Parameters.AddWithValue("@IDCLIENTE", idCliente);
+                comm.Parameters.AddWithValue("@CNPJCLIENTE", mClienteJ.getCNPJCliente());
+                comm.Parameters.AddWithValue("@RAZAO", mClienteJ.getRazao());
+                comm.ExecuteNonQuery();
+
+                // Atualiza ENDERECO_CLIENTE
+                comm.CommandText = sqlUpdateEndereco;
+                comm.Parameters.Clear();
+                comm.Parameters.AddWithValue("@IDCLIENTE", idCliente);
+                comm.Parameters.AddWithValue("@NUMERO", mClienteJ.getNumero());
+                comm.Parameters.AddWithValue("@RUA", mClienteJ.getRua());
+                comm.Parameters.AddWithValue("@CIDADE", mClienteJ.getCidade());
+                comm.Parameters.AddWithValue("@CEP", mClienteJ.getCep());
+                comm.Parameters.AddWithValue("@BAIRRO", mClienteJ.getBairro());
+                comm.Parameters.AddWithValue("@ESTADO", mClienteJ.getUf());
+                comm.ExecuteNonQuery();
+
+                // Atualiza TELEFONE_CLIENTE
+                comm.CommandText = sqlUpdateTelefone;
+                comm.Parameters.Clear();
+                comm.Parameters.AddWithValue("@IDCLIENTE", idCliente);
+                comm.Parameters.AddWithValue("@TELEFONE", mClienteJ.getTelefone());
+                comm.ExecuteNonQuery();
+
+                return "Cliente atualizado!";
+            }
+            catch (NpgsqlException ex)
+            {
+                return ex.ToString(); // Para debug, talvez seja melhor logar isso em vez de retornar como string.
+            }
+        }
     }
 }

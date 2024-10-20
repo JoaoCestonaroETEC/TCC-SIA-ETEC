@@ -121,6 +121,7 @@
             buttonPesquisar.TabIndex = 28;
             buttonPesquisar.Text = "Pesquisar";
             buttonPesquisar.UseVisualStyleBackColor = true;
+            buttonPesquisar.Click += buttonPesquisar_Click;
             // 
             // label1
             // 

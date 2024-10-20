@@ -174,8 +174,9 @@ namespace TCC_SIA.Controller
                 //Método de desconectar
                 con.desconectar();
             }
-            #endregion
         }
+            #endregion
+        
 
         #region Listar idpedido
         //Criação do método de listar o id do pedido

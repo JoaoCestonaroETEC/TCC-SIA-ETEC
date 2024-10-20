@@ -366,5 +366,45 @@ namespace TCC_SIA.Controller
             }
         }
         #endregion
+
+        #region Atualizar Veiculo
+        public string atualizarVeiculo(Veiculo mVeiculo)
+        {
+            string sql = "update veiculo set nomeveiculo = @nomeveiculo," +
+                "tipoveiculo = @tipoveiculo, corveiculo = @corveiculo, placaveiculo = @placaveiculo, " + 
+                "modeloveiculo = @modeloveiculo, chassi = @chassi, anofab = @anofab, quilometragem = @quilometragem, " + 
+                "motor = @motor, combustivel = @combustivel, data = @data, seguro = @seguro where idveiculo = @idveiculo;";
+
+
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            try
+            {
+                comm.Parameters.AddWithValue("@idveiculo", mVeiculo.getIdVeiculo());
+                comm.Parameters.AddWithValue("@nomeveiculo", mVeiculo.getNomeVeiculo());
+                comm.Parameters.AddWithValue("@tipoveiculo", mVeiculo.getTipoVeiculo());
+                comm.Parameters.AddWithValue("@corveiculo", mVeiculo.getCorVeiculo());
+                comm.Parameters.AddWithValue("@placaveiculo", mVeiculo.getPlacaVeiculo());
+                comm.Parameters.AddWithValue("@modeloveiculo", mVeiculo.getModeloVeiculo());
+                comm.Parameters.AddWithValue("@chassi", mVeiculo.getChassi());
+                comm.Parameters.AddWithValue("@anofab", mVeiculo.getAnoFabricacao());
+                comm.Parameters.AddWithValue("@quilometragem", mVeiculo.getQuilometragem());
+                comm.Parameters.AddWithValue("@motor", mVeiculo.getMotor());
+                comm.Parameters.AddWithValue("@combustivel", mVeiculo.getCombustivel());
+                comm.Parameters.AddWithValue("@data", mVeiculo.getData());
+                comm.Parameters.AddWithValue("@seguro", mVeiculo.getSeguro());
+
+                comm.ExecuteNonQuery();
+                return "Veiculo atualizado!";
+            }
+            catch (NpgsqlException ex)
+            {
+                return ex.ToString();
+                //return "Erro ao atualizar!";
+            }
+        }
+        #endregion
     }
 }

@@ -9,6 +9,7 @@ namespace TCC_SIA.Model
     internal class Veiculo
     {
         #region Criação de atributo
+        private long idVeiculo;
         private long idcliente;
         private long idMarca;
         private string nomeVeiculo;
@@ -27,6 +28,15 @@ namespace TCC_SIA.Model
         #endregion
 
         #region Encapsulamento
+        public long getIdVeiculo()
+        {
+            return this.idVeiculo;
+        }
+        public void setIdVeiculo(long idVeiculo)
+        {
+            this.idVeiculo = idVeiculo;
+        }
+
         public long getIdCliente()
         {
             return this.idcliente;
