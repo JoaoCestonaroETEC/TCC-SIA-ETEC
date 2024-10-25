@@ -235,7 +235,7 @@ namespace TCC_SIA.Controller
         public NpgsqlDataReader listaVeiculoPorCliente(string cliente)
         {
             //String sql de listar
-            string sql = "SELECT * FROM VEICULO WHERE IDCLIENTE ='" + cliente + "';";
+            string sql = "SELECT * FROM VEICULO WHERE IDCLIENTE = '" + cliente + "';";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();

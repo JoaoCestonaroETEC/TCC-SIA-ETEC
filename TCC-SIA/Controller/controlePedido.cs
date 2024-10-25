@@ -175,8 +175,143 @@ namespace TCC_SIA.Controller
                 con.desconectar();
             }
         }
-            #endregion
-        
+        #endregion
+
+        #region Pesquisar pedido
+        //Criação do método de pesquisar peça
+        public NpgsqlDataReader pesquisaPedido(int cliente, int veiculo)
+        {
+            //String sql de pesquisar
+            string sql = "SELECT * FROM PEDIDO WHERE IDCLIENTE = '" + cliente + "%' AND IDVEICULO = '" + veiculo + "%';";
+
+            //Abrindo conexão com o banco de dados
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            //Fazendo o try
+            try
+            {
+                //Retornando os valores
+                return comm.ExecuteReader();
+            }
+            //Fazendo o catch
+            catch (NpgsqlException ex)
+            {
+                //Retornando como nulo
+                return null;
+            }
+            //Encerrando a conexão
+            finally
+            {
+                //Método de desconectar
+                con.desconectar();
+            }
+
+        }
+        #endregion
+
+        #region
+        //Criação do método de pesquisar o pedido
+        public NpgsqlDataReader pesquisaPecaParaOPedido(string peca)
+        {
+            //String sql de pesquisar
+            string sql = "SELECT IDMARCAPECA FROM PECA WHERE NOMEPECA LIKE '" + peca + "%';";
+
+            //Abrindo conexão com o banco de dados
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            //Fazendo o try
+            try
+            {
+                //Retornando os valores
+                return comm.ExecuteReader();
+            }
+            //Fazendo o catch
+            catch (NpgsqlException ex)
+            {
+                //Retornando como nulo
+                return null;
+            }
+            //Encerrando a conexão
+            finally
+            {
+                //Método de desconectar
+                con.desconectar();
+            }
+
+        }
+        #endregion
+
+        #region Pesquisar pedido
+        //Criação do método de pesquisar peça
+        public NpgsqlDataReader listarPedido()
+        {
+            //String sql de pesquisar
+            string sql = "SELECT * FROM PEDIDO;";
+
+            //Abrindo conexão com o banco de dados
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            //Fazendo o try
+            try
+            {
+                //Retornando os valores
+                return comm.ExecuteReader();
+            }
+            //Fazendo o catch
+            catch (NpgsqlException ex)
+            {
+                //Retornando como nulo
+                return null;
+            }
+            //Encerrando a conexão
+            finally
+            {
+                //Método de desconectar
+                con.desconectar();
+            }
+
+        }
+        #endregion
+
+        #region
+        //Criação do método de pesquisar peça do pedido
+        public NpgsqlDataReader listarPedido(string peca)
+        {
+            //String sql de pesquisar
+            string sql = "SELECT IDMARCAPECA FROM PECA WHERE NOMEPECA LIKE '" + peca + "%';";
+
+            //Abrindo conexão com o banco de dados
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            //Fazendo o try
+            try
+            {
+                //Retornando os valores
+                return comm.ExecuteReader();
+            }
+            //Fazendo o catch
+            catch (NpgsqlException ex)
+            {
+                //Retornando como nulo
+                return null;
+            }
+            //Encerrando a conexão
+            finally
+            {
+                //Método de desconectar
+                con.desconectar();
+            }
+
+        }
+        #endregion
 
         #region Listar idpedido
         //Criação do método de listar o id do pedido
@@ -210,6 +345,78 @@ namespace TCC_SIA.Controller
                 //Método de desconectar
                 con.desconectar();
             }
+        }
+        #endregion
+
+
+        #region Pesquisar cliente por id
+        //Criação do método de pesquisar marca de peça por id
+        public string pesquisarClientePorId(string idCliente)
+        {
+            //String sql de pesquisar
+            string sql = "SELECT NOMECLIENTE FROM CLIENTE WHERE IDCLIENTE = '" + idCliente + "';";
+
+            //Abrindo conexão com o banco de dados
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            //Fazendo o try
+            try
+            {
+                //Execute a consulta e retorne o resultado como string
+                object result = comm.ExecuteScalar();
+                return result != null ? result.ToString() : "Marca não encontrada";
+            }
+            //Fazendo o catch
+            catch (NpgsqlException ex)
+            {
+                //Retornando como nulo
+                return null;
+            }
+            //Encerrando a conexão
+            finally
+            {
+                //Método de desconectar
+                con.desconectar();
+            }
+
+        }
+        #endregion
+
+
+        #region Pesquisar Veiculo por id
+        //Criação do método de pesquisar marca de peça por id
+        public string pesquisarVeiculoPorId(string IdVeiculo)
+        {
+            //String sql de pesquisar
+            string sql = "SELECT NOMEVEICULO FROM VEICULO WHERE IDVEICULO = '" + IdVeiculo + "';";
+
+            //Abrindo conexão com o banco de dados
+            conexaoBD con = new conexaoBD();
+            NpgsqlConnection conn = con.conectar();
+            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+
+            //Fazendo o try
+            try
+            {
+                //Execute a consulta e retorne o resultado como string
+                object result = comm.ExecuteScalar();
+                return result != null ? result.ToString() : "Marca não encontrada";
+            }
+            //Fazendo o catch
+            catch (NpgsqlException ex)
+            {
+                //Retornando como nulo
+                return null;
+            }
+            //Encerrando a conexão
+            finally
+            {
+                //Método de desconectar
+                con.desconectar();
+            }
+
         }
         #endregion
     }

@@ -52,6 +52,7 @@
             cadastroToolStripMenuItem = new ToolStripMenuItem();
             editarDeletarToolStripMenuItem = new ToolStripMenuItem();
             panel1 = new Panel();
+            pEDIDOToolStripMenuItem1 = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             panel2.SuspendLayout();
             contextMenuStrip1.SuspendLayout();
@@ -122,7 +123,7 @@
             // 
             // pESQUISARToolStripMenuItem
             // 
-            pESQUISARToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { sERVIÇOToolStripMenuItem1, pEÇAToolStripMenuItem1, cLIENTEToolStripMenuItem1, vEÍCULOToolStripMenuItem1, mARCAToolStripMenuItem1 });
+            pESQUISARToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { sERVIÇOToolStripMenuItem1, pEÇAToolStripMenuItem1, cLIENTEToolStripMenuItem1, vEÍCULOToolStripMenuItem1, mARCAToolStripMenuItem1, pEDIDOToolStripMenuItem1 });
             pESQUISARToolStripMenuItem.ForeColor = Color.White;
             pESQUISARToolStripMenuItem.Name = "pESQUISARToolStripMenuItem";
             pESQUISARToolStripMenuItem.Size = new Size(290, 45);
@@ -237,6 +238,13 @@
             panel1.Size = new Size(900, 40);
             panel1.TabIndex = 5;
             // 
+            // pEDIDOToolStripMenuItem1
+            // 
+            pEDIDOToolStripMenuItem1.Name = "pEDIDOToolStripMenuItem1";
+            pEDIDOToolStripMenuItem1.Size = new Size(229, 46);
+            pEDIDOToolStripMenuItem1.Text = "PEDIDO";
+            pEDIDOToolStripMenuItem1.Click += pEDIDOToolStripMenuItem1_Click;
+            // 
             // TelaInicial
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
@@ -289,5 +297,6 @@
         private ToolStripMenuItem cadastroToolStripMenuItem;
         private ToolStripMenuItem editarDeletarToolStripMenuItem;
         private Panel panel1;
+        private ToolStripMenuItem pEDIDOToolStripMenuItem1;
     }
 }

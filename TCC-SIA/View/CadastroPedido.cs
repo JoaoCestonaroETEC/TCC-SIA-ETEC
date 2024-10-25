@@ -22,7 +22,7 @@ namespace TCC_SIA.View
             InitializeComponent();
 
             listarCliente();
-            listarVeiculo();
+            listarVeiculoPorCliente();
 
             #region Carrega os dados de pesquisa de serviços
             // Criação do objeto NpgsqlDataReader servico e controleServico

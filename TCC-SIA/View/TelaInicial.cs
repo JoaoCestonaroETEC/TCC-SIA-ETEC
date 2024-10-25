@@ -111,6 +111,14 @@ namespace TCC_SIA.View
         }
         #endregion
 
+        #region Pesquisar Pedido
+        private void pEDIDOToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            PesquisaPedido formPedido = new PesquisaPedido();
+            formPedido.Show();
+        }
+        #endregion
+
         private void button1_Click(object sender, EventArgs e)
         {
 
@@ -133,6 +141,5 @@ namespace TCC_SIA.View
                 }
             }
         }
-
     }
 }

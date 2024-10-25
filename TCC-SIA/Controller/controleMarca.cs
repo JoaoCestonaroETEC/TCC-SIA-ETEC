@@ -70,7 +70,7 @@ namespace TCC_SIA.Controller
         public NpgsqlDataReader listarNovasMarca()
         {
             //String sql de listar
-            string sql = "SELECT * FROM MARCA WHERE TIPOMARCA NOT IN ('Peças Automotívas', 'Óleos lubrificantes', 'Pneus', 'Ferramentas e Equipamento para oficinas', 'Veiculos');";
+            string sql = "SELECT * FROM MARCA WHERE TIPOMARCA NOT IN ('Peças Automotívas', 'Óleos lubrificantes', 'Pneus', 'Ferramentas e Equipamentos para oficinas', 'Veiculos');";
 
             //Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
