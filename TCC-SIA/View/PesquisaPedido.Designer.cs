@@ -171,6 +171,7 @@
             dataGridViewPesquisar.RowHeadersWidth = 51;
             dataGridViewPesquisar.Size = new Size(786, 366);
             dataGridViewPesquisar.TabIndex = 16;
+            dataGridViewPesquisar.CellClick += dataGridViewPesquisar_CellClick;
             // 
             // tabPage2
             // 

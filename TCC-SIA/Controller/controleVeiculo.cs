@@ -228,7 +228,7 @@ namespace TCC_SIA.Controller
             }
 
         }
-#endregion
+        #endregion
 
         #region Listar veículo por cliente
         //Criação do método de listar veículo por cliente
@@ -371,8 +371,8 @@ namespace TCC_SIA.Controller
         public string atualizarVeiculo(Veiculo mVeiculo)
         {
             string sql = "update veiculo set nomeveiculo = @nomeveiculo," +
-                "tipoveiculo = @tipoveiculo, corveiculo = @corveiculo, placaveiculo = @placaveiculo, " + 
-                "modeloveiculo = @modeloveiculo, chassi = @chassi, anofab = @anofab, quilometragem = @quilometragem, " + 
+                "tipoveiculo = @tipoveiculo, corveiculo = @corveiculo, placaveiculo = @placaveiculo, " +
+                "modeloveiculo = @modeloveiculo, chassi = @chassi, anofab = @anofab, quilometragem = @quilometragem, " +
                 "motor = @motor, combustivel = @combustivel, data = @data, seguro = @seguro where idveiculo = @idveiculo;";
 
 
@@ -406,5 +406,37 @@ namespace TCC_SIA.Controller
             }
         }
         #endregion
+
+        public string deletarVeiculo(Veiculo mVeiculo)
+        {
+            // SQL para deletar a marca
+            string sql = "DELETE FROM VEICULO WHERE idveiculo = @idveiculo;";
+
+            // Criação da conexão e comando
+            conexaoBD con = new conexaoBD();
+            using (NpgsqlConnection conn = con.conectar()) // Conectar ao banco de dados
+            using (NpgsqlCommand comm = new NpgsqlCommand(sql, conn))
+            {
+                try
+                {
+                    // Executa o comando de exclusão
+                    int rowsAffected = comm.ExecuteNonQuery();
+
+                    // Verifica se a exclusão foi bem-sucedida
+                    if (rowsAffected > 0)
+                    {
+                        return "Veículo deletada com sucesso!";
+                    }
+                    else
+                    {
+                        return "Nenhuma linha encontrada para deletar.";
+                    }
+                }
+                catch (NpgsqlException ex)
+                {
+                    return "Erro ao deletar: " + ex.Message;
+                }
+            }
+        }
     }
 }

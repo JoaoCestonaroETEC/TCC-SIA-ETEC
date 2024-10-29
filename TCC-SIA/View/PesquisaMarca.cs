@@ -210,10 +210,10 @@ namespace TCC_SIA.View
                 }
             }
         }
-            #endregion
+        #endregion
 
-            #region Listar tipos
-            public void listarTipos()
+        #region Listar tipos
+        public void listarTipos()
         {
             controleMarca cMarca = new controleMarca();
             // Recebe os dados da consulta e salva no dataReader (Tipo)
@@ -311,6 +311,7 @@ namespace TCC_SIA.View
 
         private void buttonEditar_Click(object sender, EventArgs e)
         {
+
             foreach (DataGridViewRow row in dataGridViewPesquisar.Rows)
             {
                 // Verifica se a linha contém pelo menos 6 células e se a célula "Selecionar" (índice 5) está marcada
@@ -332,6 +333,59 @@ namespace TCC_SIA.View
             }
 
 
+        }
+
+        private void Deletar_Click(object sender, EventArgs e)
+        {
+            // Lista para armazenar os IDs das marcas a serem removidas
+            List<long> idsToDelete = new List<long>();
+
+            // Verifica todas as linhas do DataGridView
+            foreach (DataGridViewRow row in dataGridViewPesquisar.Rows)
+            {
+                // Verifica se a linha não é uma nova linha e se a checkbox está marcada
+                if (!row.IsNewRow && (bool)(row.Cells["Selecionar"].Value ?? false))
+                {
+                    // Obtém o ID da marca da linha
+                    long idMarca = Convert.ToInt64(row.Cells["Id Marca"].Value);
+                    // Adiciona o ID à lista para exclusão
+                    idsToDelete.Add(idMarca);
+                }
+            }
+
+            // Se não houver marcas selecionadas
+            if (idsToDelete.Count == 0)
+            {
+                MessageBox.Show("Por favor, selecione pelo menos uma linha para deletar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Chamada ao controleMarca para deletar as marcas
+            controleMarca cMarca = new controleMarca();
+            Marca mMarca = new Marca();
+
+            string res = string.Empty;
+
+            // Deletar cada marca do banco de dados
+            foreach (long idMarca in idsToDelete)
+            {
+                res = cMarca.deletarMarca(mMarca);
+                MessageBox.Show(res, "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            // Remove as linhas do DataGridView após a exclusão
+            foreach (long idMarca in idsToDelete)
+            {
+                // Encontre a linha correspondente e remova-a
+                foreach (DataGridViewRow row in dataGridViewPesquisar.Rows)
+                {
+                    if (!row.IsNewRow && Convert.ToInt64(row.Cells["Id Marca"].Value) == idMarca)
+                    {
+                        dataGridViewPesquisar.Rows.Remove(row);
+                        break; // Sai do loop após remover a linha
+                    }
+                }
+            }
         }
     }
 }

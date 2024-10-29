@@ -205,29 +205,92 @@ namespace TCC_SIA.Controller
         #region Atualizar Marca
         public string atualizaMarca(Marca mMarca)
         {
-            string sql = "update marca set nomemarca = @nomemarca," +
-                "descmarca = @descmarca, tipomarca = @tipomarca where idmarca = @idmarca;";
+            string sqlCount = "SELECT COUNT(*) FROM marca WHERE idmarca = @idmarca;";
+            string sqlUpdate = "UPDATE marca SET nomemarca = @nomemarca, descmarca = @descmarca, tipomarca = @tipomarca WHERE idmarca = @idmarca;";
 
             conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();
-            NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
 
             try
             {
-                comm.Parameters.AddWithValue("@idmarca", mMarca.getIdMarca());
-                comm.Parameters.AddWithValue("@nomemarca", mMarca.getNomeMarca());
-                comm.Parameters.AddWithValue("@descmarca", mMarca.getDescMarca());
-                comm.Parameters.AddWithValue("@tipomarca", mMarca.getTipoMarca());
+                // Verifica se existe exatamente uma linha com o idmarca fornecido
+                using (NpgsqlCommand countComm = new NpgsqlCommand(sqlCount, conn))
+                {
+                    countComm.Parameters.AddWithValue("@idmarca", mMarca.getIdMarca());
 
-                comm.ExecuteNonQuery();
-                return "Serviço atualizado!";
+                    int rowCount = Convert.ToInt32(countComm.ExecuteScalar());
+
+                    if (rowCount == 0)
+                    {
+                        return "Nenhuma linha encontrada para atualizar.";
+                    }
+                    else if (rowCount > 1)
+                    {
+                        return "Selecione penas uma linha";
+                    }
+                }
+
+                // Continua para o update apenas se houver exatamente uma linha correspondente
+                using (NpgsqlCommand updateComm = new NpgsqlCommand(sqlUpdate, conn))
+                {
+                    updateComm.Parameters.AddWithValue("@idmarca", mMarca.getIdMarca());
+                    updateComm.Parameters.AddWithValue("@nomemarca", mMarca.getNomeMarca());
+                    updateComm.Parameters.AddWithValue("@descmarca", mMarca.getDescMarca());
+                    updateComm.Parameters.AddWithValue("@tipomarca", mMarca.getTipoMarca());
+
+                    int rowsAffected = updateComm.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        return "Serviço atualizado com sucesso!";
+                    }
+                    else
+                    {
+                        return "Nenhuma linha foi atualizada.";
+                    }
+                }
             }
             catch (NpgsqlException ex)
             {
-                return ex.ToString();
-                //return "Erro ao atualizar!";
+                return "Erro ao atualizar: " + ex.Message;
+            }
+            finally
+            {
+                conn.Close();
             }
         }
         #endregion
+
+        public string deletarMarca(Marca mMarca)
+        {
+                // SQL para deletar a marca
+                string sql = "DELETE FROM marca WHERE idmarca = @idmarca;";
+
+                // Criação da conexão e comando
+                conexaoBD con = new conexaoBD();
+                using (NpgsqlConnection conn = con.conectar()) // Conectar ao banco de dados
+                using (NpgsqlCommand comm = new NpgsqlCommand(sql, conn))
+                {
+                    try
+                    { 
+                        // Executa o comando de exclusão
+                        int rowsAffected = comm.ExecuteNonQuery();
+
+                        // Verifica se a exclusão foi bem-sucedida
+                        if (rowsAffected > 0)
+                        {
+                            return "Marca deletada com sucesso!";
+                        }
+                        else
+                        {
+                            return "Nenhuma linha encontrada para deletar.";
+                        }
+                    }
+                    catch (NpgsqlException ex)
+                    {
+                        return "Erro ao deletar: " + ex.Message;
+                    }
+                }
+            }
+        }
     }
-}

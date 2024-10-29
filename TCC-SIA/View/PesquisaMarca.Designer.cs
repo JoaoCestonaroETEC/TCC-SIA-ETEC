@@ -47,6 +47,8 @@
             richTextBoxDesc = new RichTextBox();
             label4 = new Label();
             label5 = new Label();
+            Deletar = new Model.ButtonDesign();
+            Cancelar = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewPesquisar).BeginInit();
@@ -60,11 +62,12 @@
             tabControl1.Location = new Point(12, 12);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(608, 537);
+            tabControl1.Size = new Size(842, 537);
             tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(Deletar);
             tabPage1.Controls.Add(buttonEditar);
             tabPage1.Controls.Add(comboBoxTipo);
             tabPage1.Controls.Add(label3);
@@ -75,7 +78,7 @@
             tabPage1.Location = new Point(4, 29);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(600, 504);
+            tabPage1.Size = new Size(834, 504);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Pesquisar";
             tabPage1.UseVisualStyleBackColor = true;
@@ -97,7 +100,7 @@
             // 
             comboBoxTipo.FormattingEnabled = true;
             comboBoxTipo.Items.AddRange(new object[] { "Peças Automotívas", "Óleos lubrificantes", "Pneus", "Ferramentas e Equipamentos para oficinas", "Veiculos", "Outro" });
-            comboBoxTipo.Location = new Point(455, 427);
+            comboBoxTipo.Location = new Point(686, 428);
             comboBoxTipo.Margin = new Padding(3, 4, 3, 4);
             comboBoxTipo.Name = "comboBoxTipo";
             comboBoxTipo.Size = new Size(138, 28);
@@ -106,7 +109,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(410, 431);
+            label3.Location = new Point(641, 432);
             label3.Name = "label3";
             label3.Size = new Size(42, 20);
             label3.TabIndex = 29;
@@ -137,7 +140,7 @@
             textBoxPesquisar.Location = new Point(82, 10);
             textBoxPesquisar.Margin = new Padding(3, 4, 3, 4);
             textBoxPesquisar.Name = "textBoxPesquisar";
-            textBoxPesquisar.Size = new Size(511, 27);
+            textBoxPesquisar.Size = new Size(742, 27);
             textBoxPesquisar.TabIndex = 26;
             // 
             // dataGridViewPesquisar
@@ -156,11 +159,12 @@
             dataGridViewPesquisar.RowHeadersWidth = 51;
             dataGridViewPesquisar.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewPesquisar.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            dataGridViewPesquisar.Size = new Size(587, 334);
+            dataGridViewPesquisar.Size = new Size(817, 334);
             dataGridViewPesquisar.TabIndex = 25;
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(Cancelar);
             tabPage2.Controls.Add(maskedTextBoxID);
             tabPage2.Controls.Add(label6);
             tabPage2.Controls.Add(comboBox1);
@@ -173,7 +177,7 @@
             tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(600, 504);
+            tabPage2.Size = new Size(834, 504);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Editar";
             tabPage2.UseVisualStyleBackColor = true;
@@ -181,7 +185,7 @@
             // maskedTextBoxID
             // 
             maskedTextBoxID.Enabled = false;
-            maskedTextBoxID.Location = new Point(517, 24);
+            maskedTextBoxID.Location = new Point(780, 24);
             maskedTextBoxID.Name = "maskedTextBoxID";
             maskedTextBoxID.Size = new Size(48, 27);
             maskedTextBoxID.TabIndex = 31;
@@ -189,7 +193,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(484, 27);
+            label6.Location = new Point(747, 27);
             label6.Name = "label6";
             label6.Size = new Size(27, 20);
             label6.TabIndex = 30;
@@ -200,7 +204,7 @@
             comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(438, 420);
+            comboBox1.Location = new Point(690, 420);
             comboBox1.Margin = new Padding(3, 4, 3, 4);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(138, 28);
@@ -209,7 +213,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(393, 424);
+            label2.Location = new Point(645, 424);
             label2.Name = "label2";
             label2.Size = new Size(42, 20);
             label2.TabIndex = 28;
@@ -220,7 +224,7 @@
             textBoxNome.Location = new Point(65, 24);
             textBoxNome.Margin = new Padding(3, 4, 3, 4);
             textBoxNome.Name = "textBoxNome";
-            textBoxNome.Size = new Size(403, 27);
+            textBoxNome.Size = new Size(676, 27);
             textBoxNome.TabIndex = 27;
             // 
             // buttonSalvarA
@@ -237,7 +241,7 @@
             // 
             richTextBoxDesc.Location = new Point(89, 61);
             richTextBoxDesc.Name = "richTextBoxDesc";
-            richTextBoxDesc.Size = new Size(476, 276);
+            richTextBoxDesc.Size = new Size(739, 276);
             richTextBoxDesc.TabIndex = 25;
             richTextBoxDesc.Text = "";
             // 
@@ -259,11 +263,33 @@
             label5.TabIndex = 23;
             label5.Text = "Nome:";
             // 
+            // Deletar
+            // 
+            Deletar.BackColor = Color.White;
+            Deletar.FlatAppearance.BorderSize = 0;
+            Deletar.FlatStyle = FlatStyle.Flat;
+            Deletar.Location = new Point(457, 395);
+            Deletar.Name = "Deletar";
+            Deletar.Size = new Size(136, 95);
+            Deletar.TabIndex = 33;
+            Deletar.Text = "Deletar";
+            Deletar.UseVisualStyleBackColor = false;
+            Deletar.Click += Deletar_Click;
+            // 
+            // Cancelar
+            // 
+            Cancelar.Location = new Point(270, 386);
+            Cancelar.Name = "Cancelar";
+            Cancelar.Size = new Size(171, 97);
+            Cancelar.TabIndex = 32;
+            Cancelar.Text = "Salvar";
+            Cancelar.UseVisualStyleBackColor = true;
+            // 
             // PesquisaMarca
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(632, 561);
+            ClientSize = new Size(858, 561);
             Controls.Add(tabControl1);
             Margin = new Padding(3, 4, 3, 4);
             Name = "PesquisaMarca";
@@ -298,5 +324,7 @@
         private MaskedTextBox maskedTextBoxID;
         private Label label6;
         private Model.ButtonDesign buttonEditar;
+        private Model.ButtonDesign Deletar;
+        private Button Cancelar;
     }
 }

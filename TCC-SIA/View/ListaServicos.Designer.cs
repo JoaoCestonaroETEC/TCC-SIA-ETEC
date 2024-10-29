@@ -28,48 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            buttonPesquisar = new Button();
-            label1 = new Label();
-            textBoxPesquisar = new TextBox();
             dataGridViewPesquisar = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dataGridViewPesquisar).BeginInit();
             SuspendLayout();
             // 
-            // buttonPesquisar
-            // 
-            buttonPesquisar.Location = new Point(12, 425);
-            buttonPesquisar.Margin = new Padding(3, 4, 3, 4);
-            buttonPesquisar.Name = "buttonPesquisar";
-            buttonPesquisar.Size = new Size(173, 73);
-            buttonPesquisar.TabIndex = 23;
-            buttonPesquisar.Text = "Pesquisar";
-            buttonPesquisar.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(12, 14);
-            label1.Name = "label1";
-            label1.Size = new Size(73, 20);
-            label1.TabIndex = 22;
-            label1.Text = "Pesquisar:";
-            // 
-            // textBoxPesquisar
-            // 
-            textBoxPesquisar.Location = new Point(87, 10);
-            textBoxPesquisar.Margin = new Padding(3, 4, 3, 4);
-            textBoxPesquisar.Name = "textBoxPesquisar";
-            textBoxPesquisar.Size = new Size(711, 27);
-            textBoxPesquisar.TabIndex = 21;
-            // 
             // dataGridViewPesquisar
             // 
             dataGridViewPesquisar.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewPesquisar.Location = new Point(12, 51);
+            dataGridViewPesquisar.Location = new Point(12, 13);
             dataGridViewPesquisar.Margin = new Padding(3, 4, 3, 4);
             dataGridViewPesquisar.Name = "dataGridViewPesquisar";
             dataGridViewPesquisar.RowHeadersWidth = 51;
-            dataGridViewPesquisar.Size = new Size(786, 366);
+            dataGridViewPesquisar.Size = new Size(786, 480);
             dataGridViewPesquisar.TabIndex = 20;
             // 
             // ListaServicos
@@ -77,22 +47,14 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(813, 506);
-            Controls.Add(buttonPesquisar);
-            Controls.Add(label1);
-            Controls.Add(textBoxPesquisar);
             Controls.Add(dataGridViewPesquisar);
             Name = "ListaServicos";
             Text = "ListaServicos";
             ((System.ComponentModel.ISupportInitialize)dataGridViewPesquisar).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-
-        private Button buttonPesquisar;
-        private Label label1;
-        private TextBox textBoxPesquisar;
         private DataGridView dataGridViewPesquisar;
     }
 }

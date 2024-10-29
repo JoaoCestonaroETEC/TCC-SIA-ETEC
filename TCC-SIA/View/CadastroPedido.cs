@@ -180,7 +180,7 @@ namespace TCC_SIA.View
             dataGridViewPeca.AllowUserToAddRows = false;
 
             // Definindo a quantidade de colunas que a grid terá
-            dataGridViewPeca.ColumnCount = 6;
+            dataGridViewPeca.ColumnCount = 7;
 
             // Definindo as colunas na DataGridView para exibir as descrições das peças
             dataGridViewPeca.Columns[0].Name = "Id Peça";
@@ -195,11 +195,14 @@ namespace TCC_SIA.View
             dataGridViewPeca.Columns[3].Name = "Tipo";
             dataGridViewPeca.Columns[3].ReadOnly = true; // Somente leitura
 
-            dataGridViewPeca.Columns[4].Name = "Valor";
+            dataGridViewPeca.Columns[4].Name = "Quant. no Estoque";
             dataGridViewPeca.Columns[4].ReadOnly = true; // Somente leitura
 
-            dataGridViewPeca.Columns[5].Name = "Fornecedor";
+            dataGridViewPeca.Columns[5].Name = "Valor";
             dataGridViewPeca.Columns[5].ReadOnly = true; // Somente leitura
+
+            dataGridViewPeca.Columns[6].Name = "Fornecedor";
+            dataGridViewPeca.Columns[6].ReadOnly = true; // Somente leitura
 
             // Criando a coluna "Quantidade de Vezes" (apenas números, editável)
             DataGridViewTextBoxColumn quantidadeVezesColumn2 = new DataGridViewTextBoxColumn();
@@ -221,6 +224,7 @@ namespace TCC_SIA.View
                 string nomePeca = peca["NOMEPECA"].ToString();
                 string idMarca = peca["IDMARCA"].ToString();
                 string tipoPeca = peca["TIPOPECA"].ToString();
+                string quantEstoque = peca["QUANTPECA"].ToString();
                 string valorPeca = peca["VALORPECA"].ToString();
                 string fornecedor = peca["FORNECEDOR"].ToString();
 
@@ -236,10 +240,11 @@ namespace TCC_SIA.View
                 row.Cells[1].Value = nomePeca;
                 row.Cells[2].Value = marca;
                 row.Cells[3].Value = tipoPeca;
-                row.Cells[4].Value = valorPeca;
-                row.Cells[5].Value = fornecedor;
-                row.Cells[6].Value = 1; // Valor padrão para "Quantidade de Vezes"
-                row.Cells[7].Value = false; // Valor padrão para "Selecionar" (desmarcado)
+                row.Cells[4].Value = quantEstoque;
+                row.Cells[5].Value = valorPeca;
+                row.Cells[6].Value = fornecedor;
+                row.Cells[7].Value = 1; // Valor padrão para "Quantidade de Vezes"
+                row.Cells[8].Value = false; // Valor padrão para "Selecionar" (desmarcado)
 
                 dataGridViewPeca.Rows.Add(row);
             }
@@ -443,7 +448,7 @@ namespace TCC_SIA.View
             decimal valor;
             if (decimal.TryParse(maskedTextBoxValorTotal.Text, out valor))
             {
-                mPedido.setValorTotalPeca(valor);
+                mPedido.setValorTotalPedido(valor);
             }
 
             //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
@@ -496,15 +501,10 @@ namespace TCC_SIA.View
             List<Pedido_Peca> ListaDePecas = ExtrairPecasDataGridView(dataGridViewPeca);
             List<Servico> ListaDeServicos = ExtrairServicosDataGridView(dataGridViewServico);
 
-            //Chamada aos métodos de cadastros no controlePedido
-            string res = cPedido.cadastroPedido(mPedido);
-            string resPeca = cPedido.cadastroPedidoPecas(ListaDePecas, mPedido);
-            string resServ = cPedido.cadastroPedidoServicos(ListaDeServicos, mPedido);
+            string resultado = cPedido.cadastroCompletoPedido(mPedido, ListaDePecas, ListaDeServicos);
 
             //Mostra os resultados
-            MessageBox.Show(res);
-            MessageBox.Show(resPeca);
-            MessageBox.Show(resServ);
+            MessageBox.Show(resultado);
         }
         #endregion
 

@@ -457,5 +457,53 @@ namespace TCC_SIA.View
             //Mostra o resultado
             MessageBox.Show(res);
         }
+
+        private void Deletar_Click(object sender, EventArgs e)
+        {
+            // Lista para armazenar os IDs das marcas a serem removidas
+            List<long> idsToDelete = new List<long>();
+
+            // Verifica todas as linhas do DataGridView
+            foreach (DataGridViewRow row in dataGridViewPesquisar.Rows)
+            {
+                
+
+
+            }
+
+            // Se não houver marcas selecionadas
+            if (idsToDelete.Count == 0)
+            {
+                MessageBox.Show("Por favor, selecione pelo menos uma linha para deletar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Chamada ao controleMarca para deletar as marcas
+            controleVeiculo cVeiculo = new controleVeiculo();
+            Veiculo mVeiculo = new Veiculo();
+
+            string res = string.Empty;
+
+            // Deletar cada marca do banco de dados
+            foreach (long idMarca in idsToDelete)
+            {
+                res = cVeiculo.deletarVeiculo(mVeiculo);
+                MessageBox.Show(res, "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            // Remove as linhas do DataGridView após a exclusão
+            foreach (long idMarca in idsToDelete)
+            {
+                // Encontre a linha correspondente e remova-a
+                foreach (DataGridViewRow row in dataGridViewPesquisar.Rows)
+                {
+                    if (!row.IsNewRow && Convert.ToInt64(row.Cells["Id Veiculo"].Value) == idMarca)
+                    {
+                        dataGridViewPesquisar.Rows.Remove(row);
+                        break; // Sai do loop após remover a linha
+                    }
+                }
+            }
+        }
     }
 }

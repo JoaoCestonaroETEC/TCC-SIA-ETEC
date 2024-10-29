@@ -36,6 +36,9 @@
             textBoxPesquisar = new TextBox();
             dataGridViewPesquisar = new DataGridView();
             tabPage2 = new TabPage();
+            label11 = new Label();
+            maskedTextBoxID = new MaskedTextBox();
+            buttonSalvarA = new Button();
             label9 = new Label();
             maskedTextBoxChassi = new MaskedTextBox();
             label8 = new Label();
@@ -65,9 +68,7 @@
             labelCpf = new Label();
             labelMarca = new Label();
             labelCor = new Label();
-            buttonSalvarA = new Button();
-            maskedTextBoxID = new MaskedTextBox();
-            label11 = new Label();
+            Deletar = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewPesquisar).BeginInit();
@@ -86,6 +87,7 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(Deletar);
             tabPage1.Controls.Add(buttonEditar);
             tabPage1.Controls.Add(buttonPesquisar);
             tabPage1.Controls.Add(label1);
@@ -189,6 +191,34 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Editar";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(416, 235);
+            label11.Name = "label11";
+            label11.Size = new Size(27, 20);
+            label11.TabIndex = 89;
+            label11.Text = "ID:";
+            // 
+            // maskedTextBoxID
+            // 
+            maskedTextBoxID.Enabled = false;
+            maskedTextBoxID.Location = new Point(449, 229);
+            maskedTextBoxID.Name = "maskedTextBoxID";
+            maskedTextBoxID.Size = new Size(84, 27);
+            maskedTextBoxID.TabIndex = 88;
+            // 
+            // buttonSalvarA
+            // 
+            buttonSalvarA.Location = new Point(6, 398);
+            buttonSalvarA.Margin = new Padding(3, 4, 3, 4);
+            buttonSalvarA.Name = "buttonSalvarA";
+            buttonSalvarA.Size = new Size(136, 95);
+            buttonSalvarA.TabIndex = 87;
+            buttonSalvarA.Text = "Salvar";
+            buttonSalvarA.UseVisualStyleBackColor = true;
+            buttonSalvarA.Click += buttonSalvarA_Click;
             // 
             // label9
             // 
@@ -462,33 +492,16 @@
             labelCor.TabIndex = 58;
             labelCor.Text = "Cor:";
             // 
-            // buttonSalvarA
+            // Deletar
             // 
-            buttonSalvarA.Location = new Point(6, 398);
-            buttonSalvarA.Margin = new Padding(3, 4, 3, 4);
-            buttonSalvarA.Name = "buttonSalvarA";
-            buttonSalvarA.Size = new Size(136, 95);
-            buttonSalvarA.TabIndex = 87;
-            buttonSalvarA.Text = "Salvar";
-            buttonSalvarA.UseVisualStyleBackColor = true;
-            buttonSalvarA.Click += buttonSalvarA_Click;
-            // 
-            // maskedTextBoxID
-            // 
-            maskedTextBoxID.Enabled = false;
-            maskedTextBoxID.Location = new Point(449, 229);
-            maskedTextBoxID.Name = "maskedTextBoxID";
-            maskedTextBoxID.Size = new Size(84, 27);
-            maskedTextBoxID.TabIndex = 88;
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Location = new Point(416, 235);
-            label11.Name = "label11";
-            label11.Size = new Size(27, 20);
-            label11.TabIndex = 89;
-            label11.Text = "ID:";
+            Deletar.Location = new Point(398, 402);
+            Deletar.Margin = new Padding(3, 4, 3, 4);
+            Deletar.Name = "Deletar";
+            Deletar.Size = new Size(136, 95);
+            Deletar.TabIndex = 25;
+            Deletar.Text = "Deletar";
+            Deletar.UseVisualStyleBackColor = true;
+            Deletar.Click += Deletar_Click;
             // 
             // PesquisaVeiculo
             // 
@@ -550,5 +563,6 @@
         private Button buttonSalvarA;
         private Label label11;
         private MaskedTextBox maskedTextBoxID;
+        private Button Deletar;
     }
 }

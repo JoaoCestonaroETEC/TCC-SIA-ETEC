@@ -333,6 +333,58 @@ namespace TCC_SIA.View
         {
             listarVeiculo();
         }
+
+        private void dataGridViewPesquisar_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Verifica se o índice da linha é válido
+            if (e.RowIndex < 0) return;
+
+            // Verifica se a coluna clicada é a coluna "Peças"
+            if (dataGridViewPesquisar.Columns[e.ColumnIndex].Name == "Peças")
+            {
+                Pedido MPedido = new Pedido();
+
+                // Obtém o ID do pedido da linha selecionada
+                long idPedido = Convert.ToInt64(dataGridViewPesquisar.Rows[e.RowIndex].Cells["Id Pedido"].Value);
+
+                // Chama o método para abrir o formulário com a lista de peças
+                AbrirFormularioPecas(idPedido);
+            }
+            // Verifica se a coluna clicada é a coluna "Serviços"
+            else if (dataGridViewPesquisar.Columns[e.ColumnIndex].Name == "Serviços")
+            {
+                // Obtém o ID do pedido da linha selecionada
+                long idPedido = Convert.ToInt64(dataGridViewPesquisar.Rows[e.RowIndex].Cells["Id Pedido"].Value);
+
+                // Chama o método para abrir o formulário com a lista de serviços
+                AbrirFormularioServicos(idPedido);
+            }
+        }
+
+        private void AbrirFormularioPecas(long idPedido)
+        {
+            // Cria uma nova instância do formulário de peças
+            ListaPecas formPecas = new ListaPecas();
+
+            // Carrega os dados de peças para o pedido específico
+            formPecas.CarregarDadosPecas(idPedido); // CarregarDadosPecas é um método que você deve implementar no formulário
+
+            // Exibe o formulário
+            formPecas.ShowDialog();
+        }
+
+        private void AbrirFormularioServicos(long idPedido)
+        {
+            // Cria uma nova instância do formulário de serviços
+            ListaServicos formServicos = new ListaServicos();
+
+            // Carrega os dados de serviços para o pedido específico
+            formServicos.CarregarDadosServicos(idPedido); // CarregarDadosServicos é um método que você deve implementar no formulário
+
+            // Exibe o formulário
+            formServicos.ShowDialog();
+        }
+
     }
 }
 
