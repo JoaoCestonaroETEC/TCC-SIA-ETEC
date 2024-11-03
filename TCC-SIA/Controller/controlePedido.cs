@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using TCC_SIA.Model;
 using Npgsql;
+using System.Transactions;
+using System.Data.Common;
 
 namespace TCC_SIA.Controller
 {
@@ -378,5 +380,125 @@ namespace TCC_SIA.Controller
         }
 
         #endregion
+
+        public string atualizarPedido(Pedido mPedido, List<Pedido_Peca> mPedidoPeca, List<Servico> mServico)
+        {
+            // SQL para atualizar o pedido e retornar o ID do pedido atualizado
+            string sqlUpdatePedido = "UPDATE pedido SET " +
+                "idveiculo = @idveiculo, " +
+                "idcliente = @idcliente, " +
+                "valortotalpedido = @valortotalpedido, " +
+                "valortotalpeca = @valortotalpeca, " +
+                "valortotalservico = @valortotalservico, " +
+                "descontototalreais = @descontototalreais, " +
+                "descontototalporc = @descontototalporc, " +
+                "descontoservicoreais = @descontoservicoreais, " +
+                "descontoservicoporc = @descontoservicoporc, " +
+                "descontopecareais = @descontopecareais, " +
+                "descontopecaporc = @descontopecaporc, " +
+                "observacao = @observacao, " +
+                "datainicio = @datainicio, " +
+                "datafim = @datafim " +
+                "WHERE idpedido = @idpedido " +
+                "RETURNING idpedido;";
+
+            // SQL para atualizar peças associadas ao pedido
+            string sqlUpdatePedidoPeca = "UPDATE pedido_peca SET " +
+                "idpeca = @idpeca, " +
+                "quantvezes = @quantvezes " +
+                "WHERE idpedido = @idpedido;";
+
+            // SQL para atualizar serviços associados ao pedido
+            string sqlUpdatePedidoServico = "UPDATE pedido_servico SET " +
+                "idservico = @idservico, " +
+                "quantvezes = @quantvezes " +
+                "WHERE idpedido = @idpedido;";
+
+            conexaoBD con = new conexaoBD();
+            using (NpgsqlConnection conn = con.conectar())
+            {
+                conn.Open();
+                using (var transaction = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        // Atualiza o pedido e obtém o ID do pedido
+                        using (var comm = new NpgsqlCommand(sqlUpdatePedido, conn, transaction))
+                        {
+                            comm.Parameters.AddWithValue("@idveiculo", mPedido.getIdVeiculo());
+                            comm.Parameters.AddWithValue("@idcliente", mPedido.getIdCliente());
+                            comm.Parameters.AddWithValue("@valortotalpedido", mPedido.getValorTotalPedido());
+                            comm.Parameters.AddWithValue("@valortotalpeca", mPedido.getValorTotalPeca());
+                            comm.Parameters.AddWithValue("@valortotalservico", mPedido.getValorTotalServico());
+                            comm.Parameters.AddWithValue("@descontototalreais", mPedido.getDescontoReais());
+                            comm.Parameters.AddWithValue("@descontototalporc", mPedido.getDescontoPorCento());
+                            comm.Parameters.AddWithValue("@descontoservicoreais", mPedido.getDescontoServReais());
+                            comm.Parameters.AddWithValue("@descontoservicoporc", mPedido.getDescontoServPorCento());
+                            comm.Parameters.AddWithValue("@descontopecareais", mPedido.getDescontoPecaReais());
+                            comm.Parameters.AddWithValue("@descontopecaporc", mPedido.getDescontoPecaPorc());
+                            comm.Parameters.AddWithValue("@observacao", mPedido.getObservacao());
+                            comm.Parameters.AddWithValue("@datainicio", mPedido.getDataInicio());
+                            comm.Parameters.AddWithValue("@datafim", mPedido.getDataFim());
+                            comm.Parameters.AddWithValue("@idpedido", mPedido.getIdPedido());
+
+                            var idPedido = (int?)comm.ExecuteScalar();
+                            if (idPedido == null)
+                            {
+                                transaction.Rollback();
+                                return "Erro: Pedido não encontrado.";
+                            }
+                        }
+
+                        // Verifica e atualiza as peças associadas
+                        foreach (var peca in mPedidoPeca)
+                        {
+                            string sqlVerificaPeca = "SELECT quantpeca FROM peca WHERE idpeca = @idpeca";
+                            using (var commVerificaPeca = new NpgsqlCommand(sqlVerificaPeca, conn, transaction))
+                            {
+                                commVerificaPeca.Parameters.AddWithValue("@idpeca", peca.getIdPeca());
+                                int quantEstoque = Convert.ToInt32(commVerificaPeca.ExecuteScalar());
+
+                                if (peca.getQuantVezes() > quantEstoque)
+                                {
+                                    transaction.Rollback();
+                                    return $"Erro: A quantidade da peça {peca.getIdPeca()} excede o estoque disponível.";
+                                }
+                            }
+
+                            using (var commUpdatePeca = new NpgsqlCommand(sqlUpdatePedidoPeca, conn, transaction))
+                            {
+                                commUpdatePeca.Parameters.AddWithValue("@idpedido", mPedido.getIdPedido());
+                                commUpdatePeca.Parameters.AddWithValue("@idpeca", peca.getIdPeca());
+                                commUpdatePeca.Parameters.AddWithValue("@quantvezes", peca.getQuantVezes());
+                                commUpdatePeca.ExecuteNonQuery();
+                            }
+                        }
+
+                        // Atualiza os serviços associados
+                        foreach (var servico in mServico)
+                        {
+                            using (var commUpdateServico = new NpgsqlCommand(sqlUpdatePedidoServico, conn, transaction))
+                            {
+                                commUpdateServico.Parameters.AddWithValue("@idpedido", mPedido.getIdPedido());
+                                commUpdateServico.Parameters.AddWithValue("@idservico", servico.getIDServico());
+                                commUpdateServico.Parameters.AddWithValue("@quantvezes", servico.getQuantVezes());
+                                commUpdateServico.ExecuteNonQuery();
+                            }
+                        }
+
+                        // Confirma a transação
+                        transaction.Commit();
+                        return "Pedido atualizado!";
+                    }
+                    catch (NpgsqlException ex)
+                    {
+                        transaction.Rollback();
+                        // Log para depuração, e retornando uma mensagem de erro amigável.
+                        Console.WriteLine(ex.ToString());
+                        return "Erro ao atualizar o pedido.";
+                    }
+                }
+            }
+        }
     }
 }
