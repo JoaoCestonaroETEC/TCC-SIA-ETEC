@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TCC_SIA.Controller;
 using TCC_SIA.Model;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace TCC_SIA.View
 {
@@ -385,6 +386,55 @@ namespace TCC_SIA.View
             formServicos.ShowDialog();
         }
 
+        private void btnAtualizar_Click(object sender, EventArgs e)
+        {
+           
+                DialogResult res = MessageBox.Show("Deseja atualizar este registro?", "Atualização de registro",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+                if (res == DialogResult.OK)
+                {
+                    maskedTextBoxID.Text = dataGridViewPesquisar.CurrentRow.Cells[0].Value.ToString();
+
+                    maskedTextBoxValorTotal.Text = dataGridViewPesquisar.CurrentRow.Cells[3].Value.ToString();
+
+                    richTextBoxObs.Text = dataGridViewPesquisar.CurrentRow.Cells[4].Value.ToString();
+
+                    dateTimePickerDataInicio.Text = dataGridViewPesquisar.CurrentRow.Cells[5].Value.ToString();
+
+                    dateTimePickerDataFim.Text = dataGridViewPesquisar.CurrentRow.Cells[6].Value.ToString();
+
+                    tabControl1.SelectedTab = tabPage2;
+                }
+
+           
+
+        }
+
+        private void btnSalvarA_Click(object sender, EventArgs e)
+        {
+            controlePedido cPedido = new controlePedido();
+
+            Pedido mPedido = new Pedido();
+
+            //Definindo os valores nos atributos
+
+            //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
+
+            mPedido.setIdPedido(Convert.ToInt32(maskedTextBoxID.Text));
+            mPedido.setValorTotalPedido(Convert.ToDecimal(maskedTextBoxValorTotal.Text));
+            mPedido.setObservacao(richTextBoxObs.Text);
+            mPedido.setDataInicio(Convert.ToDateTime(dateTimePickerDataInicio.Text));
+            mPedido.setDataFim(Convert.ToDateTime(dateTimePickerDataFim.Text));
+
+
+
+            //Chamada ao método de cadastro no ControleCliente
+            string res = cPedido.atualizarPedido(mPedido);
+
+            //Mostra o resultado
+            MessageBox.Show(res);
+        }
     }
 }
 
