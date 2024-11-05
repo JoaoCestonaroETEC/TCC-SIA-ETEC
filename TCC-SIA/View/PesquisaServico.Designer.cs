@@ -306,6 +306,8 @@
             maskedTextBoxValor.TabIndex = 96;
             maskedTextBoxValor.Text = "0.00";
             maskedTextBoxValor.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            maskedTextBoxValor.TextChanged += maskedTextBoxValor_TextChanged;
+            maskedTextBoxValor.KeyPress += maskedTextBoxValor_KeyPress;
             // 
             // textBoxNome
             // 

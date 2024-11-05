@@ -383,7 +383,7 @@ namespace TCC_SIA.Controller
 
         public string atualizarPedido(Pedido mPedido)
         {
-            string sql = "UPDATE PEDIDO SET  VALORTOTALPEDIDO = @VALORTOTALPEDIDO, " +
+            string sql = "UPDATE PEDIDO SET IDCLIENTE = @IDCLIENTE, IDVEICULO = @IDVEICULO, VALORTOTALPEDIDO = @VALORTOTALPEDIDO, " +
                 " OBSERVACAO = @OBSERVACAO, DATAINICIO = @DATAINICIO," +
                 " DATAFIM = @DATAFIM" +
                 " WHERE IDPEDIDO = @IDPEDIDO;";
@@ -395,6 +395,8 @@ namespace TCC_SIA.Controller
             try
             {
                 comm.Parameters.AddWithValue("@IDPEDIDO", mPedido.getIdPedido());
+                comm.Parameters.AddWithValue("@IDCLIENTE", mPedido.getIdCliente());
+                comm.Parameters.AddWithValue("@IDVEICULO", mPedido.getIdVeiculo());
                 comm.Parameters.AddWithValue("@VALORTOTALPEDIDO", mPedido.getValorTotalPedido());
                 comm.Parameters.AddWithValue("@OBSERVACAO", mPedido.getObservacao());
                 comm.Parameters.AddWithValue("@DATAINICIO", mPedido.getDataInicio());

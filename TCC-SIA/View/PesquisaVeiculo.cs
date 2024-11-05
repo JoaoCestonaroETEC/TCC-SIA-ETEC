@@ -18,8 +18,13 @@ namespace TCC_SIA.View
     {
         #region Inicializa o formulário
         public PesquisaVeiculo()
-        {
+        {    
             InitializeComponent();
+            listarMarca();
+            listarCliente();
+            listarCor();
+            listarTipo();
+
 
             #region Carrega os dados de pesquisa de serviços
             // Criação do objeto NpgsqlDataReader servico e controleServico
@@ -190,13 +195,101 @@ namespace TCC_SIA.View
             dtCliente.Load(cliente);
 
             //Preencher a combobox com os dados do DataTable
-            comboBoxIdCliente.DataSource = dtCliente;
+            comboBoxIdClienteE.DataSource = dtCliente;
 
             //Define qual coluna do DataTable que será exibida (nome da coluna)
-            comboBoxIdCliente.DisplayMember = "NOMECLIENTE";
+            comboBoxIdClienteE.DisplayMember = "NOMECLIENTE";
 
             //Define qual o valor da linha será utilizado ao selecionar um valor
-            comboBoxIdCliente.ValueMember = "IDCLIENTE";
+            comboBoxIdClienteE.ValueMember = "IDCLIENTE";
+        }
+        #endregion
+
+        #region Listar cor
+        public void listarCor()
+        {
+            controleVeiculo cVeiculo = new controleVeiculo();
+            // Recebe os dados da consulta e salva no dataReader (Tipo)
+            NpgsqlDataReader veiculo = cVeiculo.listaCor();
+
+            // Criar e configurar o DataTable
+            DataTable dtTipo = new DataTable();
+
+            // Definir as colunas do DataTable
+            dtTipo.Columns.Add("ID", typeof(int));  // Supondo que o ID seja um int
+            dtTipo.Columns.Add("CORVEICULO", typeof(string)); // Supondo que o tipo seja uma string
+
+            // Adicionar itens pré-configurados
+            dtTipo.Rows.Add(-1, "Branco");
+            dtTipo.Rows.Add(-2, "Preto");
+            dtTipo.Rows.Add(-3, "Prata");
+            dtTipo.Rows.Add(-4, "Cinza");
+            dtTipo.Rows.Add(-5, "Azul");
+            dtTipo.Rows.Add(-6, "Vermelho");
+            dtTipo.Rows.Add(-7, "Amarelo");
+            dtTipo.Rows.Add(-8, "Verde");
+            dtTipo.Rows.Add(-9, "Roxo");
+
+            // Carregar os dados do NpgsqlDataReader
+            dtTipo.Load(veiculo);
+
+            // Preencher a ComboBox com os dados do DataTable
+            comboBoxCor.DataSource = dtTipo;
+
+            // Define qual coluna do DataTable que será exibida (nome da coluna)
+            comboBoxCor.DisplayMember = "CORVEICULO";
+
+            comboBoxCor.ValueMember = "CORVEICULO";
+
+        }
+        #endregion
+
+        #region Listar tipo
+        public void listarTipo()
+        {
+            controleVeiculo cVeiculo = new controleVeiculo();
+            // Recebe os dados da consulta e salva no dataReader (Tipo)
+            NpgsqlDataReader veiculo = cVeiculo.listaTipo();
+
+            // Criar e configurar o DataTable
+            DataTable dtTipo = new DataTable();
+
+            // Definir as colunas do DataTable
+            dtTipo.Columns.Add("ID", typeof(int));  // Supondo que o ID seja um int
+            dtTipo.Columns.Add("TIPOVEICULO", typeof(string)); // Supondo que o tipo seja uma string
+
+            // Adicionar itens pré-configurados
+            dtTipo.Rows.Add(-1, "Sedan");
+            dtTipo.Rows.Add(-2, "Hatchback");
+            dtTipo.Rows.Add(-3, "SUV (Sport Utility Vehicle)");
+            dtTipo.Rows.Add(-4, "Crossover");
+            dtTipo.Rows.Add(-5, "Conversível");
+            dtTipo.Rows.Add(-6, "Coupe");
+            dtTipo.Rows.Add(-7, "Escape");
+            dtTipo.Rows.Add(-8, "Caminhão");
+            dtTipo.Rows.Add(-9, "Van");
+            dtTipo.Rows.Add(-10, "Furgão");
+            dtTipo.Rows.Add(-11, "Motocicleta");
+            dtTipo.Rows.Add(-12, "Scooter");
+            dtTipo.Rows.Add(-13, "Micro-ônibus");
+            dtTipo.Rows.Add(-14, "ATV (All-Terrain Vehicle)");
+            dtTipo.Rows.Add(-15, "Quadriciclo");
+            dtTipo.Rows.Add(-16, "Carro Elétrico");
+            dtTipo.Rows.Add(-17, "Carro Híbrido");
+            dtTipo.Rows.Add(-18, "Caminhão Tanque");
+            dtTipo.Rows.Add(-19, "Reboque");
+
+            // Carregar os dados do NpgsqlDataReader
+            dtTipo.Load(veiculo);
+
+            // Preencher a ComboBox com os dados do DataTable
+            comboBoxTipo.DataSource = dtTipo;
+
+            // Define qual coluna do DataTable que será exibida (nome da coluna)
+            comboBoxTipo.DisplayMember = "TIPOVEICULO";
+
+            // Define qual coluna do DataTable que será exibida (nome da coluna)
+            comboBoxTipo.ValueMember = "TIPOVEICULO";
         }
         #endregion
 
@@ -392,7 +485,7 @@ namespace TCC_SIA.View
                     if (res == DialogResult.OK)
                     {
                         maskedTextBoxID.Text = row.Cells[0].Value.ToString();
-                        comboBoxIdCliente.Text = row.Cells[1].Value.ToString();
+                        comboBoxIdClienteE.Text = row.Cells[1].Value.ToString();
                         comboBoxMarca.Text = row.Cells[2].Value.ToString();
                         textBoxNome.Text = row.Cells[3].Value.ToString();
                         comboBoxTipo.Text = row.Cells[4].Value.ToString();
@@ -427,7 +520,7 @@ namespace TCC_SIA.View
             }
 
             long IDC;
-            if (long.TryParse(comboBoxIdCliente.SelectedValue?.ToString(), out IDC))
+            if (long.TryParse(comboBoxIdClienteE.SelectedValue?.ToString(), out IDC))
             {
                 mVeiculo.setIdCliente(IDC);
             }

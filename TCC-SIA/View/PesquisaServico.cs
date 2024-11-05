@@ -1,4 +1,4 @@
-﻿using Npgsql;
+﻿    using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +20,7 @@ namespace TCC_SIA.View
         public PesquisaServico()
         {
             InitializeComponent();
-
+            listarFuncionario();
 
             #region Carrega os dados de pesquisa de serviços
             // Criação do objeto NpgsqlDataReader servico e controleServico
@@ -239,6 +239,25 @@ namespace TCC_SIA.View
         }
         #endregion
 
+        #region Listar Funcionarios
+        public void listarFuncionario()
+        {
+            controleServico cVeiculo = new controleServico();
+            //Recebe os dados da consulta e salva no dataReader (Tipo)
+            NpgsqlDataReader veiculo = cVeiculo.listaFuncionario();
+
+            //Converter o dataReader em DataTable
+            DataTable dtVeiculo = new DataTable();
+            dtVeiculo.Load(veiculo);
+
+            //Preencher a combobox com os dados do DataTable
+            comboBoxFunc.DataSource = dtVeiculo;
+
+            //Define qual coluna do DataTable que será exibida (nome da coluna)
+            comboBoxFunc.DisplayMember = "FUNCIONARIO";
+        }
+        #endregion
+
         private void btnSalvarAtulizar_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in dataGridViewPesquisar.Rows)
@@ -300,6 +319,40 @@ namespace TCC_SIA.View
             MessageBox.Show(res);
         }
 
-      
+        private void maskedTextBoxValor_TextChanged(object sender, EventArgs e)
+        {
+            MaskedTextBox maskedTextBox = sender as MaskedTextBox;
+
+            // Remove qualquer formatação anterior e deixa apenas os números
+            string textoAtual = maskedTextBox.Text.Replace(",", "").Replace(".", "").TrimStart('0');
+
+            if (textoAtual.Length == 0)
+            {
+                textoAtual = "0";
+            }
+
+            // Converte o texto para decimal
+            if (decimal.TryParse(textoAtual, out decimal valorDecimal))
+            {
+                maskedTextBox.TextChanged -= maskedTextBoxValor_TextChanged; // Remove o evento para evitar loop
+
+                // Formata o valor com ponto como separador de centavos e sem separadores de milhar
+                maskedTextBox.Text = string.Format("{0:0.00}", valorDecimal / 100);
+
+                // Coloca o cursor no final
+                maskedTextBox.SelectionStart = maskedTextBox.Text.Length;
+
+                maskedTextBox.TextChanged += maskedTextBoxValor_TextChanged; // Reinscreve o evento
+            }
+        }
+
+        private void maskedTextBoxValor_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir apenas números e a tecla Backspace
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true; // Bloqueia a entrada
+            }
+        }
     }
 }

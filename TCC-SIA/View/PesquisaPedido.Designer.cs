@@ -39,6 +39,12 @@
             buttonPesquisar = new Button();
             dataGridViewPesquisar = new DataGridView();
             tabPage2 = new TabPage();
+            comboBoxVeiculoP = new ComboBox();
+            comboBoxClienteP = new ComboBox();
+            label6 = new Label();
+            label9 = new Label();
+            maskedTextBoxID = new MaskedTextBox();
+            label5 = new Label();
             label7 = new Label();
             maskedTextBoxValorTotal = new MaskedTextBox();
             label8 = new Label();
@@ -48,8 +54,6 @@
             label4 = new Label();
             label2 = new Label();
             btnSalvarA = new Button();
-            label5 = new Label();
-            maskedTextBoxID = new MaskedTextBox();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewPesquisar).BeginInit();
@@ -167,6 +171,10 @@
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(comboBoxVeiculoP);
+            tabPage2.Controls.Add(comboBoxClienteP);
+            tabPage2.Controls.Add(label6);
+            tabPage2.Controls.Add(label9);
             tabPage2.Controls.Add(maskedTextBoxID);
             tabPage2.Controls.Add(label5);
             tabPage2.Controls.Add(label7);
@@ -185,6 +193,62 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Editar";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxVeiculoP
+            // 
+            comboBoxVeiculoP.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxVeiculoP.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBoxVeiculoP.FormattingEnabled = true;
+            comboBoxVeiculoP.Location = new Point(76, 201);
+            comboBoxVeiculoP.Margin = new Padding(3, 4, 3, 4);
+            comboBoxVeiculoP.Name = "comboBoxVeiculoP";
+            comboBoxVeiculoP.Size = new Size(154, 28);
+            comboBoxVeiculoP.TabIndex = 102;
+            // 
+            // comboBoxClienteP
+            // 
+            comboBoxClienteP.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxClienteP.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBoxClienteP.FormattingEnabled = true;
+            comboBoxClienteP.Location = new Point(76, 156);
+            comboBoxClienteP.Margin = new Padding(3, 4, 3, 4);
+            comboBoxClienteP.Name = "comboBoxClienteP";
+            comboBoxClienteP.Size = new Size(154, 28);
+            comboBoxClienteP.TabIndex = 101;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(18, 201);
+            label6.Name = "label6";
+            label6.Size = new Size(60, 20);
+            label6.TabIndex = 100;
+            label6.Text = "Veículo:";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(18, 160);
+            label9.Name = "label9";
+            label9.Size = new Size(58, 20);
+            label9.TabIndex = 99;
+            label9.Text = "Cliente:";
+            // 
+            // maskedTextBoxID
+            // 
+            maskedTextBoxID.Location = new Point(49, 122);
+            maskedTextBoxID.Name = "maskedTextBoxID";
+            maskedTextBoxID.Size = new Size(45, 27);
+            maskedTextBoxID.TabIndex = 98;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(16, 125);
+            label5.Name = "label5";
+            label5.Size = new Size(27, 20);
+            label5.TabIndex = 97;
+            label5.Text = "ID:";
             // 
             // label7
             // 
@@ -269,22 +333,6 @@
             btnSalvarA.UseVisualStyleBackColor = true;
             btnSalvarA.Click += btnSalvarA_Click;
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(16, 125);
-            label5.Name = "label5";
-            label5.Size = new Size(27, 20);
-            label5.TabIndex = 97;
-            label5.Text = "ID:";
-            // 
-            // maskedTextBoxID
-            // 
-            maskedTextBoxID.Location = new Point(49, 122);
-            maskedTextBoxID.Name = "maskedTextBoxID";
-            maskedTextBoxID.Size = new Size(45, 27);
-            maskedTextBoxID.TabIndex = 98;
-            // 
             // PesquisaPedido
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -326,5 +374,9 @@
         private MaskedTextBox maskedTextBoxValorTotal;
         private MaskedTextBox maskedTextBoxID;
         private Label label5;
+        private ComboBox comboBoxVeiculoP;
+        private ComboBox comboBoxClienteP;
+        private Label label6;
+        private Label label9;
     }
 }

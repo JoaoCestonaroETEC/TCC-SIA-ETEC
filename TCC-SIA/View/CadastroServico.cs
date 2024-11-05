@@ -64,7 +64,7 @@ namespace TCC_SIA.View
         }
         #endregion
 
-        #region Listar tipos
+        #region Listar Funcionarios
         public void listarFuncionario()
         {
             controleServico cVeiculo = new controleServico();

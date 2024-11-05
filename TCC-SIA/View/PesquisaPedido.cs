@@ -19,7 +19,7 @@ namespace TCC_SIA.View
         public PesquisaPedido()
         {
             InitializeComponent();
-            listarClientes();
+            listarCliente();
             listarVeiculo();
 
             #region Carrega os dados de pesquisa de pedidos
@@ -150,53 +150,59 @@ namespace TCC_SIA.View
             #endregion
         }
 
-        #region Listar clientes
-        public void listarClientes()
+
+        #region Listar cliente
+        public void listarCliente()
         {
+            //Criação do objeto cliente e controleCliente
             controleCliente cCliente = new controleCliente();
-            // Recebe os dados da consulta e salva no dataReader (Tipo)
+
+            //Recebe os dados da consulta e salva no dataReader (Cliente)
             NpgsqlDataReader cliente = cCliente.listarCliente();
 
-            // Criar e configurar o DataTable
-            DataTable dtTipo = new DataTable();
+            //Converter o dataReader em DataTable
+            DataTable dtCliente = new DataTable();
+            dtCliente.Load(cliente);
 
-            dtTipo.Columns.Add("IDCLIENTE", typeof(int));  // Supondo que o ID seja um int
-            dtTipo.Columns.Add("NOMECLIENTE", typeof(string)); // Supondo que o tipo seja uma string
+            //Preencher a combobox com os dados do DataTable
+            comboBoxCliente.DataSource = dtCliente;
+            comboBoxClienteP.DataSource = dtCliente;
 
-            // Carregar os dados do NpgsqlDataReader
-            dtTipo.Load(cliente);
-
-            // Preencher a ComboBox com os dados do DataTable
-            comboBoxCliente.DataSource = dtTipo;
-
-            // Define qual coluna do DataTable que será exibida (nome da coluna)
+            //Define qual coluna do DataTable que será exibida (nome da coluna)
             comboBoxCliente.DisplayMember = "NOMECLIENTE";
+            comboBoxClienteP.DisplayMember = "NOMECLIENTE";
+
+            //Define qual o valor da linha será utilizado ao selecionar um valor
             comboBoxCliente.ValueMember = "IDCLIENTE";
+            comboBoxClienteP.ValueMember = "IDCLIENTE";
+
         }
         #endregion
 
-        #region Listar Veiculos
+        #region Listar veículo
         public void listarVeiculo()
         {
+            //Criação do objeto veiculo e controleVeiculo
             controleVeiculo cVeiculo = new controleVeiculo();
-            // Recebe os dados da consulta e salva no dataReader (Tipo)
-            NpgsqlDataReader veiculo = cVeiculo.listaVeiculoPorCliente(Convert.ToString(comboBoxCliente.SelectedValue));
 
-            // Criar e configurar o DataTable
-            DataTable dtTipo = new DataTable();
+            //Recebe os dados da consulta e salva no dataReader (Veiculo)
+            NpgsqlDataReader veiculo = cVeiculo.listaVeiculo();
 
-            dtTipo.Columns.Add("IDVEICULO", typeof(int));  // Supondo que o ID seja um int
-            dtTipo.Columns.Add("NOMEVEICULO", typeof(string)); // Supondo que o tipo seja uma string
+            //Converter o dataReader em DataTable
+            DataTable dtVeiculo = new DataTable();
+            dtVeiculo.Load(veiculo);
 
-            // Carregar os dados do NpgsqlDataReader
-            dtTipo.Load(veiculo);
+            //Preencher a combobox com os dados do DataTable
+            comboBoxVeiculo.DataSource = dtVeiculo;
+            comboBoxVeiculoP.DataSource = dtVeiculo;
 
-            // Preencher a ComboBox com os dados do DataTable
-            comboBoxVeiculo.DataSource = dtTipo;
-
-            // Define qual coluna do DataTable que será exibida (nome da coluna)
+            //Define qual coluna do DataTable que será exibida (nome da coluna)
             comboBoxVeiculo.DisplayMember = "NOMEVEICULO";
+            comboBoxVeiculoP.DisplayMember = "NOMEVEICULO";
+
+            //Define qual o valor da linha será utilizado ao selecionar um valor
             comboBoxVeiculo.ValueMember = "IDVEICULO";
+            comboBoxVeiculoP.ValueMember = "IDVEICULO";
         }
         #endregion
 
@@ -388,26 +394,31 @@ namespace TCC_SIA.View
 
         private void btnAtualizar_Click(object sender, EventArgs e)
         {
-           
-                DialogResult res = MessageBox.Show("Deseja atualizar este registro?", "Atualização de registro",
-                MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
-                if (res == DialogResult.OK)
-                {
-                    maskedTextBoxID.Text = dataGridViewPesquisar.CurrentRow.Cells[0].Value.ToString();
 
-                    maskedTextBoxValorTotal.Text = dataGridViewPesquisar.CurrentRow.Cells[3].Value.ToString();
+            DialogResult res = MessageBox.Show("Deseja atualizar este registro?", "Atualização de registro",
+            MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
-                    richTextBoxObs.Text = dataGridViewPesquisar.CurrentRow.Cells[4].Value.ToString();
+            if (res == DialogResult.OK)
+            {
+                maskedTextBoxID.Text = dataGridViewPesquisar.CurrentRow.Cells[0].Value.ToString();
 
-                    dateTimePickerDataInicio.Text = dataGridViewPesquisar.CurrentRow.Cells[5].Value.ToString();
+                comboBoxVeiculoP.Text = dataGridViewPesquisar.CurrentRow.Cells[1].Value.ToString();
 
-                    dateTimePickerDataFim.Text = dataGridViewPesquisar.CurrentRow.Cells[6].Value.ToString();
+                comboBoxClienteP.Text = dataGridViewPesquisar.CurrentRow.Cells[2].Value.ToString();
 
-                    tabControl1.SelectedTab = tabPage2;
-                }
+                maskedTextBoxValorTotal.Text = dataGridViewPesquisar.CurrentRow.Cells[3].Value.ToString();
 
-           
+                richTextBoxObs.Text = dataGridViewPesquisar.CurrentRow.Cells[4].Value.ToString();
+
+                dateTimePickerDataInicio.Text = dataGridViewPesquisar.CurrentRow.Cells[5].Value.ToString();
+
+                dateTimePickerDataFim.Text = dataGridViewPesquisar.CurrentRow.Cells[6].Value.ToString();
+
+                tabControl1.SelectedTab = tabPage2;
+            }
+
+
 
         }
 
@@ -420,6 +431,17 @@ namespace TCC_SIA.View
             //Definindo os valores nos atributos
 
             //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
+
+            long IDC;
+            if (long.TryParse(comboBoxClienteP.SelectedValue?.ToString(), out IDC))
+            {
+                mPedido.setIdCliente(IDC);
+            }
+            long IDV;
+            if (long.TryParse(comboBoxVeiculoP.SelectedValue?.ToString(), out IDV))
+            {
+                mPedido.setIdVeiculo(IDV);
+            }
 
             mPedido.setIdPedido(Convert.ToInt32(maskedTextBoxID.Text));
             mPedido.setValorTotalPedido(Convert.ToDecimal(maskedTextBoxValorTotal.Text));

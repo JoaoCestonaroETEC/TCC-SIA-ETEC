@@ -370,7 +370,7 @@ namespace TCC_SIA.Controller
         #region Atualizar Veiculo
         public string atualizarVeiculo(Veiculo mVeiculo)
         {
-            string sql = "update veiculo set nomeveiculo = @nomeveiculo," +
+            string sql = "update veiculo set idcliente = @idcliente, idmarca = @idmarca, nomeveiculo = @nomeveiculo," +
                 "tipoveiculo = @tipoveiculo, corveiculo = @corveiculo, placaveiculo = @placaveiculo, " +
                 "modeloveiculo = @modeloveiculo, chassi = @chassi, anofab = @anofab, quilometragem = @quilometragem, " +
                 "motor = @motor, combustivel = @combustivel, data = @data, seguro = @seguro where idveiculo = @idveiculo;";
@@ -383,6 +383,8 @@ namespace TCC_SIA.Controller
             try
             {
                 comm.Parameters.AddWithValue("@idveiculo", mVeiculo.getIdVeiculo());
+                comm.Parameters.AddWithValue("@idmarca", mVeiculo.getIdMarca());
+                comm.Parameters.AddWithValue("@idcliente", mVeiculo.getIdCliente());
                 comm.Parameters.AddWithValue("@nomeveiculo", mVeiculo.getNomeVeiculo());
                 comm.Parameters.AddWithValue("@tipoveiculo", mVeiculo.getTipoVeiculo());
                 comm.Parameters.AddWithValue("@corveiculo", mVeiculo.getCorVeiculo());

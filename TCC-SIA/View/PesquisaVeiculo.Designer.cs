@@ -30,6 +30,7 @@
         {
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            Deletar = new Button();
             buttonEditar = new Button();
             buttonPesquisar = new Button();
             label1 = new Label();
@@ -54,7 +55,7 @@
             dateTimePickerFab = new DateTimePicker();
             label3 = new Label();
             label2 = new Label();
-            comboBoxIdCliente = new ComboBox();
+            comboBoxIdClienteE = new ComboBox();
             textBoxNome = new TextBox();
             label10 = new Label();
             maskedTextBoxPlaca = new MaskedTextBox();
@@ -68,7 +69,6 @@
             labelCpf = new Label();
             labelMarca = new Label();
             labelCor = new Label();
-            Deletar = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewPesquisar).BeginInit();
@@ -100,6 +100,17 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Pesquisar";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // Deletar
+            // 
+            Deletar.Location = new Point(398, 402);
+            Deletar.Margin = new Padding(3, 4, 3, 4);
+            Deletar.Name = "Deletar";
+            Deletar.Size = new Size(136, 95);
+            Deletar.TabIndex = 25;
+            Deletar.Text = "Deletar";
+            Deletar.UseVisualStyleBackColor = true;
+            Deletar.Click += Deletar_Click;
             // 
             // buttonEditar
             // 
@@ -170,7 +181,7 @@
             tabPage2.Controls.Add(dateTimePickerFab);
             tabPage2.Controls.Add(label3);
             tabPage2.Controls.Add(label2);
-            tabPage2.Controls.Add(comboBoxIdCliente);
+            tabPage2.Controls.Add(comboBoxIdClienteE);
             tabPage2.Controls.Add(textBoxNome);
             tabPage2.Controls.Add(label10);
             tabPage2.Controls.Add(maskedTextBoxPlaca);
@@ -359,16 +370,16 @@
             label2.TabIndex = 72;
             label2.Text = "Chassi:";
             // 
-            // comboBoxIdCliente
+            // comboBoxIdClienteE
             // 
-            comboBoxIdCliente.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            comboBoxIdCliente.AutoCompleteSource = AutoCompleteSource.ListItems;
-            comboBoxIdCliente.FormattingEnabled = true;
-            comboBoxIdCliente.Location = new Point(64, 18);
-            comboBoxIdCliente.Margin = new Padding(3, 5, 3, 5);
-            comboBoxIdCliente.Name = "comboBoxIdCliente";
-            comboBoxIdCliente.Size = new Size(293, 28);
-            comboBoxIdCliente.TabIndex = 71;
+            comboBoxIdClienteE.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBoxIdClienteE.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBoxIdClienteE.FormattingEnabled = true;
+            comboBoxIdClienteE.Location = new Point(64, 18);
+            comboBoxIdClienteE.Margin = new Padding(3, 5, 3, 5);
+            comboBoxIdClienteE.Name = "comboBoxIdClienteE";
+            comboBoxIdClienteE.Size = new Size(293, 28);
+            comboBoxIdClienteE.TabIndex = 71;
             // 
             // textBoxNome
             // 
@@ -492,17 +503,6 @@
             labelCor.TabIndex = 58;
             labelCor.Text = "Cor:";
             // 
-            // Deletar
-            // 
-            Deletar.Location = new Point(398, 402);
-            Deletar.Margin = new Padding(3, 4, 3, 4);
-            Deletar.Name = "Deletar";
-            Deletar.Size = new Size(136, 95);
-            Deletar.TabIndex = 25;
-            Deletar.Text = "Deletar";
-            Deletar.UseVisualStyleBackColor = true;
-            Deletar.Click += Deletar_Click;
-            // 
             // PesquisaVeiculo
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -546,7 +546,7 @@
         private DateTimePicker dateTimePickerFab;
         private Label label3;
         private Label label2;
-        private ComboBox comboBoxIdCliente;
+        private ComboBox comboBoxIdClienteE;
         private TextBox textBoxNome;
         private Label label10;
         private MaskedTextBox maskedTextBoxPlaca;
