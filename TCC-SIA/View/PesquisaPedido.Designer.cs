@@ -131,6 +131,7 @@
             btnDeletar.TabIndex = 21;
             btnDeletar.Text = "Deletar";
             btnDeletar.UseVisualStyleBackColor = true;
+            btnDeletar.Click += btnDeletar_Click;
             // 
             // btnAtualizar
             // 

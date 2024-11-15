@@ -337,54 +337,44 @@ namespace TCC_SIA.View
 
         private void Deletar_Click(object sender, EventArgs e)
         {
-            // Lista para armazenar os IDs das marcas a serem removidas
-            List<long> idsToDelete = new List<long>();
+            // Lista para armazenar os IDs dos pedidos a serem deletados
+            List<long> marcasParaDeletar = new List<long>();
 
-            // Verifica todas as linhas do DataGridView
+            // Percorrer todas as linhas do DataGridView
             foreach (DataGridViewRow row in dataGridViewPesquisar.Rows)
             {
-                // Verifica se a linha não é uma nova linha e se a checkbox está marcada
-                if (!row.IsNewRow && (bool)(row.Cells["Selecionar"].Value ?? false))
+                // Verifica se a checkbox está marcada na linha
+                bool isSelected = Convert.ToBoolean(row.Cells["Selecionar"].Value);
+
+                if (isSelected)
                 {
-                    // Obtém o ID da marca da linha
+                    // Recupera o ID do pedido da linha
                     long idMarca = Convert.ToInt64(row.Cells["Id Marca"].Value);
-                    // Adiciona o ID à lista para exclusão
-                    idsToDelete.Add(idMarca);
+                    marcasParaDeletar.Add(idMarca);
                 }
             }
 
-            // Se não houver marcas selecionadas
-            if (idsToDelete.Count == 0)
+            if (marcasParaDeletar.Count > 0)
             {
-                MessageBox.Show("Por favor, selecione pelo menos uma linha para deletar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                // Inicializa o controlePedido para acessar o método de deletação
+                controleMarca cMarca = new controleMarca();
 
-            // Chamada ao controleMarca para deletar as marcas
-            controleMarca cMarca = new controleMarca();
-            Marca mMarca = new Marca();
-
-            string res = string.Empty;
-
-            // Deletar cada marca do banco de dados
-            foreach (long idMarca in idsToDelete)
-            {
-                res = cMarca.deletarMarca(mMarca);
-                MessageBox.Show(res, "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-
-            // Remove as linhas do DataGridView após a exclusão
-            foreach (long idMarca in idsToDelete)
-            {
-                // Encontre a linha correspondente e remova-a
-                foreach (DataGridViewRow row in dataGridViewPesquisar.Rows)
+                // Deletar cada pedido selecionado
+                foreach (long idMarca in marcasParaDeletar)
                 {
-                    if (!row.IsNewRow && Convert.ToInt64(row.Cells["Id Marca"].Value) == idMarca)
-                    {
-                        dataGridViewPesquisar.Rows.Remove(row);
-                        break; // Sai do loop após remover a linha
-                    }
+                    Marca mMarca = new Marca();
+                    mMarca.setIdMarca(idMarca);
+
+                    // Chama o método para deletar o pedido
+                    string resultMessage = cMarca.deletarMarca(mMarca);
+
+                    // Exibe o resultado da exclusão
+                    MessageBox.Show(resultMessage);
                 }
+            }
+            else
+            {
+                MessageBox.Show("Please select at least one order to delete.");
             }
         }
     }

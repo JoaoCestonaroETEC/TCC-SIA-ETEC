@@ -9,6 +9,8 @@ using TCC_SIA.Model;
 using System.Text.RegularExpressions;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
 using System.Reflection;
+using System.Runtime.ConstrainedExecution;
+using System.Security.Cryptography;
 
 namespace TCC_SIA.Controller
 {
@@ -464,6 +466,167 @@ namespace TCC_SIA.Controller
             {
                 return ex.ToString(); // Para debug, talvez seja melhor logar isso em vez de retornar como string.
             }
+        }
+
+        public string DeletarClienteF(Cliente mClienteF)
+        {
+
+            // Obtém o ID do CLIENTE usando o método getter
+            long idCliente = mClienteF.getIdCliente();
+
+            try
+            {
+                // Inicializa a conexão com o banco de dados
+                conexaoBD conexao = new conexaoBD();
+                using (NpgsqlConnection conn = conexao.conectar())
+                {
+                    if (conn == null)
+                    {
+                        return "Falha ao conectar ao banco de dados.";
+                    }
+
+                    // Inicia uma transação para garantir que todas as exclusões ocorram ou nenhuma seja aplicada
+                    using (var transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            // Deleta os registros da tabela CLIENTE_TELEFONE
+                            string sqlDeleteTelefone = "DELETE FROM CLIENTE_TELEFONE WHERE IDCLIENTE = @IDCLIENTE;";
+                            using (var cmdTelefone = new NpgsqlCommand(sqlDeleteTelefone, conn))
+                            {
+                                cmdTelefone.Parameters.AddWithValue("@IDCLIENTE", idCliente);
+                                cmdTelefone.ExecuteNonQuery();
+                            }
+
+                            // Deleta os registros da tabela CLIENTE_ENDERECO
+                            string sqlDeleteEndereco = "DELETE FROM CLIENTE_ENDERECO WHERE IDCLIENTE = @IDCLIENTE;";
+                            using (var cmdEndereco = new NpgsqlCommand(sqlDeleteEndereco, conn))
+                            {
+                                cmdEndereco.Parameters.AddWithValue("@IDCLIENTE", idCliente);
+                                cmdEndereco.ExecuteNonQuery();
+                            }
+
+                            // Deleta os registros da tabela CLIENTE_F
+                            string sqlDeleteClienteF = "DELETE FROM CLIENTE_F WHERE IDCLIENTE = @IDCLIENTE;";
+                            using (var cmdClienteF = new NpgsqlCommand(sqlDeleteClienteF, conn))
+                            {
+                                cmdClienteF.Parameters.AddWithValue("@IDCLIENTE", idCliente);
+                                cmdClienteF.ExecuteNonQuery();
+                            }
+
+                            // Deleta o registro principal da tabela CLIENTE
+                            string sqlDeleteCliente = "DELETE FROM CLIENTE WHERE IDCLIENTE = @IDCLIENTE;";
+                            using (var cmdCliente = new NpgsqlCommand(sqlDeleteCliente, conn))
+                            {
+                                cmdCliente.Parameters.AddWithValue("@IDCLIENTE", idCliente);
+                                int rowsAffected = cmdCliente.ExecuteNonQuery();
+
+                                // Verifica se o cliente foi excluído
+                                if (rowsAffected > 0)
+                                {
+                                    transaction.Commit();
+                                    return "Cliente e registros relacionados excluídos com sucesso.";
+                                }
+                                else
+                                {
+                                    throw new Exception("Nenhum cliente encontrado com o ID fornecido.");
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            // Reverte a transação em caso de erro
+                            transaction.Rollback();
+                            return "Erro ao excluir cliente: " + ex.Message;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Erro ao conectar ao banco de dados: " + ex.Message;
+            }
+
+        }
+
+        public string DeletarClienteJ(Cliente mClienteJ)
+        {
+            // Obtém o ID do CLIENTE usando o método getter
+            long idCliente = mClienteJ.getIdCliente();
+
+            try
+            {
+                // Inicializa a conexão com o banco de dados
+                conexaoBD conexao = new conexaoBD();
+                using (NpgsqlConnection conn = conexao.conectar())
+                {
+                    if (conn == null)
+                    {
+                        return "Falha ao conectar ao banco de dados.";
+                    }
+
+                    // Inicia uma transação para garantir que todas as exclusões ocorram ou nenhuma seja aplicada
+                    using (var transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            // Deleta os registros da tabela CLIENTE_TELEFONE
+                            string sqlDeleteTelefone = "DELETE FROM CLIENTE_TELEFONE WHERE IDCLIENTE = @IDCLIENTE;";
+                            using (var cmdTelefone = new NpgsqlCommand(sqlDeleteTelefone, conn))
+                            {
+                                cmdTelefone.Parameters.AddWithValue("@IDCLIENTE", idCliente);
+                                cmdTelefone.ExecuteNonQuery();
+                            }
+
+                            // Deleta os registros da tabela CLIENTE_ENDERECO
+                            string sqlDeleteEndereco = "DELETE FROM CLIENTE_ENDERECO WHERE IDCLIENTE = @IDCLIENTE;";
+                            using (var cmdEndereco = new NpgsqlCommand(sqlDeleteEndereco, conn))
+                            {
+                                cmdEndereco.Parameters.AddWithValue("@IDCLIENTE", idCliente);
+                                cmdEndereco.ExecuteNonQuery();
+                            }
+
+                            // Deleta os registros da tabela CLIENTE_J
+                            string sqlDeleteClienteJ = "DELETE FROM CLIENTE_J WHERE IDCLIENTE = @IDCLIENTE;";
+                            using (var cmdClienteJ = new NpgsqlCommand(sqlDeleteClienteJ, conn))
+                            {
+                                cmdClienteJ.Parameters.AddWithValue("@IDCLIENTE", idCliente);
+                                cmdClienteJ.ExecuteNonQuery();
+                            }
+
+                            // Deleta o registro principal da tabela CLIENTE
+                            string sqlDeleteCliente = "DELETE FROM CLIENTE WHERE IDCLIENTE = @IDCLIENTE;";
+                            using (var cmdCliente = new NpgsqlCommand(sqlDeleteCliente, conn))
+                            {
+                                cmdCliente.Parameters.AddWithValue("@IDCLIENTE", idCliente);
+                                int rowsAffected = cmdCliente.ExecuteNonQuery();
+
+                                // Verifica se o cliente foi excluído
+                                if (rowsAffected > 0)
+                                {
+                                    transaction.Commit();
+                                    return "Cliente e registros relacionados excluídos com sucesso.";
+                                }
+                                else
+                                {
+                                    throw new Exception("Nenhum cliente encontrado com o ID fornecido.");
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            // Reverte a transação em caso de erro
+                            transaction.Rollback();
+                            return "Erro ao excluir cliente: " + ex.Message;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Erro ao conectar ao banco de dados: " + ex.Message;
+            }
+
         }
     }
 }

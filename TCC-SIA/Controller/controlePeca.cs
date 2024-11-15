@@ -309,5 +309,51 @@ namespace TCC_SIA.Controller
                 //return "Erro ao atualizar!";
             }
         }
+
+        public string deletarPeca (Peca mPeca)
+        {
+            // Get the ID from the Peca object using its getter method
+            long idPeca = mPeca.getIdPeca();
+
+            try
+            {
+                // Using the conexaoBD class to establish a connection
+                conexaoBD conexao = new conexaoBD();
+                using (NpgsqlConnection conn = conexao.conectar())
+                {
+                    if (conn == null)
+                    {
+                        return "Failed to connect to the database.";
+                    }
+
+                    // SQL query to delete the part based on its ID
+                    string query = "DELETE FROM Peca WHERE idPeca = @idPeca";
+
+                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, conn))
+                    {
+                        // Add the ID parameter to the SQL command
+                        cmd.Parameters.AddWithValue("@idPeca", idPeca);
+
+                        // Execute the delete command and check if a row was affected
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        // Return success or error message based on the result
+                        if (rowsAffected > 0)
+                        {
+                            return "Part deleted successfully.";
+                        }
+                        else
+                        {
+                            return "No part found with the provided ID.";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Return an error message if an exception occurs
+                return "Error deleting part: " + ex.Message;
+            }
+        }
     }
 }

@@ -401,7 +401,7 @@ namespace TCC_SIA.Controller
                 comm.Parameters.AddWithValue("@OBSERVACAO", mPedido.getObservacao());
                 comm.Parameters.AddWithValue("@DATAINICIO", mPedido.getDataInicio());
                 comm.Parameters.AddWithValue("@DATAFIM", mPedido.getDataFim());
-                
+
                 comm.ExecuteNonQuery();
                 return "Pedido atualizado!";
             }
@@ -409,6 +409,80 @@ namespace TCC_SIA.Controller
             {
                 return ex.ToString();
                 //return "Erro ao atualizar!";
+            }
+        }
+
+        public string deletarPedido(Pedido mPedido)
+        {
+            // Get the ID of the Pedido using its getter
+            long idPedido = mPedido.getIdPedido();
+
+            try
+            {
+                // Initialize the database connection
+                conexaoBD conexao = new conexaoBD();
+                using (NpgsqlConnection conn = conexao.conectar())
+                {
+                    if (conn == null)
+                    {
+                        return "Falha ao conectar ao banco de dados.";
+                    }
+
+                    // Begin a transaction to ensure all deletions succeed or fail together
+                    using (var transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            // First, delete related records from Pedido_Peca
+                            string deletePedidoPecaQuery = "DELETE FROM Pedido_Peca WHERE idPedido = @idPedido";
+                            using (var cmdPeca = new NpgsqlCommand(deletePedidoPecaQuery, conn))
+                            {
+                                cmdPeca.Parameters.AddWithValue("@idPedido", idPedido);
+                                cmdPeca.ExecuteNonQuery();
+                            }
+
+                            // Then, delete related records from Pedido_Servico
+                            string deletePedidoServicoQuery = "DELETE FROM Pedido_Servico WHERE idPedido = @idPedido";
+                            using (var cmdServico = new NpgsqlCommand(deletePedidoServicoQuery, conn))
+                            {
+                                cmdServico.Parameters.AddWithValue("@idPedido", idPedido);
+                                cmdServico.ExecuteNonQuery();
+                            }
+
+                            // Finally, delete the main Pedido record
+                            string deletePedidoQuery = "DELETE FROM Pedido WHERE idPedido = @idPedido";
+                            using (var cmdPedido = new NpgsqlCommand(deletePedidoQuery, conn))
+                            {
+                                cmdPedido.Parameters.AddWithValue("@idPedido", idPedido);
+                                int rowsAffected = cmdPedido.ExecuteNonQuery();
+
+                                // Commit the transaction if everything succeeds
+                                transaction.Commit();
+
+                                // Check if the main record was successfully deleted
+                                if (rowsAffected > 0)
+                                {
+                                    return $"pedido com ID {idPedido} excluído com sucesso.";
+                                }
+                                else
+                                {
+                                    throw new Exception("Nenhum pedido encontrado com o ID fornecido.");
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            // Roll back the transaction if an error occurs
+                            transaction.Rollback();
+                            return "Erro ao excluir pedido: " + ex.Message;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Return an error message if a connection or other issue occurs
+                return "Erro ao conectar ao banco de dados: " + ex.Message;
             }
         }
     }

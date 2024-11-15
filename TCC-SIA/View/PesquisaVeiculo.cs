@@ -18,7 +18,7 @@ namespace TCC_SIA.View
     {
         #region Inicializa o formulário
         public PesquisaVeiculo()
-        {    
+        {
             InitializeComponent();
             listarMarca();
             listarCliente();
@@ -553,49 +553,44 @@ namespace TCC_SIA.View
 
         private void Deletar_Click(object sender, EventArgs e)
         {
-            // Lista para armazenar os IDs das marcas a serem removidas
-            List<long> idsToDelete = new List<long>();
+            // Lista para armazenar os IDs dos pedidos a serem deletados
+            List<long> veiculosParaDeletar = new List<long>();
 
-            // Verifica todas as linhas do DataGridView
+            // Percorrer todas as linhas do DataGridView
             foreach (DataGridViewRow row in dataGridViewPesquisar.Rows)
             {
-                
+                // Verifica se a checkbox está marcada na linha
+                bool isSelected = Convert.ToBoolean(row.Cells["Selecionar"].Value);
 
-
-            }
-
-            // Se não houver marcas selecionadas
-            if (idsToDelete.Count == 0)
-            {
-                MessageBox.Show("Por favor, selecione pelo menos uma linha para deletar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // Chamada ao controleMarca para deletar as marcas
-            controleVeiculo cVeiculo = new controleVeiculo();
-            Veiculo mVeiculo = new Veiculo();
-
-            string res = string.Empty;
-
-            // Deletar cada marca do banco de dados
-            foreach (long idMarca in idsToDelete)
-            {
-                res = cVeiculo.deletarVeiculo(mVeiculo);
-                MessageBox.Show(res, "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-
-            // Remove as linhas do DataGridView após a exclusão
-            foreach (long idMarca in idsToDelete)
-            {
-                // Encontre a linha correspondente e remova-a
-                foreach (DataGridViewRow row in dataGridViewPesquisar.Rows)
+                if (isSelected)
                 {
-                    if (!row.IsNewRow && Convert.ToInt64(row.Cells["Id Veiculo"].Value) == idMarca)
-                    {
-                        dataGridViewPesquisar.Rows.Remove(row);
-                        break; // Sai do loop após remover a linha
-                    }
+                    // Recupera o ID do pedido da linha
+                    long idVeiculo = Convert.ToInt64(row.Cells["Id Veiculo"].Value);
+                    veiculosParaDeletar.Add(idVeiculo);
                 }
+            }
+
+            if (veiculosParaDeletar.Count > 0)
+            {
+                // Inicializa o controlePedido para acessar o método de deletação
+                controleVeiculo cVeiculo = new controleVeiculo();
+
+                // Deletar cada pedido selecionado
+                foreach (long idVeiculo in veiculosParaDeletar)
+                {
+                    Veiculo mVeiculo = new Veiculo();
+                    mVeiculo.setIdVeiculo(idVeiculo);
+
+                    // Chama o método para deletar o pedido
+                    string resultMessage = cVeiculo.deletarVeiculo(mVeiculo);
+
+                    // Exibe o resultado da exclusão
+                    MessageBox.Show(resultMessage);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select at least one order to delete.");
             }
         }
     }

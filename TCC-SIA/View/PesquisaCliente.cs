@@ -798,7 +798,7 @@ namespace TCC_SIA.View
 
                     // Verifique se a linha já existe
                     bool existsJ = false;
-                    foreach (DataGridViewRow existingRow in dataGridViewPesquisarF.Rows)
+                    foreach (DataGridViewRow existingRow in dataGridViewPesquisarJ.Rows)
                     {
                         if (!existingRow.IsNewRow &&
                             existingRow.Cells["Id Cliente"].Value.ToString() == idClienteJ &&
@@ -814,7 +814,7 @@ namespace TCC_SIA.View
                     {
                         // Criando a nova linha manualmente
                         DataGridViewRow row = new DataGridViewRow();
-                        row.CreateCells(dataGridViewPesquisarF); // Define a grid para onde a linha vai
+                        row.CreateCells(dataGridViewPesquisarJ); // Define a grid para onde a linha vai
 
                         // Preenchendo a linha com os valores
                         row.Cells[0].Value = idClienteJ;
@@ -894,7 +894,7 @@ namespace TCC_SIA.View
 
         }
 
-        
+
 
         private void buttonSalvarAJ_Click(object sender, EventArgs e)
         {
@@ -985,6 +985,93 @@ namespace TCC_SIA.View
 
                     tabControlPesquisarClientes.SelectedTab = tabPage2;
                 }
+            }
+        }
+
+        private void btnDeletarF_Click(object sender, EventArgs e)
+        {
+            // Lista para armazenar os IDs dos pedidos a serem deletados
+            List<long> clientesParaDeletar = new List<long>();
+
+            // Percorrer todas as linhas do DataGridView
+            foreach (DataGridViewRow row in dataGridViewPesquisarF.Rows)
+            {
+                // Verifica se a checkbox está marcada na linha
+                bool isSelected = Convert.ToBoolean(row.Cells["Selecionar"].Value);
+
+                if (isSelected)
+                {
+                    // Recupera o ID do pedido da linha
+                    long idCliente = Convert.ToInt64(row.Cells["Id Cliente"].Value);
+                    clientesParaDeletar.Add(idCliente);
+                }
+            }
+
+            if (clientesParaDeletar.Count > 0)
+            {
+                // Inicializa o controlePedido para acessar o método de deletação
+                controleCliente cCliente = new controleCliente();
+
+                // Deletar cada pedido selecionado
+                foreach (int idCliente in clientesParaDeletar)
+                {
+                    Cliente mCliente = new Cliente();
+                    mCliente.setIdCliente(idCliente);
+
+                    // Chama o método para deletar o pedido
+                    string resultMessage = cCliente.DeletarClienteF(mCliente);
+
+                    // Exibe o resultado da exclusão
+                    MessageBox.Show(resultMessage);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select at least one order to delete.");
+            }
+
+        }
+
+        private void btnDeletarJ_Click(object sender, EventArgs e)
+        {
+            // Lista para armazenar os IDs dos pedidos a serem deletados
+            List<long> clientesParaDeletar = new List<long>();
+
+            // Percorrer todas as linhas do DataGridView
+            foreach (DataGridViewRow row in dataGridViewPesquisarJ.Rows)
+            {
+                // Verifica se a checkbox está marcada na linha
+                bool isSelected = Convert.ToBoolean(row.Cells["Selecionar"].Value);
+
+                if (isSelected)
+                {
+                    // Recupera o ID do pedido da linha
+                    long idCliente = Convert.ToInt64(row.Cells["Id Cliente"].Value);
+                    clientesParaDeletar.Add(idCliente);
+                }
+            }
+
+            if (clientesParaDeletar.Count > 0)
+            {
+                // Inicializa o controlePedido para acessar o método de deletação
+                controleCliente cCliente = new controleCliente();
+
+                // Deletar cada pedido selecionado
+                foreach (int idCliente in clientesParaDeletar)
+                {
+                    Cliente mCliente = new Cliente();
+                    mCliente.setIdCliente(idCliente);
+
+                    // Chama o método para deletar o pedido
+                    string resultMessage = cCliente.DeletarClienteJ(mCliente);
+
+                    // Exibe o resultado da exclusão
+                    MessageBox.Show(resultMessage);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select at least one order to delete.");
             }
         }
     }

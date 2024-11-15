@@ -227,5 +227,43 @@ namespace TCC_SIA.View
                 }
             }
         }
+
+        private void btnDeletar_Click(object sender, EventArgs e)
+        {
+
+            // Ensure a row is selected
+            if (dataGridViewPesquisar.SelectedRows.Count > 0)
+            {
+                // Get the selected row
+                DataGridViewRow selectedRow = dataGridViewPesquisar.SelectedRows[0];
+
+                // Retrieve the ID of the item to delete and set it in mPeca
+                long idPeca = Convert.ToInt64(selectedRow.Cells["Id"].Value);
+
+                // Create instances of controlePeca and Peca
+                controlePeca cPeca = new controlePeca();
+                Peca mPeca = new Peca();
+                mPeca.setIdPeca(idPeca);  // Set the ID using the setter method
+
+                // Call the delete method on controlePeca
+                string result = cPeca.deletarPeca(mPeca);
+
+                if (result == "Part deleted successfully.")
+                {
+                    // Remove the row from the DataGridView
+                    dataGridViewPesquisar.Rows.Remove(selectedRow);
+                    MessageBox.Show("Item deleted successfully.");
+                }
+                else
+                {
+                    MessageBox.Show(result); // Display any error messages returned by deletarPeca
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a row to delete.");
+            }
+
+        }
     }
 }

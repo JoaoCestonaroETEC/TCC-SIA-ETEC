@@ -152,6 +152,7 @@
             btnDeletarF.TabIndex = 9;
             btnDeletarF.Text = "Deletar";
             btnDeletarF.UseVisualStyleBackColor = true;
+            btnDeletarF.Click += btnDeletarF_Click;
             // 
             // btnAtualizarF
             // 
@@ -225,6 +226,7 @@
             btnDeletarJ.TabIndex = 15;
             btnDeletarJ.Text = "Deletar";
             btnDeletarJ.UseVisualStyleBackColor = true;
+            btnDeletarJ.Click += btnDeletarJ_Click;
             // 
             // btnAtualizarJ
             // 

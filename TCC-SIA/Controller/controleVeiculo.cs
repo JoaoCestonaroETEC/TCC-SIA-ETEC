@@ -411,33 +411,57 @@ namespace TCC_SIA.Controller
 
         public string deletarVeiculo(Veiculo mVeiculo)
         {
-            // SQL para deletar a marca
-            string sql = "DELETE FROM VEICULO WHERE idveiculo = @idveiculo;";
+            // Obtém o ID da MARCA usando o método getter
+            long idVeiculo = mVeiculo.getIdVeiculo();
 
-            // Criação da conexão e comando
-            conexaoBD con = new conexaoBD();
-            using (NpgsqlConnection conn = con.conectar()) // Conectar ao banco de dados
-            using (NpgsqlCommand comm = new NpgsqlCommand(sql, conn))
+            try
             {
-                try
+                // Inicializa a conexão com o banco de dados
+                conexaoBD conexao = new conexaoBD();
+                using (NpgsqlConnection conn = conexao.conectar())
                 {
-                    // Executa o comando de exclusão
-                    int rowsAffected = comm.ExecuteNonQuery();
+                    if (conn == null)
+                    {
+                        return "Falha ao conectar ao banco de dados.";
+                    }
 
-                    // Verifica se a exclusão foi bem-sucedida
-                    if (rowsAffected > 0)
+                    // Inicia uma transação para garantir que todas as exclusões ocorram ou nenhuma seja aplicada
+                    using (var transaction = conn.BeginTransaction())
                     {
-                        return "Veículo deletada com sucesso!";
-                    }
-                    else
-                    {
-                        return "Nenhuma linha encontrada para deletar.";
+                        try
+                        {
+                            // Deleta os registros da tabela MARCA
+                            string sqlDeleteVeiculo = "DELETE FROM VEICULO WHERE IDVEICULO = @IDVEICULO;";
+                            using (var cmdVeiculo = new NpgsqlCommand(sqlDeleteVeiculo, conn))
+                            {
+                                cmdVeiculo.Parameters.AddWithValue("@IDVEICULO", idVeiculo);
+                                int rowsAffected = cmdVeiculo.ExecuteNonQuery();
+
+                                // Verifica se a marca foi excluída
+                                if (rowsAffected > 0)
+                                {
+                                    // Confirma a transação
+                                    transaction.Commit();
+                                    return $"Marca com ID {idVeiculo} excluída com sucesso.";
+                                }
+                                else
+                                {
+                                    throw new Exception("Nenhuma marca encontrada com o ID fornecido.");
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            // Reverte a transação em caso de erro
+                            transaction.Rollback();
+                            return "Erro ao excluir marca: " + ex.Message;
+                        }
                     }
                 }
-                catch (NpgsqlException ex)
-                {
-                    return "Erro ao deletar: " + ex.Message;
-                }
+            }
+            catch (Exception ex)
+            {
+                return "Erro ao conectar ao banco de dados: " + ex.Message;
             }
         }
     }

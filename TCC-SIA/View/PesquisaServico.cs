@@ -354,5 +354,48 @@ namespace TCC_SIA.View
                 e.Handled = true; // Bloqueia a entrada
             }
         }
+
+        private void btnDeletar_Click(object sender, EventArgs e)
+        {
+            // Lista para armazenar os IDs dos pedidos a serem deletados
+            List<long> servicosParaDeletar = new List<long>();
+
+            // Percorrer todas as linhas do DataGridView
+            foreach (DataGridViewRow row in dataGridViewPesquisar.Rows)
+            {
+                // Verifica se a checkbox está marcada na linha
+                bool isSelected = Convert.ToBoolean(row.Cells["Selecionar"].Value);
+
+                if (isSelected)
+                {
+                    // Recupera o ID do pedido da linha
+                    long idServico = Convert.ToInt64(row.Cells["Id Serviço"].Value);
+                    servicosParaDeletar.Add(idServico);
+                }
+            }
+
+            if (servicosParaDeletar.Count > 0)
+            {
+                // Inicializa o controlePedido para acessar o método de deletação
+                controleServico cServico = new controleServico();
+
+                // Deletar cada pedido selecionado
+                foreach (long idServico in servicosParaDeletar)
+                {
+                    Servico mServico = new Servico();
+                    mServico.setIDServico(idServico);
+
+                    // Chama o método para deletar o pedido
+                    string resultMessage = cServico.deletarServico(mServico);
+
+                    // Exibe o resultado da exclusão
+                    MessageBox.Show(resultMessage);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select at least one order to delete.");
+            }
+        }
     }
 }

@@ -203,5 +203,61 @@ namespace TCC_SIA.Controller
             }
         }
         #endregion
+
+        public string deletarServico(Servico mServico)
+        {
+            // Obtém o ID da MARCA usando o método getter
+            long idServico = mServico.getIDServico();
+
+            try
+            {
+                // Inicializa a conexão com o banco de dados
+                conexaoBD conexao = new conexaoBD();
+                using (NpgsqlConnection conn = conexao.conectar())
+                {
+                    if (conn == null)
+                    {
+                        return "Falha ao conectar ao banco de dados.";
+                    }
+
+                    // Inicia uma transação para garantir que todas as exclusões ocorram ou nenhuma seja aplicada
+                    using (var transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            // Deleta os registros da tabela MARCA
+                            string sqlDeleteServico = "DELETE FROM SERVICO WHERE IDSERVICO = @IDSERVICO;";
+                            using (var cmdServico = new NpgsqlCommand(sqlDeleteServico, conn))
+                            {
+                                cmdServico.Parameters.AddWithValue("@IDSERVICO", idServico);
+                                int rowsAffected = cmdServico.ExecuteNonQuery();
+
+                                // Verifica se a marca foi excluída
+                                if (rowsAffected > 0)
+                                {
+                                    // Confirma a transação
+                                    transaction.Commit();
+                                    return $"Servico com ID {idServico} excluído com sucesso.";
+                                }
+                                else
+                                {
+                                    throw new Exception("Nenhum servico encontrado com o ID fornecido.");
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            // Reverte a transação em caso de erro
+                            transaction.Rollback();
+                            return "Erro ao excluir servico: " + ex.Message;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Erro ao conectar ao banco de dados: " + ex.Message;
+            }
+        }
     }
 }

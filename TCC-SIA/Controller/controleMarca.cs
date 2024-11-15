@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TCC_SIA.Model;
 
@@ -263,34 +264,58 @@ namespace TCC_SIA.Controller
 
         public string deletarMarca(Marca mMarca)
         {
-                // SQL para deletar a marca
-                string sql = "DELETE FROM marca WHERE idmarca = @idmarca;";
+            // Obtém o ID da MARCA usando o método getter
+            long idMarca = mMarca.getIdMarca();
 
-                // Criação da conexão e comando
-                conexaoBD con = new conexaoBD();
-                using (NpgsqlConnection conn = con.conectar()) // Conectar ao banco de dados
-                using (NpgsqlCommand comm = new NpgsqlCommand(sql, conn))
+            try
+            {
+                // Inicializa a conexão com o banco de dados
+                conexaoBD conexao = new conexaoBD();
+                using (NpgsqlConnection conn = conexao.conectar())
                 {
-                    try
-                    { 
-                        // Executa o comando de exclusão
-                        int rowsAffected = comm.ExecuteNonQuery();
-
-                        // Verifica se a exclusão foi bem-sucedida
-                        if (rowsAffected > 0)
-                        {
-                            return "Marca deletada com sucesso!";
-                        }
-                        else
-                        {
-                            return "Nenhuma linha encontrada para deletar.";
-                        }
-                    }
-                    catch (NpgsqlException ex)
+                    if (conn == null)
                     {
-                        return "Erro ao deletar: " + ex.Message;
+                        return "Falha ao conectar ao banco de dados.";
+                    }
+
+                    // Inicia uma transação para garantir que todas as exclusões ocorram ou nenhuma seja aplicada
+                    using (var transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            // Deleta os registros da tabela MARCA
+                            string sqlDeleteMarca = "DELETE FROM MARCA WHERE IDMARCA = @IDMARCA;";
+                            using (var cmdMarca = new NpgsqlCommand(sqlDeleteMarca, conn))
+                            {
+                                cmdMarca.Parameters.AddWithValue("@IDMARCA", idMarca);
+                                int rowsAffected = cmdMarca.ExecuteNonQuery();
+
+                                // Verifica se a marca foi excluída
+                                if (rowsAffected > 0)
+                                {
+                                    // Confirma a transação
+                                    transaction.Commit();
+                                    return $"Marca com ID {idMarca} excluída com sucesso.";
+                                }
+                                else
+                                {
+                                    throw new Exception("Nenhuma marca encontrada com o ID fornecido.");
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            // Reverte a transação em caso de erro
+                            transaction.Rollback();
+                            return "Erro ao excluir marca: " + ex.Message;
+                        }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                return "Erro ao conectar ao banco de dados: " + ex.Message;
+            }
         }
     }
+}
