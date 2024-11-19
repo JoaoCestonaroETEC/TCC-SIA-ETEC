@@ -37,12 +37,12 @@
             textBoxPesquisarF = new TextBox();
             dataGridViewPesquisarF = new DataGridView();
             tabControlPesquisarClienteJ = new TabPage();
+            dataGridViewPesquisarJ = new DataGridView();
             btnDeletarJ = new Button();
             btnAtualizarJ = new Button();
             buttonPesquisarJ = new Button();
             label2 = new Label();
             textBoxPesquisarJ = new TextBox();
-            dataGridViewPesquisarJ = new DataGridView();
             tabPage1 = new TabPage();
             maskedID = new MaskedTextBox();
             label17 = new Label();
@@ -194,22 +194,26 @@
             // 
             // dataGridViewPesquisarF
             // 
+            dataGridViewPesquisarF.AllowUserToAddRows = false;
+            dataGridViewPesquisarF.AllowUserToDeleteRows = false;
+            dataGridViewPesquisarF.AllowUserToResizeRows = false;
             dataGridViewPesquisarF.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewPesquisarF.Location = new Point(6, 44);
             dataGridViewPesquisarF.Margin = new Padding(3, 4, 3, 4);
             dataGridViewPesquisarF.Name = "dataGridViewPesquisarF";
+            dataGridViewPesquisarF.RowHeadersVisible = false;
             dataGridViewPesquisarF.RowHeadersWidth = 51;
             dataGridViewPesquisarF.Size = new Size(834, 383);
             dataGridViewPesquisarF.TabIndex = 4;
             // 
             // tabControlPesquisarClienteJ
             // 
+            tabControlPesquisarClienteJ.Controls.Add(dataGridViewPesquisarJ);
             tabControlPesquisarClienteJ.Controls.Add(btnDeletarJ);
             tabControlPesquisarClienteJ.Controls.Add(btnAtualizarJ);
             tabControlPesquisarClienteJ.Controls.Add(buttonPesquisarJ);
             tabControlPesquisarClienteJ.Controls.Add(label2);
             tabControlPesquisarClienteJ.Controls.Add(textBoxPesquisarJ);
-            tabControlPesquisarClienteJ.Controls.Add(dataGridViewPesquisarJ);
             tabControlPesquisarClienteJ.Location = new Point(4, 29);
             tabControlPesquisarClienteJ.Name = "tabControlPesquisarClienteJ";
             tabControlPesquisarClienteJ.Padding = new Padding(3);
@@ -217,6 +221,15 @@
             tabControlPesquisarClienteJ.TabIndex = 1;
             tabControlPesquisarClienteJ.Text = "Pesquisar Cliente Júridico";
             tabControlPesquisarClienteJ.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewPesquisarJ
+            // 
+            dataGridViewPesquisarJ.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewPesquisarJ.Location = new Point(6, 41);
+            dataGridViewPesquisarJ.Name = "dataGridViewPesquisarJ";
+            dataGridViewPesquisarJ.RowHeadersWidth = 51;
+            dataGridViewPesquisarJ.Size = new Size(832, 400);
+            dataGridViewPesquisarJ.TabIndex = 16;
             // 
             // btnDeletarJ
             // 
@@ -265,16 +278,6 @@
             textBoxPesquisarJ.Name = "textBoxPesquisarJ";
             textBoxPesquisarJ.Size = new Size(747, 27);
             textBoxPesquisarJ.TabIndex = 11;
-            // 
-            // dataGridViewPesquisarJ
-            // 
-            dataGridViewPesquisarJ.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewPesquisarJ.Location = new Point(5, 41);
-            dataGridViewPesquisarJ.Margin = new Padding(3, 4, 3, 4);
-            dataGridViewPesquisarJ.Name = "dataGridViewPesquisarJ";
-            dataGridViewPesquisarJ.RowHeadersWidth = 51;
-            dataGridViewPesquisarJ.Size = new Size(834, 383);
-            dataGridViewPesquisarJ.TabIndex = 10;
             // 
             // tabPage1
             // 
@@ -958,7 +961,6 @@
         public Button buttonPesquisarJ;
         public Label label2;
         public TextBox textBoxPesquisarJ;
-        public DataGridView dataGridViewPesquisarJ;
         private TabPage tabPage1;
         private RichTextBox richTextBoxObsF;
         private Label label29;
@@ -1023,5 +1025,6 @@
         private Button buttonSalvarAJ;
         private MaskedTextBox maskedTextBoxIDJ;
         private Label label32;
+        private DataGridView dataGridViewPesquisarJ;
     }
 }

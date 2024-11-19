@@ -310,108 +310,94 @@ namespace TCC_SIA.View
 
         private void AtualizarValoresTotais()
         {
-            decimal valorTotalPecas = 0;
-            decimal valorTotalServicos = 0;
-
-            // Calcular o valor total de peças e serviços
-            foreach (DataGridViewRow row in dataGridViewPeca.Rows)
-            {
-                if (Convert.ToBoolean(row.Cells["Selecionar"].Value))
-                {
-                    int quantidadeVezes = Convert.ToInt32(row.Cells["Quant. Vezes"].Value);
-                    decimal valor = Convert.ToDecimal(row.Cells["Valor"].Value);
-                    valorTotalPecas += quantidadeVezes * valor;
-                }
-            }
-
-            foreach (DataGridViewRow row in dataGridViewServico.Rows)
-            {
-                if (Convert.ToBoolean(row.Cells["Selecionar"].Value))
-                {
-                    int quantidadeVezes = Convert.ToInt32(row.Cells["Quant. Vezes"].Value);
-                    decimal valor = Convert.ToDecimal(row.Cells["Valor"].Value);
-                    valorTotalServicos += quantidadeVezes * valor;
-                }
-            }
+            decimal valorTotalPecas = CalcularValorTotal(dataGridViewPeca);
+            decimal valorTotalServicos = CalcularValorTotal(dataGridViewServico);
 
             // Atualiza as MaskedTextBoxes de valores totais
             maskedTextBoxValorTotalPecas.Text = valorTotalPecas.ToString("0.00");
             maskedTextBoxValorTotalServicos.Text = valorTotalServicos.ToString("0.00");
 
-            // Aplicar descontos e calcular o valor total do pedido
-            decimal descontoReais = decimal.TryParse(maskedTextBoxDescontoRPeca.Text, out decimal dr) ? dr : 0;
-            decimal descontoPorcentagemPecas = decimal.TryParse(maskedTextBoxDescontoPPecaDesconto.Text, out decimal dpp) ? dpp / 100 : 0;
-            decimal descontoPorcentagemServicos = decimal.TryParse(maskedTextBoxDescontoPServico.Text, out decimal dps) ? dps / 100 : 0;
+            // Aplicar descontos
+            decimal valorFinalPecas = AplicarDescontosParciais(valorTotalPecas, maskedTextBoxDescontoRPeca, maskedTextBoxDescontoPPecaDesconto);
+            decimal valorFinalServicos = AplicarDescontosParciais(valorTotalServicos, maskedTextBoxDescontoRServico, maskedTextBoxDescontoPServico);
 
-            decimal valorFinalPecas = valorTotalPecas - descontoReais - (valorTotalPecas * descontoPorcentagemPecas);
-            decimal valorFinalServicos = valorTotalServicos - (valorTotalServicos * descontoPorcentagemServicos);
+            // Calcular o valor total final
+            decimal valorTotalPedido = valorFinalPecas + valorFinalServicos;
+
+            // Aplicar descontos gerais no pedido
+            valorTotalPedido -= AplicarDescontosTotais(maskedTextBoxDescontoTotalReais, maskedTextBoxDescontoTotalPorc, valorTotalPedido);
 
             // Atualize o valor total do pedido
-            decimal valorTotalPedido = valorFinalPecas + valorFinalServicos;
             maskedTextBoxValorTotal.Text = valorTotalPedido.ToString("0.00");
+        }
+
+        private decimal CalcularValorTotal(DataGridView dataGridView)
+        {
+            decimal valorTotal = 0;
+
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                // Verifica se a linha está selecionada
+                if (row.Cells["Selecionar"]?.Value is bool isSelected && isSelected)
+                {
+                    int quantidadeVezes = row.Cells["Quant. Vezes"]?.Value != null
+                        ? Convert.ToInt32(row.Cells["Quant. Vezes"].Value)
+                        : 0;
+
+                    decimal valorUnitario = row.Cells["Valor"]?.Value != null
+                        ? Convert.ToDecimal(row.Cells["Valor"].Value)
+                        : 0;
+
+                    valorTotal += quantidadeVezes * valorUnitario;
+                }
+            }
+
+            return valorTotal;
+        }
+
+        private decimal AplicarDescontosParciais(decimal valorTotal, MaskedTextBox descontoReaisBox, MaskedTextBox descontoPorcentagemBox)
+        {
+            decimal descontoReais = decimal.TryParse(descontoReaisBox.Text, out decimal dr) ? dr : 0;
+            decimal descontoPorcentagem = decimal.TryParse(descontoPorcentagemBox.Text, out decimal dp) ? dp / 100 : 0;
+
+            return valorTotal - descontoReais - (valorTotal * descontoPorcentagem);
+        }
+
+        private decimal AplicarDescontosTotais(MaskedTextBox descontoReaisBox, MaskedTextBox descontoPorcentagemBox, decimal valorTotalPedido)
+        {
+            decimal descontoReais = decimal.TryParse(descontoReaisBox.Text, out decimal dr) ? dr : 0;
+            decimal descontoPorcentagem = decimal.TryParse(descontoPorcentagemBox.Text, out decimal dp) ? dp / 100 : 0;
+
+            return descontoReais + (valorTotalPedido * descontoPorcentagem);
         }
 
         private void dataGridViewPeca_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Verifica se a célula clicada é a checkbox "Selecionar"
-            if (e.ColumnIndex == dataGridViewPeca.Columns["Selecionar"].Index)
-            {
-                // Alterna o valor da checkbox
-                DataGridViewCheckBoxCell checkBox = (DataGridViewCheckBoxCell)dataGridViewPeca.Rows[e.RowIndex].Cells["Selecionar"];
-                checkBox.Value = !(Convert.ToBoolean(checkBox.Value));
+            if (e.RowIndex < 0 || e.ColumnIndex != dataGridViewPeca.Columns["Selecionar"].Index) return;
 
-                // Atualiza os valores totais
-                AtualizarValoresTotais();
-            }
+            // Alterna o valor da checkbox
+            var checkBox = (DataGridViewCheckBoxCell)dataGridViewPeca.Rows[e.RowIndex].Cells["Selecionar"];
+            bool isChecked = checkBox.Value != null && Convert.ToBoolean(checkBox.Value);
+            checkBox.Value = !isChecked;
+
+            AtualizarValoresTotais();
         }
 
         private void dataGridViewServico_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Verifica se a célula clicada é a checkbox "Selecionar"
-            if (e.ColumnIndex == dataGridViewServico.Columns["Selecionar"].Index)
-            {
-                // Alterna o valor da checkbox
-                DataGridViewCheckBoxCell checkBox = (DataGridViewCheckBoxCell)dataGridViewServico.Rows[e.RowIndex].Cells["Selecionar"];
-                checkBox.Value = !(Convert.ToBoolean(checkBox.Value));
+            if (e.RowIndex < 0 || e.ColumnIndex != dataGridViewServico.Columns["Selecionar"].Index) return;
 
-                // Atualiza os valores totais
-                AtualizarValoresTotais();
-            }
+            // Alterna o valor da checkbox
+            var checkBox = (DataGridViewCheckBoxCell)dataGridViewServico.Rows[e.RowIndex].Cells["Selecionar"];
+            bool isChecked = checkBox.Value != null && Convert.ToBoolean(checkBox.Value);
+            checkBox.Value = !isChecked;
+
+            AtualizarValoresTotais();
         }
 
 
-
-
-        private void AplicarDescontos(decimal valorTotalPecas, decimal valorTotalServicos)
-        {
-            decimal descontoTotalPecasReal = 0;
-            decimal descontoTotalPecasPorcentagem = 0;
-            decimal.TryParse(maskedTextBoxDescontoRPeca.Text, out descontoTotalPecasReal);
-            decimal.TryParse(maskedTextBoxDescontoPPecaDesconto.Text, out descontoTotalPecasPorcentagem);
-
-            decimal descontoTotalServicosReal = 0;
-            decimal descontoTotalServicosPorcentagem = 0;
-            decimal.TryParse(maskedTextBoxDescontoRServico.Text, out descontoTotalServicosReal);
-            decimal.TryParse(maskedTextBoxDescontoPServico.Text, out descontoTotalServicosPorcentagem);
-
-            decimal descontoTotalPedidoReal = 0;
-            decimal descontoTotalPedidoPorcentagem = 0;
-            decimal.TryParse(maskedTextBoxDescontoTotalReais.Text, out descontoTotalPedidoReal);
-            decimal.TryParse(maskedTextBoxDescontoTotalPorc.Text, out descontoTotalPedidoPorcentagem);
-
-            // Aplicando descontos em porcentagem
-            decimal descontoPecasPorcentagem = valorTotalPecas * (descontoTotalPecasPorcentagem / 100);
-            decimal descontoServicosPorcentagem = valorTotalServicos * (descontoTotalServicosPorcentagem / 100);
-            decimal descontoTotalPedidoPorcentagemTotal = (valorTotalPecas + valorTotalServicos) * (descontoTotalPedidoPorcentagem / 100);
-
-            // Calcule os valores finais aplicando os descontos
-            decimal valorFinalPecas = valorTotalPecas - descontoTotalPecasReal - descontoPecasPorcentagem;
-            decimal valorFinalServicos = valorTotalServicos - descontoTotalServicosReal - descontoServicosPorcentagem;
-            decimal valorTotalPedidoFinal = valorFinalPecas + valorFinalServicos - descontoTotalPedidoReal - descontoTotalPedidoPorcentagemTotal;
-
-            // Atualize o valor total do pedido
-            maskedTextBoxValorTotal.Text = valorTotalPedidoFinal.ToString("0.00");
-        }
 
 
 

@@ -20,8 +20,6 @@ namespace TCC_SIA.View
         {
             InitializeComponent();
 
-            dataGridViewPesquisarJ.Text = p;
-
         }
 
         #region Inicializa o formulário
@@ -72,7 +70,6 @@ namespace TCC_SIA.View
                 "Outro"
             });
             */
-
 
             #region Carrega os dados de pesquisa de serviços
             // Criação do objeto NpgsqlDataReader servico e controleServico
@@ -218,141 +215,9 @@ namespace TCC_SIA.View
                 }
                 #endregion
 
+                buttonPesquisarJ.Click += buttonPesquisarJ_Click;
 
-                #region Carrega os dados de pesquisa de serviços
-                // Criação do objeto NpgsqlDataReader servico e controleServico
-                controleCliente cClienteJ = new controleCliente();
-                NpgsqlDataReader clienteJ = cClienteJ.pesquisarClienteJ(textBoxPesquisarJ.Text);
 
-                // Armazena os estados das checkboxes e os valores de "Quantidade de Vezes" antes de limpar
-                List<bool> checkboxStatesJ = new List<bool>();
-                List<int> quantidadeVezesValuesJ = new List<int>();
-
-                for (int i = 0; i < dataGridViewPesquisarJ.Rows.Count; i++)
-                {
-                    if (!dataGridViewPesquisarJ.Rows[i].IsNewRow)
-                    {
-                        checkboxStates.Add(dataGridViewPesquisarJ.Rows[i].Cells["Selecionar"].Value is bool isChecked && isChecked);
-                    }
-                }
-
-                // Apaga as colunas da datagridview
-                dataGridViewPesquisarJ.Columns.Clear();
-
-                // Desabilitar a adição automática de novas linhas
-                dataGridViewPesquisarJ.AllowUserToAddRows = false;
-
-                // Definindo a quantidade de colunas que a grid terá
-                dataGridViewPesquisarJ.ColumnCount = 14;
-
-                // Definindo as colunas na DataGridView para exibir as descrições
-                dataGridViewPesquisarJ.Columns[0].Name = "Id Cliente";
-                dataGridViewPesquisarJ.Columns[0].ReadOnly = true; // Definindo como somente leitura
-
-                dataGridViewPesquisarJ.Columns[1].Name = "Nome";
-                dataGridViewPesquisarJ.Columns[1].ReadOnly = true; // Definindo como somente leitura
-
-                dataGridViewPesquisarJ.Columns[2].Name = "Email";
-                dataGridViewPesquisarJ.Columns[2].ReadOnly = true; // Definindo como somente leitura
-
-                dataGridViewPesquisarJ.Columns[3].Name = "Data";
-                dataGridViewPesquisarJ.Columns[3].ReadOnly = true; // Definindo como somente leitura
-
-                dataGridViewPesquisarJ.Columns[4].Name = "Status";
-                dataGridViewPesquisarJ.Columns[4].ReadOnly = true; // Definindo como somente leitura
-
-                dataGridViewPesquisarJ.Columns[5].Name = "CNPJ";
-                dataGridViewPesquisarJ.Columns[5].ReadOnly = true; // Definindo como somente leitura
-
-                dataGridViewPesquisarJ.Columns[6].Name = "Razao";
-                dataGridViewPesquisarJ.Columns[6].ReadOnly = true; // Definindo como somente leitura
-
-                dataGridViewPesquisarJ.Columns[7].Name = "Telefone";
-                dataGridViewPesquisarJ.Columns[7].ReadOnly = true; // Definindo como somente leitura
-
-                dataGridViewPesquisarJ.Columns[8].Name = "Numero";
-                dataGridViewPesquisarJ.Columns[8].ReadOnly = true; // Definindo como somente leitura
-
-                dataGridViewPesquisarJ.Columns[9].Name = "Rua";
-                dataGridViewPesquisarJ.Columns[9].ReadOnly = true; // Definindo como somente leitura
-
-                dataGridViewPesquisarJ.Columns[10].Name = "Cidade";
-                dataGridViewPesquisarJ.Columns[10].ReadOnly = true; // Definindo como somente leitura
-
-                dataGridViewPesquisarJ.Columns[11].Name = "Cep";
-                dataGridViewPesquisarJ.Columns[11].ReadOnly = true; // Definindo como somente leitura
-
-                dataGridViewPesquisarJ.Columns[12].Name = "Bairro";
-                dataGridViewPesquisarJ.Columns[12].ReadOnly = true; // Definindo como somente leitura
-
-                dataGridViewPesquisarJ.Columns[13].Name = "Estado";
-                dataGridViewPesquisarJ.Columns[13].ReadOnly = true; // Definindo como somente leitura
-
-                // Criando a coluna de checkbox para marcação (editável)
-                DataGridViewCheckBoxColumn checkBoxColumnJ = new DataGridViewCheckBoxColumn();
-                checkBoxColumnJ.Name = "Selecionar";
-                checkBoxColumnJ.ReadOnly = false; // Deixando a checkbox editável
-                dataGridViewPesquisarJ.Columns.Add(checkBoxColumnJ);
-
-                // Adicionando as descrições dos serviços
-                while (clienteJ.Read())
-                {
-                    string idClienteJ = clienteJ["IDCLIENTE"].ToString();
-                    string nomeClienteJ = clienteJ["NOMECLIENTE"].ToString();
-                    string emailClienteJ = clienteJ["EMAILCLIENTE"].ToString();
-                    string dataJ = clienteJ["DATA"].ToString();
-                    string statusJ = clienteJ["STATUS"].ToString();
-                    string cnpjCliente = clienteJ["CNPJCLIENTE"].ToString();
-                    string razao = clienteJ["RAZAO"].ToString();
-                    string telefoneJ = clienteJ["TELEFONE"].ToString();
-                    string numeroJ = clienteJ["NUMERO"].ToString();
-                    string ruaJ = clienteJ["RUA"].ToString();
-                    string cidadeJ = clienteJ["CIDADE"].ToString();
-                    string cepJ = clienteJ["CEP"].ToString();
-                    string bairroJ = clienteJ["BAIRRO"].ToString();
-                    string estadoJ = clienteJ["ESTADO"].ToString();
-
-                    // Verifique se a linha já existe
-                    bool existsJ = false;
-                    foreach (DataGridViewRow existingRow in dataGridViewPesquisarF.Rows)
-                    {
-                        if (!existingRow.IsNewRow &&
-                            existingRow.Cells["Id Cliente"].Value.ToString() == idClienteJ &&
-                            existingRow.Cells["Nome"].Value.ToString() == nomeClienteJ)
-                        {
-                            existsJ = true;
-                            break;
-                        }
-                    }
-
-                    // Adiciona a nova linha apenas se não existir
-                    if (!existsJ)
-                    {
-                        // Criando a nova linha manualmente
-                        DataGridViewRow row = new DataGridViewRow();
-                        row.CreateCells(dataGridViewPesquisarJ); // Define a grid para onde a linha vai
-
-                        // Preenchendo a linha com os valores
-                        row.Cells[0].Value = idClienteJ;
-                        row.Cells[1].Value = nomeClienteJ;
-                        row.Cells[2].Value = emailClienteJ;
-                        row.Cells[3].Value = dataJ;
-                        row.Cells[4].Value = statusJ;
-                        row.Cells[5].Value = cnpjCliente;
-                        row.Cells[6].Value = razao;
-                        row.Cells[7].Value = telefoneJ;
-                        row.Cells[8].Value = numeroJ;
-                        row.Cells[9].Value = ruaJ;
-                        row.Cells[10].Value = cidadeJ;
-                        row.Cells[11].Value = cepJ;
-                        row.Cells[12].Value = bairroJ;
-                        row.Cells[13].Value = estadoJ;
-                        row.Cells[14].Value = false; // Valor padrão para "Selecionar" (desmarcado)
-
-                        dataGridViewPesquisarJ.Rows.Add(row);
-                    }
-                    #endregion
-                }
             }
         }
         #region Pesquisar cliente
@@ -558,150 +423,6 @@ namespace TCC_SIA.View
         private void buttonPesquisarJ_Click(object sender, EventArgs e)
         {
             #region Pesquisar clientes
-            #region Carrega os dados de pesquisa de serviços
-            // Criação do objeto NpgsqlDataReader servico e controleServico
-            controleCliente cCliente = new controleCliente();
-            NpgsqlDataReader cliente = cCliente.pesquisarClienteF(textBoxPesquisarF.Text);
-
-            // Armazena os estados das checkboxes e os valores de "Quantidade de Vezes" antes de limpar
-            List<bool> checkboxStates = new List<bool>();
-            List<int> quantidadeVezesValues = new List<int>();
-
-            for (int i = 0; i < dataGridViewPesquisarF.Rows.Count; i++)
-            {
-                if (!dataGridViewPesquisarF.Rows[i].IsNewRow)
-                {
-                    checkboxStates.Add(dataGridViewPesquisarF.Rows[i].Cells["Selecionar"].Value is bool isChecked && isChecked);
-                }
-            }
-
-            // Apaga as colunas da datagridview
-            dataGridViewPesquisarF.Columns.Clear();
-
-            // Desabilitar a adição automática de novas linhas
-            dataGridViewPesquisarF.AllowUserToAddRows = false;
-
-            // Definindo a quantidade de colunas que a grid terá
-            dataGridViewPesquisarF.ColumnCount = 16;
-
-            // Definindo as colunas na DataGridView para exibir as descrições
-            dataGridViewPesquisarF.Columns[0].Name = "Id Cliente";
-            dataGridViewPesquisarF.Columns[0].ReadOnly = true; // Definindo como somente leitura
-
-            dataGridViewPesquisarF.Columns[1].Name = "Nome";
-            dataGridViewPesquisarF.Columns[1].ReadOnly = true; // Definindo como somente leitura
-
-            dataGridViewPesquisarF.Columns[2].Name = "Email";
-            dataGridViewPesquisarF.Columns[2].ReadOnly = true; // Definindo como somente leitura
-
-            dataGridViewPesquisarF.Columns[3].Name = "Data";
-            dataGridViewPesquisarF.Columns[3].ReadOnly = true; // Definindo como somente leitura
-
-            dataGridViewPesquisarF.Columns[4].Name = "Status";
-            dataGridViewPesquisarF.Columns[4].ReadOnly = true; // Definindo como somente leitura
-
-            dataGridViewPesquisarF.Columns[5].Name = "CPF";
-            dataGridViewPesquisarF.Columns[5].ReadOnly = true; // Definindo como somente leitura
-
-            dataGridViewPesquisarF.Columns[6].Name = "Data de Nascimento";
-            dataGridViewPesquisarF.Columns[6].ReadOnly = true; // Definindo como somente leitura
-
-            dataGridViewPesquisarF.Columns[7].Name = "Sexo";
-            dataGridViewPesquisarF.Columns[7].ReadOnly = true; // Definindo como somente leitura
-
-            dataGridViewPesquisarF.Columns[8].Name = "Observação";
-            dataGridViewPesquisarF.Columns[8].ReadOnly = true; // Definindo como somente leitura
-
-            dataGridViewPesquisarF.Columns[9].Name = "Telefone";
-            dataGridViewPesquisarF.Columns[9].ReadOnly = true; // Definindo como somente leitura
-
-            dataGridViewPesquisarF.Columns[10].Name = "Numero";
-            dataGridViewPesquisarF.Columns[10].ReadOnly = true; // Definindo como somente leitura
-
-            dataGridViewPesquisarF.Columns[11].Name = "Rua";
-            dataGridViewPesquisarF.Columns[11].ReadOnly = true; // Definindo como somente leitura
-
-            dataGridViewPesquisarF.Columns[12].Name = "Cidade";
-            dataGridViewPesquisarF.Columns[12].ReadOnly = true; // Definindo como somente leitura
-
-            dataGridViewPesquisarF.Columns[13].Name = "Cep";
-            dataGridViewPesquisarF.Columns[13].ReadOnly = true; // Definindo como somente leitura
-
-            dataGridViewPesquisarF.Columns[14].Name = "Bairro";
-            dataGridViewPesquisarF.Columns[14].ReadOnly = true; // Definindo como somente leitura
-
-            dataGridViewPesquisarF.Columns[15].Name = "Estado";
-            dataGridViewPesquisarF.Columns[15].ReadOnly = true; // Definindo como somente leitura
-
-            // Criando a coluna de checkbox para marcação (editável)
-            DataGridViewCheckBoxColumn checkBoxColumn = new DataGridViewCheckBoxColumn();
-            checkBoxColumn.Name = "Selecionar";
-            checkBoxColumn.ReadOnly = false; // Deixando a checkbox editável
-            dataGridViewPesquisarF.Columns.Add(checkBoxColumn);
-
-            // Adicionando as descrições dos serviços
-            while (cliente.Read())
-            {
-                string idCliente = cliente["IDCLIENTE"].ToString();
-                string nomeCliente = cliente["NOMECLIENTE"].ToString();
-                string emailCliente = cliente["EMAILCLIENTE"].ToString();
-                string data = cliente["DATA"].ToString();
-                string status = cliente["STATUS"].ToString();
-                string cpfCliente = cliente["CPFCLIENTE"].ToString();
-                string datanasc_cliente = cliente["DATANASC_CLIENTE"].ToString();
-                string sexo = cliente["SEXO"].ToString();
-                string obs = cliente["OBS"].ToString();
-                string telefone = cliente["TELEFONE"].ToString();
-                string numero = cliente["NUMERO"].ToString();
-                string rua = cliente["RUA"].ToString();
-                string cidade = cliente["CIDADE"].ToString();
-                string cep = cliente["CEP"].ToString();
-                string bairro = cliente["BAIRRO"].ToString();
-                string estado = cliente["ESTADO"].ToString();
-
-                // Verifique se a linha já existe
-                bool exists = false;
-                foreach (DataGridViewRow existingRow in dataGridViewPesquisarF.Rows)
-                {
-                    if (!existingRow.IsNewRow &&
-                        existingRow.Cells["Id Cliente"].Value.ToString() == idCliente &&
-                        existingRow.Cells["Nome"].Value.ToString() == nomeCliente)
-                    {
-                        exists = true;
-                        break;
-                    }
-                }
-
-                // Adiciona a nova linha apenas se não existir
-                if (!exists)
-                {
-                    // Criando a nova linha manualmente
-                    DataGridViewRow row = new DataGridViewRow();
-                    row.CreateCells(dataGridViewPesquisarF); // Define a grid para onde a linha vai
-
-                    // Preenchendo a linha com os valores
-                    row.Cells[0].Value = idCliente;
-                    row.Cells[1].Value = nomeCliente;
-                    row.Cells[2].Value = emailCliente;
-                    row.Cells[3].Value = data;
-                    row.Cells[4].Value = status;
-                    row.Cells[5].Value = cpfCliente;
-                    row.Cells[6].Value = datanasc_cliente;
-                    row.Cells[7].Value = sexo;
-                    row.Cells[8].Value = obs;
-                    row.Cells[9].Value = telefone;
-                    row.Cells[10].Value = numero;
-                    row.Cells[11].Value = rua;
-                    row.Cells[12].Value = cidade;
-                    row.Cells[13].Value = cep;
-                    row.Cells[14].Value = bairro;
-                    row.Cells[15].Value = estado;
-                    row.Cells[16].Value = false; // Valor padrão para "Selecionar" (desmarcado)
-
-                    dataGridViewPesquisarF.Rows.Add(row);
-                }
-                #endregion
-
 
                 #region Carrega os dados de pesquisa de serviços
                 // Criação do objeto NpgsqlDataReader servico e controleServico
@@ -716,7 +437,7 @@ namespace TCC_SIA.View
                 {
                     if (!dataGridViewPesquisarJ.Rows[i].IsNewRow)
                     {
-                        checkboxStates.Add(dataGridViewPesquisarJ.Rows[i].Cells["Selecionar"].Value is bool isChecked && isChecked);
+                        checkboxStatesJ.Add(dataGridViewPesquisarJ.Rows[i].Cells["Selecionar"].Value is bool isChecked && isChecked);
                     }
                 }
 
@@ -727,7 +448,7 @@ namespace TCC_SIA.View
                 dataGridViewPesquisarJ.AllowUserToAddRows = false;
 
                 // Definindo a quantidade de colunas que a grid terá
-                dataGridViewPesquisarJ.ColumnCount = 16;
+                dataGridViewPesquisarJ.ColumnCount = 14;
 
                 // Definindo as colunas na DataGridView para exibir as descrições
                 dataGridViewPesquisarJ.Columns[0].Name = "Id Cliente";
@@ -836,7 +557,7 @@ namespace TCC_SIA.View
                         dataGridViewPesquisarJ.Rows.Add(row);
                     }
                     #endregion
-                }
+                
             }
             #endregion
         }

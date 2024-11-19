@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCC-SIA", "TCC-SIA\TCC-SIA.csproj", "{E337B949-5F60-44CE-843B-D5DB53000F85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCC-SIGO", "TCC-SIA\TCC-SIGO.csproj", "{E337B949-5F60-44CE-843B-D5DB53000F85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
