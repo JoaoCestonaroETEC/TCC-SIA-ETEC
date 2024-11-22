@@ -23,31 +23,68 @@ namespace TCC_SIA.View
             listarMarca();
 
             #region Carrega as informações gerais das peças
-            //Criação do objeto NpgsqlDataReader peca e controlePeca
+            // Criação do objeto NpgsqlDataReader peça e controlePeca
             controlePeca cPeca = new controlePeca();
             NpgsqlDataReader peca = cPeca.listaPeca();
 
-            //Apaga as colunas da datagridview
+            // Armazena os estados das checkboxes antes de limpar
+            List<bool> checkboxStates = new List<bool>();
+
+            for (int i = 0; i < dataGridViewPesquisar.Rows.Count; i++)
+            {
+                if (!dataGridViewPesquisar.Rows[i].IsNewRow)
+                {
+                    checkboxStates.Add(dataGridViewPesquisar.Rows[i].Cells["Selecionar"].Value is bool isChecked && isChecked);
+                }
+            }
+
+            // Apaga as colunas da datagridview
             dataGridViewPesquisar.Columns.Clear();
 
-            //Definindo a quant. de colunas que a grid terá
-            dataGridViewPesquisar.ColumnCount = peca.FieldCount;
+            // Desabilitar a adição automática de novas linhas
+            dataGridViewPesquisar.AllowUserToAddRows = false;
 
-            //Definindo seis colunas na DataGridView para exibir as descrições
+            // Definindo a quantidade de colunas que a grid terá
             dataGridViewPesquisar.ColumnCount = 10;
+
+            // Definindo as colunas na DataGridView para exibir as descrições
             dataGridViewPesquisar.Columns[0].Name = "Id";
+            dataGridViewPesquisar.Columns[0].ReadOnly = true;
+
             dataGridViewPesquisar.Columns[1].Name = "Marca";
+            dataGridViewPesquisar.Columns[1].ReadOnly = true;
+
             dataGridViewPesquisar.Columns[2].Name = "Nome";
+            dataGridViewPesquisar.Columns[2].ReadOnly = true;
+
             dataGridViewPesquisar.Columns[3].Name = "Tipo";
+            dataGridViewPesquisar.Columns[3].ReadOnly = true;
+
             dataGridViewPesquisar.Columns[4].Name = "Valor";
+            dataGridViewPesquisar.Columns[4].ReadOnly = true;
+
             dataGridViewPesquisar.Columns[5].Name = "Quantidade";
+            dataGridViewPesquisar.Columns[5].ReadOnly = true;
+
             dataGridViewPesquisar.Columns[6].Name = "Garantia";
+            dataGridViewPesquisar.Columns[6].ReadOnly = true;
+
             dataGridViewPesquisar.Columns[7].Name = "Unidade";
+            dataGridViewPesquisar.Columns[7].ReadOnly = true;
+
             dataGridViewPesquisar.Columns[8].Name = "Data de Aquisição";
+            dataGridViewPesquisar.Columns[8].ReadOnly = true;
+
             dataGridViewPesquisar.Columns[9].Name = "Fornecedor";
+            dataGridViewPesquisar.Columns[9].ReadOnly = true;
 
+            // Criando a coluna de checkbox para marcação (editável)
+            DataGridViewCheckBoxColumn checkBoxColumn = new DataGridViewCheckBoxColumn();
+            checkBoxColumn.Name = "Selecionar";
+            checkBoxColumn.ReadOnly = false; // Deixando a checkbox editável
+            dataGridViewPesquisar.Columns.Add(checkBoxColumn);
 
-            //Adicionando as descrições de peças
+            // Adicionando as descrições das peças
             while (peca.Read())
             {
                 string idPeca = peca["IDPECA"].ToString();
@@ -61,13 +98,56 @@ namespace TCC_SIA.View
                 string dataAquis = peca["DATA_AQUISICAO"].ToString();
                 string fornecedor = peca["FORNECEDOR"].ToString();
 
-
-                //Consulta o nome da marca pelo id
+                // Consulta o nome da marca pelo id
                 string marca = cPeca.pesquisaMarcaPecaPorId(idMarca);
 
-                dataGridViewPesquisar.Rows.Add(idPeca, marca, nomePeca, tipoPeca, valorPeca, quantPeca, garantiaPeca, unidade, dataAquis, fornecedor);
+                // Verifique se a linha já existe
+                bool exists = false;
+                foreach (DataGridViewRow existingRow in dataGridViewPesquisar.Rows)
+                {
+                    if (!existingRow.IsNewRow &&
+                        existingRow.Cells["Id"].Value.ToString() == idPeca)
+                    {
+                        exists = true;
+                        break;
+                    }
+                }
+
+                // Adiciona a nova linha apenas se não existir
+                if (!exists)
+                {
+                    // Criando a nova linha manualmente
+                    DataGridViewRow row = new DataGridViewRow();
+                    row.CreateCells(dataGridViewPesquisar); // Define a grid para onde a linha vai
+
+                    // Preenchendo a linha com os valores
+                    row.Cells[0].Value = idPeca;
+                    row.Cells[1].Value = marca;
+                    row.Cells[2].Value = nomePeca;
+                    row.Cells[3].Value = tipoPeca;
+                    row.Cells[4].Value = valorPeca;
+                    row.Cells[5].Value = quantPeca;
+                    row.Cells[6].Value = garantiaPeca;
+                    row.Cells[7].Value = unidade;
+                    row.Cells[8].Value = dataAquis;
+                    row.Cells[9].Value = fornecedor;
+                    row.Cells[10].Value = false; // Valor padrão para "Selecionar" (desmarcado)
+
+                    dataGridViewPesquisar.Rows.Add(row);
+                }
+            }
+
+            // Após adicionar novas linhas, restaure os estados das checkboxes
+            for (int i = 0; i < dataGridViewPesquisar.Rows.Count; i++)
+            {
+                if (i < checkboxStates.Count)
+                {
+                    dataGridViewPesquisar.Rows[i].Cells["Selecionar"].Value = checkboxStates[i];
+                }
             }
             #endregion
+
+
         }
         #endregion
 
@@ -75,28 +155,68 @@ namespace TCC_SIA.View
         //Evento de pesquisar peça
         private void buttonPesquisar_Click(object sender, EventArgs e)
         {
-            //Criação do objeto NpgsqlDataReader peca e controlePeca
+            // Criação do objeto NpgsqlDataReader peça e controlePeca
             controlePeca cPeca = new controlePeca();
             NpgsqlDataReader peca = cPeca.pesquisaPeca(textBoxPesquisar.Text);
 
-            //Apaga as colunas da datagridview
+            // Armazena os estados das checkboxes antes de limpar
+            List<bool> checkboxStates = new List<bool>();
+
+            for (int i = 0; i < dataGridViewPesquisar.Rows.Count; i++)
+            {
+                if (!dataGridViewPesquisar.Rows[i].IsNewRow)
+                {
+                    checkboxStates.Add(dataGridViewPesquisar.Rows[i].Cells["Selecionar"].Value is bool isChecked && isChecked);
+                }
+            }
+
+            // Apaga as colunas da datagridview
             dataGridViewPesquisar.Columns.Clear();
 
-            //Definindo a quant. de colunas que a grid terá
-            dataGridViewPesquisar.ColumnCount = peca.FieldCount;
+            // Desabilitar a adição automática de novas linhas
+            dataGridViewPesquisar.AllowUserToAddRows = false;
 
-            //Definindo seis colunas na DataGridView para exibir as descrições
-            dataGridViewPesquisar.ColumnCount = 7;
+            // Definindo a quantidade de colunas que a grid terá
+            dataGridViewPesquisar.ColumnCount = 10;
+
+            // Definindo as colunas na DataGridView para exibir as descrições
             dataGridViewPesquisar.Columns[0].Name = "Id";
+            dataGridViewPesquisar.Columns[0].ReadOnly = true;
+
             dataGridViewPesquisar.Columns[1].Name = "Marca";
+            dataGridViewPesquisar.Columns[1].ReadOnly = true;
+
             dataGridViewPesquisar.Columns[2].Name = "Nome";
+            dataGridViewPesquisar.Columns[2].ReadOnly = true;
+
             dataGridViewPesquisar.Columns[3].Name = "Tipo";
+            dataGridViewPesquisar.Columns[3].ReadOnly = true;
+
             dataGridViewPesquisar.Columns[4].Name = "Valor";
+            dataGridViewPesquisar.Columns[4].ReadOnly = true;
+
             dataGridViewPesquisar.Columns[5].Name = "Quantidade";
+            dataGridViewPesquisar.Columns[5].ReadOnly = true;
+
             dataGridViewPesquisar.Columns[6].Name = "Garantia";
+            dataGridViewPesquisar.Columns[6].ReadOnly = true;
 
+            dataGridViewPesquisar.Columns[7].Name = "Unidade";
+            dataGridViewPesquisar.Columns[7].ReadOnly = true;
 
-            //Adicionando as descrições de peças
+            dataGridViewPesquisar.Columns[8].Name = "Data de Aquisição";
+            dataGridViewPesquisar.Columns[8].ReadOnly = true;
+
+            dataGridViewPesquisar.Columns[9].Name = "Fornecedor";
+            dataGridViewPesquisar.Columns[9].ReadOnly = true;
+
+            // Criando a coluna de checkbox para marcação (editável)
+            DataGridViewCheckBoxColumn checkBoxColumn = new DataGridViewCheckBoxColumn();
+            checkBoxColumn.Name = "Selecionar";
+            checkBoxColumn.ReadOnly = false; // Deixando a checkbox editável
+            dataGridViewPesquisar.Columns.Add(checkBoxColumn);
+
+            // Adicionando as descrições das peças
             while (peca.Read())
             {
                 string idPeca = peca["IDPECA"].ToString();
@@ -110,11 +230,52 @@ namespace TCC_SIA.View
                 string dataAquis = peca["DATA_AQUISICAO"].ToString();
                 string fornecedor = peca["FORNECEDOR"].ToString();
 
-
-                //Consulta o nome da marca pelo id
+                // Consulta o nome da marca pelo id
                 string marca = cPeca.pesquisaMarcaPecaPorId(idMarca);
 
-                dataGridViewPesquisar.Rows.Add(idPeca, marca, nomePeca, tipoPeca, valorPeca, quantPeca, garantiaPeca, unidade, dataAquis, fornecedor);
+                // Verifique se a linha já existe
+                bool exists = false;
+                foreach (DataGridViewRow existingRow in dataGridViewPesquisar.Rows)
+                {
+                    if (!existingRow.IsNewRow &&
+                        existingRow.Cells["Id"].Value.ToString() == idPeca)
+                    {
+                        exists = true;
+                        break;
+                    }
+                }
+
+                // Adiciona a nova linha apenas se não existir
+                if (!exists)
+                {
+                    // Criando a nova linha manualmente
+                    DataGridViewRow row = new DataGridViewRow();
+                    row.CreateCells(dataGridViewPesquisar); // Define a grid para onde a linha vai
+
+                    // Preenchendo a linha com os valores
+                    row.Cells[0].Value = idPeca;
+                    row.Cells[1].Value = marca;
+                    row.Cells[2].Value = nomePeca;
+                    row.Cells[3].Value = tipoPeca;
+                    row.Cells[4].Value = valorPeca;
+                    row.Cells[5].Value = quantPeca;
+                    row.Cells[6].Value = garantiaPeca;
+                    row.Cells[7].Value = unidade;
+                    row.Cells[8].Value = dataAquis;
+                    row.Cells[9].Value = fornecedor;
+                    row.Cells[10].Value = false; // Valor padrão para "Selecionar" (desmarcado)
+
+                    dataGridViewPesquisar.Rows.Add(row);
+                }
+            }
+
+            // Após adicionar novas linhas, restaure os estados das checkboxes
+            for (int i = 0; i < dataGridViewPesquisar.Rows.Count; i++)
+            {
+                if (i < checkboxStates.Count)
+                {
+                    dataGridViewPesquisar.Rows[i].Cells["Selecionar"].Value = checkboxStates[i];
+                }
             }
         }
         #endregion
@@ -208,26 +369,35 @@ namespace TCC_SIA.View
 
         private void btnAtualizar_Click(object sender, EventArgs e)
         {
-            if (dataGridViewPesquisar.SelectedRows.Count > 0)
+            foreach (DataGridViewRow row in dataGridViewPesquisar.Rows)
             {
-                DialogResult res = MessageBox.Show("Deseja atualizar este registro?", "Atualização de registro",
-                    MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-
-                if (res == DialogResult.OK)
+                // Verifica se a linha contém pelo menos 11 células e se a célula "Selecionar" (índice 10) está marcada
+                if (row.Cells.Count > 10 && Convert.ToBoolean(row.Cells[10].Value) == true)
                 {
-                    maskedTextBoxID.Text = dataGridViewPesquisar.CurrentRow.Cells[0].Value.ToString();
-                    textBoxNome.Text = dataGridViewPesquisar.CurrentRow.Cells[1].Value.ToString();
-                    comboBoxTipo.Text = dataGridViewPesquisar.CurrentRow.Cells[2].Value.ToString();
-                    richTextBoxDesc.Text = dataGridViewPesquisar.CurrentRow.Cells[3].Value.ToString();
-                    maskedTextBoxValor.Text = dataGridViewPesquisar.CurrentRow.Cells[4].Value.ToString();
-                    numericUpDownQuant.Text = dataGridViewPesquisar.CurrentRow.Cells[5].Value.ToString();
-                    dateTimePickerGarantia.Value = Convert.ToDateTime(dataGridViewPesquisar.CurrentRow.Cells[6].Value.ToString());
-                    tabControl1.SelectedTab = tabPage2;
+                    DialogResult res = MessageBox.Show("Deseja atualizar este registro?", "Atualização de registro",
+                        MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
+                    if (res == DialogResult.OK)
+                    {
+                        // Atualiza os campos no formulário com base nos valores da DataGridView
+                        maskedTextBoxID.Text = dataGridViewPesquisar.CurrentRow.Cells[0].Value.ToString(); // Id
+                        comboBoxMarca.Text = dataGridViewPesquisar.CurrentRow.Cells[1].Value.ToString(); // Marca
+                        textBoxNome.Text = dataGridViewPesquisar.CurrentRow.Cells[2].Value.ToString(); // Nome
+                        comboBoxTipo.Text = dataGridViewPesquisar.CurrentRow.Cells[3].Value.ToString(); // Tipo
+                        maskedTextBoxValor.Text = dataGridViewPesquisar.CurrentRow.Cells[4].Value.ToString(); // Valor
+                        numericUpDownQuant.Value = Convert.ToDecimal(dataGridViewPesquisar.CurrentRow.Cells[5].Value); // Quantidade
+                        dateTimePickerGarantia.Value = Convert.ToDateTime(dataGridViewPesquisar.CurrentRow.Cells[6].Value.ToString()); // Garantia
+                        numericUpDownUnidade.Text = dataGridViewPesquisar.CurrentRow.Cells[7].Value.ToString(); // Unidade
+                        dateTimePickerAquisicao.Value = Convert.ToDateTime(dataGridViewPesquisar.CurrentRow.Cells[8].Value.ToString()); // Data de Aquisição
+                        comboBoxFornecedor.Text = dataGridViewPesquisar.CurrentRow.Cells[9].Value.ToString(); // Fornecedor
+
+                        // Troca para a aba de edição
+                        tabControl1.SelectedTab = tabPage2;
+                    }
                 }
             }
-        }
 
+        }
         private void btnDeletar_Click(object sender, EventArgs e)
         {
 

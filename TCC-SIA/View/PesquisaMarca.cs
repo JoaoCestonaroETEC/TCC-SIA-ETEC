@@ -47,7 +47,7 @@ namespace TCC_SIA.View
             dataGridViewPesquisar.AllowUserToAddRows = false;
 
             // Definindo a quantidade de colunas que a grid terá
-            dataGridViewPesquisar.ColumnCount = 5;
+            dataGridViewPesquisar.ColumnCount = 4;
 
             // Definindo as colunas na DataGridView para exibir as descrições
             dataGridViewPesquisar.Columns[0].Name = "Id Marca";
@@ -150,7 +150,7 @@ namespace TCC_SIA.View
             NpgsqlDataReader marca = cMarca.pesquisaMarca(textBoxPesquisar.Text);
 
             // Definindo a quantidade de colunas que a grid terá
-            dataGridViewPesquisar.ColumnCount = 5;
+            dataGridViewPesquisar.ColumnCount = 4;
 
             // Definindo as colunas na DataGridView para exibir as descrições
             dataGridViewPesquisar.Columns[0].Name = "Id Marca";
@@ -159,11 +159,11 @@ namespace TCC_SIA.View
             dataGridViewPesquisar.Columns[1].Name = "Nome";
             dataGridViewPesquisar.Columns[1].ReadOnly = true;
 
-            dataGridViewPesquisar.Columns[3].Name = "Descrição";
-            dataGridViewPesquisar.Columns[3].ReadOnly = true;
+            dataGridViewPesquisar.Columns[2].Name = "Descrição";
+            dataGridViewPesquisar.Columns[2].ReadOnly = true;
 
-            dataGridViewPesquisar.Columns[4].Name = "Tipo da Marca";
-            dataGridViewPesquisar.Columns[4].ReadOnly = true;
+            dataGridViewPesquisar.Columns[3].Name = "Tipo da Marca";
+            dataGridViewPesquisar.Columns[3].ReadOnly = true;
 
             // Criando a coluna de checkbox para marcação (editável)
             DataGridViewCheckBoxColumn checkBoxColumn = new DataGridViewCheckBoxColumn();
@@ -315,7 +315,7 @@ namespace TCC_SIA.View
             foreach (DataGridViewRow row in dataGridViewPesquisar.Rows)
             {
                 // Verifica se a linha contém pelo menos 6 células e se a célula "Selecionar" (índice 5) está marcada
-                if (row.Cells.Count > 5 && Convert.ToBoolean(row.Cells[5].Value) == true)
+                if (row.Cells.Count > 4 && Convert.ToBoolean(row.Cells[4].Value) == true)
                 {
                     DialogResult res = MessageBox.Show("Deseja atualizar este registro?", "Atualização de registro",
                         MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);

@@ -34,10 +34,16 @@
             // 
             // dataGridViewPesquisar
             // 
+            dataGridViewPesquisar.AllowUserToAddRows = false;
+            dataGridViewPesquisar.AllowUserToDeleteRows = false;
+            dataGridViewPesquisar.AllowUserToResizeColumns = false;
+            dataGridViewPesquisar.AllowUserToResizeRows = false;
             dataGridViewPesquisar.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewPesquisar.Location = new Point(12, 13);
             dataGridViewPesquisar.Margin = new Padding(3, 4, 3, 4);
+            dataGridViewPesquisar.MultiSelect = false;
             dataGridViewPesquisar.Name = "dataGridViewPesquisar";
+            dataGridViewPesquisar.RowHeadersVisible = false;
             dataGridViewPesquisar.RowHeadersWidth = 51;
             dataGridViewPesquisar.Size = new Size(786, 486);
             dataGridViewPesquisar.TabIndex = 20;

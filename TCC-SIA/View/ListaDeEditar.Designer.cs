@@ -49,6 +49,7 @@
             button6.TabIndex = 11;
             button6.Text = "Pedido";
             button6.UseVisualStyleBackColor = false;
+            button6.Click += button6_Click;
             // 
             // button5
             // 
@@ -63,6 +64,7 @@
             button5.TabIndex = 10;
             button5.Text = "Veículo";
             button5.UseVisualStyleBackColor = false;
+            button5.Click += button5_Click;
             // 
             // button4
             // 
@@ -77,6 +79,7 @@
             button4.TabIndex = 9;
             button4.Text = "Peça";
             button4.UseVisualStyleBackColor = false;
+            button4.Click += button4_Click;
             // 
             // button3
             // 
@@ -91,6 +94,7 @@
             button3.TabIndex = 8;
             button3.Text = "Serviço";
             button3.UseVisualStyleBackColor = false;
+            button3.Click += button3_Click;
             // 
             // button2
             // 
@@ -105,6 +109,7 @@
             button2.TabIndex = 7;
             button2.Text = "Marca";
             button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // button1
             // 
@@ -119,6 +124,7 @@
             button1.TabIndex = 6;
             button1.Text = "Cliente";
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // ListaDeEditar
             // 
@@ -133,6 +139,7 @@
             Controls.Add(button2);
             Controls.Add(button1);
             Name = "ListaDeEditar";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "ListaDeEditar";
             ResumeLayout(false);
         }

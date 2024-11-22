@@ -146,5 +146,17 @@ namespace TCC_SIA.View
         {
 
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            ListaDeCadastrar formPeça = new ListaDeCadastrar();
+            formPeça.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ListaDeEditar formPeça = new ListaDeEditar();
+            formPeça.Show();
+        }
     }
 }
