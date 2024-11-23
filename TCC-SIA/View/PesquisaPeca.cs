@@ -45,7 +45,7 @@ namespace TCC_SIA.View
             dataGridViewPesquisar.AllowUserToAddRows = false;
 
             // Definindo a quantidade de colunas que a grid terá
-            dataGridViewPesquisar.ColumnCount = 10;
+            dataGridViewPesquisar.ColumnCount = 11;
 
             // Definindo as colunas na DataGridView para exibir as descrições
             dataGridViewPesquisar.Columns[0].Name = "Id";
@@ -78,6 +78,9 @@ namespace TCC_SIA.View
             dataGridViewPesquisar.Columns[9].Name = "Fornecedor";
             dataGridViewPesquisar.Columns[9].ReadOnly = true;
 
+            dataGridViewPesquisar.Columns[10].Name = "Descrição";
+            dataGridViewPesquisar.Columns[10].ReadOnly = true;
+
             // Criando a coluna de checkbox para marcação (editável)
             DataGridViewCheckBoxColumn checkBoxColumn = new DataGridViewCheckBoxColumn();
             checkBoxColumn.Name = "Selecionar";
@@ -97,6 +100,7 @@ namespace TCC_SIA.View
                 string unidade = peca["UNIDADE"].ToString();
                 string dataAquis = peca["DATA_AQUISICAO"].ToString();
                 string fornecedor = peca["FORNECEDOR"].ToString();
+                string descricao = peca["DESCPECA"].ToString();
 
                 // Consulta o nome da marca pelo id
                 string marca = cPeca.pesquisaMarcaPecaPorId(idMarca);
@@ -131,7 +135,8 @@ namespace TCC_SIA.View
                     row.Cells[7].Value = unidade;
                     row.Cells[8].Value = dataAquis;
                     row.Cells[9].Value = fornecedor;
-                    row.Cells[10].Value = false; // Valor padrão para "Selecionar" (desmarcado)
+                    row.Cells[10].Value = descricao;
+                    row.Cells[11].Value = false; // Valor padrão para "Selecionar" (desmarcado)
 
                     dataGridViewPesquisar.Rows.Add(row);
                 }
@@ -177,7 +182,7 @@ namespace TCC_SIA.View
             dataGridViewPesquisar.AllowUserToAddRows = false;
 
             // Definindo a quantidade de colunas que a grid terá
-            dataGridViewPesquisar.ColumnCount = 10;
+            dataGridViewPesquisar.ColumnCount = 11;
 
             // Definindo as colunas na DataGridView para exibir as descrições
             dataGridViewPesquisar.Columns[0].Name = "Id";
@@ -210,6 +215,9 @@ namespace TCC_SIA.View
             dataGridViewPesquisar.Columns[9].Name = "Fornecedor";
             dataGridViewPesquisar.Columns[9].ReadOnly = true;
 
+            dataGridViewPesquisar.Columns[10].Name = "Descrição";
+            dataGridViewPesquisar.Columns[10].ReadOnly = true;
+
             // Criando a coluna de checkbox para marcação (editável)
             DataGridViewCheckBoxColumn checkBoxColumn = new DataGridViewCheckBoxColumn();
             checkBoxColumn.Name = "Selecionar";
@@ -229,6 +237,7 @@ namespace TCC_SIA.View
                 string unidade = peca["UNIDADE"].ToString();
                 string dataAquis = peca["DATA_AQUISICAO"].ToString();
                 string fornecedor = peca["FORNECEDOR"].ToString();
+                string descricao = peca["DESCPECA"].ToString();
 
                 // Consulta o nome da marca pelo id
                 string marca = cPeca.pesquisaMarcaPecaPorId(idMarca);
@@ -263,7 +272,8 @@ namespace TCC_SIA.View
                     row.Cells[7].Value = unidade;
                     row.Cells[8].Value = dataAquis;
                     row.Cells[9].Value = fornecedor;
-                    row.Cells[10].Value = false; // Valor padrão para "Selecionar" (desmarcado)
+                    row.Cells[10].Value = descricao;
+                    row.Cells[11].Value = false; // Valor padrão para "Selecionar" (desmarcado)
 
                     dataGridViewPesquisar.Rows.Add(row);
                 }
@@ -372,7 +382,7 @@ namespace TCC_SIA.View
             foreach (DataGridViewRow row in dataGridViewPesquisar.Rows)
             {
                 // Verifica se a linha contém pelo menos 11 células e se a célula "Selecionar" (índice 10) está marcada
-                if (row.Cells.Count > 10 && Convert.ToBoolean(row.Cells[10].Value) == true)
+                if (row.Cells.Count > 11 && Convert.ToBoolean(row.Cells[11].Value) == true)
                 {
                     DialogResult res = MessageBox.Show("Deseja atualizar este registro?", "Atualização de registro",
                         MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
@@ -390,6 +400,7 @@ namespace TCC_SIA.View
                         numericUpDownUnidade.Text = dataGridViewPesquisar.CurrentRow.Cells[7].Value.ToString(); // Unidade
                         dateTimePickerAquisicao.Value = Convert.ToDateTime(dataGridViewPesquisar.CurrentRow.Cells[8].Value.ToString()); // Data de Aquisição
                         comboBoxFornecedor.Text = dataGridViewPesquisar.CurrentRow.Cells[9].Value.ToString(); // Fornecedor
+                        richTextBoxDesc.Text = dataGridViewPesquisar.CurrentRow.Cells[10].Value.ToString();
 
                         // Troca para a aba de edição
                         tabControl1.SelectedTab = tabPage2;

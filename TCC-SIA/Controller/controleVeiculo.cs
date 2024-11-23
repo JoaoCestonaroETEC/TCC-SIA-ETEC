@@ -411,7 +411,7 @@ namespace TCC_SIA.Controller
 
         public string deletarVeiculo(Veiculo mVeiculo)
         {
-            // Obtém o ID da MARCA usando o método getter
+            // Obtém o ID do VEICULO usando o método getter
             long idVeiculo = mVeiculo.getIdVeiculo();
 
             try
@@ -430,31 +430,63 @@ namespace TCC_SIA.Controller
                     {
                         try
                         {
-                            // Deleta os registros da tabela MARCA
-                            string sqlDeleteVeiculo = "DELETE FROM VEICULO WHERE IDVEICULO = @IDVEICULO;";
+                            // Exclusões relacionadas ao PEDIDO usando o ID do VEICULO
+                            string sqlDeletePedidoPeca = @"
+                    DELETE FROM Pedido_Peca 
+                    WHERE idPedido IN (
+                        SELECT idPedido FROM Pedido WHERE idVeiculo = @idVeiculo
+                    );";
+                            using (var cmdPeca = new NpgsqlCommand(sqlDeletePedidoPeca, conn))
+                            {
+                                cmdPeca.Parameters.AddWithValue("@idVeiculo", idVeiculo);
+                                cmdPeca.ExecuteNonQuery();
+                            }
+
+                            string sqlDeletePedidoServico = @"
+                    DELETE FROM Pedido_Servico 
+                    WHERE idPedido IN (
+                        SELECT idPedido FROM Pedido WHERE idVeiculo = @idVeiculo
+                    );";
+                            using (var cmdServico = new NpgsqlCommand(sqlDeletePedidoServico, conn))
+                            {
+                                cmdServico.Parameters.AddWithValue("@idVeiculo", idVeiculo);
+                                cmdServico.ExecuteNonQuery();
+                            }
+
+                            string sqlDeletePedido = @"
+                    DELETE FROM Pedido 
+                    WHERE idVeiculo = @idVeiculo;";
+                            using (var cmdPedido = new NpgsqlCommand(sqlDeletePedido, conn))
+                            {
+                                cmdPedido.Parameters.AddWithValue("@idVeiculo", idVeiculo);
+                                cmdPedido.ExecuteNonQuery();
+                            }
+
+                            // Exclusão do VEICULO usando o ID
+                            string sqlDeleteVeiculo = @"
+                    DELETE FROM VEICULO 
+                    WHERE idVeiculo = @idVeiculo;";
                             using (var cmdVeiculo = new NpgsqlCommand(sqlDeleteVeiculo, conn))
                             {
-                                cmdVeiculo.Parameters.AddWithValue("@IDVEICULO", idVeiculo);
+                                cmdVeiculo.Parameters.AddWithValue("@idVeiculo", idVeiculo);
                                 int rowsAffected = cmdVeiculo.ExecuteNonQuery();
 
-                                // Verifica se a marca foi excluída
-                                if (rowsAffected > 0)
+                                // Verifica se o veículo foi excluído
+                                if (rowsAffected <= 0)
                                 {
-                                    // Confirma a transação
-                                    transaction.Commit();
-                                    return $"Marca com ID {idVeiculo} excluída com sucesso.";
-                                }
-                                else
-                                {
-                                    throw new Exception("Nenhuma marca encontrada com o ID fornecido.");
+                                    throw new Exception("Nenhum veículo encontrado com o ID fornecido.");
                                 }
                             }
+
+                            // Confirma a transação
+                            transaction.Commit();
+                            return $"Pedidos e veículo com ID {idVeiculo} excluídos com sucesso.";
                         }
                         catch (Exception ex)
                         {
                             // Reverte a transação em caso de erro
                             transaction.Rollback();
-                            return "Erro ao excluir marca: " + ex.Message;
+                            return "Erro ao excluir registros: " + ex.Message;
                         }
                     }
                 }
@@ -463,6 +495,7 @@ namespace TCC_SIA.Controller
             {
                 return "Erro ao conectar ao banco de dados: " + ex.Message;
             }
+
         }
     }
 }

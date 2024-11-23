@@ -375,47 +375,51 @@ namespace TCC_SIA.View
 
         private void AtualizarClienteF(object sender, EventArgs e)
         {
-            if (dataGridViewPesquisarF.SelectedRows.Count > 0)
+            foreach (DataGridViewRow row in dataGridViewPesquisarF.Rows)
             {
-                DialogResult res = MessageBox.Show("Deseja atualizar este registro?", "Atualização de registro",
-                    MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-
-                if (res == DialogResult.OK)
+                // Verifica se a linha contém pelo menos 11 células e se a célula "Selecionar" (índice 10) está marcada
+                if (row.Cells.Count > 16 && Convert.ToBoolean(row.Cells[16].Value) == true)
                 {
-                    maskedID.Text = dataGridViewPesquisarF.CurrentRow.Cells[0].Value.ToString();
+                    DialogResult res = MessageBox.Show("Deseja atualizar este registro?", "Atualização de registro",
+                        MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
-                    maskedTextBoxCPFF.Text = dataGridViewPesquisarF.CurrentRow.Cells[1].Value.ToString();
+                    if (res == DialogResult.OK)
+                    {
 
-                    textBoxNomeF.Text = dataGridViewPesquisarF.CurrentRow.Cells[2].Value.ToString();
+                        maskedID.Text = dataGridViewPesquisarF.CurrentRow.Cells[0].Value.ToString();
 
-                    maskedTextBoxEmailF.Text = dataGridViewPesquisarF.CurrentRow.Cells[3].Value.ToString();
+                        textBoxNomeF.Text = dataGridViewPesquisarF.CurrentRow.Cells[1].Value.ToString();
 
-                    dateTimePickerNascF.Value = Convert.ToDateTime(dataGridViewPesquisarF.CurrentRow.Cells[4].Value.ToString());
+                        maskedTextBoxEmailF.Text = dataGridViewPesquisarF.CurrentRow.Cells[2].Value.ToString();
 
-                    comboBoxSexoF.Text = dataGridViewPesquisarF.CurrentRow.Cells[5].Value.ToString();
+                        dateTimePickerDataF.Value = Convert.ToDateTime(dataGridViewPesquisarF.CurrentRow.Cells[3].Value.ToString());
 
-                    maskedTextBoxTelefoneF.Text = dataGridViewPesquisarF.CurrentRow.Cells[6].Value.ToString();
+                        comboBoxStatusF.SelectedIndex = comboBoxStatusF.FindStringExact(dataGridViewPesquisarF.CurrentRow.Cells[4].Value.ToString());
 
-                    maskedTextBoxNumeroF.Text = dataGridViewPesquisarF.CurrentRow.Cells[7].Value.ToString();
+                        maskedTextBoxCPFF.Text = dataGridViewPesquisarF.CurrentRow.Cells[5].Value.ToString();
 
-                    textBoxRuaF.Text = dataGridViewPesquisarF.CurrentRow.Cells[8].Value.ToString();
+                        dateTimePickerNascF.Value = Convert.ToDateTime(dataGridViewPesquisarF.CurrentRow.Cells[6].Value.ToString());
 
-                    textBoxCidadeF.Text = dataGridViewPesquisarF.CurrentRow.Cells[9].Value.ToString();
+                        comboBoxSexoF.Text = dataGridViewPesquisarF.CurrentRow.Cells[7].Value.ToString();
 
-                    maskedTextBoxCepF.Text = dataGridViewPesquisarF.CurrentRow.Cells[10].Value.ToString();
+                        richTextBoxObsF.Text = dataGridViewPesquisarF.CurrentRow.Cells[8].Value.ToString();
 
-                    textBoxBairroF.Text = dataGridViewPesquisarF.CurrentRow.Cells[11].Value.ToString();
+                        maskedTextBoxTelefoneF.Text = dataGridViewPesquisarF.CurrentRow.Cells[9].Value.ToString();
 
-                    comboBoxUfF.SelectedIndex = comboBoxUfF.FindStringExact(dataGridViewPesquisarF.CurrentRow.Cells[12].Value.ToString());
+                        maskedTextBoxNumeroF.Text = dataGridViewPesquisarF.CurrentRow.Cells[10].Value.ToString();
 
-                    comboBoxStatusF.SelectedIndex = comboBoxStatusF.FindStringExact(dataGridViewPesquisarF.CurrentRow.Cells[13].Value.ToString());
+                        textBoxRuaF.Text = dataGridViewPesquisarF.CurrentRow.Cells[11].Value.ToString();
 
-                    dateTimePickerDataF.Value = Convert.ToDateTime(dataGridViewPesquisarF.CurrentRow.Cells[14].Value.ToString());
+                        textBoxCidadeF.Text = dataGridViewPesquisarF.CurrentRow.Cells[12].Value.ToString();
 
-                    richTextBoxObsF.Text = dataGridViewPesquisarF.CurrentRow.Cells[15].Value.ToString();
+                        maskedTextBoxCepF.Text = dataGridViewPesquisarF.CurrentRow.Cells[13].Value.ToString();
 
-                    tabControlPesquisarClientes.SelectedTab = tabPage1;
+                        textBoxBairroF.Text = dataGridViewPesquisarF.CurrentRow.Cells[14].Value.ToString();
 
+                        comboBoxUfF.SelectedIndex = comboBoxUfF.FindStringExact(dataGridViewPesquisarF.CurrentRow.Cells[15].Value.ToString());
+
+                        tabControlPesquisarClientes.SelectedTab = tabPage1;
+                    }
                 }
             }
         }
@@ -424,140 +428,140 @@ namespace TCC_SIA.View
         {
             #region Pesquisar clientes
 
-                #region Carrega os dados de pesquisa de serviços
-                // Criação do objeto NpgsqlDataReader servico e controleServico
-                controleCliente cClienteJ = new controleCliente();
-                NpgsqlDataReader clienteJ = cClienteJ.pesquisarClienteJ(textBoxPesquisarJ.Text);
+            #region Carrega os dados de pesquisa de serviços
+            // Criação do objeto NpgsqlDataReader servico e controleServico
+            controleCliente cClienteJ = new controleCliente();
+            NpgsqlDataReader clienteJ = cClienteJ.pesquisarClienteJ(textBoxPesquisarJ.Text);
 
-                // Armazena os estados das checkboxes e os valores de "Quantidade de Vezes" antes de limpar
-                List<bool> checkboxStatesJ = new List<bool>();
-                List<int> quantidadeVezesValuesJ = new List<int>();
+            // Armazena os estados das checkboxes e os valores de "Quantidade de Vezes" antes de limpar
+            List<bool> checkboxStatesJ = new List<bool>();
+            List<int> quantidadeVezesValuesJ = new List<int>();
 
-                for (int i = 0; i < dataGridViewPesquisarJ.Rows.Count; i++)
+            for (int i = 0; i < dataGridViewPesquisarJ.Rows.Count; i++)
+            {
+                if (!dataGridViewPesquisarJ.Rows[i].IsNewRow)
                 {
-                    if (!dataGridViewPesquisarJ.Rows[i].IsNewRow)
+                    checkboxStatesJ.Add(dataGridViewPesquisarJ.Rows[i].Cells["Selecionar"].Value is bool isChecked && isChecked);
+                }
+            }
+
+            // Apaga as colunas da datagridview
+            dataGridViewPesquisarJ.Columns.Clear();
+
+            // Desabilitar a adição automática de novas linhas
+            dataGridViewPesquisarJ.AllowUserToAddRows = false;
+
+            // Definindo a quantidade de colunas que a grid terá
+            dataGridViewPesquisarJ.ColumnCount = 14;
+
+            // Definindo as colunas na DataGridView para exibir as descrições
+            dataGridViewPesquisarJ.Columns[0].Name = "Id Cliente";
+            dataGridViewPesquisarJ.Columns[0].ReadOnly = true; // Definindo como somente leitura
+
+            dataGridViewPesquisarJ.Columns[1].Name = "Nome";
+            dataGridViewPesquisarJ.Columns[1].ReadOnly = true; // Definindo como somente leitura
+
+            dataGridViewPesquisarJ.Columns[2].Name = "Email";
+            dataGridViewPesquisarJ.Columns[2].ReadOnly = true; // Definindo como somente leitura
+
+            dataGridViewPesquisarJ.Columns[3].Name = "Data";
+            dataGridViewPesquisarJ.Columns[3].ReadOnly = true; // Definindo como somente leitura
+
+            dataGridViewPesquisarJ.Columns[4].Name = "Status";
+            dataGridViewPesquisarJ.Columns[4].ReadOnly = true; // Definindo como somente leitura
+
+            dataGridViewPesquisarJ.Columns[5].Name = "CNPJ";
+            dataGridViewPesquisarJ.Columns[5].ReadOnly = true; // Definindo como somente leitura
+
+            dataGridViewPesquisarJ.Columns[6].Name = "Razao";
+            dataGridViewPesquisarJ.Columns[6].ReadOnly = true; // Definindo como somente leitura
+
+            dataGridViewPesquisarJ.Columns[7].Name = "Telefone";
+            dataGridViewPesquisarJ.Columns[7].ReadOnly = true; // Definindo como somente leitura
+
+            dataGridViewPesquisarJ.Columns[8].Name = "Numero";
+            dataGridViewPesquisarJ.Columns[8].ReadOnly = true; // Definindo como somente leitura
+
+            dataGridViewPesquisarJ.Columns[9].Name = "Rua";
+            dataGridViewPesquisarJ.Columns[9].ReadOnly = true; // Definindo como somente leitura
+
+            dataGridViewPesquisarJ.Columns[10].Name = "Cidade";
+            dataGridViewPesquisarJ.Columns[10].ReadOnly = true; // Definindo como somente leitura
+
+            dataGridViewPesquisarJ.Columns[11].Name = "Cep";
+            dataGridViewPesquisarJ.Columns[11].ReadOnly = true; // Definindo como somente leitura
+
+            dataGridViewPesquisarJ.Columns[12].Name = "Bairro";
+            dataGridViewPesquisarJ.Columns[12].ReadOnly = true; // Definindo como somente leitura
+
+            dataGridViewPesquisarJ.Columns[13].Name = "Estado";
+            dataGridViewPesquisarJ.Columns[13].ReadOnly = true; // Definindo como somente leitura
+
+            // Criando a coluna de checkbox para marcação (editável)
+            DataGridViewCheckBoxColumn checkBoxColumnJ = new DataGridViewCheckBoxColumn();
+            checkBoxColumnJ.Name = "Selecionar";
+            checkBoxColumnJ.ReadOnly = false; // Deixando a checkbox editável
+            dataGridViewPesquisarJ.Columns.Add(checkBoxColumnJ);
+
+            // Adicionando as descrições dos serviços
+            while (clienteJ.Read())
+            {
+                string idClienteJ = clienteJ["IDCLIENTE"].ToString();
+                string nomeClienteJ = clienteJ["NOMECLIENTE"].ToString();
+                string emailClienteJ = clienteJ["EMAILCLIENTE"].ToString();
+                string dataJ = clienteJ["DATA"].ToString();
+                string statusJ = clienteJ["STATUS"].ToString();
+                string cnpjCliente = clienteJ["CNPJCLIENTE"].ToString();
+                string razao = clienteJ["RAZAO"].ToString();
+                string telefoneJ = clienteJ["TELEFONE"].ToString();
+                string numeroJ = clienteJ["NUMERO"].ToString();
+                string ruaJ = clienteJ["RUA"].ToString();
+                string cidadeJ = clienteJ["CIDADE"].ToString();
+                string cepJ = clienteJ["CEP"].ToString();
+                string bairroJ = clienteJ["BAIRRO"].ToString();
+                string estadoJ = clienteJ["ESTADO"].ToString();
+
+                // Verifique se a linha já existe
+                bool existsJ = false;
+                foreach (DataGridViewRow existingRow in dataGridViewPesquisarJ.Rows)
+                {
+                    if (!existingRow.IsNewRow &&
+                        existingRow.Cells["Id Cliente"].Value.ToString() == idClienteJ &&
+                        existingRow.Cells["Nome"].Value.ToString() == nomeClienteJ)
                     {
-                        checkboxStatesJ.Add(dataGridViewPesquisarJ.Rows[i].Cells["Selecionar"].Value is bool isChecked && isChecked);
+                        existsJ = true;
+                        break;
                     }
                 }
 
-                // Apaga as colunas da datagridview
-                dataGridViewPesquisarJ.Columns.Clear();
-
-                // Desabilitar a adição automática de novas linhas
-                dataGridViewPesquisarJ.AllowUserToAddRows = false;
-
-                // Definindo a quantidade de colunas que a grid terá
-                dataGridViewPesquisarJ.ColumnCount = 14;
-
-                // Definindo as colunas na DataGridView para exibir as descrições
-                dataGridViewPesquisarJ.Columns[0].Name = "Id Cliente";
-                dataGridViewPesquisarJ.Columns[0].ReadOnly = true; // Definindo como somente leitura
-
-                dataGridViewPesquisarJ.Columns[1].Name = "Nome";
-                dataGridViewPesquisarJ.Columns[1].ReadOnly = true; // Definindo como somente leitura
-
-                dataGridViewPesquisarJ.Columns[2].Name = "Email";
-                dataGridViewPesquisarJ.Columns[2].ReadOnly = true; // Definindo como somente leitura
-
-                dataGridViewPesquisarJ.Columns[3].Name = "Data";
-                dataGridViewPesquisarJ.Columns[3].ReadOnly = true; // Definindo como somente leitura
-
-                dataGridViewPesquisarJ.Columns[4].Name = "Status";
-                dataGridViewPesquisarJ.Columns[4].ReadOnly = true; // Definindo como somente leitura
-
-                dataGridViewPesquisarJ.Columns[5].Name = "CNPJ";
-                dataGridViewPesquisarJ.Columns[5].ReadOnly = true; // Definindo como somente leitura
-
-                dataGridViewPesquisarJ.Columns[6].Name = "Razao";
-                dataGridViewPesquisarJ.Columns[6].ReadOnly = true; // Definindo como somente leitura
-
-                dataGridViewPesquisarJ.Columns[7].Name = "Telefone";
-                dataGridViewPesquisarJ.Columns[7].ReadOnly = true; // Definindo como somente leitura
-
-                dataGridViewPesquisarJ.Columns[8].Name = "Numero";
-                dataGridViewPesquisarJ.Columns[8].ReadOnly = true; // Definindo como somente leitura
-
-                dataGridViewPesquisarJ.Columns[9].Name = "Rua";
-                dataGridViewPesquisarJ.Columns[9].ReadOnly = true; // Definindo como somente leitura
-
-                dataGridViewPesquisarJ.Columns[10].Name = "Cidade";
-                dataGridViewPesquisarJ.Columns[10].ReadOnly = true; // Definindo como somente leitura
-
-                dataGridViewPesquisarJ.Columns[11].Name = "Cep";
-                dataGridViewPesquisarJ.Columns[11].ReadOnly = true; // Definindo como somente leitura
-
-                dataGridViewPesquisarJ.Columns[12].Name = "Bairro";
-                dataGridViewPesquisarJ.Columns[12].ReadOnly = true; // Definindo como somente leitura
-
-                dataGridViewPesquisarJ.Columns[13].Name = "Estado";
-                dataGridViewPesquisarJ.Columns[13].ReadOnly = true; // Definindo como somente leitura
-
-                // Criando a coluna de checkbox para marcação (editável)
-                DataGridViewCheckBoxColumn checkBoxColumnJ = new DataGridViewCheckBoxColumn();
-                checkBoxColumnJ.Name = "Selecionar";
-                checkBoxColumnJ.ReadOnly = false; // Deixando a checkbox editável
-                dataGridViewPesquisarJ.Columns.Add(checkBoxColumnJ);
-
-                // Adicionando as descrições dos serviços
-                while (clienteJ.Read())
+                // Adiciona a nova linha apenas se não existir
+                if (!existsJ)
                 {
-                    string idClienteJ = clienteJ["IDCLIENTE"].ToString();
-                    string nomeClienteJ = clienteJ["NOMECLIENTE"].ToString();
-                    string emailClienteJ = clienteJ["EMAILCLIENTE"].ToString();
-                    string dataJ = clienteJ["DATA"].ToString();
-                    string statusJ = clienteJ["STATUS"].ToString();
-                    string cnpjCliente = clienteJ["CNPJCLIENTE"].ToString();
-                    string razao = clienteJ["RAZAO"].ToString();
-                    string telefoneJ = clienteJ["TELEFONE"].ToString();
-                    string numeroJ = clienteJ["NUMERO"].ToString();
-                    string ruaJ = clienteJ["RUA"].ToString();
-                    string cidadeJ = clienteJ["CIDADE"].ToString();
-                    string cepJ = clienteJ["CEP"].ToString();
-                    string bairroJ = clienteJ["BAIRRO"].ToString();
-                    string estadoJ = clienteJ["ESTADO"].ToString();
+                    // Criando a nova linha manualmente
+                    DataGridViewRow row = new DataGridViewRow();
+                    row.CreateCells(dataGridViewPesquisarJ); // Define a grid para onde a linha vai
 
-                    // Verifique se a linha já existe
-                    bool existsJ = false;
-                    foreach (DataGridViewRow existingRow in dataGridViewPesquisarJ.Rows)
-                    {
-                        if (!existingRow.IsNewRow &&
-                            existingRow.Cells["Id Cliente"].Value.ToString() == idClienteJ &&
-                            existingRow.Cells["Nome"].Value.ToString() == nomeClienteJ)
-                        {
-                            existsJ = true;
-                            break;
-                        }
-                    }
+                    // Preenchendo a linha com os valores
+                    row.Cells[0].Value = idClienteJ;
+                    row.Cells[1].Value = nomeClienteJ;
+                    row.Cells[2].Value = emailClienteJ;
+                    row.Cells[3].Value = dataJ;
+                    row.Cells[4].Value = statusJ;
+                    row.Cells[5].Value = cnpjCliente;
+                    row.Cells[6].Value = razao;
+                    row.Cells[7].Value = telefoneJ;
+                    row.Cells[8].Value = numeroJ;
+                    row.Cells[9].Value = ruaJ;
+                    row.Cells[10].Value = cidadeJ;
+                    row.Cells[11].Value = cepJ;
+                    row.Cells[12].Value = bairroJ;
+                    row.Cells[13].Value = estadoJ;
+                    row.Cells[14].Value = false; // Valor padrão para "Selecionar" (desmarcado)
 
-                    // Adiciona a nova linha apenas se não existir
-                    if (!existsJ)
-                    {
-                        // Criando a nova linha manualmente
-                        DataGridViewRow row = new DataGridViewRow();
-                        row.CreateCells(dataGridViewPesquisarJ); // Define a grid para onde a linha vai
+                    dataGridViewPesquisarJ.Rows.Add(row);
+                }
+                #endregion
 
-                        // Preenchendo a linha com os valores
-                        row.Cells[0].Value = idClienteJ;
-                        row.Cells[1].Value = nomeClienteJ;
-                        row.Cells[2].Value = emailClienteJ;
-                        row.Cells[3].Value = dataJ;
-                        row.Cells[4].Value = statusJ;
-                        row.Cells[5].Value = cnpjCliente;
-                        row.Cells[6].Value = razao;
-                        row.Cells[7].Value = telefoneJ;
-                        row.Cells[8].Value = numeroJ;
-                        row.Cells[9].Value = ruaJ;
-                        row.Cells[10].Value = cidadeJ;
-                        row.Cells[11].Value = cepJ;
-                        row.Cells[12].Value = bairroJ;
-                        row.Cells[13].Value = estadoJ;
-                        row.Cells[14].Value = false; // Valor padrão para "Selecionar" (desmarcado)
-
-                        dataGridViewPesquisarJ.Rows.Add(row);
-                    }
-                    #endregion
-                
             }
             #endregion
         }
@@ -668,46 +672,52 @@ namespace TCC_SIA.View
 
         private void AtualizaClienteJ(object sender, EventArgs e)
         {
-
-            if (dataGridViewPesquisarJ.SelectedRows.Count > 0)
+            foreach (DataGridViewRow row in dataGridViewPesquisarJ.Rows)
             {
-                DialogResult res = MessageBox.Show("Deseja atualizar este registro?", "Atualização de registro",
-                    MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-
-                if (res == DialogResult.OK)
+                // Verifica se a linha contém pelo menos 11 células e se a célula "Selecionar" (índice 10) está marcada
+                if (row.Cells.Count > 14 && Convert.ToBoolean(row.Cells[14].Value) == true)
                 {
-                    maskedTextBoxIDJ.Text = dataGridViewPesquisarJ.CurrentRow.Cells[0].Value.ToString();
+                    DialogResult res = MessageBox.Show("Deseja atualizar este registro?", "Atualização de registro",
+                        MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
-                    maskedTextBoxCNPJ.Text = dataGridViewPesquisarJ.CurrentRow.Cells[1].Value.ToString();
+                    if (res == DialogResult.OK)
+                    {
 
-                    textBoxNomeJ.Text = dataGridViewPesquisarJ.CurrentRow.Cells[2].Value.ToString();
+                        maskedTextBoxIDJ.Text = dataGridViewPesquisarJ.CurrentRow.Cells[0].Value.ToString();
 
-                    maskedTextBoxEmailJ.Text = dataGridViewPesquisarJ.CurrentRow.Cells[3].Value.ToString();
+                        textBoxNomeJ.Text = dataGridViewPesquisarJ.CurrentRow.Cells[1].Value.ToString();
 
-                    maskedTextBoxTelefoneJ.Text = dataGridViewPesquisarJ.CurrentRow.Cells[4].Value.ToString();
+                        maskedTextBoxEmailJ.Text = dataGridViewPesquisarJ.CurrentRow.Cells[2].Value.ToString();
 
-                    maskedTextBoxNumeroJ.Text = dataGridViewPesquisarJ.CurrentRow.Cells[5].Value.ToString();
+                        dateTimePickerDataJ.Value = Convert.ToDateTime(dataGridViewPesquisarJ.CurrentRow.Cells[3].Value.ToString());
 
-                    textBoxRuaJ.Text = dataGridViewPesquisarJ.CurrentRow.Cells[6].Value.ToString();
+                        comboBoxStatusJ.SelectedIndex = comboBoxStatusF.FindStringExact(dataGridViewPesquisarJ.CurrentRow.Cells[4].Value.ToString());
 
-                    textBoxCidadeJ.Text = dataGridViewPesquisarJ.CurrentRow.Cells[7].Value.ToString();
+                        maskedTextBoxCNPJ.Text = dataGridViewPesquisarJ.CurrentRow.Cells[5].Value.ToString();
 
-                    maskedTextBoxCepJ.Text = dataGridViewPesquisarJ.CurrentRow.Cells[8].Value.ToString();
+                        richTextBoxRazao.Text = dataGridViewPesquisarJ.CurrentRow.Cells[6].Value.ToString();
 
-                    textBoxBairroJ.Text = dataGridViewPesquisarJ.CurrentRow.Cells[9].Value.ToString();
+                        maskedTextBoxTelefoneJ.Text = dataGridViewPesquisarJ.CurrentRow.Cells[7].Value.ToString();
 
-                    comboBoxUfJ.SelectedIndex = comboBoxUfF.FindStringExact(dataGridViewPesquisarJ.CurrentRow.Cells[10].Value.ToString());
+                        maskedTextBoxNumeroJ.Text = dataGridViewPesquisarJ.CurrentRow.Cells[8].Value.ToString();
 
-                    comboBoxStatusJ.SelectedIndex = comboBoxStatusF.FindStringExact(dataGridViewPesquisarJ.CurrentRow.Cells[11].Value.ToString());
+                        textBoxRuaJ.Text = dataGridViewPesquisarJ.CurrentRow.Cells[9].Value.ToString();
 
-                    dateTimePickerDataJ.Value = Convert.ToDateTime(dataGridViewPesquisarJ.CurrentRow.Cells[12].Value.ToString());
+                        textBoxCidadeJ.Text = dataGridViewPesquisarJ.CurrentRow.Cells[10].Value.ToString();
 
-                    richTextBoxRazao.Text = dataGridViewPesquisarJ.CurrentRow.Cells[13].Value.ToString();
+                        maskedTextBoxCepJ.Text = dataGridViewPesquisarJ.CurrentRow.Cells[11].Value.ToString();
 
-                    tabControlPesquisarClientes.SelectedTab = tabPage2;
+                        textBoxBairroJ.Text = dataGridViewPesquisarJ.CurrentRow.Cells[12].Value.ToString();
+
+                        comboBoxUfJ.SelectedIndex = comboBoxUfF.FindStringExact(dataGridViewPesquisarJ.CurrentRow.Cells[13].Value.ToString());
+
+                        // Troca para a aba de edição
+                        tabControlPesquisarClientes.SelectedTab = tabPage2;
+                    }
                 }
             }
         }
+
 
         private void btnDeletarF_Click(object sender, EventArgs e)
         {
@@ -793,6 +803,23 @@ namespace TCC_SIA.View
             else
             {
                 MessageBox.Show("Please select at least one order to delete.");
+            }
+        }
+
+
+        private bool programmaticSelection = false;
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+
+            // Impede que a aba 'tabPage1' seja selecionada ao clicar
+            if (tabControlPesquisarClientes.SelectedTab == tabPage1)
+            {
+                // Cancela a seleção da aba (recoloca a aba anterior selecionada)
+                tabControlPesquisarClientes.SelectedTab = null;
+
+                // Exibe uma mensagem, se desejado
+                MessageBox.Show("Esta aba está desativada para seleção manual.");
             }
         }
     }

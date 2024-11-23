@@ -459,7 +459,7 @@
             tabPageJuridica.Location = new Point(4, 29);
             tabPageJuridica.Name = "tabPageJuridica";
             tabPageJuridica.Padding = new Padding(3);
-            tabPageJuridica.Size = new Size(1010, 363);
+            tabPageJuridica.Size = new Size(989, 363);
             tabPageJuridica.TabIndex = 1;
             tabPageJuridica.Text = "Pessoa Jurídica";
             tabPageJuridica.UseVisualStyleBackColor = true;
@@ -528,10 +528,10 @@
             // 
             // maskedTextBoxNumeroJ
             // 
-            maskedTextBoxNumeroJ.Location = new Point(405, 19);
+            maskedTextBoxNumeroJ.Location = new Point(418, 19);
             maskedTextBoxNumeroJ.Margin = new Padding(3, 4, 3, 4);
             maskedTextBoxNumeroJ.Name = "maskedTextBoxNumeroJ";
-            maskedTextBoxNumeroJ.Size = new Size(171, 27);
+            maskedTextBoxNumeroJ.Size = new Size(158, 27);
             maskedTextBoxNumeroJ.TabIndex = 87;
             maskedTextBoxNumeroJ.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
@@ -630,9 +630,9 @@
             label23.AutoSize = true;
             label23.Location = new Point(288, 23);
             label23.Name = "label23";
-            label23.Size = new Size(120, 20);
+            label23.Size = new Size(124, 20);
             label23.TabIndex = 75;
-            label23.Text = "Numero da casa:";
+            label23.Text = "Número do local:";
             // 
             // maskedTextBoxTelefoneJ
             // 

@@ -470,7 +470,6 @@ namespace TCC_SIA.Controller
 
         public string DeletarClienteF(Cliente mClienteF)
         {
-
             // Obtém o ID do CLIENTE usando o método getter
             long idCliente = mClienteF.getIdCliente();
 
@@ -490,7 +489,49 @@ namespace TCC_SIA.Controller
                     {
                         try
                         {
-                            // Deleta os registros da tabela CLIENTE_TELEFONE
+                            // Exclusões relacionadas ao PEDIDO usando o ID do CLIENTE
+                            string sqlDeletePedidoPeca = @"
+                    DELETE FROM Pedido_Peca 
+                    WHERE idPedido IN (
+                        SELECT idPedido FROM Pedido WHERE idCliente = @idCliente
+                    );";
+                            using (var cmdPeca = new NpgsqlCommand(sqlDeletePedidoPeca, conn))
+                            {
+                                cmdPeca.Parameters.AddWithValue("@idCliente", idCliente);
+                                cmdPeca.ExecuteNonQuery();
+                            }
+
+                            string sqlDeletePedidoServico = @"
+                    DELETE FROM Pedido_Servico 
+                    WHERE idPedido IN (
+                        SELECT idPedido FROM Pedido WHERE idCliente = @idCliente
+                    );";
+                            using (var cmdServico = new NpgsqlCommand(sqlDeletePedidoServico, conn))
+                            {
+                                cmdServico.Parameters.AddWithValue("@idCliente", idCliente);
+                                cmdServico.ExecuteNonQuery();
+                            }
+
+                            string sqlDeletePedido = @"
+                    DELETE FROM Pedido 
+                    WHERE idCliente = @idCliente;";
+                            using (var cmdPedido = new NpgsqlCommand(sqlDeletePedido, conn))
+                            {
+                                cmdPedido.Parameters.AddWithValue("@idCliente", idCliente);
+                                cmdPedido.ExecuteNonQuery();
+                            }
+
+                            // Exclusões relacionadas ao VEICULO usando o ID do CLIENTE
+                            string sqlDeleteVeiculo = @"
+                    DELETE FROM VEICULO 
+                    WHERE idCliente = @idCliente;";
+                            using (var cmdVeiculo = new NpgsqlCommand(sqlDeleteVeiculo, conn))
+                            {
+                                cmdVeiculo.Parameters.AddWithValue("@idCliente", idCliente);
+                                cmdVeiculo.ExecuteNonQuery();
+                            }
+
+                            // Exclusões relacionadas ao CLIENTE
                             string sqlDeleteTelefone = "DELETE FROM CLIENTE_TELEFONE WHERE IDCLIENTE = @IDCLIENTE;";
                             using (var cmdTelefone = new NpgsqlCommand(sqlDeleteTelefone, conn))
                             {
@@ -498,7 +539,6 @@ namespace TCC_SIA.Controller
                                 cmdTelefone.ExecuteNonQuery();
                             }
 
-                            // Deleta os registros da tabela CLIENTE_ENDERECO
                             string sqlDeleteEndereco = "DELETE FROM CLIENTE_ENDERECO WHERE IDCLIENTE = @IDCLIENTE;";
                             using (var cmdEndereco = new NpgsqlCommand(sqlDeleteEndereco, conn))
                             {
@@ -506,7 +546,6 @@ namespace TCC_SIA.Controller
                                 cmdEndereco.ExecuteNonQuery();
                             }
 
-                            // Deleta os registros da tabela CLIENTE_F
                             string sqlDeleteClienteF = "DELETE FROM CLIENTE_F WHERE IDCLIENTE = @IDCLIENTE;";
                             using (var cmdClienteF = new NpgsqlCommand(sqlDeleteClienteF, conn))
                             {
@@ -514,30 +553,27 @@ namespace TCC_SIA.Controller
                                 cmdClienteF.ExecuteNonQuery();
                             }
 
-                            // Deleta o registro principal da tabela CLIENTE
                             string sqlDeleteCliente = "DELETE FROM CLIENTE WHERE IDCLIENTE = @IDCLIENTE;";
                             using (var cmdCliente = new NpgsqlCommand(sqlDeleteCliente, conn))
                             {
                                 cmdCliente.Parameters.AddWithValue("@IDCLIENTE", idCliente);
-                                int rowsAffected = cmdCliente.ExecuteNonQuery();
+                                int rowsCliente = cmdCliente.ExecuteNonQuery();
 
-                                // Verifica se o cliente foi excluído
-                                if (rowsAffected > 0)
-                                {
-                                    transaction.Commit();
-                                    return "Cliente e registros relacionados excluídos com sucesso.";
-                                }
-                                else
+                                if (rowsCliente <= 0)
                                 {
                                     throw new Exception("Nenhum cliente encontrado com o ID fornecido.");
                                 }
                             }
+
+                            // Confirma a transação
+                            transaction.Commit();
+                            return "Cliente, pedidos, veículos e registros relacionados excluídos com sucesso.";
                         }
                         catch (Exception ex)
                         {
                             // Reverte a transação em caso de erro
                             transaction.Rollback();
-                            return "Erro ao excluir cliente: " + ex.Message;
+                            return "Erro ao excluir registros: " + ex.Message;
                         }
                     }
                 }
@@ -546,7 +582,6 @@ namespace TCC_SIA.Controller
             {
                 return "Erro ao conectar ao banco de dados: " + ex.Message;
             }
-
         }
 
         public string DeletarClienteJ(Cliente mClienteJ)
@@ -570,7 +605,49 @@ namespace TCC_SIA.Controller
                     {
                         try
                         {
-                            // Deleta os registros da tabela CLIENTE_TELEFONE
+                            // Exclusões relacionadas ao PEDIDO usando o ID do CLIENTE
+                            string sqlDeletePedidoPeca = @"
+                    DELETE FROM Pedido_Peca 
+                    WHERE idPedido IN (
+                        SELECT idPedido FROM Pedido WHERE idCliente = @idCliente
+                    );";
+                            using (var cmdPeca = new NpgsqlCommand(sqlDeletePedidoPeca, conn))
+                            {
+                                cmdPeca.Parameters.AddWithValue("@idCliente", idCliente);
+                                cmdPeca.ExecuteNonQuery();
+                            }
+
+                            string sqlDeletePedidoServico = @"
+                    DELETE FROM Pedido_Servico 
+                    WHERE idPedido IN (
+                        SELECT idPedido FROM Pedido WHERE idCliente = @idCliente
+                    );";
+                            using (var cmdServico = new NpgsqlCommand(sqlDeletePedidoServico, conn))
+                            {
+                                cmdServico.Parameters.AddWithValue("@idCliente", idCliente);
+                                cmdServico.ExecuteNonQuery();
+                            }
+
+                            string sqlDeletePedido = @"
+                    DELETE FROM Pedido 
+                    WHERE idCliente = @idCliente;";
+                            using (var cmdPedido = new NpgsqlCommand(sqlDeletePedido, conn))
+                            {
+                                cmdPedido.Parameters.AddWithValue("@idCliente", idCliente);
+                                cmdPedido.ExecuteNonQuery();
+                            }
+
+                            // Exclusões relacionadas ao VEICULO usando o ID do CLIENTE
+                            string sqlDeleteVeiculo = @"
+                    DELETE FROM VEICULO 
+                    WHERE idCliente = @idCliente;";
+                            using (var cmdVeiculo = new NpgsqlCommand(sqlDeleteVeiculo, conn))
+                            {
+                                cmdVeiculo.Parameters.AddWithValue("@idCliente", idCliente);
+                                cmdVeiculo.ExecuteNonQuery();
+                            }
+
+                            // Exclusões relacionadas ao CLIENTE
                             string sqlDeleteTelefone = "DELETE FROM CLIENTE_TELEFONE WHERE IDCLIENTE = @IDCLIENTE;";
                             using (var cmdTelefone = new NpgsqlCommand(sqlDeleteTelefone, conn))
                             {
@@ -578,7 +655,6 @@ namespace TCC_SIA.Controller
                                 cmdTelefone.ExecuteNonQuery();
                             }
 
-                            // Deleta os registros da tabela CLIENTE_ENDERECO
                             string sqlDeleteEndereco = "DELETE FROM CLIENTE_ENDERECO WHERE IDCLIENTE = @IDCLIENTE;";
                             using (var cmdEndereco = new NpgsqlCommand(sqlDeleteEndereco, conn))
                             {
@@ -586,7 +662,6 @@ namespace TCC_SIA.Controller
                                 cmdEndereco.ExecuteNonQuery();
                             }
 
-                            // Deleta os registros da tabela CLIENTE_J
                             string sqlDeleteClienteJ = "DELETE FROM CLIENTE_J WHERE IDCLIENTE = @IDCLIENTE;";
                             using (var cmdClienteJ = new NpgsqlCommand(sqlDeleteClienteJ, conn))
                             {
@@ -594,30 +669,27 @@ namespace TCC_SIA.Controller
                                 cmdClienteJ.ExecuteNonQuery();
                             }
 
-                            // Deleta o registro principal da tabela CLIENTE
                             string sqlDeleteCliente = "DELETE FROM CLIENTE WHERE IDCLIENTE = @IDCLIENTE;";
                             using (var cmdCliente = new NpgsqlCommand(sqlDeleteCliente, conn))
                             {
                                 cmdCliente.Parameters.AddWithValue("@IDCLIENTE", idCliente);
-                                int rowsAffected = cmdCliente.ExecuteNonQuery();
+                                int rowsCliente = cmdCliente.ExecuteNonQuery();
 
-                                // Verifica se o cliente foi excluído
-                                if (rowsAffected > 0)
-                                {
-                                    transaction.Commit();
-                                    return "Cliente e registros relacionados excluídos com sucesso.";
-                                }
-                                else
+                                if (rowsCliente <= 0)
                                 {
                                     throw new Exception("Nenhum cliente encontrado com o ID fornecido.");
                                 }
                             }
+
+                            // Confirma a transação
+                            transaction.Commit();
+                            return "Cliente, pedidos, veículos e registros relacionados excluídos com sucesso.";
                         }
                         catch (Exception ex)
                         {
                             // Reverte a transação em caso de erro
                             transaction.Rollback();
-                            return "Erro ao excluir cliente: " + ex.Message;
+                            return "Erro ao excluir registros: " + ex.Message;
                         }
                     }
                 }
@@ -626,7 +698,6 @@ namespace TCC_SIA.Controller
             {
                 return "Erro ao conectar ao banco de dados: " + ex.Message;
             }
-
         }
     }
 }
