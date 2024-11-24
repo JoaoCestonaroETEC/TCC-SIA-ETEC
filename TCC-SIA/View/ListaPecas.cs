@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TCC_SIA.Controller;
+using TCC_SIA.Model;
 
 namespace TCC_SIA.View
 {
@@ -25,6 +26,17 @@ namespace TCC_SIA.View
             // Criação do objeto NpgsqlDataReader servico e controleServico
             controlePedido cMarca = new controlePedido();
             NpgsqlDataReader marca = cMarca.listarPecas(idPedido);
+
+            // Armazena os estados das checkboxes antes de limpar
+            List<bool> checkboxStates = new List<bool>();
+
+            for (int i = 0; i < dataGridViewPesquisar.Rows.Count; i++)
+            {
+                if (!dataGridViewPesquisar.Rows[i].IsNewRow)
+                {
+                    checkboxStates.Add(dataGridViewPesquisar.Rows[i].Cells["Selecionar"].Value is bool isChecked && isChecked);
+                }
+            }
 
             // Apaga as colunas da datagridview
             dataGridViewPesquisar.Columns.Clear();
@@ -75,6 +87,13 @@ namespace TCC_SIA.View
             dataGridViewPesquisar.Columns[12].Name = "Quant. De Vezes";
             dataGridViewPesquisar.Columns[12].ReadOnly = true; // Definindo como somente leitura
 
+
+            // Criando a coluna de checkbox para marcação (editável)
+            DataGridViewCheckBoxColumn checkBoxColumn = new DataGridViewCheckBoxColumn();
+            checkBoxColumn.Name = "Selecionar";
+            checkBoxColumn.ReadOnly = false; // Deixando a checkbox editável
+            dataGridViewPesquisar.Columns.Add(checkBoxColumn);
+
             // Adicionando as descrições dos serviços
             while (marca.Read())
             {
@@ -110,11 +129,67 @@ namespace TCC_SIA.View
                 row.Cells[10].Value = marca["DATA_AQUISICAO"].ToString();
                 row.Cells[11].Value = marca["FORNECEDOR"].ToString();
                 row.Cells[12].Value = marca["QUANTVEZES"].ToString();
+                row.Cells[13].Value = false; // Valor padrão para "Selecionar" (desmarcado)
 
                 dataGridViewPesquisar.Rows.Add(row);
-                
+
+
+                // Após adicionar novas linhas, restaure os estados das checkboxes
+                for (int i = 0; i < dataGridViewPesquisar.Rows.Count; i++)
+                {
+                    if (i < checkboxStates.Count)
+                    {
+                        dataGridViewPesquisar.Rows[i].Cells["Selecionar"].Value = checkboxStates[i];
+                    }
+                }
+                #endregion
+
             }
-            #endregion
         }
+
+        private void buttonDeletar_Click(object sender, EventArgs e)
+        {
+            // Lista para armazenar os IDs dos pedidos a serem deletados
+            List<long> pecasParaDeletar = new List<long>();
+
+            // Percorrer todas as linhas do DataGridView
+            foreach (DataGridViewRow row in dataGridViewPesquisar.Rows)
+            {
+                // Verifica se a checkbox está marcada na linha
+                bool isSelected = Convert.ToBoolean(row.Cells["Selecionar"].Value);
+
+                if (isSelected)
+                {
+                    // Recupera o ID do pedido da linha
+                    long idPedido = Convert.ToInt64(row.Cells["Id Pedido"].Value);
+                    pecasParaDeletar.Add(idPedido);
+                }
+            }
+
+            if (pecasParaDeletar.Count > 0)
+            {
+                // Inicializa o controlePedido para acessar o método de deletação
+                controlePedido cPedido = new controlePedido();
+
+                // Deletar cada pedido selecionado
+                foreach (long idPedido in pecasParaDeletar)
+                {
+                    Pedido mPedido = new Pedido();
+                    mPedido.setIdPedido(idPedido);
+
+                    // Chama o método para deletar o pedido
+                    string resultMessage = cPedido.deletarPedidoP(mPedido);
+
+                    // Exibe o resultado da exclusão
+                    MessageBox.Show(resultMessage);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Porfavor selecione algo para deletar");
+            }
+        }
+
+      
     }
 }

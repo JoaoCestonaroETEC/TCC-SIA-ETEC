@@ -264,11 +264,12 @@ namespace TCC_SIA.Controller
 
         public string deletarMarca(Marca mMarca)
         {
-            // Obtém o ID da MARCA usando o método getter
+            // Get the ID from the Peca object using its getter method
             long idMarca = mMarca.getIdMarca();
 
             try
             {
+                // Using the conexaoBD class to establish a connection
                 // Inicializa a conexão com o banco de dados
                 conexaoBD conexao = new conexaoBD();
                 using (NpgsqlConnection conn = conexao.conectar())
@@ -283,39 +284,38 @@ namespace TCC_SIA.Controller
                     {
                         try
                         {
-                            // Deleta os registros da tabela MARCA
-                            string sqlDeleteMarca = "DELETE FROM MARCA WHERE IDMARCA = @IDMARCA;";
-                            using (var cmdMarca = new NpgsqlCommand(sqlDeleteMarca, conn))
-                            {
-                                cmdMarca.Parameters.AddWithValue("@IDMARCA", idMarca);
-                                int rowsAffected = cmdMarca.ExecuteNonQuery();
 
-                                // Verifica se a marca foi excluída
-                                if (rowsAffected > 0)
-                                {
-                                    // Confirma a transação
-                                    transaction.Commit();
-                                    return $"Marca com ID {idMarca} excluída com sucesso.";
-                                }
-                                else
-                                {
-                                    throw new Exception("Nenhuma marca encontrada com o ID fornecido.");
-                                }
+                            // Exclusão da Marca se a Peça relacionada à Marca for excluída (assumindo que a Marca está associada à Peça)
+                            string sqlDeleteMarca = @"
+                            DELETE FROM MARCA 
+                            WHERE idMarca = @idMarca;";
+                            using (var cmdMarcaDelete = new NpgsqlCommand(sqlDeleteMarca, conn))
+                            {
+                                cmdMarcaDelete.Parameters.AddWithValue("@idMarca", idMarca);
+                                cmdMarcaDelete.ExecuteNonQuery();
                             }
+
+                            // Confirma a transação
+                            transaction.Commit();
+                            return $"Marca com ID {idMarca} deletada com sucesso!.";
                         }
                         catch (Exception ex)
                         {
                             // Reverte a transação em caso de erro
                             transaction.Rollback();
-                            return "Erro ao excluir marca: " + ex.Message;
+                            return "Erro ao excluir registros relacionados à peça e marca: " + ex.Message;
                         }
                     }
                 }
+
+
             }
             catch (Exception ex)
             {
-                return "Erro ao conectar ao banco de dados: " + ex.Message;
+                // Return an error message if an exception occurs
+                return "Error deleting part: " + ex.Message;
             }
+        
         }
     }
 }

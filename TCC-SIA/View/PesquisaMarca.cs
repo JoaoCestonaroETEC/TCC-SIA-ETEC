@@ -358,6 +358,7 @@ namespace TCC_SIA.View
             {
                 // Inicializa o controlePedido para acessar o método de deletação
                 controleMarca cMarca = new controleMarca();
+                
 
                 // Deletar cada pedido selecionado
                 foreach (long idMarca in marcasParaDeletar)
@@ -367,6 +368,7 @@ namespace TCC_SIA.View
 
                     // Chama o método para deletar o pedido
                     string resultMessage = cMarca.deletarMarca(mMarca);
+
 
                     // Exibe o resultado da exclusão
                     MessageBox.Show(resultMessage);
