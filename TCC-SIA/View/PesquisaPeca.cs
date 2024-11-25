@@ -388,11 +388,16 @@ namespace TCC_SIA.View
             mPeca.setNomePeca(textBoxNome.Text);
             mPeca.setTipoPeca(comboBoxTipo.Text);
             mPeca.setDescPeca(richTextBoxDesc.Text);
+<<<<<<< HEAD
             decimal valor;
             if (decimal.TryParse(maskedTextBoxValor.Text, out valor))
             {
                 mPeca.setValorPeca(valor);
             }
+=======
+            mPeca.setFornecedor(comboBoxFornecedor.Text);
+            mPeca.setValorPeca(Convert.ToInt32(maskedTextBoxValor.Text));
+>>>>>>> deae05ff8a6420e700280864cfe569a1ea72a801
             mPeca.setQuantPeca(Convert.ToInt32(numericUpDownQuant.Text));
             mPeca.setGarantiaPeca(Convert.ToDateTime(dateTimePickerGarantia.Text));
 
@@ -438,37 +443,44 @@ namespace TCC_SIA.View
         private void btnDeletar_Click(object sender, EventArgs e)
         {
 
-            // Ensure a row is selected
-            if (dataGridViewPesquisar.SelectedRows.Count > 0)
+            // Lista para armazenar os IDs dos pedidos a serem deletados
+            List<long> pecasParaDeletar = new List<long>();
+
+            // Percorrer todas as linhas do DataGridView
+            foreach (DataGridViewRow row in dataGridViewPesquisar.Rows)
             {
-                // Get the selected row
-                DataGridViewRow selectedRow = dataGridViewPesquisar.SelectedRows[0];
+                // Verifica se a checkbox está marcada na linha
+                bool isSelected = Convert.ToBoolean(row.Cells["Selecionar"].Value);
 
-                // Retrieve the ID of the item to delete and set it in mPeca
-                long idPeca = Convert.ToInt64(selectedRow.Cells["Id"].Value);
-
-                // Create instances of controlePeca and Peca
-                controlePeca cPeca = new controlePeca();
-                Peca mPeca = new Peca();
-                mPeca.setIdPeca(idPeca);  // Set the ID using the setter method
-
-                // Call the delete method on controlePeca
-                string result = cPeca.deletarPeca(mPeca);
-
-                if (result == "Part deleted successfully.")
+                if (isSelected)
                 {
-                    // Remove the row from the DataGridView
-                    dataGridViewPesquisar.Rows.Remove(selectedRow);
-                    MessageBox.Show("Item deleted successfully.");
+                    // Recupera o ID do pedido da linha
+                    long idPeca = Convert.ToInt64(row.Cells["Id"].Value);
+                    pecasParaDeletar.Add(idPeca);
                 }
-                else
+            }
+
+            if (pecasParaDeletar.Count > 0)
+            {
+                // Inicializa o controlePedido para acessar o método de deletação
+                controlePeca cPeca = new controlePeca();
+
+                // Deletar cada pedido selecionado
+                foreach (int idPeca in pecasParaDeletar)
                 {
-                    MessageBox.Show(result); // Display any error messages returned by deletarPeca
+                    Peca mPeca = new Peca();
+                    mPeca.setIdPeca(idPeca);
+
+                    // Chama o método para deletar o pedido
+                    string resultMessage = cPeca.deletarPeca(mPeca);
+
+                    // Exibe o resultado da exclusão
+                    MessageBox.Show(resultMessage);
                 }
             }
             else
             {
-                MessageBox.Show("Please select a row to delete.");
+                MessageBox.Show("Please select at least one order to delete.");
             }
 
         }

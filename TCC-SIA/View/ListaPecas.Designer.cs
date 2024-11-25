@@ -45,7 +45,7 @@
             dataGridViewPesquisar.Name = "dataGridViewPesquisar";
             dataGridViewPesquisar.RowHeadersVisible = false;
             dataGridViewPesquisar.RowHeadersWidth = 51;
-            dataGridViewPesquisar.Size = new Size(786, 486);
+            dataGridViewPesquisar.Size = new Size(790, 486);
             dataGridViewPesquisar.TabIndex = 20;
             // 
             // ListaPecas

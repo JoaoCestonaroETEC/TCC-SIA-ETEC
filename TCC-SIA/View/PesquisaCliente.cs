@@ -805,23 +805,6 @@ namespace TCC_SIA.View
                 MessageBox.Show("Please select at least one order to delete.");
             }
         }
-
-
-        private bool programmaticSelection = false;
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
-
-            // Impede que a aba 'tabPage1' seja selecionada ao clicar
-            if (tabControlPesquisarClientes.SelectedTab == tabPage1)
-            {
-                // Cancela a seleção da aba (recoloca a aba anterior selecionada)
-                tabControlPesquisarClientes.SelectedTab = null;
-
-                // Exibe uma mensagem, se desejado
-                MessageBox.Show("Esta aba está desativada para seleção manual.");
-            }
-        }
     }
 }
 #endregion

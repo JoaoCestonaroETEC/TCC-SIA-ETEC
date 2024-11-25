@@ -318,36 +318,83 @@ namespace TCC_SIA.Controller
             try
             {
                 // Using the conexaoBD class to establish a connection
+                // Inicializa a conexão com o banco de dados
                 conexaoBD conexao = new conexaoBD();
                 using (NpgsqlConnection conn = conexao.conectar())
                 {
                     if (conn == null)
                     {
-                        return "Failed to connect to the database.";
+                        return "Falha ao conectar ao banco de dados.";
                     }
 
-                    // SQL query to delete the part based on its ID
-                    string query = "DELETE FROM Peca WHERE idPeca = @idPeca";
-
-                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, conn))
+                    // Inicia uma transação para garantir que todas as exclusões ocorram ou nenhuma seja aplicada
+                    using (var transaction = conn.BeginTransaction())
                     {
-                        // Add the ID parameter to the SQL command
-                        cmd.Parameters.AddWithValue("@idPeca", idPeca);
-
-                        // Execute the delete command and check if a row was affected
-                        int rowsAffected = cmd.ExecuteNonQuery();
-
-                        // Return success or error message based on the result
-                        if (rowsAffected > 0)
+                        try
                         {
-                            return "Part deleted successfully.";
+                            // Exclusões relacionadas à Pedido_Peca usando o ID da Peça
+                            string sqlDeletePedidoPeca = @"
+                            DELETE FROM Pedido_Peca 
+                            WHERE idPeca = @idPeca;";
+                            using (var cmdPeca = new NpgsqlCommand(sqlDeletePedidoPeca, conn))
+                            {
+                                cmdPeca.Parameters.AddWithValue("@idPeca", idPeca);
+                                cmdPeca.ExecuteNonQuery();
+                            }
+
+                            // Exclusões relacionadas ao Pedido_Servico usando o ID da Peça (caso haja ligação entre a peça e o serviço)
+                            string sqlDeletePedidoServico = @"
+                            DELETE FROM Pedido_Servico 
+                            WHERE idPedido IN (
+                            SELECT idPedido FROM Pedido_Peca WHERE idPeca = @idPeca
+                            );";
+                            using (var cmdServico = new NpgsqlCommand(sqlDeletePedidoServico, conn))
+                            {
+                                cmdServico.Parameters.AddWithValue("@idPeca", idPeca);
+                                cmdServico.ExecuteNonQuery();
+                            }
+
+                            // Exclusões relacionadas à Peça na tabela PECA
+                            string sqlDeletePeca = @"
+                            DELETE FROM PECA 
+                            WHERE idPeca = @idPeca;";
+                            using (var cmdPecaDelete = new NpgsqlCommand(sqlDeletePeca, conn))
+                            {
+                                cmdPecaDelete.Parameters.AddWithValue("@idPeca", idPeca);
+                                int rowsPeca = cmdPecaDelete.ExecuteNonQuery();
+
+                                if (rowsPeca <= 0)
+                                {
+                                    throw new Exception("Nenhuma peça encontrada com o ID fornecido.");
+                                }
+                            }
+
+                            // Exclusão da Marca se a Peça relacionada à Marca for excluída (assumindo que a Marca está associada à Peça)
+                            string sqlDeleteMarca = @"
+                            DELETE FROM MARCA 
+                            WHERE idMarca IN (
+                            SELECT idMarca FROM PECA WHERE idPeca = @idPeca
+                            );";
+                            using (var cmdMarcaDelete = new NpgsqlCommand(sqlDeleteMarca, conn))
+                            {
+                                cmdMarcaDelete.Parameters.AddWithValue("@idPeca", idPeca);
+                                cmdMarcaDelete.ExecuteNonQuery();
+                            }
+
+                            // Confirma a transação
+                            transaction.Commit();
+                            return $"Peça com ID {idPeca}, Marca relacionada e registros associados excluídos com sucesso.";
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            return "No part found with the provided ID.";
+                            // Reverte a transação em caso de erro
+                            transaction.Rollback();
+                            return "Erro ao excluir registros relacionados à peça e marca: " + ex.Message;
                         }
                     }
                 }
+
+
             }
             catch (Exception ex)
             {
@@ -355,5 +402,41 @@ namespace TCC_SIA.Controller
                 return "Error deleting part: " + ex.Message;
             }
         }
+
+        public void AtualizarIdPecaNoBanco(int idPedido, int idPecaAtual, int novoIdPeca)
+        {
+            // Criando a conexão com o banco
+            conexaoBD conexao = new conexaoBD();
+
+            try
+            {
+                using (NpgsqlConnection conn = conexao.conectar())
+                {
+                    string query = @"
+                UPDATE pedido_peca
+                SET idpeca = @idpeca
+                WHERE idpedido = @idPedido";
+
+                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, conn))
+                    {
+                        // Adiciona os parâmetros à query
+                        cmd.Parameters.AddWithValue("@novoIdPeca", novoIdPeca);
+                        cmd.Parameters.AddWithValue("@idPedido", idPedido);
+                        cmd.Parameters.AddWithValue("@idPeca", idPecaAtual);
+
+                        // Executa a atualização
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao atualizar o banco de dados: {ex.Message}",
+                                "Erro",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+            }
+        }
+
     }
 }

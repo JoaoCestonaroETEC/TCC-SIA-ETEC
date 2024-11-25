@@ -485,5 +485,68 @@ namespace TCC_SIA.Controller
                 return "Erro ao conectar ao banco de dados: " + ex.Message;
             }
         }
+        public string deletarPedidoP(Pedido mPedido)
+        {
+            // Get the ID of the Pedido using its getter
+            long idPedido = mPedido.getIdPedido();
+
+            try
+            {
+                // Initialize the database connection
+                conexaoBD conexao = new conexaoBD();
+                using (NpgsqlConnection conn = conexao.conectar())
+                {
+                    if (conn == null)
+                    {
+                        return "Falha ao conectar ao banco de dados.";
+                    }
+
+                    // Begin a transaction to ensure all deletions succeed or fail together
+                    using (var transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            // First, delete related records from Pedido_Peca
+                            string deletePedidoPecaQuery = "DELETE FROM Pedido_Peca WHERE idPedido = @idPedido";
+                            using (var cmdPeca = new NpgsqlCommand(deletePedidoPecaQuery, conn))
+                            {
+                                cmdPeca.Parameters.AddWithValue("@idPedido", idPedido);
+                                cmdPeca.ExecuteNonQuery();
+                            }
+
+                            using (var cmdPedido = new NpgsqlCommand(deletePedidoPecaQuery, conn))
+                            {
+                                cmdPedido.Parameters.AddWithValue("@idPedido", idPedido);
+                                int rowsAffected = cmdPedido.ExecuteNonQuery();
+
+                                // Commit the transaction if everything succeeds
+                                transaction.Commit();
+
+                                // Check if the main record was successfully deleted
+                                if (rowsAffected > 0)
+                                {
+                                    return $"Peça com ID {idPedido} excluído com sucesso.";
+                                }
+                                else
+                                {
+                                    throw new Exception("Nenhum pedido encontrado com o ID fornecido.");
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            // Roll back the transaction if an error occurs
+                            transaction.Rollback();
+                            return "Erro ao excluir pedido: " + ex.Message;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Return an error message if a connection or other issue occurs
+                return "Erro ao conectar ao banco de dados: " + ex.Message;
+            }
+        }
     }
 }
