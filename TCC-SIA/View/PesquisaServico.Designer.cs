@@ -62,10 +62,11 @@
             // 
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
-            tabControl1.Location = new Point(12, 12);
+            tabControl1.Location = new Point(10, 9);
+            tabControl1.Margin = new Padding(3, 2, 3, 2);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(593, 540);
+            tabControl1.Size = new Size(519, 405);
             tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -76,19 +77,21 @@
             tabPage1.Controls.Add(label1);
             tabPage1.Controls.Add(textBoxPesquisar);
             tabPage1.Controls.Add(dataGridViewPesquisar);
-            tabPage1.Location = new Point(4, 29);
+            tabPage1.Location = new Point(4, 24);
+            tabPage1.Margin = new Padding(3, 2, 3, 2);
             tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(585, 507);
+            tabPage1.Padding = new Padding(3, 2, 3, 2);
+            tabPage1.Size = new Size(511, 377);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Pesquisar";
             tabPage1.UseVisualStyleBackColor = true;
             // 
             // btnDeletar
             // 
-            btnDeletar.Location = new Point(448, 425);
+            btnDeletar.Location = new Point(392, 319);
+            btnDeletar.Margin = new Padding(3, 2, 3, 2);
             btnDeletar.Name = "btnDeletar";
-            btnDeletar.Size = new Size(130, 74);
+            btnDeletar.Size = new Size(114, 56);
             btnDeletar.TabIndex = 21;
             btnDeletar.Text = "Deletar";
             btnDeletar.UseVisualStyleBackColor = true;
@@ -96,9 +99,10 @@
             // 
             // btnSalvarAtulizar
             // 
-            btnSalvarAtulizar.Location = new Point(302, 425);
+            btnSalvarAtulizar.Location = new Point(264, 319);
+            btnSalvarAtulizar.Margin = new Padding(3, 2, 3, 2);
             btnSalvarAtulizar.Name = "btnSalvarAtulizar";
-            btnSalvarAtulizar.Size = new Size(130, 74);
+            btnSalvarAtulizar.Size = new Size(114, 56);
             btnSalvarAtulizar.TabIndex = 20;
             btnSalvarAtulizar.Text = "Editar";
             btnSalvarAtulizar.UseVisualStyleBackColor = true;
@@ -106,10 +110,9 @@
             // 
             // buttonPesquisar
             // 
-            buttonPesquisar.Location = new Point(6, 426);
-            buttonPesquisar.Margin = new Padding(3, 4, 3, 4);
+            buttonPesquisar.Location = new Point(5, 320);
             buttonPesquisar.Name = "buttonPesquisar";
-            buttonPesquisar.Size = new Size(130, 74);
+            buttonPesquisar.Size = new Size(114, 56);
             buttonPesquisar.TabIndex = 19;
             buttonPesquisar.Text = "Pesquisar";
             buttonPesquisar.UseVisualStyleBackColor = true;
@@ -118,18 +121,17 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(3, 13);
+            label1.Location = new Point(3, 10);
             label1.Name = "label1";
-            label1.Size = new Size(73, 20);
+            label1.Size = new Size(60, 15);
             label1.TabIndex = 18;
             label1.Text = "Pesquisar:";
             // 
             // textBoxPesquisar
             // 
-            textBoxPesquisar.Location = new Point(78, 9);
-            textBoxPesquisar.Margin = new Padding(3, 4, 3, 4);
+            textBoxPesquisar.Location = new Point(68, 7);
             textBoxPesquisar.Name = "textBoxPesquisar";
-            textBoxPesquisar.Size = new Size(500, 27);
+            textBoxPesquisar.Size = new Size(438, 23);
             textBoxPesquisar.TabIndex = 17;
             // 
             // dataGridViewPesquisar
@@ -140,8 +142,7 @@
             dataGridViewPesquisar.AllowUserToResizeRows = false;
             dataGridViewPesquisar.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewPesquisar.ImeMode = ImeMode.NoControl;
-            dataGridViewPesquisar.Location = new Point(6, 50);
-            dataGridViewPesquisar.Margin = new Padding(3, 4, 3, 4);
+            dataGridViewPesquisar.Location = new Point(5, 38);
             dataGridViewPesquisar.MultiSelect = false;
             dataGridViewPesquisar.Name = "dataGridViewPesquisar";
             dataGridViewPesquisar.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
@@ -149,7 +150,7 @@
             dataGridViewPesquisar.RowHeadersWidth = 51;
             dataGridViewPesquisar.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewPesquisar.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            dataGridViewPesquisar.Size = new Size(572, 368);
+            dataGridViewPesquisar.Size = new Size(500, 276);
             dataGridViewPesquisar.TabIndex = 16;
             // 
             // tabPage2
@@ -169,10 +170,11 @@
             tabPage2.Controls.Add(label4);
             tabPage2.Controls.Add(maskedTextBoxValor);
             tabPage2.Controls.Add(textBoxNome);
-            tabPage2.Location = new Point(4, 29);
+            tabPage2.Location = new Point(4, 24);
+            tabPage2.Margin = new Padding(3, 2, 3, 2);
             tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(585, 507);
+            tabPage2.Padding = new Padding(3, 2, 3, 2);
+            tabPage2.Size = new Size(511, 377);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Editar";
             tabPage2.UseVisualStyleBackColor = true;
@@ -182,9 +184,10 @@
             buttonDesign1.BackColor = Color.White;
             buttonDesign1.FlatAppearance.BorderColor = SystemColors.HotTrack;
             buttonDesign1.FlatStyle = FlatStyle.Flat;
-            buttonDesign1.Location = new Point(428, 425);
+            buttonDesign1.Location = new Point(374, 319);
+            buttonDesign1.Margin = new Padding(3, 2, 3, 2);
             buttonDesign1.Name = "buttonDesign1";
-            buttonDesign1.Size = new Size(151, 76);
+            buttonDesign1.Size = new Size(132, 57);
             buttonDesign1.TabIndex = 104;
             buttonDesign1.Text = "Cancelar";
             buttonDesign1.UseVisualStyleBackColor = false;
@@ -192,34 +195,38 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(452, 10);
+            label7.Location = new Point(396, 8);
             label7.Name = "label7";
-            label7.Size = new Size(27, 20);
+            label7.Size = new Size(21, 15);
             label7.TabIndex = 103;
             label7.Text = "ID:";
             // 
             // maskedTextBoxID
             // 
             maskedTextBoxID.Enabled = false;
-            maskedTextBoxID.Location = new Point(485, 7);
+            maskedTextBoxID.Location = new Point(424, 5);
+            maskedTextBoxID.Margin = new Padding(3, 2, 3, 2);
             maskedTextBoxID.Name = "maskedTextBoxID";
-            maskedTextBoxID.Size = new Size(58, 27);
+            maskedTextBoxID.Size = new Size(51, 23);
             maskedTextBoxID.TabIndex = 102;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(18, 112);
+            label6.Location = new Point(16, 84);
             label6.Name = "label6";
-            label6.Size = new Size(89, 20);
+            label6.Size = new Size(73, 15);
             label6.TabIndex = 101;
             label6.Text = "Funcionário:";
             // 
             // buttonSalvarA
             // 
-            buttonSalvarA.Location = new Point(6, 425);
+            buttonSalvarA.FlatAppearance.BorderSize = 0;
+            buttonSalvarA.FlatStyle = FlatStyle.Flat;
+            buttonSalvarA.Location = new Point(5, 319);
+            buttonSalvarA.Margin = new Padding(3, 2, 3, 2);
             buttonSalvarA.Name = "buttonSalvarA";
-            buttonSalvarA.Size = new Size(149, 76);
+            buttonSalvarA.Size = new Size(130, 57);
             buttonSalvarA.TabIndex = 19;
             buttonSalvarA.Text = "Salvar";
             buttonSalvarA.UseVisualStyleBackColor = true;
@@ -230,80 +237,81 @@
             comboBoxFunc.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             comboBoxFunc.AutoCompleteSource = AutoCompleteSource.ListItems;
             comboBoxFunc.FormattingEnabled = true;
-            comboBoxFunc.Location = new Point(113, 109);
+            comboBoxFunc.Location = new Point(99, 82);
+            comboBoxFunc.Margin = new Padding(3, 2, 3, 2);
             comboBoxFunc.Name = "comboBoxFunc";
-            comboBoxFunc.Size = new Size(269, 28);
+            comboBoxFunc.Size = new Size(236, 23);
             comboBoxFunc.TabIndex = 100;
+            comboBoxFunc.DropDown += comboBoxFunc_DropDown;
             // 
             // richTextBoxDesc
             // 
-            richTextBoxDesc.Location = new Point(112, 156);
-            richTextBoxDesc.Margin = new Padding(3, 4, 3, 4);
+            richTextBoxDesc.Location = new Point(98, 117);
             richTextBoxDesc.Name = "richTextBoxDesc";
-            richTextBoxDesc.Size = new Size(340, 246);
+            richTextBoxDesc.Size = new Size(298, 186);
             richTextBoxDesc.TabIndex = 95;
             richTextBoxDesc.Text = "";
             // 
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(388, 40);
+            label11.Location = new Point(340, 30);
             label11.Name = "label11";
-            label11.Size = new Size(26, 20);
+            label11.Size = new Size(20, 15);
             label11.TabIndex = 99;
             label11.Text = "R$";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(54, 10);
+            label5.Location = new Point(47, 8);
             label5.Name = "label5";
-            label5.Size = new Size(53, 20);
+            label5.Size = new Size(43, 15);
             label5.TabIndex = 91;
             label5.Text = "Nome:";
             // 
             // dateTimePickerGarantia
             // 
             dateTimePickerGarantia.Format = DateTimePickerFormat.Short;
-            dateTimePickerGarantia.Location = new Point(112, 76);
+            dateTimePickerGarantia.Location = new Point(98, 57);
+            dateTimePickerGarantia.Margin = new Padding(3, 2, 3, 2);
             dateTimePickerGarantia.Name = "dateTimePickerGarantia";
-            dateTimePickerGarantia.Size = new Size(122, 27);
+            dateTimePickerGarantia.Size = new Size(107, 23);
             dateTimePickerGarantia.TabIndex = 98;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(60, 45);
+            label3.Location = new Point(52, 34);
             label3.Name = "label3";
-            label3.Size = new Size(46, 20);
+            label3.Size = new Size(36, 15);
             label3.TabIndex = 92;
             label3.Text = "Valor:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(39, 81);
+            label2.Location = new Point(34, 61);
             label2.Name = "label2";
-            label2.Size = new Size(68, 20);
+            label2.Size = new Size(54, 15);
             label2.TabIndex = 97;
             label2.Text = "Garantia:";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(29, 156);
+            label4.Location = new Point(25, 117);
             label4.Name = "label4";
-            label4.Size = new Size(77, 20);
+            label4.Size = new Size(61, 15);
             label4.TabIndex = 93;
             label4.Text = "Descrição:";
             // 
             // maskedTextBoxValor
             // 
             maskedTextBoxValor.CutCopyMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            maskedTextBoxValor.Location = new Point(112, 42);
-            maskedTextBoxValor.Margin = new Padding(3, 4, 3, 4);
+            maskedTextBoxValor.Location = new Point(98, 32);
             maskedTextBoxValor.Name = "maskedTextBoxValor";
-            maskedTextBoxValor.Size = new Size(269, 27);
+            maskedTextBoxValor.Size = new Size(236, 23);
             maskedTextBoxValor.TabIndex = 96;
             maskedTextBoxValor.Text = "0.00";
             maskedTextBoxValor.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
@@ -312,19 +320,17 @@
             // 
             // textBoxNome
             // 
-            textBoxNome.Location = new Point(112, 7);
-            textBoxNome.Margin = new Padding(3, 4, 3, 4);
+            textBoxNome.Location = new Point(98, 5);
             textBoxNome.Name = "textBoxNome";
-            textBoxNome.Size = new Size(269, 27);
+            textBoxNome.Size = new Size(236, 23);
             textBoxNome.TabIndex = 94;
             // 
             // PesquisaServico
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(607, 564);
+            ClientSize = new Size(531, 423);
             Controls.Add(tabControl1);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "PesquisaServico";
             Text = "PesquisaServico";
             tabControl1.ResumeLayout(false);

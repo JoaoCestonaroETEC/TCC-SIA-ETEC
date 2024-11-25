@@ -43,9 +43,10 @@
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(12, 12);
+            button1.Location = new Point(10, 9);
+            button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
-            button1.Size = new Size(302, 56);
+            button1.Size = new Size(264, 42);
             button1.TabIndex = 0;
             button1.Text = "Cliente";
             button1.UseVisualStyleBackColor = false;
@@ -58,9 +59,10 @@
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             button2.ForeColor = Color.White;
-            button2.Location = new Point(12, 74);
+            button2.Location = new Point(10, 56);
+            button2.Margin = new Padding(3, 2, 3, 2);
             button2.Name = "button2";
-            button2.Size = new Size(302, 56);
+            button2.Size = new Size(264, 42);
             button2.TabIndex = 1;
             button2.Text = "Marca";
             button2.UseVisualStyleBackColor = false;
@@ -73,9 +75,10 @@
             button3.FlatStyle = FlatStyle.Flat;
             button3.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             button3.ForeColor = Color.White;
-            button3.Location = new Point(12, 136);
+            button3.Location = new Point(10, 102);
+            button3.Margin = new Padding(3, 2, 3, 2);
             button3.Name = "button3";
-            button3.Size = new Size(302, 56);
+            button3.Size = new Size(264, 42);
             button3.TabIndex = 2;
             button3.Text = "Serviço";
             button3.UseVisualStyleBackColor = false;
@@ -88,9 +91,10 @@
             button4.FlatStyle = FlatStyle.Flat;
             button4.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             button4.ForeColor = Color.White;
-            button4.Location = new Point(12, 198);
+            button4.Location = new Point(10, 148);
+            button4.Margin = new Padding(3, 2, 3, 2);
             button4.Name = "button4";
-            button4.Size = new Size(302, 56);
+            button4.Size = new Size(264, 42);
             button4.TabIndex = 3;
             button4.Text = "Peça";
             button4.UseVisualStyleBackColor = false;
@@ -103,9 +107,10 @@
             button5.FlatStyle = FlatStyle.Flat;
             button5.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             button5.ForeColor = Color.White;
-            button5.Location = new Point(12, 260);
+            button5.Location = new Point(10, 195);
+            button5.Margin = new Padding(3, 2, 3, 2);
             button5.Name = "button5";
-            button5.Size = new Size(302, 56);
+            button5.Size = new Size(264, 42);
             button5.TabIndex = 4;
             button5.Text = "Veículo";
             button5.UseVisualStyleBackColor = false;
@@ -118,9 +123,10 @@
             button6.FlatStyle = FlatStyle.Flat;
             button6.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             button6.ForeColor = Color.White;
-            button6.Location = new Point(12, 322);
+            button6.Location = new Point(10, 242);
+            button6.Margin = new Padding(3, 2, 3, 2);
             button6.Name = "button6";
-            button6.Size = new Size(302, 56);
+            button6.Size = new Size(264, 42);
             button6.TabIndex = 5;
             button6.Text = "Pedido";
             button6.UseVisualStyleBackColor = false;
@@ -128,16 +134,18 @@
             // 
             // ListaDeCadastrar
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 91, 166);
-            ClientSize = new Size(329, 395);
+            ClientSize = new Size(288, 296);
             Controls.Add(button6);
             Controls.Add(button5);
             Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
+            Margin = new Padding(3, 2, 3, 2);
+            MaximizeBox = false;
             Name = "ListaDeCadastrar";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ListaDeCadastrar";

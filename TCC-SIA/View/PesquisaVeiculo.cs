@@ -315,6 +315,66 @@ namespace TCC_SIA.View
         }
         #endregion
 
+        #region Listar combustível
+        public void listarCombustivel()
+        {
+            controleVeiculo cVeiculo = new controleVeiculo();
+            // Recebe os dados da consulta e salva no dataReader (Tipo)
+            NpgsqlDataReader veiculo = cVeiculo.listaCombustivel();
+
+            // Criar e configurar o DataTable
+            DataTable dtTipo = new DataTable();
+
+            // Definir as colunas do DataTable
+            dtTipo.Columns.Add("ID", typeof(int));  // Supondo que o ID seja um int
+            dtTipo.Columns.Add("COMBUSTIVEL", typeof(string)); // Supondo que o tipo seja uma string
+
+            // Adicionar itens pré-configurados
+            dtTipo.Rows.Add(-1, "Gasolina");
+            dtTipo.Rows.Add(-2, "Diesel");
+            dtTipo.Rows.Add(-3, "Álcool Etílico (Ethanol)");
+            dtTipo.Rows.Add(-4, "Gás Natural");
+            dtTipo.Rows.Add(-5, "Gás Liquefeito de Petróleo (GLP)");
+            dtTipo.Rows.Add(-6, "Óleo Diesel Biodiesel");
+            dtTipo.Rows.Add(-7, "Óleo de Cocina");
+            dtTipo.Rows.Add(-8, "Biogás");
+
+            // Carregar os dados do NpgsqlDataReader
+            dtTipo.Load(veiculo);
+
+            // Preencher a ComboBox com os dados do DataTable
+            comboBoxCombustivel.DataSource = dtTipo;
+
+            // Define qual coluna do DataTable que será exibida (nome da coluna)
+            comboBoxCombustivel.DisplayMember = "COMBUSTIVEL";
+
+            //Define qual o valor da linha será utilizado ao selecionar um valor
+            comboBoxCombustivel.ValueMember = "COMBUSTIVEL";
+        }
+        #endregion
+
+        #region Listar seguro
+        public void listarSeguro()
+        {
+            controleVeiculo cVeiculo = new controleVeiculo();
+            //Recebe os dados da consulta e salva no dataReader (Tipo)
+            NpgsqlDataReader veiculo = cVeiculo.listaSeguro();
+
+            //Converter o dataReader em DataTable
+            DataTable dtVeiculo = new DataTable();
+            dtVeiculo.Load(veiculo);
+
+            //Preencher a combobox com os dados do DataTable
+            comboBoxSeguro.DataSource = dtVeiculo;
+
+            //Define qual coluna do DataTable que será exibida (nome da coluna)
+            comboBoxSeguro.DisplayMember = "SEGURO";
+
+            //Define qual o valor da linha será utilizado ao selecionar um valor
+            comboBoxSeguro.ValueMember = "SEGURO";
+        }
+        #endregion
+
         #region Pesquisar veículo
         //Evento de pesquisar veículo
         private void buttonPesquisar_Click(object sender, EventArgs e)
@@ -592,6 +652,36 @@ namespace TCC_SIA.View
             {
                 MessageBox.Show("Please select at least one order to delete.");
             }
+        }
+
+        private void comboBoxIdClienteE_DropDown(object sender, EventArgs e)
+        {
+            listarCliente();
+        }
+
+        private void comboBoxMarca_DropDown(object sender, EventArgs e)
+        {
+            listarMarca();
+        }
+
+        private void comboBoxTipo_DropDown(object sender, EventArgs e)
+        {
+            listarTipo();
+        }
+
+        private void comboBoxCor_DropDown(object sender, EventArgs e)
+        {
+            listarCor();
+        }
+
+        private void comboBoxCombustivel_DropDown(object sender, EventArgs e)
+        {
+            listarCombustivel();
+        }
+
+        private void comboBoxSeguro_DropDown(object sender, EventArgs e)
+        {
+            listarSeguro();
         }
     }
 }

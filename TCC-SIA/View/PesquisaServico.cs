@@ -397,5 +397,10 @@ namespace TCC_SIA.View
                 MessageBox.Show("Please select at least one order to delete.");
             }
         }
+
+        private void comboBoxFunc_DropDown(object sender, EventArgs e)
+        {
+            listarFuncionario();
+        }
     }
 }

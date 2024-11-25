@@ -351,6 +351,28 @@ namespace TCC_SIA.View
         }
         #endregion
 
+        #region Listar Fornecedor
+        public void listarFornecedor()
+        {
+            controlePeca cPeca = new controlePeca();
+            //Recebe os dados da consulta e salva no dataReader (Tipo)
+            NpgsqlDataReader peca = cPeca.listaFornecedor();
+
+            //Converter o dataReader em DataTable
+            DataTable dtFornecedor = new DataTable();
+            dtFornecedor.Load(peca);
+
+            //Preencher a combobox com os dados do DataTable
+            comboBoxFornecedor.DataSource = dtFornecedor;
+
+            //Define qual coluna do DataTable que será exibida (nome da coluna)
+            comboBoxFornecedor.DisplayMember = "FORNECEDOR";
+
+            //Define qual o valor da linha será utilizado ao selecionar um valor
+            comboBoxFornecedor.ValueMember = "FORNECEDOR";
+        }
+        #endregion
+
 
         private void btnSalvarA_Click(object sender, EventArgs e)
         {
@@ -366,7 +388,11 @@ namespace TCC_SIA.View
             mPeca.setNomePeca(textBoxNome.Text);
             mPeca.setTipoPeca(comboBoxTipo.Text);
             mPeca.setDescPeca(richTextBoxDesc.Text);
-            mPeca.setValorPeca(Convert.ToInt32(maskedTextBoxValor.Text));
+            decimal valor;
+            if (decimal.TryParse(maskedTextBoxValor.Text, out valor))
+            {
+                mPeca.setValorPeca(valor);
+            }
             mPeca.setQuantPeca(Convert.ToInt32(numericUpDownQuant.Text));
             mPeca.setGarantiaPeca(Convert.ToDateTime(dateTimePickerGarantia.Text));
 
@@ -445,6 +471,100 @@ namespace TCC_SIA.View
                 MessageBox.Show("Please select a row to delete.");
             }
 
+        }
+
+        private void comboBoxTipo_DropDown(object sender, EventArgs e)
+        {
+            listarTipo();
+        }
+
+        private void comboBoxMarca_DropDown(object sender, EventArgs e)
+        {
+            listarMarca();
+        }
+
+        private void comboBoxFornecedor_DropDown(object sender, EventArgs e)
+        {
+            listarFornecedor();
+        }
+
+        private void comboBoxFornecedor_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            System.Windows.Forms.ComboBox comboBox = sender as System.Windows.Forms.ComboBox;
+            string fornecedorDigitado = comboBox.Text;
+
+            // Verifica se o valor digitado já existe na lista de itens da ComboBox
+            bool fornecedorExiste = comboBox.Items.Cast<System.Data.DataRowView>()
+                                       .Any(item => item["FORNECEDOR"].ToString()
+                                       .Equals(fornecedorDigitado, StringComparison.OrdinalIgnoreCase));
+
+            if (!fornecedorExiste && !string.IsNullOrEmpty(fornecedorDigitado))
+            {
+                // Exibe a mensagem com o aviso
+                DialogResult result = MessageBox.Show("Aviso! Fornecedor não registrado, deseja adicionar um novo?",
+                                                      "Novo Fornecedor",
+                                                      MessageBoxButtons.YesNo,
+                                                      MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    // Ação para adicionar um novo fornecedor (sem adicionar o valor na ComboBox diretamente)
+                    MessageBox.Show("Mantenha o valor digitado para cadastrar um novo fornecedor",
+                                    "Ação Necessária",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
+                }
+                else
+                {
+                    // Limpa o texto da ComboBox
+                    comboBox.Text = string.Empty;
+                }
+            }
+        }
+
+        private void maskedTextBoxValor_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir apenas números e a tecla Backspace
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true; // Bloqueia a entrada
+            }
+        }
+
+        private void maskedTextBoxValor_TextChanged(object sender, EventArgs e)
+        {
+            MaskedTextBox maskedTextBox = sender as MaskedTextBox;
+
+            // Remove qualquer formatação anterior e deixa apenas os números
+            string textoAtual = maskedTextBox.Text.Replace(",", "").Replace(".", "").TrimStart('0');
+
+            if (textoAtual.Length == 0)
+            {
+                textoAtual = "0";
+            }
+
+            // Converte o texto para decimal
+            if (decimal.TryParse(textoAtual, out decimal valorDecimal))
+            {
+                maskedTextBox.TextChanged -= maskedTextBoxValor_TextChanged; // Remove o evento para evitar loop
+
+                // Formata o valor com ponto como separador de centavos e sem separadores de milhar
+                maskedTextBox.Text = string.Format("{0:0.00}", valorDecimal / 100);
+
+                // Coloca o cursor no final
+                maskedTextBox.SelectionStart = maskedTextBox.Text.Length;
+
+                maskedTextBox.TextChanged += maskedTextBoxValor_TextChanged; // Reinscreve o evento
+            }
+        }
+
+        private void maskedTextBoxValor_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            // Permitir apenas números e a tecla Backspace
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true; // Bloqueia a entrada
+            }
         }
     }
 }

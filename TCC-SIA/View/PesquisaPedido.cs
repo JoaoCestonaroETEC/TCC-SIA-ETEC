@@ -186,7 +186,7 @@ namespace TCC_SIA.View
             controleVeiculo cVeiculo = new controleVeiculo();
 
             //Recebe os dados da consulta e salva no dataReader (Veiculo)
-            NpgsqlDataReader veiculo = cVeiculo.listaVeiculo();
+            NpgsqlDataReader veiculo = cVeiculo.listaVeiculoPorCliente(comboBoxClienteP.ValueMember);
 
             //Converter o dataReader em DataTable
             DataTable dtVeiculo = new DataTable();
@@ -501,7 +501,17 @@ namespace TCC_SIA.View
             }
 
         }
+
+        private void comboBoxClienteP_DropDown(object sender, EventArgs e)
+        {
+            listarCliente();
+        }
+
+        private void comboBoxVeiculoP_DropDown(object sender, EventArgs e)
+        {
+            listarVeiculo();
+        }
     }
-    
+
 }
 
