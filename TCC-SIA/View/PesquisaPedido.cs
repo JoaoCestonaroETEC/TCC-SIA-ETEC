@@ -20,7 +20,7 @@ namespace TCC_SIA.View
         {
             InitializeComponent();
             listarCliente();
-            listarVeiculo();
+            listarVeiculoPorID();
 
             #region Carrega os dados de pesquisa de pedidos
             // Criação do objeto NpgsqlDataReader pedido e controlePedido
@@ -166,15 +166,12 @@ namespace TCC_SIA.View
 
             //Preencher a combobox com os dados do DataTable
             comboBoxCliente.DataSource = dtCliente;
-            comboBoxClienteP.DataSource = dtCliente;
 
             //Define qual coluna do DataTable que será exibida (nome da coluna)
             comboBoxCliente.DisplayMember = "NOMECLIENTE";
-            comboBoxClienteP.DisplayMember = "NOMECLIENTE";
 
             //Define qual o valor da linha será utilizado ao selecionar um valor
             comboBoxCliente.ValueMember = "IDCLIENTE";
-            comboBoxClienteP.ValueMember = "IDCLIENTE";
 
         }
         #endregion
@@ -186,7 +183,7 @@ namespace TCC_SIA.View
             controleVeiculo cVeiculo = new controleVeiculo();
 
             //Recebe os dados da consulta e salva no dataReader (Veiculo)
-            NpgsqlDataReader veiculo = cVeiculo.listaVeiculoPorCliente(comboBoxClienteP.ValueMember);
+            NpgsqlDataReader veiculo = cVeiculo.listaVeiculo();
 
             //Converter o dataReader em DataTable
             DataTable dtVeiculo = new DataTable();
@@ -194,15 +191,53 @@ namespace TCC_SIA.View
 
             //Preencher a combobox com os dados do DataTable
             comboBoxVeiculo.DataSource = dtVeiculo;
-            comboBoxVeiculoP.DataSource = dtVeiculo;
 
             //Define qual coluna do DataTable que será exibida (nome da coluna)
             comboBoxVeiculo.DisplayMember = "NOMEVEICULO";
-            comboBoxVeiculoP.DisplayMember = "NOMEVEICULO";
 
             //Define qual o valor da linha será utilizado ao selecionar um valor
             comboBoxVeiculo.ValueMember = "IDVEICULO";
-            comboBoxVeiculoP.ValueMember = "IDVEICULO";
+        }
+        #endregion
+
+        #region Listar veículo
+        public void listarVeiculoPorID()
+        {
+            //Criação do objeto NpgsqlDataReader veiculo e controleVeiculo
+            controleVeiculo cVeiculo = new controleVeiculo();
+
+            if (comboBoxCliente.SelectedValue == null || string.IsNullOrEmpty(comboBoxCliente.SelectedValue.ToString()))
+            {
+                // Define o valor como o primeiro item da ComboBox
+                if (comboBoxCliente.Items.Count > 0)
+                {
+                    comboBoxCliente.SelectedIndex = 0; // Seleciona o primeiro item
+                }
+                else
+                {
+                    MessageBox.Show("A ComboBox está vazia.");
+                }
+            }
+            else
+            {
+                // O valor selecionado não é vazio, pode prosseguir
+            }
+
+            //Recebe os dados da consulta e salva no dataReader (Veiculo)
+            NpgsqlDataReader veiculo = cVeiculo.listaVeiculoPorCliente(Convert.ToInt32(comboBoxCliente.SelectedValue));
+
+            //Converter o dataReader em DataTable
+            DataTable dtVeiculo = new DataTable();
+            dtVeiculo.Load(veiculo);
+
+            //Preencher a combobox com os dados do DataTable
+            comboBoxVeiculo.DataSource = dtVeiculo;
+
+            //Define qual coluna do DataTable que será exibida (nome da coluna)
+            comboBoxVeiculo.DisplayMember = "NOMEVEICULO";
+
+            //Define qual o valor da linha será utilizado ao selecionar um valor
+            comboBoxVeiculo.ValueMember = "IDVEICULO";
         }
         #endregion
 
@@ -510,6 +545,11 @@ namespace TCC_SIA.View
         private void comboBoxVeiculoP_DropDown(object sender, EventArgs e)
         {
             listarVeiculo();
+        }
+
+        private void maskedTextBoxValorTotal_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

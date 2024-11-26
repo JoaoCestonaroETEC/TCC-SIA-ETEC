@@ -23,16 +23,16 @@ namespace TCC_SIA.Controller
             try
             {
                 // SQL de inserção para o pedido
-                string sqlPedido = "INSERT INTO PEDIDO(IDPEDIDO, IDVEICULO, IDCLIENTE, VALORTOTALPEDIDO, VALORTOTALPECA, VALORTOTALSERVICO, " +
+                string sqlPedido = "INSERT INTO PEDIDO(IDVEICULO, IDCLIENTE, VALORTOTALPEDIDO, VALORTOTALPECA, VALORTOTALSERVICO, " +
                                    "DESCONTOTOTALPORC, DESCONTOTOTALREAIS, DESCONTOSERVICOREAIS, DESCONTOSERVICOPORC, DESCONTOPECAREAIS, " +
-                                   "DESCONTOPECAPORC, OBSERVACAO, DATAINICIO, DATAFIM) VALUES(@IDPEDIDO, @IDVEICULO, @IDCLIENTE, @VALORTOTALPEDIDO, " +
-                                   "@VALORTOTALPECA, @VALORTOTALSERVICO, @DESCONTOTOTALPORC, @DESCONTOTOTALREAIS, @DESCONTOSERVICOREAIS, " +
-                                   "@DESCONTOSERVICOPORC, @DESCONTOPECAREAIS, @DESCONTOPECAPORC, @OBSERVACAO, @DATAINICIO, @DATAFIM);";
+                                   "DESCONTOPECAPORC, OBSERVACAO, DATAINICIO, DATAFIM) " +
+                                   "VALUES(@IDVEICULO, @IDCLIENTE, @VALORTOTALPEDIDO, @VALORTOTALPECA, @VALORTOTALSERVICO, " +
+                                   "@DESCONTOTOTALPORC, @DESCONTOTOTALREAIS, @DESCONTOSERVICOREAIS, @DESCONTOSERVICOPORC, @DESCONTOPECAREAIS, " +
+                                   "@DESCONTOPECAPORC, @OBSERVACAO, @DATAINICIO, @DATAFIM) RETURNING IDPEDIDO;";
                 NpgsqlCommand commPedido = new NpgsqlCommand(sqlPedido, conn);
                 commPedido.Transaction = transaction;
 
                 // Definindo parâmetros do pedido
-                commPedido.Parameters.AddWithValue("@IDPEDIDO", mPedido.getIdPedido());
                 commPedido.Parameters.AddWithValue("@IDVEICULO", mPedido.getIdVeiculo());
                 commPedido.Parameters.AddWithValue("@IDCLIENTE", mPedido.getIdCliente());
                 commPedido.Parameters.AddWithValue("@VALORTOTALPEDIDO", mPedido.getValorTotalPedido());
@@ -48,11 +48,15 @@ namespace TCC_SIA.Controller
                 commPedido.Parameters.AddWithValue("@DATAINICIO", mPedido.getDataInicio());
                 commPedido.Parameters.AddWithValue("@DATAFIM", mPedido.getDataFim());
 
-                // Executando a query de inserção do pedido
-                commPedido.ExecuteNonQuery();
+                // Executando a query de inserção do pedido e pegando o ID gerado
+                int idPedido = Convert.ToInt32(commPedido.ExecuteScalar());
+
+                // Atualiza o ID do pedido no objeto para uso posterior
+                mPedido.setIdPedido(idPedido);
 
                 // SQL para verificar quantidade disponível e inserir peças do pedido
                 string sqlVerificaPeca = "SELECT quantpeca FROM peca WHERE idpeca = @IDPECA";
+                string sqlUpdatePeca = "UPDATE peca SET quantpeca = quantpeca - @QUANTVEZES WHERE idpeca = @IDPECA";
                 string sqlInsertPeca = "INSERT INTO PEDIDO_PECA(IDPEDIDO, IDPECA, QUANTVEZES) VALUES(@IDPEDIDO, @IDPECA, @QUANTVEZES);";
 
                 foreach (var peca in mPedidoPeca)
@@ -61,20 +65,33 @@ namespace TCC_SIA.Controller
                     commVerificaPeca.Transaction = transaction;
                     commVerificaPeca.Parameters.AddWithValue("@IDPECA", peca.getIdPeca());
 
+                    // Verifica a quantidade no estoque
                     int quantEstoque = Convert.ToInt32(commVerificaPeca.ExecuteScalar());
 
+                    // Verifica se a quantidade solicitada é maior que a disponível
                     if (peca.getQuantVezes() > quantEstoque)
                     {
+                        // Se a quantidade for maior, cancela a transação e retorna erro
                         transaction.Rollback();
-                        return $"Erro: A quantidade da peça {peca.getIdPeca()} excede o estoque disponível.";
+                        return $"Erro: A quantidade da peça {peca.getIdPeca()} excede o estoque disponível. Quantidade disponível: {quantEstoque}.";
                     }
 
+                    // Atualiza o estoque após a inserção
+                    NpgsqlCommand commUpdatePeca = new NpgsqlCommand(sqlUpdatePeca, conn);
+                    commUpdatePeca.Transaction = transaction;
+                    commUpdatePeca.Parameters.AddWithValue("@QUANTVEZES", peca.getQuantVezes());
+                    commUpdatePeca.Parameters.AddWithValue("@IDPECA", peca.getIdPeca());
+
+                    commUpdatePeca.ExecuteNonQuery();
+
+                    // Insere a peça no pedido
                     NpgsqlCommand commInsertPeca = new NpgsqlCommand(sqlInsertPeca, conn);
                     commInsertPeca.Transaction = transaction;
-                    commInsertPeca.Parameters.AddWithValue("@IDPEDIDO", mPedido.getIdPedido());
+                    commInsertPeca.Parameters.AddWithValue("@IDPEDIDO", idPedido); // Usa o ID do pedido retornado
                     commInsertPeca.Parameters.AddWithValue("@IDPECA", peca.getIdPeca());
                     commInsertPeca.Parameters.AddWithValue("@QUANTVEZES", peca.getQuantVezes());
 
+                    // Executa a inserção da peça no pedido
                     commInsertPeca.ExecuteNonQuery();
                 }
 
@@ -86,10 +103,11 @@ namespace TCC_SIA.Controller
                     NpgsqlCommand commInsertServico = new NpgsqlCommand(sqlInsertServico, conn);
                     commInsertServico.Transaction = transaction;
 
-                    commInsertServico.Parameters.AddWithValue("@IDPEDIDO", mPedido.getIdPedido());
+                    commInsertServico.Parameters.AddWithValue("@IDPEDIDO", idPedido); // Usa o ID do pedido retornado
                     commInsertServico.Parameters.AddWithValue("@IDSERVICO", servico.getIDServico());
                     commInsertServico.Parameters.AddWithValue("@QUANTVEZES", servico.getQuantVezes());
 
+                    // Executa a inserção do serviço
                     commInsertServico.ExecuteNonQuery();
                 }
 
@@ -109,6 +127,7 @@ namespace TCC_SIA.Controller
             }
         }
         #endregion
+
 
 
         #region Pesquisar pedido

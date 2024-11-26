@@ -242,6 +242,7 @@
             // 
             // maskedTextBoxID
             // 
+            maskedTextBoxID.Enabled = false;
             maskedTextBoxID.Location = new Point(43, 92);
             maskedTextBoxID.Margin = new Padding(3, 2, 3, 2);
             maskedTextBoxID.Name = "maskedTextBoxID";
@@ -274,6 +275,7 @@
             maskedTextBoxValorTotal.TabIndex = 95;
             maskedTextBoxValorTotal.Text = "0.00";
             maskedTextBoxValorTotal.TextMaskFormat = MaskFormat.IncludePrompt;
+            maskedTextBoxValorTotal.TextChanged += maskedTextBoxValorTotal_TextChanged;
             // 
             // label8
             // 

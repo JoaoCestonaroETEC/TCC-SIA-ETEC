@@ -545,41 +545,46 @@ namespace TCC_SIA.View
         #region Listar veículo por cliente
         public void listarVeiculoPorCliente()
         {
-            //Criação do objeto NpgsqlDataReader veiculo e controleVeiculo
+            // Criação do objeto NpgsqlDataReader veiculo e controleVeiculo
             controleVeiculo cVeiculo = new controleVeiculo();
 
-            if (comboBoxCliente.SelectedValue == null || string.IsNullOrEmpty(comboBoxCliente.SelectedValue.ToString()))
+            try
             {
-                // Define o valor como o primeiro item da ComboBox
-                if (comboBoxCliente.Items.Count > 0)
+                // Verificação da ComboBox de Cliente
+                if (comboBoxCliente.SelectedValue == null || string.IsNullOrEmpty(comboBoxCliente.SelectedValue.ToString()))
                 {
-                    comboBoxCliente.SelectedIndex = 0; // Seleciona o primeiro item
+                    // Define o valor como o primeiro item da ComboBox
+                    if (comboBoxCliente.Items.Count > 0)
+                    {
+                        comboBoxCliente.SelectedIndex = 0; // Seleciona o primeiro item
+                    }
+                    else
+                    {
+                        MessageBox.Show("A ComboBox está vazia.");
+                    }
                 }
-                else
+
+                // Recebe os dados da consulta e salva no dataReader (Veiculo)
+                using (NpgsqlDataReader veiculo = cVeiculo.listaVeiculoPorCliente(Convert.ToInt32(comboBoxCliente.SelectedValue)))
                 {
-                    MessageBox.Show("A ComboBox está vazia.");
+                    // Converter o dataReader em DataTable
+                    DataTable dtVeiculo = new DataTable();
+                    dtVeiculo.Load(veiculo);
+
+                    // Preencher a combobox com os dados do DataTable
+                    comboBoxVeiculo.DataSource = dtVeiculo;
+
+                    // Define qual coluna do DataTable que será exibida (nome da coluna)
+                    comboBoxVeiculo.DisplayMember = "NOMEVEICULO";
+
+                    // Define qual o valor da linha será utilizado ao selecionar um valor
+                    comboBoxVeiculo.ValueMember = "IDVEICULO";
                 }
             }
-            else
+            catch (Exception ex)
             {
-                // O valor selecionado não é vazio, pode prosseguir
+                MessageBox.Show($"Erro ao carregar veículos: {ex.Message}");
             }
-
-            //Recebe os dados da consulta e salva no dataReader (Veiculo)
-            NpgsqlDataReader veiculo = cVeiculo.listaVeiculoPorCliente(Convert.ToString(comboBoxCliente.SelectedValue));
-
-            //Converter o dataReader em DataTable
-            DataTable dtVeiculo = new DataTable();
-            dtVeiculo.Load(veiculo);
-
-            //Preencher a combobox com os dados do DataTable
-            comboBoxVeiculo.DataSource = dtVeiculo;
-
-            //Define qual coluna do DataTable que será exibida (nome da coluna)
-            comboBoxVeiculo.DisplayMember = "NOMEVEICULO";
-
-            //Define qual o valor da linha será utilizado ao selecionar um valor
-            comboBoxVeiculo.ValueMember = "IDVEICULO";
 
         }
         #endregion
@@ -648,24 +653,30 @@ namespace TCC_SIA.View
             // Definindo a quantidade de colunas que a grid terá
             dataGridViewPeca.ColumnCount = 6;
 
+            // Definindo a quantidade de colunas que a grid terá
+            dataGridViewPeca.ColumnCount = 7;
+
             // Definindo as colunas na DataGridView para exibir as descrições das peças
             dataGridViewPeca.Columns[0].Name = "Id Peça";
-            dataGridViewPeca.Columns[0].ReadOnly = true;
+            dataGridViewPeca.Columns[0].ReadOnly = true; // Somente leitura
 
             dataGridViewPeca.Columns[1].Name = "Nome";
-            dataGridViewPeca.Columns[1].ReadOnly = true;
+            dataGridViewPeca.Columns[1].ReadOnly = true; // Somente leitura
 
             dataGridViewPeca.Columns[2].Name = "Marca";
-            dataGridViewPeca.Columns[2].ReadOnly = true;
+            dataGridViewPeca.Columns[2].ReadOnly = true; // Somente leitura
 
             dataGridViewPeca.Columns[3].Name = "Tipo";
-            dataGridViewPeca.Columns[3].ReadOnly = true;
+            dataGridViewPeca.Columns[3].ReadOnly = true; // Somente leitura
 
-            dataGridViewPeca.Columns[4].Name = "Valor";
-            dataGridViewPeca.Columns[4].ReadOnly = true;
+            dataGridViewPeca.Columns[4].Name = "Quant. no Estoque";
+            dataGridViewPeca.Columns[4].ReadOnly = true; // Somente leitura
 
-            dataGridViewPeca.Columns[5].Name = "Fornecedor";
-            dataGridViewPeca.Columns[5].ReadOnly = true;
+            dataGridViewPeca.Columns[5].Name = "Valor";
+            dataGridViewPeca.Columns[5].ReadOnly = true; // Somente leitura
+
+            dataGridViewPeca.Columns[6].Name = "Fornecedor";
+            dataGridViewPeca.Columns[6].ReadOnly = true; // Somente leitura
 
             // Criando a coluna "Quantidade de Vezes" (apenas números, editável)
             DataGridViewTextBoxColumn quantidadeVezesColumn2 = new DataGridViewTextBoxColumn();
@@ -687,6 +698,7 @@ namespace TCC_SIA.View
                 string nomePeca = peca["NOMEPECA"].ToString();
                 string idMarca = peca["IDMARCA"].ToString();
                 string tipoPeca = peca["TIPOPECA"].ToString();
+                string quantEstoque = peca["QUANTPECA"].ToString();
                 string valorPeca = peca["VALORPECA"].ToString();
                 string fornecedor = peca["FORNECEDOR"].ToString();
 

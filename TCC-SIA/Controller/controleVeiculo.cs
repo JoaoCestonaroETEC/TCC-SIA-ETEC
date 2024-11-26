@@ -231,36 +231,38 @@ namespace TCC_SIA.Controller
         #endregion
 
         #region Listar veículo por cliente
-        //Criação do método de listar veículo por cliente
-        public NpgsqlDataReader listaVeiculoPorCliente(string cliente)
+        // Criação do método de listar veículo por cliente
+        public NpgsqlDataReader listaVeiculoPorCliente(int cliente)
         {
-            //String sql de listar
-            string sql = "SELECT * FROM VEICULO WHERE IDCLIENTE = '" + cliente + "';";
+            // String SQL para listar
+            string sql = "SELECT * FROM VEICULO WHERE IDCLIENTE = @IDCLIENTE;";
 
-            //Abrindo conexão com o banco de dados
+            // Abrindo conexão com o banco de dados
             conexaoBD con = new conexaoBD();
             NpgsqlConnection conn = con.conectar();
             NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
 
-            //Fazendo o try
+            // Adicionando o parâmetro
+            comm.Parameters.AddWithValue("@IDCLIENTE", cliente);
+
+            // Fazendo o try
             try
             {
-                //Retornando os valores
+                // Retornando os valores
                 return comm.ExecuteReader();
             }
-            //Fazendo o catch
+            // Fazendo o catch
             catch (NpgsqlException ex)
             {
-                //Retornando como nulo
+                // Retornando como nulo em caso de erro
                 return null;
             }
-            //Encerrando a conexão
+            // Encerrando a conexão
             finally
             {
-                //Método de desconectar
+                // Método de desconectar
                 con.desconectar();
             }
-
         }
         #endregion
 

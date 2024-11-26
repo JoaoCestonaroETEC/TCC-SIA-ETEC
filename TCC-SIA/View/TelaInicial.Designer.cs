@@ -154,14 +154,14 @@
             panel1.Dock = DockStyle.Bottom;
             panel1.Location = new Point(0, 589);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1088, 5);
+            panel1.Size = new Size(1029, 5);
             panel1.TabIndex = 9;
             // 
             // panel2
             // 
             panel2.BackColor = Color.White;
             panel2.Dock = DockStyle.Right;
-            panel2.Location = new Point(1083, 0);
+            panel2.Location = new Point(1024, 0);
             panel2.Name = "panel2";
             panel2.Size = new Size(5, 589);
             panel2.TabIndex = 10;
@@ -172,7 +172,7 @@
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1083, 5);
+            panel3.Size = new Size(1024, 5);
             panel3.TabIndex = 11;
             // 
             // panel4
@@ -191,7 +191,7 @@
             AutoSize = true;
             BackColor = Color.FromArgb(54, 75, 109);
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1088, 594);
+            ClientSize = new Size(1029, 594);
             Controls.Add(panel4);
             Controls.Add(panel3);
             Controls.Add(panel2);

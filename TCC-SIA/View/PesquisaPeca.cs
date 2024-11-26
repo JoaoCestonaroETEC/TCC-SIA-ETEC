@@ -388,16 +388,12 @@ namespace TCC_SIA.View
             mPeca.setNomePeca(textBoxNome.Text);
             mPeca.setTipoPeca(comboBoxTipo.Text);
             mPeca.setDescPeca(richTextBoxDesc.Text);
-<<<<<<< HEAD
             decimal valor;
             if (decimal.TryParse(maskedTextBoxValor.Text, out valor))
             {
                 mPeca.setValorPeca(valor);
             }
-=======
             mPeca.setFornecedor(comboBoxFornecedor.Text);
-            mPeca.setValorPeca(Convert.ToInt32(maskedTextBoxValor.Text));
->>>>>>> deae05ff8a6420e700280864cfe569a1ea72a801
             mPeca.setQuantPeca(Convert.ToInt32(numericUpDownQuant.Text));
             mPeca.setGarantiaPeca(Convert.ToDateTime(dateTimePickerGarantia.Text));
 
