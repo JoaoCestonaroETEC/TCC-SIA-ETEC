@@ -731,10 +731,11 @@ namespace TCC_SIA.View
                     row.Cells[1].Value = nomePeca;
                     row.Cells[2].Value = marca;
                     row.Cells[3].Value = tipoPeca;
-                    row.Cells[4].Value = valorPeca;
-                    row.Cells[5].Value = fornecedor;
-                    row.Cells[6].Value = 1; // Valor padrão para "Quantidade de Vezes"
-                    row.Cells[7].Value = false; // Valor padrão para "Selecionar" (desmarcado)
+                    row.Cells[4].Value = quantEstoque;
+                    row.Cells[5].Value = valorPeca;
+                    row.Cells[6].Value = fornecedor;
+                    row.Cells[7].Value = 1; // Valor padrão para "Quantidade de Vezes"
+                    row.Cells[8].Value = false; // Valor padrão para "Selecionar" (desmarcado)
 
                     dataGridViewPeca.Rows.Add(row);
                 }

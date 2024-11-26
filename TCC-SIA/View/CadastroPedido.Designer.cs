@@ -429,7 +429,7 @@
             // 
             // maskedTextBoxValorTotal
             // 
-            maskedTextBoxValorTotal.Location = new Point(353, 546);
+            maskedTextBoxValorTotal.Location = new Point(361, 545);
             maskedTextBoxValorTotal.Margin = new Padding(3, 4, 3, 4);
             maskedTextBoxValorTotal.Name = "maskedTextBoxValorTotal";
             maskedTextBoxValorTotal.Size = new Size(153, 27);
@@ -464,7 +464,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(266, 549);
+            label5.Location = new Point(274, 548);
             label5.Name = "label5";
             label5.Size = new Size(81, 20);
             label5.TabIndex = 5;

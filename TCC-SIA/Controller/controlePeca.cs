@@ -283,7 +283,9 @@ namespace TCC_SIA.Controller
         {
             string sql = "UPDATE PECA SET  NOMEPECA = @NOMEPECA, "+
                 " TIPOPECA = @TIPOPECA, DESCPECA = @DESCPECA," + 
-                " VALORPECA = @VALORPECA, QUANTPECA = @QUANTPECA," + 
+                " VALORPECA = @VALORPECA, QUANTPECA = @QUANTPECA," +
+                " MARCAPECA = @MARCAPECA, UNIDADE = @UNIDADE," +
+                " FORNECEDOR = @FORNECEDOR, DATAAQUISICAO = @DATAAQUISICAO," +
                 " GARANTIAPECA = @GARANTIAPECA WHERE IDPECA = @IDPECA";
 
             conexaoBD con = new conexaoBD();
@@ -301,7 +303,7 @@ namespace TCC_SIA.Controller
                 comm.Parameters.AddWithValue("@GARANTIAPECA", mPeca.getGarantiaPeca());
 
                 comm.ExecuteNonQuery();
-                return "Cliente atualizado!";
+                return "Peça atualizada!";
             }
             catch(NpgsqlException ex)
             {

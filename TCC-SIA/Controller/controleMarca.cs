@@ -243,7 +243,7 @@ namespace TCC_SIA.Controller
 
                     if (rowsAffected > 0)
                     {
-                        return "Serviço atualizado com sucesso!";
+                        return "Marca atualizada com sucesso!";
                     }
                     else
                     {

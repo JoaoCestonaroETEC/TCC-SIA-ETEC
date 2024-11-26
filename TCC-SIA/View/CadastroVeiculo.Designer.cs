@@ -83,7 +83,7 @@
             buttonCadastrar.Location = new Point(14, 313);
             buttonCadastrar.Margin = new Padding(3, 5, 3, 5);
             buttonCadastrar.Name = "buttonCadastrar";
-            buttonCadastrar.Size = new Size(131, 88);
+            buttonCadastrar.Size = new Size(171, 96);
             buttonCadastrar.TabIndex = 16;
             buttonCadastrar.Text = "Cadastrar";
             buttonCadastrar.UseVisualStyleBackColor = true;
@@ -349,7 +349,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(398, 279);
+            label9.Location = new Point(396, 275);
             label9.Name = "label9";
             label9.Size = new Size(31, 20);
             label9.TabIndex = 57;

@@ -385,9 +385,11 @@ namespace TCC_SIA.View
             //Faz uma verificação para tentar enviar o valor para o atributo, se existiver vazia ele envia vazia sem dar erro
 
             mPeca.setIdPeca(Convert.ToInt32(maskedTextBoxID.Text));
+            mPeca.setIdMarca(Convert.ToInt32(comboBoxMarca.SelectedValue));
             mPeca.setNomePeca(textBoxNome.Text);
             mPeca.setTipoPeca(comboBoxTipo.Text);
             mPeca.setDescPeca(richTextBoxDesc.Text);
+            mPeca.setUnidade(Convert.ToInt32(numericUpDownUnidade.Text));
             decimal valor;
             if (decimal.TryParse(maskedTextBoxValor.Text, out valor))
             {
@@ -396,6 +398,7 @@ namespace TCC_SIA.View
             mPeca.setFornecedor(comboBoxFornecedor.Text);
             mPeca.setQuantPeca(Convert.ToInt32(numericUpDownQuant.Text));
             mPeca.setGarantiaPeca(Convert.ToDateTime(dateTimePickerGarantia.Text));
+            mPeca.setDataAquisao(Convert.ToDateTime(dateTimePickerAquisicao.Text));
 
             //Chamada ao método de cadastro no ControleCliente
             string res = cPeca.atualizaPeca(mPeca);

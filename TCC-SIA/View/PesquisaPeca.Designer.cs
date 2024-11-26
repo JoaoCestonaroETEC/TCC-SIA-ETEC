@@ -72,11 +72,10 @@
             // 
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
-            tabControl1.Location = new Point(10, 9);
-            tabControl1.Margin = new Padding(3, 2, 3, 2);
+            tabControl1.Location = new Point(11, 12);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(705, 409);
+            tabControl1.Size = new Size(806, 545);
             tabControl1.TabIndex = 12;
             // 
             // tabPage1
@@ -87,21 +86,19 @@
             tabPage1.Controls.Add(label1);
             tabPage1.Controls.Add(textBoxPesquisar);
             tabPage1.Controls.Add(dataGridViewPesquisar);
-            tabPage1.Location = new Point(4, 24);
-            tabPage1.Margin = new Padding(3, 2, 3, 2);
+            tabPage1.Location = new Point(4, 29);
             tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3, 2, 3, 2);
-            tabPage1.Size = new Size(697, 381);
+            tabPage1.Padding = new Padding(3, 3, 3, 3);
+            tabPage1.Size = new Size(798, 512);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Pesquisar";
             tabPage1.UseVisualStyleBackColor = true;
             // 
             // btnDeletar
             // 
-            btnDeletar.Location = new Point(542, 316);
-            btnDeletar.Margin = new Padding(3, 2, 3, 2);
+            btnDeletar.Location = new Point(619, 421);
             btnDeletar.Name = "btnDeletar";
-            btnDeletar.Size = new Size(151, 55);
+            btnDeletar.Size = new Size(173, 73);
             btnDeletar.TabIndex = 21;
             btnDeletar.Text = "Deletar";
             btnDeletar.UseVisualStyleBackColor = true;
@@ -109,10 +106,9 @@
             // 
             // btnAtualizar
             // 
-            btnAtualizar.Location = new Point(374, 316);
-            btnAtualizar.Margin = new Padding(3, 2, 3, 2);
+            btnAtualizar.Location = new Point(427, 421);
             btnAtualizar.Name = "btnAtualizar";
-            btnAtualizar.Size = new Size(151, 55);
+            btnAtualizar.Size = new Size(173, 73);
             btnAtualizar.TabIndex = 20;
             btnAtualizar.Text = "Editar";
             btnAtualizar.UseVisualStyleBackColor = true;
@@ -120,9 +116,10 @@
             // 
             // buttonPesquisar
             // 
-            buttonPesquisar.Location = new Point(6, 316);
+            buttonPesquisar.Location = new Point(7, 421);
+            buttonPesquisar.Margin = new Padding(3, 4, 3, 4);
             buttonPesquisar.Name = "buttonPesquisar";
-            buttonPesquisar.Size = new Size(151, 55);
+            buttonPesquisar.Size = new Size(173, 73);
             buttonPesquisar.TabIndex = 19;
             buttonPesquisar.Text = "Pesquisar";
             buttonPesquisar.UseVisualStyleBackColor = true;
@@ -131,26 +128,28 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(5, 8);
+            label1.Location = new Point(6, 11);
             label1.Name = "label1";
-            label1.Size = new Size(60, 15);
+            label1.Size = new Size(73, 20);
             label1.TabIndex = 18;
             label1.Text = "Pesquisar:";
             // 
             // textBoxPesquisar
             // 
-            textBoxPesquisar.Location = new Point(71, 5);
+            textBoxPesquisar.Location = new Point(81, 7);
+            textBoxPesquisar.Margin = new Padding(3, 4, 3, 4);
             textBoxPesquisar.Name = "textBoxPesquisar";
-            textBoxPesquisar.Size = new Size(623, 23);
+            textBoxPesquisar.Size = new Size(711, 27);
             textBoxPesquisar.TabIndex = 17;
             // 
             // dataGridViewPesquisar
             // 
             dataGridViewPesquisar.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewPesquisar.Location = new Point(5, 36);
+            dataGridViewPesquisar.Location = new Point(6, 48);
+            dataGridViewPesquisar.Margin = new Padding(3, 4, 3, 4);
             dataGridViewPesquisar.Name = "dataGridViewPesquisar";
             dataGridViewPesquisar.RowHeadersWidth = 51;
-            dataGridViewPesquisar.Size = new Size(688, 274);
+            dataGridViewPesquisar.Size = new Size(786, 365);
             dataGridViewPesquisar.TabIndex = 16;
             // 
             // tabPage2
@@ -178,11 +177,10 @@
             tabPage2.Controls.Add(label19);
             tabPage2.Controls.Add(textBoxNome);
             tabPage2.Controls.Add(label20);
-            tabPage2.Location = new Point(4, 24);
-            tabPage2.Margin = new Padding(3, 2, 3, 2);
+            tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3, 2, 3, 2);
-            tabPage2.Size = new Size(697, 381);
+            tabPage2.Padding = new Padding(3, 3, 3, 3);
+            tabPage2.Size = new Size(798, 512);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Editar";
             tabPage2.UseVisualStyleBackColor = true;
@@ -190,27 +188,25 @@
             // maskedTextBoxID
             // 
             maskedTextBoxID.Enabled = false;
-            maskedTextBoxID.Location = new Point(129, 263);
-            maskedTextBoxID.Margin = new Padding(3, 2, 3, 2);
+            maskedTextBoxID.Location = new Point(147, 351);
             maskedTextBoxID.Name = "maskedTextBoxID";
-            maskedTextBoxID.Size = new Size(83, 23);
+            maskedTextBoxID.Size = new Size(94, 27);
             maskedTextBoxID.TabIndex = 86;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(73, 263);
+            label2.Location = new Point(83, 351);
             label2.Name = "label2";
-            label2.Size = new Size(45, 15);
+            label2.Size = new Size(55, 20);
             label2.TabIndex = 85;
             label2.Text = "idPeça:";
             // 
             // btnSalvarA
             // 
-            btnSalvarA.Location = new Point(14, 315);
-            btnSalvarA.Margin = new Padding(3, 2, 3, 2);
+            btnSalvarA.Location = new Point(16, 420);
             btnSalvarA.Name = "btnSalvarA";
-            btnSalvarA.Size = new Size(116, 58);
+            btnSalvarA.Size = new Size(133, 77);
             btnSalvarA.TabIndex = 84;
             btnSalvarA.Text = "Salvar";
             btnSalvarA.UseVisualStyleBackColor = true;
@@ -219,141 +215,145 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(50, 134);
+            label11.Location = new Point(57, 179);
             label11.Name = "label11";
-            label11.Size = new Size(54, 15);
+            label11.Size = new Size(68, 20);
             label11.TabIndex = 83;
             label11.Text = "Unidade:";
             // 
             // numericUpDownUnidade
             // 
-            numericUpDownUnidade.Location = new Point(121, 130);
+            numericUpDownUnidade.Location = new Point(138, 173);
+            numericUpDownUnidade.Margin = new Padding(3, 4, 3, 4);
             numericUpDownUnidade.Maximum = new decimal(new int[] { 1215752192, 23, 0, 0 });
             numericUpDownUnidade.Name = "numericUpDownUnidade";
-            numericUpDownUnidade.Size = new Size(209, 23);
+            numericUpDownUnidade.Size = new Size(239, 27);
             numericUpDownUnidade.TabIndex = 82;
             // 
             // dateTimePickerAquisicao
             // 
             dateTimePickerAquisicao.Format = DateTimePickerFormat.Short;
-            dateTimePickerAquisicao.Location = new Point(129, 238);
-            dateTimePickerAquisicao.Margin = new Padding(3, 2, 3, 2);
+            dateTimePickerAquisicao.Location = new Point(147, 317);
             dateTimePickerAquisicao.Name = "dateTimePickerAquisicao";
-            dateTimePickerAquisicao.Size = new Size(189, 23);
+            dateTimePickerAquisicao.Size = new Size(215, 27);
             dateTimePickerAquisicao.TabIndex = 81;
             // 
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(12, 240);
+            label12.Location = new Point(14, 320);
             label12.Name = "label12";
-            label12.Size = new Size(105, 15);
+            label12.Size = new Size(134, 20);
             label12.TabIndex = 80;
             label12.Text = "Data de Aquisição:";
             // 
             // comboBoxFornecedor
             // 
             comboBoxFornecedor.FormattingEnabled = true;
-            comboBoxFornecedor.Location = new Point(129, 208);
-            comboBoxFornecedor.Margin = new Padding(3, 2, 3, 2);
+            comboBoxFornecedor.Location = new Point(147, 277);
             comboBoxFornecedor.Name = "comboBoxFornecedor";
-            comboBoxFornecedor.Size = new Size(188, 23);
+            comboBoxFornecedor.Size = new Size(214, 28);
             comboBoxFornecedor.TabIndex = 79;
             comboBoxFornecedor.DropDown += comboBoxFornecedor_DropDown;
             // 
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(50, 212);
+            label13.Location = new Point(57, 283);
             label13.Name = "label13";
-            label13.Size = new Size(70, 15);
+            label13.Size = new Size(87, 20);
             label13.TabIndex = 78;
             label13.Text = "Fornecedor:";
             // 
             // comboBoxTipo
             // 
             comboBoxTipo.FormattingEnabled = true;
-            comboBoxTipo.Location = new Point(118, 45);
+            comboBoxTipo.Location = new Point(135, 60);
+            comboBoxTipo.Margin = new Padding(3, 4, 3, 4);
             comboBoxTipo.Name = "comboBoxTipo";
-            comboBoxTipo.Size = new Size(209, 23);
+            comboBoxTipo.Size = new Size(238, 28);
             comboBoxTipo.TabIndex = 77;
             comboBoxTipo.DropDown += comboBoxTipo_DropDown;
             // 
             // label14
             // 
             label14.AutoSize = true;
-            label14.Location = new Point(76, 51);
+            label14.Location = new Point(87, 68);
             label14.Name = "label14";
-            label14.Size = new Size(33, 15);
+            label14.Size = new Size(42, 20);
             label14.TabIndex = 76;
             label14.Text = "Tipo:";
             // 
             // comboBoxMarca
             // 
             comboBoxMarca.FormattingEnabled = true;
-            comboBoxMarca.Location = new Point(118, 17);
+            comboBoxMarca.Location = new Point(135, 23);
+            comboBoxMarca.Margin = new Padding(3, 4, 3, 4);
             comboBoxMarca.Name = "comboBoxMarca";
-            comboBoxMarca.Size = new Size(209, 23);
+            comboBoxMarca.Size = new Size(238, 28);
             comboBoxMarca.TabIndex = 75;
             comboBoxMarca.DropDown += comboBoxMarca_DropDown;
             // 
             // label15
             // 
             label15.AutoSize = true;
-            label15.Location = new Point(50, 186);
+            label15.Location = new Point(57, 248);
             label15.Name = "label15";
-            label15.Size = new Size(54, 15);
+            label15.Size = new Size(68, 20);
             label15.TabIndex = 74;
             label15.Text = "Garantia:";
             // 
             // dateTimePickerGarantia
             // 
             dateTimePickerGarantia.Format = DateTimePickerFormat.Short;
-            dateTimePickerGarantia.Location = new Point(119, 182);
+            dateTimePickerGarantia.Location = new Point(136, 243);
+            dateTimePickerGarantia.Margin = new Padding(3, 4, 3, 4);
             dateTimePickerGarantia.Name = "dateTimePickerGarantia";
-            dateTimePickerGarantia.Size = new Size(209, 23);
+            dateTimePickerGarantia.Size = new Size(238, 27);
             dateTimePickerGarantia.TabIndex = 73;
             // 
             // label16
             // 
             label16.AutoSize = true;
-            label16.Location = new Point(37, 160);
+            label16.Location = new Point(42, 213);
             label16.Name = "label16";
-            label16.Size = new Size(72, 15);
+            label16.Size = new Size(90, 20);
             label16.TabIndex = 72;
             label16.Text = "Quantidade:";
             // 
             // numericUpDownQuant
             // 
-            numericUpDownQuant.Location = new Point(121, 156);
+            numericUpDownQuant.Location = new Point(138, 208);
+            numericUpDownQuant.Margin = new Padding(3, 4, 3, 4);
             numericUpDownQuant.Maximum = new decimal(new int[] { 1215752192, 23, 0, 0 });
             numericUpDownQuant.Name = "numericUpDownQuant";
-            numericUpDownQuant.Size = new Size(209, 23);
+            numericUpDownQuant.Size = new Size(239, 27);
             numericUpDownQuant.TabIndex = 71;
             // 
             // label17
             // 
             label17.AutoSize = true;
-            label17.Location = new Point(66, 22);
+            label17.Location = new Point(75, 29);
             label17.Name = "label17";
-            label17.Size = new Size(43, 15);
+            label17.Size = new Size(53, 20);
             label17.TabIndex = 70;
             label17.Text = "Marca:";
             // 
             // label18
             // 
             label18.AutoSize = true;
-            label18.Location = new Point(73, 109);
+            label18.Location = new Point(83, 145);
             label18.Name = "label18";
-            label18.Size = new Size(36, 15);
+            label18.Size = new Size(46, 20);
             label18.TabIndex = 69;
             label18.Text = "Valor:";
             // 
             // maskedTextBoxValor
             // 
-            maskedTextBoxValor.Location = new Point(119, 104);
+            maskedTextBoxValor.Location = new Point(136, 139);
+            maskedTextBoxValor.Margin = new Padding(3, 4, 3, 4);
             maskedTextBoxValor.Name = "maskedTextBoxValor";
-            maskedTextBoxValor.Size = new Size(209, 23);
+            maskedTextBoxValor.Size = new Size(238, 27);
             maskedTextBoxValor.TabIndex = 68;
             maskedTextBoxValor.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             maskedTextBoxValor.TextChanged += maskedTextBoxValor_TextChanged;
@@ -361,43 +361,46 @@
             // 
             // richTextBoxDesc
             // 
-            richTextBoxDesc.Location = new Point(395, 19);
+            richTextBoxDesc.Location = new Point(451, 25);
+            richTextBoxDesc.Margin = new Padding(3, 4, 3, 4);
             richTextBoxDesc.Name = "richTextBoxDesc";
-            richTextBoxDesc.Size = new Size(299, 267);
+            richTextBoxDesc.Size = new Size(341, 355);
             richTextBoxDesc.TabIndex = 67;
             richTextBoxDesc.Text = "";
             // 
             // label19
             // 
             label19.AutoSize = true;
-            label19.Location = new Point(328, 22);
+            label19.Location = new Point(375, 29);
             label19.Name = "label19";
-            label19.Size = new Size(61, 15);
+            label19.Size = new Size(77, 20);
             label19.TabIndex = 66;
             label19.Text = "Descrição:";
             // 
             // textBoxNome
             // 
-            textBoxNome.Location = new Point(118, 74);
+            textBoxNome.Location = new Point(135, 99);
+            textBoxNome.Margin = new Padding(3, 4, 3, 4);
             textBoxNome.Name = "textBoxNome";
-            textBoxNome.Size = new Size(209, 23);
+            textBoxNome.Size = new Size(238, 27);
             textBoxNome.TabIndex = 65;
             // 
             // label20
             // 
             label20.AutoSize = true;
-            label20.Location = new Point(66, 80);
+            label20.Location = new Point(75, 107);
             label20.Name = "label20";
-            label20.Size = new Size(43, 15);
+            label20.Size = new Size(53, 20);
             label20.TabIndex = 64;
             label20.Text = "Nome:";
             // 
             // PesquisaPeca
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(726, 427);
+            ClientSize = new Size(830, 569);
             Controls.Add(tabControl1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "PesquisaPeca";
             Text = "PesquisarPeca";
             tabControl1.ResumeLayout(false);

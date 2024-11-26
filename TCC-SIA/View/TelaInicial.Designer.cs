@@ -52,27 +52,27 @@
             contextMenuStrip1.ImageScalingSize = new Size(20, 20);
             contextMenuStrip1.Items.AddRange(new ToolStripItem[] { cadastroToolStripMenuItem, editarDeletarToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(147, 48);
+            contextMenuStrip1.Size = new Size(173, 52);
             // 
             // cadastroToolStripMenuItem
             // 
             cadastroToolStripMenuItem.Name = "cadastroToolStripMenuItem";
-            cadastroToolStripMenuItem.Size = new Size(146, 22);
+            cadastroToolStripMenuItem.Size = new Size(172, 24);
             cadastroToolStripMenuItem.Text = "Cadastro";
             // 
             // editarDeletarToolStripMenuItem
             // 
             editarDeletarToolStripMenuItem.Name = "editarDeletarToolStripMenuItem";
-            editarDeletarToolStripMenuItem.Size = new Size(146, 22);
+            editarDeletarToolStripMenuItem.Size = new Size(172, 24);
             editarDeletarToolStripMenuItem.Text = "Editar/Deletar";
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(411, 109);
+            label2.Location = new Point(405, 115);
             label2.Name = "label2";
-            label2.Size = new Size(166, 37);
+            label2.Size = new Size(207, 46);
             label2.TabIndex = 3;
             label2.Text = "Bem Vindo!";
             label2.TextAlign = ContentAlignment.MiddleCenter;
@@ -81,9 +81,9 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(238, 157);
+            label3.Location = new Point(173, 161);
             label3.Name = "label3";
-            label3.Size = new Size(521, 30);
+            label3.Size = new Size(668, 38);
             label3.TabIndex = 4;
             label3.Text = "Ao Sistema de Informatização e Gestão Para Oficinas";
             label3.TextAlign = ContentAlignment.MiddleCenter;
@@ -95,7 +95,7 @@
             button1.BackgroundImageLayout = ImageLayout.Stretch;
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(352, 276);
+            button1.Location = new Point(327, 282);
             button1.Name = "button1";
             button1.Size = new Size(158, 146);
             button1.TabIndex = 2;
@@ -109,7 +109,7 @@
             button2.BackgroundImageLayout = ImageLayout.Stretch;
             button2.FlatAppearance.BorderSize = 0;
             button2.FlatStyle = FlatStyle.Flat;
-            button2.Location = new Point(516, 276);
+            button2.Location = new Point(491, 282);
             button2.Name = "button2";
             button2.Size = new Size(158, 146);
             button2.TabIndex = 5;
@@ -120,9 +120,9 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(384, 425);
+            label4.Location = new Point(351, 431);
             label4.Name = "label4";
-            label4.Size = new Size(93, 25);
+            label4.Size = new Size(112, 31);
             label4.TabIndex = 7;
             label4.Text = "Cadastrar";
             label4.TextAlign = ContentAlignment.MiddleCenter;
@@ -131,9 +131,9 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(529, 425);
+            label5.Location = new Point(504, 431);
             label5.Name = "label5";
-            label5.Size = new Size(129, 25);
+            label5.Size = new Size(157, 31);
             label5.TabIndex = 8;
             label5.Text = "Editar/Deletar";
             label5.TextAlign = ContentAlignment.MiddleCenter;
@@ -142,9 +142,9 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 16.2F);
-            label1.Location = new Point(63, 18);
+            label1.Location = new Point(26, 21);
             label1.Name = "label1";
-            label1.Size = new Size(63, 30);
+            label1.Size = new Size(79, 38);
             label1.TabIndex = 6;
             label1.Text = "SIGO";
             // 
@@ -186,7 +186,7 @@
             // 
             // TelaInicial
             // 
-            AutoScaleDimensions = new SizeF(9F, 21F);
+            AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             BackColor = Color.FromArgb(54, 75, 109);
